@@ -1,6 +1,8 @@
 grub2 (2.02-3ubuntu1) UNRELEASED; urgency=medium
 
   * Merge with Debian; remaining changes:
+    - debian/patches/support_initrd-less_boot.patch: Added knobs to allow
+      non-initrd boot config. (LP: #1640878)
 
  -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Wed, 01 Nov 2017 10:53:31 -0400
 
