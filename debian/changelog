@@ -10,6 +10,18 @@ grub2 (2.02-3ubuntu1) UNRELEASED; urgency=medium
       the same as grub$arch.efi minus the 'linux' module. Without fallback to
       'linux' for unsigned loading, this makes it effectively enforce having a
       signed kernel. (LP: #1401532)
+    - debian/patches/install_signed.patch, grub-install-extra-removable.patch:
+      - Make sure if we install shim; it should also be exported as the default
+        bootloader to install later to a removable path, if we do.
+      - Rework grub-install-extra-removable.patch to reverse its logic: in the
+        default case, install the bootloader to /EFI/BOOT, unless we're trying
+        to install on a removable device, or explicitly telling grub *not* to
+        do it.
+      - Move installing fb$arch.efi to --no-extra-removable; as we don't want
+        fallback to be installed unless we're also installing to /EFI/BOOT.
+        (LP: #1684341)
+      - Make sure postinst and templates know about the replacement of
+        --force-extra-removable with --no-extra-removable.
 
  -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Wed, 01 Nov 2017 10:53:31 -0400
 
