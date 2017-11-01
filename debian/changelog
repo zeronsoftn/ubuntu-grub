@@ -5,6 +5,11 @@ grub2 (2.02-3ubuntu1) UNRELEASED; urgency=medium
       non-initrd boot config. (LP: #1640878)
     - Disable os-prober for ppc64el on the PowerNV platform, to reduce the
       number of entries/clutter from other OSes in Petitboot (LP: #1447500)
+    - debian/build-efi-images: provide a new grub EFI image which enforces that
+      loaded kernels are signed for Secure Boot: build gsb$arch.efi; which is
+      the same as grub$arch.efi minus the 'linux' module. Without fallback to
+      'linux' for unsigned loading, this makes it effectively enforce having a
+      signed kernel. (LP: #1401532)
 
  -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Wed, 01 Nov 2017 10:53:31 -0400
 
