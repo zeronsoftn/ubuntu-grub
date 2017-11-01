@@ -68,3 +68,4 @@ efinet_set_dns_from_uefi_proto.patch
 grub-install-efibootmgr-check.patch
 ext4_feature_encrypt.patch
 support_initrd-less_boot.patch
+dont-fail-efi-warnings.patch

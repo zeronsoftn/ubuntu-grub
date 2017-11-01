@@ -44,6 +44,10 @@ grub2 (2.02-2ubuntu1) UNRELEASED; urgency=medium
     - debian/patches/linuxefi_rework_non-sb_efi_chainload.patch
     - debian/patches/linuxefi_rework_pe_loading.patch
     - debian/patches/linuxefi_use_dev_chainloader_target.patch
+  * debian/patches/dont-fail-efi-warnings.patch: handle linuxefi patches and
+    the casting they do on some architectures: we don't want to fail build
+    because of some of the warnings that can show up since we otherwise build
+    with -Werror.
 
  -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Wed, 01 Nov 2017 10:53:31 -0400
 
