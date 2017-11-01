@@ -22,6 +22,28 @@ grub2 (2.02-2ubuntu1) UNRELEASED; urgency=medium
         (LP: #1684341)
       - Make sure postinst and templates know about the replacement of
         --force-extra-removable with --no-extra-removable.
+  * Sync Secure Boot support patches with the upstream patch set from
+    rhboot/grub2:master-sb. Renamed some patches and updated descriptions for
+    the whole thing to make more sense, too:
+    - dropped debian/patches/linuxefi_require_shim.patch
+    - renamed: debian/patches/no_insmod_on_sb.patch ->
+      debian/patches/linuxefi_no_insmod_on_sb.patch
+    - debian/patches/linuxefi.patch
+    - debian/patches/linuxefi_debug.patch
+    - debian/patches/linuxefi_non_sb_fallback.patch
+    - debian/patches/linuxefi_add_sb_to_efi_chainload.patch
+    - debian/patches/linuxefi_cleanup_errors_in_loader.patch
+    - debian/patches/linuxefi_fix_efi_validation_race.patch
+    - debian/patches/linuxefi_handle_multiarch_boot.patch
+    - debian/patches/linuxefi_honor_sb_mode.patch
+    - debian/patches/linuxefi_load_arm_with_sb.patch
+    - debian/patches/linuxefi_minor_cleanups.patch
+    - debian/patches/linuxefi_re-enable_linux_cmd.patch
+    - debian/patches/linuxefi_rework_linux16_cmd.patch
+    - debian/patches/linuxefi_rework_linux_cmd.patch
+    - debian/patches/linuxefi_rework_non-sb_efi_chainload.patch
+    - debian/patches/linuxefi_rework_pe_loading.patch
+    - debian/patches/linuxefi_use_dev_chainloader_target.patch
 
  -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Wed, 01 Nov 2017 10:53:31 -0400
 
