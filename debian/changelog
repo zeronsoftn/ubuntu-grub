@@ -1,4 +1,4 @@
-grub2 (2.02-3ubuntu1) UNRELEASED; urgency=medium
+grub2 (2.02-2ubuntu1) UNRELEASED; urgency=medium
 
   * Merge with Debian; remaining changes:
     - debian/patches/support_initrd-less_boot.patch: Added knobs to allow
