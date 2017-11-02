@@ -1,4 +1,4 @@
-From 7f446e0d4a8ecf966ce733a88d75f42f59b91e31 Mon Sep 17 00:00:00 2001
+From 0590671cbaa0852720a63b88fdc2805e8f9bcf0f Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 16:09:25 -0400
 Subject: Make any of the loaders that link in efi mode honor secure boot.
@@ -449,10 +449,10 @@ index c9885b1bc..df8dfdb4b 100644
    grub_unregister_command (cmd_resume);
  #endif
 diff --git a/include/grub/efi/efi.h b/include/grub/efi/efi.h
-index 5336cb3a2..0ee7cb8db 100644
+index 62a3d9726..764cd11f5 100644
 --- a/include/grub/efi/efi.h
 +++ b/include/grub/efi/efi.h
-@@ -78,7 +78,6 @@ EXPORT_FUNC (grub_efi_set_variable) (const char *var,
+@@ -76,7 +76,6 @@ EXPORT_FUNC (grub_efi_set_variable) (const char *var,
  				     const grub_efi_guid_t *guid,
  				     void *data,
  				     grub_size_t datasize);

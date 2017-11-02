@@ -1,4 +1,4 @@
-From eaabe6de88fbb4ae079c27dc7b77cc78cecc3b93 Mon Sep 17 00:00:00 2001
+From c35b1186e426748fb28fa7e68a2ea554e160b4ae Mon Sep 17 00:00:00 2001
 From: Evan Broder <evan@ebroder.net>
 Date: Mon, 13 Jan 2014 12:13:29 +0000
 Subject: Add configure option to enable gfxpayload=keep dynamically

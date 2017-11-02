@@ -1,4 +1,4 @@
-From 18ccbbd02043504866077df8b9cc0d8e54b4078a Mon Sep 17 00:00:00 2001
+From 766f57687cc7546d14006ed0782c8325fff77b26 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Sun, 18 Sep 2016 17:26:00 +0100
 Subject: syslinux_test: Fix out-of-tree build handling
