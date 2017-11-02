@@ -1,4 +1,4 @@
-From cc529cf53320380ee18e67b1ed6aa98ac967b478 Mon Sep 17 00:00:00 2001
+From c237dd50cfd2d3f7bc36e7867f1282727ad4b0bc Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 13:04:37 -0400
 Subject: Add secureboot support on efi chainloader
@@ -28,7 +28,7 @@ Patch-Name: linuxefi_add_sb_to_efi_chainload.patch
  2 files changed, 595 insertions(+), 37 deletions(-)
 
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
-index 14ce6ddd7..87a91e16f 100644
+index 14ce6ddd7..456043407 100644
 --- a/grub-core/loader/efi/chainloader.c
 +++ b/grub-core/loader/efi/chainloader.c
 @@ -32,6 +32,8 @@
@@ -397,7 +397,7 @@ index 14ce6ddd7..87a91e16f 100644
 +  buffer_size = context.image_size + section_alignment;
 +
 +  efi_status = efi_call_3 (b->allocate_pool, GRUB_EFI_LOADER_DATA,
-+			   buffer_size, &buffer);
++			   buffer_size, (void**) &buffer);
 +
 +  if (efi_status != GRUB_EFI_SUCCESS)
 +    {

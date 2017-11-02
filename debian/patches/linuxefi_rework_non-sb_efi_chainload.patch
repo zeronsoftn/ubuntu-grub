@@ -1,4 +1,4 @@
-From 72cfca6391e149937e04e2bee382293ab16c8d0e Mon Sep 17 00:00:00 2001
+From 02ad88ceff517ade9e65f1681c27becf94fc0987 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 10 Jun 2016 14:06:15 -0400
 Subject: Rework even more of efi chainload so non-sb cases work right.
@@ -107,7 +107,7 @@ index 167a574ce..0074db01f 100644
        grub_error (GRUB_ERR_INVALID_COMMAND, N_("%s has invalid signature"), argv[0]);
        goto fail;
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
-index 4b77a7d5a..3e89de900 100644
+index 505d883ef..a2e2d1b6f 100644
 --- a/grub-core/loader/efi/chainloader.c
 +++ b/grub-core/loader/efi/chainloader.c
 @@ -182,7 +182,6 @@ make_file_path (grub_efi_device_path_t *dp, const char *filename)

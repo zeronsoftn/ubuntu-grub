@@ -1,4 +1,4 @@
-From ba68460cfe6bb198d8d43266f84ea0a801102a0e Mon Sep 17 00:00:00 2001
+From 41354dc98ccadde10e9be4c1cfa6a346a91c66f9 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 9 Jun 2016 12:22:29 -0400
 Subject: Re-work some intricacies of PE loading.
@@ -18,7 +18,7 @@ Patch-Name: linuxefi_rework_pe_loading.patch
  2 files changed, 152 insertions(+), 36 deletions(-)
 
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
-index aee8e6bec..4b77a7d5a 100644
+index 83e191460..505d883ef 100644
 --- a/grub-core/loader/efi/chainloader.c
 +++ b/grub-core/loader/efi/chainloader.c
 @@ -301,7 +301,7 @@ image_is_64_bit (grub_pe_header_t *pe_hdr)
@@ -87,7 +87,7 @@ index aee8e6bec..4b77a7d5a 100644
 +	       context.image_size, datasize);
  
    efi_status = efi_call_3 (b->allocate_pool, GRUB_EFI_LOADER_DATA,
- 			   buffer_size, &buffer);
+ 			   buffer_size, (void**) &buffer);
 @@ -539,7 +560,6 @@ handle_image (void *data, grub_efi_uint32_t datasize)
      }
  

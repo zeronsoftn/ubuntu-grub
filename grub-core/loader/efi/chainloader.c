@@ -556,7 +556,7 @@ handle_image (void *data, grub_efi_uint32_t datasize)
 	       context.image_size, datasize);
 
   efi_status = efi_call_3 (b->allocate_pool, GRUB_EFI_LOADER_DATA,
-			   buffer_size, &buffer);
+			   buffer_size, (void**) &buffer);
 
   if (efi_status != GRUB_EFI_SUCCESS)
     {

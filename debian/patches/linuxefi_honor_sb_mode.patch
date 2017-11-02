@@ -1,4 +1,4 @@
-From 7484e0a44f009e47dc2a58e5ca73877e3d5bb39f Mon Sep 17 00:00:00 2001
+From d35990b82c408b7ee3017f482a18516402164da5 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 16:09:25 -0400
 Subject: Make any of the loaders that link in efi mode honor secure boot.
@@ -277,7 +277,7 @@ index 74888c463..69c2a10d3 100644
    grub_unregister_command (cmd);
  }
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
-index 87a91e16f..aee8e6bec 100644
+index 456043407..83e191460 100644
 --- a/grub-core/loader/efi/chainloader.c
 +++ b/grub-core/loader/efi/chainloader.c
 @@ -34,6 +34,7 @@
