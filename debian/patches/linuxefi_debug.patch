@@ -1,4 +1,4 @@
-From 18a857cb5a708484d85c6f80f567f4cbd58c87e9 Mon Sep 17 00:00:00 2001
+From 27704c464e1927f0e3a06647f734837938f0611f Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Wed, 1 Nov 2017 13:39:59 -0400
 Subject: Add some grub_dprintf() in the linuxefi path.

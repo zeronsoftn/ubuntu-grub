@@ -1,4 +1,4 @@
-From e92d56714bbf751aea77986d1ed11c456f1ca1ad Mon Sep 17 00:00:00 2001
+From f3f0ecc24395b27aad48c742bbf1b597bfc15773 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 27 Oct 2016 17:43:05 -0400
 Subject: efinet: Setting network from UEFI device path

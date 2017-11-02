@@ -1,4 +1,4 @@
-From 6a46b82ccd8e9709e8e57193f30809650a52f985 Mon Sep 17 00:00:00 2001
+From 0d295c4cbd31d6eafd938f1fbc99f59370ad2fa2 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg@redhat.com>
 Date: Mon, 13 Jan 2014 12:13:15 +0000
 Subject: Add "linuxefi" loader which avoids ExitBootServices
@@ -10,11 +10,11 @@ Last-Update: 2017-11-01
 Patch-Name: linuxefi.patch
 ---
  grub-core/Makefile.core.def       |   8 +
- grub-core/kern/efi/mm.c           |  64 +++++++
+ grub-core/kern/efi/mm.c           |  32 ++++
  grub-core/loader/i386/efi/linux.c | 371 ++++++++++++++++++++++++++++++++++++++
  include/grub/efi/efi.h            |   5 +
  include/grub/i386/linux.h         |   1 +
- 5 files changed, 449 insertions(+)
+ 5 files changed, 417 insertions(+)
  create mode 100644 grub-core/loader/i386/efi/linux.c
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
@@ -37,45 +37,13 @@ index 2dfa22a92..68e47a727 100644
    name = chain;
    efi = loader/efi/chainloader.c;
 diff --git a/grub-core/kern/efi/mm.c b/grub-core/kern/efi/mm.c
-index 20a47aaf5..44f84f853 100644
+index 20a47aaf5..efb15cc1b 100644
 --- a/grub-core/kern/efi/mm.c
 +++ b/grub-core/kern/efi/mm.c
-@@ -49,6 +49,70 @@ static grub_efi_uintn_t finish_desc_size;
+@@ -49,6 +49,38 @@ static grub_efi_uintn_t finish_desc_size;
  static grub_efi_uint32_t finish_desc_version;
  int grub_efi_is_finished = 0;
  
-+/* Allocate pages below a specified address */
-+void *
-+grub_efi_allocate_pages_max (grub_efi_physical_address_t max,
-+			     grub_efi_uintn_t pages)
-+{
-+  grub_efi_status_t status;
-+  grub_efi_boot_services_t *b;
-+  grub_efi_physical_address_t address = max;
-+
-+  if (max > 0xffffffff)
-+    return 0;
-+
-+  b = grub_efi_system_table->boot_services;
-+  status = efi_call_4 (b->allocate_pages, GRUB_EFI_ALLOCATE_MAX_ADDRESS, GRUB_EFI_LOADER_DATA, pages, &address);
-+
-+  if (status != GRUB_EFI_SUCCESS)
-+    return 0;
-+
-+  if (address == 0)
-+    {
-+      /* Uggh, the address 0 was allocated... This is too annoying,
-+	 so reallocate another one.  */
-+      address = max;
-+      status = efi_call_4 (b->allocate_pages, GRUB_EFI_ALLOCATE_MAX_ADDRESS, GRUB_EFI_LOADER_DATA, pages, &address);
-+      grub_efi_free_pages (0, pages);
-+      if (status != GRUB_EFI_SUCCESS)
-+	return 0;
-+    }
-+
-+  return (void *) ((grub_addr_t) address);
-+}
-+
 +/* Allocate pages below a specified address */
 +void *
 +grub_efi_allocate_pages_max (grub_efi_physical_address_t max,

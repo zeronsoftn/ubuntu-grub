@@ -1,4 +1,4 @@
-From ebb34ed02bce56151f65e96f2c57559e7ad5b513 Mon Sep 17 00:00:00 2001
+From c337b8bf78b2258fecf019dac0c1aea50d0923f0 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Feb 2017 16:31:52 -0500
 Subject: linuxefi: minor cleanups

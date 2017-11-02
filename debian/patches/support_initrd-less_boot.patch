@@ -1,4 +1,4 @@
-From 1575caf6b35ea5e74da856ee0625045ab2d81d1e Mon Sep 17 00:00:00 2001
+From 7568580d8b6da8d51f3908323f73a97c6f972180 Mon Sep 17 00:00:00 2001
 From: Chris Glass <chris.glass@canonical.com>
 Date: Thu, 10 Nov 2016 13:44:25 -0500
 Subject: Added knobs to allow non-initrd boot config

@@ -1,4 +1,4 @@
-From b77f4f20ffd10c1cbb6dc973af92eb6abc411c35 Mon Sep 17 00:00:00 2001
+From 1675efd6a0e7f18250844edfdbf60c6b0f9d32b3 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:24 +0000
 Subject: Skip Windows os-prober entries on Wubi systems
