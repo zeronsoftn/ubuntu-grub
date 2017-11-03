@@ -1,4 +1,4 @@
-From f8b0be67d335ef5212940ee6a6d4cf351379f410 Mon Sep 17 00:00:00 2001
+From 896cee45ee05e62630ec9740af0ff9244490262e Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 10 Jun 2016 14:06:15 -0400
 Subject: Rework even more of efi chainload so non-sb cases work right.
@@ -85,10 +85,10 @@ index a41b6c5b8..d74778b0c 100644
    if (*secure_boot && !*setup_mode)
      ret = 1;
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index 167a574ce..0074db01f 100644
+index b19f5d3fe..151af404b 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
-@@ -252,6 +252,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -251,6 +251,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
    grub_file_t file = 0;
    struct grub_arm64_linux_kernel_header lh;
    struct grub_arm64_linux_pe_header *pe;
@@ -96,7 +96,7 @@ index 167a574ce..0074db01f 100644
  
    grub_dl_ref (my_mod);
  
-@@ -296,7 +297,8 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -295,7 +296,8 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  
    grub_dprintf ("linux", "kernel @ %p\n", kernel_addr);
  

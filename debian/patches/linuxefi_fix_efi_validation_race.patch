@@ -1,4 +1,4 @@
-From e6f7f0a75faef2cc3bc176dac49e0953806623dc Mon Sep 17 00:00:00 2001
+From 1fd4a2ef3b62b9efd2eb403c16cc5d0796679aaa Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Tue, 14 Jul 2015 16:58:51 -0700
 Subject: Fix race in EFI validation

@@ -36,6 +36,7 @@ grub2 (2.02-2ubuntu1) UNRELEASED; urgency=medium
     - debian/patches/linuxefi_fix_efi_validation_race.patch
     - debian/patches/linuxefi_handle_multiarch_boot.patch
     - debian/patches/linuxefi_honor_sb_mode.patch
+    - debian/patches/linuxefi_move_fdt_helper.patch
     - debian/patches/linuxefi_load_arm_with_sb.patch
     - debian/patches/linuxefi_minor_cleanups.patch
     - debian/patches/linuxefi_re-enable_linux_cmd.patch

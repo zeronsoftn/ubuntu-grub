@@ -1,6 +1,6 @@
-From 9694d0e4d70c899e7a562bfa774457d615933049 Mon Sep 17 00:00:00 2001
+From b29175bfff5d5b3be0c71e33817eeb4f54f7a9c3 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
-Date: Thu, 18 Sep 2014 11:26:14 -0400
+Date: Fri, 3 Nov 2017 12:06:24 -0400
 Subject: Load arm with SB enabled.
 
 Make sure we actually try to validate secure boot on this platform (even
@@ -16,17 +16,17 @@ Last-Update: 2017-11-01
 Patch-Name: linuxefi_load_arm_with_sb.patch
 ---
  grub-core/Makefile.core.def       |   3 +
- grub-core/loader/arm64/linux.c    | 118 ++++++++++++++++++++------------------
+ grub-core/loader/arm64/linux.c    | 117 ++++++++++++++++++++------------------
  grub-core/loader/efi/linux.c      |  65 +++++++++++++++++++++
  grub-core/loader/i386/efi/linux.c |  39 +------------
  include/grub/arm64/linux.h        |   7 +++
  include/grub/efi/linux.h          |  31 ++++++++++
- 6 files changed, 172 insertions(+), 91 deletions(-)
+ 6 files changed, 171 insertions(+), 91 deletions(-)
  create mode 100644 grub-core/loader/efi/linux.c
  create mode 100644 include/grub/efi/linux.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 68e47a727..086352600 100644
+index cedf27eb8..1b642472e 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -1670,6 +1670,8 @@ module = {
@@ -47,19 +47,18 @@ index 68e47a727..086352600 100644
    enable = x86_64_efi;
  };
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index 9519d2e4d..167a574ce 100644
+index 57890fdda..b19f5d3fe 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
-@@ -28,6 +28,8 @@
+@@ -28,6 +28,7 @@
  #include <grub/cpu/linux.h>
- #include <grub/cpu/fdtload.h>
  #include <grub/efi/efi.h>
-+#include <grub/efi/fdtload.h>
+ #include <grub/efi/fdtload.h>
 +#include <grub/efi/linux.h>
  #include <grub/efi/pe32.h>
  #include <grub/i18n.h>
  #include <grub/lib/cmdline.h>
-@@ -39,6 +41,7 @@ static int loaded;
+@@ -39,6 +40,7 @@ static int loaded;
  
  static void *kernel_addr;
  static grub_uint64_t kernel_size;
@@ -67,7 +66,7 @@ index 9519d2e4d..167a574ce 100644
  
  static char *linux_args;
  static grub_uint32_t cmdline_size;
-@@ -67,7 +70,8 @@ grub_arm64_uefi_check_image (struct grub_arm64_linux_kernel_header * lh)
+@@ -67,7 +69,8 @@ grub_arm64_uefi_check_image (struct grub_arm64_linux_kernel_header * lh)
  static grub_err_t
  finalize_params_linux (void)
  {
@@ -77,7 +76,7 @@ index 9519d2e4d..167a574ce 100644
  
    void *fdt;
  
-@@ -102,6 +106,26 @@ finalize_params_linux (void)
+@@ -102,6 +105,26 @@ finalize_params_linux (void)
    if (grub_fdt_install() != GRUB_ERR_NONE)
      goto failure;
  
@@ -104,7 +103,7 @@ index 9519d2e4d..167a574ce 100644
    return GRUB_ERR_NONE;
  
  failure:
-@@ -109,73 +133,47 @@ failure:
+@@ -109,73 +132,47 @@ failure:
    return grub_error(GRUB_ERR_BAD_OS, "failed to install/update FDT");
  }
  
@@ -206,7 +205,7 @@ index 9519d2e4d..167a574ce 100644
  }
  
  static grub_err_t
-@@ -253,6 +251,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -253,6 +250,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  {
    grub_file_t file = 0;
    struct grub_arm64_linux_kernel_header lh;
@@ -214,7 +213,7 @@ index 9519d2e4d..167a574ce 100644
  
    grub_dl_ref (my_mod);
  
-@@ -297,6 +296,15 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -297,6 +295,15 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  
    grub_dprintf ("linux", "kernel @ %p\n", kernel_addr);
  

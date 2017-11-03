@@ -1,4 +1,4 @@
-From de10d9c6fd8633c9db41f35ba2b32e4f76dd2384 Mon Sep 17 00:00:00 2001
+From 3bde9b7ef798787c3e53e6347af08154ef27ee1f Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Wed, 1 Nov 2017 17:03:36 -0400
 Subject: Don't fail build on some warnings we know might show up building
@@ -26,7 +26,7 @@ Patch-Name: dont-fail-efi-warnings.patch
  1 file changed, 2 insertions(+)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index d54bc4283..8a6fe8c7a 100644
+index 6ccfe4e03..3a6c3c8e4 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -1747,6 +1747,7 @@ module = {
