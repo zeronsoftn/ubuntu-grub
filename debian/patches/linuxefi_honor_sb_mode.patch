@@ -1,4 +1,4 @@
-From 13d95df88d09010fbd6e65496ad57ba6e39669b2 Mon Sep 17 00:00:00 2001
+From 0530ce2b38e21c2ee87653df5dcdb0ad7c407c2a Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 16:09:25 -0400
 Subject: Make any of the loaders that link in efi mode honor secure boot.
@@ -32,9 +32,9 @@ Patch-Name: linuxefi_honor_sb_mode.patch
  include/grub/efi/sb.h              | 29 +++++++++++++++++++
  include/grub/ia64/linux.h          |  0
  include/grub/mips/linux.h          |  0
- include/grub/powerpc/linux.h       |  0
+ include/grub/powerpc/linux.h       | 22 +++++++++++++++
  include/grub/sparc64/linux.h       |  0
- 20 files changed, 147 insertions(+), 29 deletions(-)
+ 20 files changed, 169 insertions(+), 29 deletions(-)
  create mode 100644 grub-core/kern/efi/sb.c
  create mode 100644 include/grub/efi/sb.h
  create mode 100644 include/grub/ia64/linux.h
@@ -503,7 +503,32 @@ new file mode 100644
 index 000000000..e69de29bb
 diff --git a/include/grub/powerpc/linux.h b/include/grub/powerpc/linux.h
 new file mode 100644
-index 000000000..e69de29bb
+index 000000000..5761d53e7
+--- /dev/null
++++ b/include/grub/powerpc/linux.h
+@@ -0,0 +1,22 @@
++/*
++ *  GRUB  --  GRand Unified Bootloader
++ *  Copyright (C) 2013  Free Software Foundation, Inc.
++ *
++ *  GRUB is free software: you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation, either version 3 of the License, or
++ *  (at your option) any later version.
++ *
++ *  GRUB is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef GRUB_LINUX_CPU_HEADER
++#define GRUB_LINUX_CPU_HEADER 1
++
++#endif /* ! GRUB_LINUX_CPU_HEADER */
 diff --git a/include/grub/sparc64/linux.h b/include/grub/sparc64/linux.h
 new file mode 100644
 index 000000000..e69de29bb
