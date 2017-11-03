@@ -1,4 +1,4 @@
-From 761b71d315d35839bca63281502ffcde236bb66b Mon Sep 17 00:00:00 2001
+From ad27cd917d70cfc65551afbbf22b40b8b1731f77 Mon Sep 17 00:00:00 2001
 From: Raymund Will <rw@suse.com>
 Date: Fri, 10 Apr 2015 01:45:02 -0400
 Subject: Use device part of chainloader target, if present.
