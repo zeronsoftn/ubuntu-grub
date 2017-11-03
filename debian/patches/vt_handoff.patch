@@ -1,4 +1,4 @@
-From 09a9edb8dc4bd7f9a594afee017d42b72090aaff Mon Sep 17 00:00:00 2001
+From 77e1bbad4e4cdabf634036918dde91a6fc5d6685 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:30 +0000
 Subject: Add configure option to use vt.handoff=7

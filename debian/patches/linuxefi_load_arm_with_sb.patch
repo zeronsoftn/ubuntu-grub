@@ -1,4 +1,4 @@
-From 6d367ad219169be025c19e721af3d4cca5f5bd14 Mon Sep 17 00:00:00 2001
+From 9aa4d2f67a0109cb9c4ed23997b47f3c47943e2c Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 3 Nov 2017 12:06:24 -0400
 Subject: Load arm with SB enabled.
@@ -16,12 +16,13 @@ Last-Update: 2017-11-01
 Patch-Name: linuxefi_load_arm_with_sb.patch
 ---
  grub-core/Makefile.core.def       |   3 +
+ grub-core/loader/arm/linux.c      |   1 +
  grub-core/loader/arm64/linux.c    | 119 ++++++++++++++++++++------------------
  grub-core/loader/efi/linux.c      |  65 +++++++++++++++++++++
  grub-core/loader/i386/efi/linux.c |  39 +------------
  include/grub/arm64/linux.h        |   7 +++
  include/grub/efi/linux.h          |  31 ++++++++++
- 6 files changed, 173 insertions(+), 91 deletions(-)
+ 7 files changed, 174 insertions(+), 91 deletions(-)
  create mode 100644 grub-core/loader/efi/linux.c
  create mode 100644 include/grub/efi/linux.h
 
@@ -46,6 +47,18 @@ index cedf27eb8..1b642472e 100644
    enable = i386_efi;
    enable = x86_64_efi;
  };
+diff --git a/grub-core/loader/arm/linux.c b/grub-core/loader/arm/linux.c
+index 5b39f02bb..d7ebae0ff 100644
+--- a/grub-core/loader/arm/linux.c
++++ b/grub-core/loader/arm/linux.c
+@@ -26,6 +26,7 @@
+ #include <grub/command.h>
+ #include <grub/cache.h>
+ #include <grub/cpu/linux.h>
++#include <grub/efi/linux.h>
+ #include <grub/lib/cmdline.h>
+ #include <grub/linux.h>
+ 
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
 index 57890fdda..bc7ebb699 100644
 --- a/grub-core/loader/arm64/linux.c
