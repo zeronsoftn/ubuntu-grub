@@ -1,4 +1,4 @@
-From fd7276bcdf83c548ea59f9153d1fb2270e4d92c3 Mon Sep 17 00:00:00 2001
+From b69edc1d9f3e792063cc2e4f6263491174512401 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:26 +0000
 Subject: Add configure option to reduce visual clutter at boot time

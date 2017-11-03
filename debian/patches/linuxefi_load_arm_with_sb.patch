@@ -1,4 +1,4 @@
-From 13c20c32954b178ac4da1b9a6192e6da0c5a9bc5 Mon Sep 17 00:00:00 2001
+From 6d367ad219169be025c19e721af3d4cca5f5bd14 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 3 Nov 2017 12:06:24 -0400
 Subject: Load arm with SB enabled.
@@ -16,12 +16,12 @@ Last-Update: 2017-11-01
 Patch-Name: linuxefi_load_arm_with_sb.patch
 ---
  grub-core/Makefile.core.def       |   3 +
- grub-core/loader/arm64/linux.c    | 117 ++++++++++++++++++++------------------
+ grub-core/loader/arm64/linux.c    | 119 ++++++++++++++++++++------------------
  grub-core/loader/efi/linux.c      |  65 +++++++++++++++++++++
  grub-core/loader/i386/efi/linux.c |  39 +------------
  include/grub/arm64/linux.h        |   7 +++
  include/grub/efi/linux.h          |  31 ++++++++++
- 6 files changed, 171 insertions(+), 91 deletions(-)
+ 6 files changed, 173 insertions(+), 91 deletions(-)
  create mode 100644 grub-core/loader/efi/linux.c
  create mode 100644 include/grub/efi/linux.h
 
@@ -47,7 +47,7 @@ index cedf27eb8..1b642472e 100644
    enable = x86_64_efi;
  };
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index 57890fdda..b19f5d3fe 100644
+index 57890fdda..bc7ebb699 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
 @@ -28,6 +28,7 @@
@@ -103,7 +103,7 @@ index 57890fdda..b19f5d3fe 100644
    return GRUB_ERR_NONE;
  
  failure:
-@@ -109,73 +132,47 @@ failure:
+@@ -109,73 +132,49 @@ failure:
    return grub_error(GRUB_ERR_BAD_OS, "failed to install/update FDT");
  }
  
@@ -155,7 +155,9 @@ index 57890fdda..b19f5d3fe 100644
  
 -  grub_dprintf ("linux", "linux command line: '%s'\n", args);
 +grub_err_t
-+grub_arm64_uefi_boot_image (grub_addr_t addr, grub_size_t size, char *args)
++grub_arm64_uefi_boot_image (grub_addr_t addr __attribute__ ((unused)),
++			    grub_size_t size __attribute__ ((unused)),
++			    char *args)
 +{
 +  grub_err_t retval;
  
@@ -205,7 +207,7 @@ index 57890fdda..b19f5d3fe 100644
  }
  
  static grub_err_t
-@@ -253,6 +250,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -253,6 +252,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  {
    grub_file_t file = 0;
    struct grub_arm64_linux_kernel_header lh;
@@ -213,7 +215,7 @@ index 57890fdda..b19f5d3fe 100644
  
    grub_dl_ref (my_mod);
  
-@@ -297,6 +295,15 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -297,6 +297,15 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  
    grub_dprintf ("linux", "kernel @ %p\n", kernel_addr);
  

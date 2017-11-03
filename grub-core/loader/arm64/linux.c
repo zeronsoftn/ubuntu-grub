@@ -150,7 +150,9 @@ free_params (void)
 }
 
 grub_err_t
-grub_arm64_uefi_boot_image (grub_addr_t addr, grub_size_t size, char *args)
+grub_arm64_uefi_boot_image (grub_addr_t addr __attribute__ ((unused)),
+			    grub_size_t size __attribute__ ((unused)),
+			    char *args)
 {
   grub_err_t retval;
 
