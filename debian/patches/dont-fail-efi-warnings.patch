@@ -1,4 +1,4 @@
-From bd192212a4a2af8e1ef5e51ccf91dfa204bbd475 Mon Sep 17 00:00:00 2001
+From ba2b2485acc94bee484d08ae774cddf61758a21a Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Wed, 1 Nov 2017 17:03:36 -0400
 Subject: Don't fail build on some warnings we know might show up building
@@ -26,7 +26,7 @@ Patch-Name: dont-fail-efi-warnings.patch
  1 file changed, 2 insertions(+)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 6ccfe4e03..3a6c3c8e4 100644
+index e3662bb03..208b8c136 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -1747,6 +1747,7 @@ module = {
@@ -43,5 +43,5 @@ index 6ccfe4e03..3a6c3c8e4 100644
    name = chain;
 +  cflags = '-Wno-error=format= -Wno-error=cast-align -Wno-error=int-to-pointer-cast -Wno-error=pointer-to-int-cast -Wno-error=unused-parameter';
    efi = loader/efi/chainloader.c;
+   efi = loader/efi/linux.c;
    i386_pc = loader/i386/pc/chainloader.c;
-   i386_coreboot = loader/i386/coreboot/chainloader.c;

@@ -1,4 +1,4 @@
-From 397151a5a182b168899eb8aae2c1a4b070a6cf68 Mon Sep 17 00:00:00 2001
+From dffbb7316bdbee9595d0e2c247972ec70bf8bec6 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 13:04:37 -0400
 Subject: Add secureboot support on efi chainloader
@@ -23,10 +23,23 @@ Last-Update: 2017-11-01
 
 Patch-Name: linuxefi_add_sb_to_efi_chainload.patch
 ---
+ grub-core/Makefile.core.def        |   1 +
  grub-core/loader/efi/chainloader.c | 612 ++++++++++++++++++++++++++++++++++---
  include/grub/efi/pe32.h            |  20 +-
- 2 files changed, 595 insertions(+), 37 deletions(-)
+ 3 files changed, 596 insertions(+), 37 deletions(-)
 
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index 1b642472e..9b7b661ff 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -1747,6 +1747,7 @@ module = {
+ module = {
+   name = chain;
+   efi = loader/efi/chainloader.c;
++  efi = loader/efi/linux.c;
+   i386_pc = loader/i386/pc/chainloader.c;
+   i386_coreboot = loader/i386/coreboot/chainloader.c;
+   i386_coreboot = lib/LzmaDec.c;
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
 index 14ce6ddd7..456043407 100644
 --- a/grub-core/loader/efi/chainloader.c

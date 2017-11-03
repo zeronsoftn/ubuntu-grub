@@ -1,4 +1,4 @@
-From e9fe274cbd61b642edad12b3ceef0de57aa50a9e Mon Sep 17 00:00:00 2001
+From 6c8809100c8e55c3278d2b95c00213a18e433e4c Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 24 May 2017 15:58:18 -0400
 Subject: Clean up some errors in the linuxefi loader

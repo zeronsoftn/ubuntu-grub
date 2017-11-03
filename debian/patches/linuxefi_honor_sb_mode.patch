@@ -1,4 +1,4 @@
-From ccf9fc3c197819e7e95d4de41d27c34822fa7818 Mon Sep 17 00:00:00 2001
+From b6890a1c275c817b98e94e0b05f1699b806f18f7 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 16:09:25 -0400
 Subject: Make any of the loaders that link in efi mode honor secure boot.
@@ -55,7 +55,7 @@ index 04e9395fd..fd715a8ea 100644
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/env_private.h
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/err.h
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 1b642472e..e786b7451 100644
+index 9b7b661ff..50c555e43 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -177,6 +177,7 @@ kernel = {
