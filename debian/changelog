@@ -1,4 +1,4 @@
-grub2 (2.02-2ubuntu1) UNRELEASED; urgency=medium
+grub2 (2.02-2ubuntu1) bionic; urgency=medium
 
   * Merge with Debian; remaining changes:
     - debian/patches/support_initrd-less_boot.patch: Added knobs to allow
@@ -50,7 +50,7 @@ grub2 (2.02-2ubuntu1) UNRELEASED; urgency=medium
     because of some of the warnings that can show up since we otherwise build
     with -Werror.
 
- -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Wed, 01 Nov 2017 10:53:31 -0400
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Mon, 06 Nov 2017 15:37:12 -0500
 
 grub2 (2.02-3) UNRELEASED; urgency=medium
 
