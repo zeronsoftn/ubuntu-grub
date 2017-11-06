@@ -382,12 +382,13 @@ case "$1" in
       ;;
       grub-ieee1275)
         if grep ^platform /proc/cpuinfo | grep -q PowerNV; then
-          cat <<-EOF >>"$tmp_default_grub"
-          # Disable os-prober for ppc64el on the PowerNV platform (for Petitboot)
-          GRUB_DISABLE_OS_PROBER=true
-          EOF
+		cat <<-EOF >>"$tmp_default_grub"
+
+		# Disable os-prober for ppc64el on the PowerNV platform (for Petitboot)
+		GRUB_DISABLE_OS_PROBER=true
+		EOF
         fi
-      ;;
+        ;;
     esac
 
     ucf --three-way --debconf-ok --sum-file=/usr/share/grub/default/grub.md5sum ${tmp_default_grub} /etc/default/grub
@@ -705,12 +706,12 @@ case "$1" in
         if dpkg --compare-versions "$2" lt-nl 2.02-1~; then
           # Try to not break people upgrading by suddenly installing things
           # to /EFI/BOOT without knowing if it might break.
-          db_get grub2/force_efi_extra_removable
+          db_get grub2/force_efi_extra_removable || true
           if [ "$RET" = false ]; then
             db_set grub2/no_efi_extra_removable true
             db_fset grub2/no_efi_extra_removable seen true
           fi
-          db_reset grub2/force_efi_extra_removable
+          db_reset grub2/force_efi_extra_removable || true
           if [ -e "/boot/efi/EFI/${bootloader_id}/fbx64.efi" ]; then
             rm -f "/boot/efi/EFI/${bootloader_id}/fbx64.efi";
           fi
