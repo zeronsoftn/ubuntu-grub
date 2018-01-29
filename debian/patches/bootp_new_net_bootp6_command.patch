@@ -1,4 +1,4 @@
-From 839f5dd59a35ac4973e25679057b27b6da8995c5 Mon Sep 17 00:00:00 2001
+From 030e09954b72f9e09decf190e1c7713052d9666e Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 27 Oct 2016 17:41:04 -0400
 Subject: bootp: New net_bootp6 command

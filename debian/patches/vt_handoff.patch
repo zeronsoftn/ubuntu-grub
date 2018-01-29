@@ -1,7 +1,14 @@
-From b50a7ea8b5cbddc90188c5bb9fb7fd5d9b9c15fe Mon Sep 17 00:00:00 2001
+From 9bb549712dc638a4ca3c2c475217a9a53af498f8 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:30 +0000
-Subject: Add configure option to use vt.handoff=1
+Subject: =?UTF-8?q?From=20b50a7ea8b5cbddc90188c5bb9fb7fd5d9b9c15fe=20Mon?=
+ =?UTF-8?q?=20Sep=2017=2000:00:00=202001=0AFrom:=20Colin=20Watson=20<cjwat?=
+ =?UTF-8?q?son@ubuntu.com>=0ADate:=20Mon,=2013=20Jan=202014=2012:13:30=20+?=
+ =?UTF-8?q?0000=0ASubject:=20Add=20configure=20option=20to=20use=20vt.hand?=
+ =?UTF-8?q?off=3D1?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 This is used for non-recovery Linux entries only; it enables
 flicker-free booting if gfxpayload=keep is in use and a suitable kernel
@@ -43,7 +50,7 @@ index 7f1431352..cd1f49837 100644
  
  AC_SUBST([FONT_SOURCE])
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index 2983b515f..18c859214 100644
+index 2983b515f..88bc0e300 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -24,6 +24,7 @@ ubuntu_recovery="@UBUNTU_RECOVERY@"
