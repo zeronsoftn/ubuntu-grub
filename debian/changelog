@@ -1,4 +1,4 @@
-grub2 (2.02-2ubuntu6) UNRELEASED; urgency=medium
+grub2 (2.02-2ubuntu6) bionic; urgency=medium
 
   [ Steve Langasek ]
   * debian/patches/bufio_sensible_block_sizes.patch: Don't use arbitrary file
@@ -6,7 +6,7 @@ grub2 (2.02-2ubuntu6) UNRELEASED; urgency=medium
     the files unnecessarily, which may require re-open files that cannot be
     seeked into, such as via TFTP. (LP: #1743249)
 
- -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 02 Feb 2018 10:28:31 -0500
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Mon, 05 Feb 2018 11:58:09 -0500
 
 grub2 (2.02-2ubuntu5) bionic; urgency=medium
 
