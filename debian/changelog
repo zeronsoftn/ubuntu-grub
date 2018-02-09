@@ -1,4 +1,4 @@
-grub2 (2.02-2ubuntu7) UNRELEASED; urgency=medium
+grub2 (2.02-2ubuntu7) bionic; urgency=medium
 
   [ Julian Andres Klode ]
   * debian/patches/shorter_version_info.patch: Only show the upstream version
@@ -10,7 +10,7 @@ grub2 (2.02-2ubuntu7) UNRELEASED; urgency=medium
     'text' payload if it's not supported but present in gfxpayload, such as
     on EFI systems. (LP: #1711452)
 
- -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 08 Feb 2018 10:50:56 +0100
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 09 Feb 2018 16:30:45 -0500
 
 grub2 (2.02-2ubuntu6) bionic; urgency=medium
 
