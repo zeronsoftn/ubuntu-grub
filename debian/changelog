@@ -1,4 +1,4 @@
-grub2 (2.02-2ubuntu8) UNRELEASED; urgency=medium
+grub2 (2.02-2ubuntu8) bionic; urgency=medium
 
   * Drop debian/patches/mkconfig_keep_native_term_active.patch, which can
     lead to flickering between graphical and text mode when traversing the
@@ -6,7 +6,7 @@ grub2 (2.02-2ubuntu8) UNRELEASED; urgency=medium
   * debian/patches/yylex-explicitly_cast_fprintf_to_void.patch: Fix FTBFS
     with flex 2.6.4.
 
- -- dann frazier <dann.frazier@canonical.com>  Fri, 02 Mar 2018 11:03:36 -0700
+ -- dann frazier <dannf@ubuntu.com>  Sun, 04 Mar 2018 06:11:35 -0700
 
 grub2 (2.02-2ubuntu7) bionic; urgency=medium
 
