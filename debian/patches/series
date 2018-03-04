@@ -74,3 +74,4 @@ tsc_efi_default_to_pmtimer.patch
 bufio_sensible_block_sizes.patch
 shorter_version_info.patch
 skip_text_gfxpayload_where_not_supported.patch
+yylex-explicitly_cast_fprintf_to_void.patch

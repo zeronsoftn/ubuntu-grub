@@ -3,6 +3,8 @@ grub2 (2.02-2ubuntu8) UNRELEASED; urgency=medium
   * Drop debian/patches/mkconfig_keep_native_term_active.patch, which can
     lead to flickering between graphical and text mode when traversing the
     menu. (LP: #1752767)
+  * debian/patches/yylex-explicitly_cast_fprintf_to_void.patch: Fix FTBFS
+    with flex 2.6.4.
 
  -- dann frazier <dann.frazier@canonical.com>  Fri, 02 Mar 2018 11:03:36 -0700
 
