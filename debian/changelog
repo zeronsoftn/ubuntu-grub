@@ -1,3 +1,10 @@
+grub2 (2.02-2ubuntu9) UNRELEASED; urgency=medium
+
+  * Add support for initrd-less boot, with fallback to "normal" boot in case
+    initrd-less boot failed.
+
+ -- Christopher Glass (Canonical) <christopher.glass@canonical.com>  Thu, 08 Mar 2018 16:18:48 +0100
+
 grub2 (2.02-2ubuntu8) bionic; urgency=medium
 
   * Drop debian/patches/mkconfig_keep_native_term_active.patch, which can
