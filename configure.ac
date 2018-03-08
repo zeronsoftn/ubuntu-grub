@@ -293,7 +293,6 @@ AC_ARG_WITH([systemdsystemunitdir],
             [],
             [with_systemdsystemunitdir=/usr/lib/systemd/system],
             [with_systemdsystemunitdir=no])
-    ])
 if test "x$with_systemdsystemunitdir" != xno; then
    AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])
 fi
