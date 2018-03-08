@@ -1,4 +1,4 @@
-From 054f8fdef02b93b236e63970385af1d47ce15718 Mon Sep 17 00:00:00 2001
+From 0674e09f6477488f8019c6acb9d7788ff3247d26 Mon Sep 17 00:00:00 2001
 From: Chris Glass <chris.glass@canonical.com>
 Date: Thu, 8 Mar 2018 16:16:55 +0100
 Subject: Added initrd-less boot capabilities.
@@ -8,12 +8,48 @@ to trying to boot the kernel with an initrd.
 
 Patch-Name: add-initrd-less-boot-fallback.patch
 ---
+ Makefile.am                  |  3 +++
+ configure.ac                 | 11 +++++++++
  grub-initrd-fallback.service | 13 +++++++++++
  util/grub.d/00_header.in     | 27 ++++++++++++++++++++++
  util/grub.d/10_linux.in      | 53 ++++++++++++++++++++++++++++++++------------
- 3 files changed, 79 insertions(+), 14 deletions(-)
+ 5 files changed, 93 insertions(+), 14 deletions(-)
  create mode 100644 grub-initrd-fallback.service
 
+diff --git a/Makefile.am b/Makefile.am
+index f0ab1adc3..aaf2bbf34 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -472,4 +472,7 @@ ChangeLog: FORCE
+ 		touch $@; \
+ 	fi
+ 
++systemdsystemunit_DATA = \
++	grub-initrd-fallback.service
++
+ EXTRA_DIST += ChangeLog ChangeLog-2015
+diff --git a/configure.ac b/configure.ac
+index cd1f49837..01dbe9d80 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -287,6 +287,17 @@ AC_SUBST(grubdirname)
+ AC_DEFINE_UNQUOTED(GRUB_DIR_NAME, "$grubdirname",
+     [Default grub directory name])
+ 
++##### systemd unit files
++AC_ARG_WITH([systemdsystemunitdir],
++            AS_HELP_STRING([--with-systemdsystemunitdir=DIR], [Directory for systemd service files]),
++            [],
++            [with_systemdsystemunitdir=/usr/lib/systemd/system],
++            [with_systemdsystemunitdir=no])
++    ])
++if test "x$with_systemdsystemunitdir" != xno; then
++   AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])
++fi
++
+ #
+ # Checks for build programs.
+ #
 diff --git a/grub-initrd-fallback.service b/grub-initrd-fallback.service
 new file mode 100644
 index 000000000..258853800
