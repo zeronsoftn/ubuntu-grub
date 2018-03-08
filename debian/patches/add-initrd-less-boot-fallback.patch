@@ -1,4 +1,4 @@
-From cd2faacd63595b746ece084aa17d054a843a4ff8 Mon Sep 17 00:00:00 2001
+From 054f8fdef02b93b236e63970385af1d47ce15718 Mon Sep 17 00:00:00 2001
 From: Chris Glass <chris.glass@canonical.com>
 Date: Thu, 8 Mar 2018 16:16:55 +0100
 Subject: Added initrd-less boot capabilities.
@@ -8,17 +8,17 @@ to trying to boot the kernel with an initrd.
 
 Patch-Name: add-initrd-less-boot-fallback.patch
 ---
- grub-common.grub-initrd-fallback.service | 13 ++++++++
- util/grub.d/00_header.in                 | 27 ++++++++++++++++
- util/grub.d/10_linux.in                  | 53 +++++++++++++++++++++++---------
+ grub-initrd-fallback.service | 13 +++++++++++
+ util/grub.d/00_header.in     | 27 ++++++++++++++++++++++
+ util/grub.d/10_linux.in      | 53 ++++++++++++++++++++++++++++++++------------
  3 files changed, 79 insertions(+), 14 deletions(-)
- create mode 100644 grub-common.grub-initrd-fallback.service
+ create mode 100644 grub-initrd-fallback.service
 
-diff --git a/grub-common.grub-initrd-fallback.service b/grub-common.grub-initrd-fallback.service
+diff --git a/grub-initrd-fallback.service b/grub-initrd-fallback.service
 new file mode 100644
 index 000000000..258853800
 --- /dev/null
-+++ b/grub-common.grub-initrd-fallback.service
++++ b/grub-initrd-fallback.service
 @@ -0,0 +1,13 @@
 +[Unit]
 +Description=GRUB failed boot detection
