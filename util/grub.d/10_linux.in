@@ -189,13 +189,13 @@ EOF
     if [ x"$GRUB_FORCE_PARTUUID" != x ]; then
         linux_root_device_thisversion="PARTUUID=${GRUB_FORCE_PARTUUID}"
     fi
+    message="$(gettext_printf "Loading initial ramdisk ...")"
     if test -n "${initrd}" && [ x"$GRUB_FORCE_PARTUUID" != x ]; then
         sed "s/^/$submenu_indentation/" << EOF
 	if [ "\${initrdfail}" = 1 ]; then
 	  linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
 EOF
         if [ x"$quiet_boot" = x0 ] || [ x"$type" != xsimple ]; then
-          message="$(gettext_printf "Loading initial ramdisk ...")"
           sed "s/^/$submenu_indentation/" << EOF
 	  echo	'$(echo "$message" | grub_quote)'
 EOF
@@ -217,7 +217,6 @@ EOF
 	    # We do have initrd - let's use it at boot.
 	    # TRANSLATORS: ramdisk isn't identifier. Should be translated.
 	    if [ x"$quiet_boot" = x0 ] || [ x"$type" != xsimple ]; then
-	      message="$(gettext_printf "Loading initial ramdisk ...")"
 	      sed "s/^/$submenu_indentation/" << EOF
 	echo	'$(echo "$message" | grub_quote)'
 EOF

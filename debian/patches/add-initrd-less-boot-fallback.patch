@@ -1,4 +1,4 @@
-From e90755881ea40feb319a77b6175c26bfa6a3b30c Mon Sep 17 00:00:00 2001
+From 8ab8c3dcd38ba9b32006d02e06c78b04e7559c27 Mon Sep 17 00:00:00 2001
 From: Chris Glass <chris.glass@canonical.com>
 Date: Thu, 8 Mar 2018 16:16:55 +0100
 Subject: Added initrd-less boot capabilities.
@@ -6,7 +6,8 @@ Subject: Added initrd-less boot capabilities.
 In case the kernel fails to boot without an initrd, grub will fallback
 to trying to boot the kernel with an initrd.
 
-Clean up the indent handling to match existing practice.
+- Clean up the indent handling to match existing practice.
+- Eliminate string duplication.
 
 Patch-Name: add-initrd-less-boot-fallback.patch
 
@@ -14,10 +15,10 @@ Signed-off-by: Steve Langasek <steve.langasek@canonical.com>
 ---
  Makefile.am                  |  3 +++
  configure.ac                 | 10 +++++++++
- grub-initrd-fallback.service | 13 +++++++++++
- util/grub.d/00_header.in     | 27 +++++++++++++++++++++++
- util/grub.d/10_linux.in      | 51 +++++++++++++++++++++++++++++++++-----------
- 5 files changed, 92 insertions(+), 12 deletions(-)
+ grub-initrd-fallback.service | 13 ++++++++++++
+ util/grub.d/00_header.in     | 27 ++++++++++++++++++++++++
+ util/grub.d/10_linux.in      | 50 +++++++++++++++++++++++++++++++++-----------
+ 5 files changed, 91 insertions(+), 12 deletions(-)
  create mode 100644 grub-initrd-fallback.service
 
 diff --git a/Makefile.am b/Makefile.am
@@ -118,7 +119,7 @@ index 674a76140..23322458a 100644
      cat <<EOF
  function recordfail {
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index 76d4f31bf..c0b7d408e 100644
+index 76d4f31bf..fa615c3e0 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -104,6 +104,10 @@ if [ "$vt_handoff" = 1 ]; then
@@ -132,7 +133,7 @@ index 76d4f31bf..c0b7d408e 100644
  linux_entry ()
  {
    os="$1"
-@@ -179,27 +183,50 @@ EOF
+@@ -179,27 +183,49 @@ EOF
  	linux	${rel_dirname}/${basename}.efi.signed root=${linux_root_device_thisversion} ro ${args}
  EOF
    else
@@ -143,13 +144,13 @@ index 76d4f31bf..c0b7d408e 100644
 +    if [ x"$GRUB_FORCE_PARTUUID" != x ]; then
 +        linux_root_device_thisversion="PARTUUID=${GRUB_FORCE_PARTUUID}"
 +    fi
++    message="$(gettext_printf "Loading initial ramdisk ...")"
 +    if test -n "${initrd}" && [ x"$GRUB_FORCE_PARTUUID" != x ]; then
 +        sed "s/^/$submenu_indentation/" << EOF
 +	if [ "\${initrdfail}" = 1 ]; then
 +	  linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
 +EOF
 +        if [ x"$quiet_boot" = x0 ] || [ x"$type" != xsimple ]; then
-+          message="$(gettext_printf "Loading initial ramdisk ...")"
 +          sed "s/^/$submenu_indentation/" << EOF
 +	  echo	'$(echo "$message" | grub_quote)'
 +EOF
@@ -180,7 +181,6 @@ index 76d4f31bf..c0b7d408e 100644
 +	    # We do have initrd - let's use it at boot.
 +	    # TRANSLATORS: ramdisk isn't identifier. Should be translated.
 +	    if [ x"$quiet_boot" = x0 ] || [ x"$type" != xsimple ]; then
-+	      message="$(gettext_printf "Loading initial ramdisk ...")"
 +	      sed "s/^/$submenu_indentation/" << EOF
  	echo	'$(echo "$message" | grub_quote)'
  EOF
