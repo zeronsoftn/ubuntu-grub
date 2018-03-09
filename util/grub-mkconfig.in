@@ -246,8 +246,7 @@ export GRUB_DEFAULT \
   GRUB_DISABLE_SUBMENU \
   GRUB_RECORDFAIL_TIMEOUT \
   GRUB_RECOVERY_TITLE \
-  GRUB_FORCE_PARTUUID \
-  GRUB_DISABLE_INITRD
+  GRUB_FORCE_PARTUUID
 
 if test "x${grub_cfg}" != "x"; then
   rm -f "${grub_cfg}.new"

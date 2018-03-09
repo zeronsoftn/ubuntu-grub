@@ -189,41 +189,42 @@ EOF
     if [ x"$GRUB_FORCE_PARTUUID" != x ]; then
         linux_root_device_thisversion="PARTUUID=${GRUB_FORCE_PARTUUID}"
     fi
+    message="$(gettext_printf "Loading initial ramdisk ...")"
     if test -n "${initrd}" && [ x"$GRUB_FORCE_PARTUUID" != x ]; then
         sed "s/^/$submenu_indentation/" << EOF
-    if [ "\${initrdfail}" = 1 ]; then
-          linux	  ${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
+	if [ "\${initrdfail}" = 1 ]; then
+	  linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
 EOF
         if [ x"$quiet_boot" = x0 ] || [ x"$type" != xsimple ]; then
-          message="$(gettext_printf "Loading initial ramdisk ...")"
-          echo "	      ${message}"
+          sed "s/^/$submenu_indentation/" << EOF
+	  echo	'$(echo "$message" | grub_quote)'
+EOF
         fi
 
         sed "s/^/$submenu_indentation/" << EOF
-	      initrd	${rel_dirname}/${initrd}
-    else
-          linux	  ${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args} panic=-1
-    fi
-    initrdfail
+	  initrd	${rel_dirname}/${initrd}
+	else
+	  linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args} panic=-1
+	fi
+	initrdfail
 EOF
     else
     # We don't have initrd or we don't want to set PARTUUID. Don't try initrd-less boot with fallback.
         sed "s/^/$submenu_indentation/" << EOF
-        linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
+	linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
 EOF
-	  if test -n "${initrd}"; then
-	    # We do have initrd - let's use it at boot.
-	    # TRANSLATORS: ramdisk isn't identifier. Should be translated.
-	    if [ x"$quiet_boot" = x0 ] || [ x"$type" != xsimple ]; then
-	      message="$(gettext_printf "Loading initial ramdisk ...")"
-	      sed "s/^/$submenu_indentation/" << EOF
-		echo	'$(echo "$message" | grub_quote)'
+        if test -n "${initrd}"; then
+            # We do have initrd - let's use it at boot.
+            # TRANSLATORS: ramdisk isn't identifier. Should be translated.
+            if [ x"$quiet_boot" = x0 ] || [ x"$type" != xsimple ]; then
+              sed "s/^/$submenu_indentation/" << EOF
+	echo	'$(echo "$message" | grub_quote)'
 EOF
-	    fi
-	    sed "s/^/$submenu_indentation/" << EOF
-		initrd	${rel_dirname}/${initrd}
+            fi
+            sed "s/^/$submenu_indentation/" << EOF
+	initrd	${rel_dirname}/${initrd}
 EOF
-    	  fi
+        fi
     fi
   fi
   sed "s/^/$submenu_indentation/" << EOF

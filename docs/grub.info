@@ -1412,11 +1412,6 @@ it must be quoted.  For example:
      Setting this option to '12345678-01' will produce:
      root=PARTUUID=12345678-01
 
-'GRUB_DISABLE_INITRD'
-     Then set to 'true', this option prevents an initrd to be used at
-     boot time, regardless of whether one is detected or not.
-     grub-mkconfig will therefore not generate any initrd lines.
-
    The following options are still accepted for compatibility with
 existing configurations, but have better replacements:
 
