@@ -134,7 +134,8 @@ grub_install_remove_efi_entries_by_distributor (const char *efi_distributor)
 int
 grub_install_register_efi (grub_device_t efidir_grub_dev,
 			   const char *efifile_path,
-			   const char *efi_distributor)
+			   const char *efi_distributor,
+			   int detect_nvram)
 {
   const char * efidir_disk;
   int efidir_part;
@@ -153,6 +154,21 @@ grub_install_register_efi (grub_device_t efidir_grub_dev,
 #ifdef __linux__
   grub_util_exec ((const char * []){ "modprobe", "-q", "efivars", NULL });
 #endif
+
+  /* If requested, we try to detect if NVRAM access is available and if not,
+     warn the user and resume normal operation.  */
+  if (detect_nvram)
+    {
+      error = grub_util_exec_redirect_null ((const char * []){ "efibootmgr", NULL });
+      if (error == 2)
+	{
+	  grub_util_warn ("%s", _("Auto-NVRAM selected and no EFI variable support detected on the system."));
+	  return 0;
+	}
+      else if (error)
+	return error;
+    }
+
   /* Delete old entries from the same distributor.  */
   error = grub_install_remove_efi_entries_by_distributor (efi_distributor);
   if (error)
@@ -178,7 +194,7 @@ grub_install_register_efi (grub_device_t efidir_grub_dev,
 
 void
 grub_install_register_ieee1275 (int is_prep, const char *install_device,
-				int partno, const char *relpath)
+				int partno, const char *relpath, int detect_nvram)
 {
   char *boot_device;
 
