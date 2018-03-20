@@ -205,6 +205,14 @@ grub_install_register_ieee1275 (int is_prep, const char *install_device,
       grub_util_error (_("%s: not found"), "ofpathname");
     }
 
+  /* If requested, we try to detect if NVRAM access is available and if not,
+     warn the user and resume normal operation.  */
+  if (detect_nvram && grub_util_exec_redirect_null ((const char * []){ "nvram", NULL }))
+    {
+      grub_util_warn ("%s", _("Auto-NVRAM selected and no IEEE1275 variable support detected on the system."));
+      return;
+    }
+
   /* Get the Open Firmware device tree path translation.  */
   if (!is_prep)
     {
