@@ -161,10 +161,7 @@ grub_install_register_efi (grub_device_t efidir_grub_dev,
     {
       error = grub_util_exec_redirect_null ((const char * []){ "efibootmgr", NULL });
       if (error == 2)
-	{
-	  grub_util_warn ("%s", _("Auto-NVRAM selected and no EFI variable support detected on the system."));
-	  return 0;
-	}
+	return 0;
       else if (error)
 	return error;
     }
