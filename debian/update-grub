@@ -1,3 +1,4 @@
 #!/bin/sh
 set -e
-exec grub-mkconfig -o /boot/grub/grub.cfg "$@"
+grub-mkconfig -o /boot/grub/grub.cfg "$@" 3>&-
+/usr/share/grub/grub-check-signatures

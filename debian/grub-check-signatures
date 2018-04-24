@@ -1,0 +1,55 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+# Check if we are on an EFI system
+are_efi() {
+	test -d /sys/firmware/efi/
+	return $?
+}
+
+# Check if a given kernel image is sized
+is_signed() {
+	tmp=$(mktemp)
+	sbattach --detach $tmp $1 >/dev/null  	# that's ugly...
+	test "$(wc -c < $tmp)" -ge 16	# Just _some_ minimum size
+	result=$?
+	rm $tmp
+	return $result
+}
+
+# Check that our current kernel and every newer one is signed
+have_signed() {
+	uname_r="$(uname -r)"
+	for kernel in $(grep '^\s*linux' /boot/grub/grub.cfg  | awk '{print $2}' | uniq); do
+		this_uname_r="$(echo "$kernel" | sed -nr 's#^/vmlinuz-(.*)#\1#p' | sed 's#\.efi\.signed$##')"
+		if test  -e /boot/$kernel && ! is_signed /boot/$kernel; then
+			return 1
+		fi
+		if [ "$uname_r" = "$this_uname_r" ]; then
+			return 0
+		fi
+	done
+	return 0
+}
+
+# Only reached from show_warning
+error() {
+	echo "E: Your kernels are unsigned. This system will fail to boot in a secure boot environment." >&2
+	exit 1
+}
+
+# Either shows a debconf note or prints an error with error() above if
+# that fails
+show_warning() {
+	db_title "Unsigned kernel" || error
+	db_fset grub2/unsigned_kernels seen 0 || error
+	db_input critical grub2/unsigned_kernels || error
+	db_go || error
+}
+
+if are_efi && ! have_signed; then
+	show_warning
+fi

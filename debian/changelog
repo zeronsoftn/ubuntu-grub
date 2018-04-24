@@ -1,3 +1,11 @@
+grub2 (2.02-2ubuntu11) UNRELEASED; urgency=medium
+
+  [ Julian Andres Klode ]
+  * Verify that the current and newer kernels are signed when grub is updated, to
+    make sure people do not accidentally shutdown without a signed kernel.
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Wed, 20 Jun 2018 13:04:33 +0200
+
 grub2 (2.02-2ubuntu10) cosmic; urgency=medium
 
   * debian/patches/grub-shell-test-helper-disable-seabios-sercon.patch: In the

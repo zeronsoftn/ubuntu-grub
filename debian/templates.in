@@ -65,3 +65,9 @@ _Description: /boot/grub/device.map has been regenerated
  .
  If you do not understand this message, or if there are no custom
  boot menu entries, you can ignore this message.
+
+Template: grub2/unsigned_kernels
+Type: note
+_Description: Unsigned kernels
+ Your system does not have any signed kernel installed. If your system
+ uses secure boot or you enable it later, your system might not boot.
