@@ -308,7 +308,7 @@ no_nvram_arg() {
 
 run_grub_install()
 {
-    if ! grub-install $@ ; then
+    if ! grub-install --auto-nvram $@ ; then
         echo "Failed: grub-install $@" >&2
         echo "WARNING: Bootloader is not properly installed, system may not be bootable" >&2
     fi

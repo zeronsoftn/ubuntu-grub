@@ -3,6 +3,7 @@ grub2 (2.02-2ubuntu9) UNRELEASED; urgency=medium
   * debian/patches/add-an-auto-nvram-option-to-grub-install.patch: Add the
     --auto-nvram option to grub-install for auto-detecting NVRAM availability
     before attempting NVRAM updates.
+  * debian/postinst.in: use --auto-nvram with grub-install calls.
 
  -- Łukasz 'sil2100' Zemczak <lukasz.zemczak@ubuntu.com>  Fri, 20 Apr 2018 19:41:26 +0200
 
