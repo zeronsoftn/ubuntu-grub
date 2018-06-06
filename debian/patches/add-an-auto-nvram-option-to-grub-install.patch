@@ -1,6 +1,5 @@
 From 1696f83780575139eb0ad801a311c947028278f2 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?=C5=81ukasz=20=27sil2100=27=20Zemczak?=
- <lukasz.zemczak@canonical.com>
+From: Łukasz 'sil2100' Zemczak <lukasz.zemczak@canonical.com>
 Date: Fri, 20 Apr 2018 19:27:37 +0200
 Subject: Add an auto-nvram option to grub-install for auto-detecting NVRAM
  access
@@ -8,6 +7,8 @@ Subject: Add an auto-nvram option to grub-install for auto-detecting NVRAM
 This adds the auto-nvram functionality of only attempting the NVRAM
 variable update if the system has access to those. Useful for dual
 BIOS-EFI devices.
+
+Patch-Name: add-an-auto-nvram-option-to-grub-install.patch
 ---
  grub-core/osdep/basic/no_platform.c |  5 +++--
  grub-core/osdep/unix/platform.c     | 22 ++++++++++++++++++++--
