@@ -23,13 +23,13 @@ is_signed() {
 # Check that our current kernel and every newer one is signed
 have_signed() {
 	uname_r="$(uname -r)"
-	for kernel in $(grep '^\s*linux' /boot/grub/grub.cfg  | awk '{print $2}' | uniq); do
-		this_uname_r="$(echo "$kernel" | sed -nr 's#^/vmlinuz-(.*)#\1#p' | sed 's#\.efi\.signed$##')"
-		if test  -e /boot/$kernel && ! is_signed /boot/$kernel; then
-			return 1
+	for kernel in $(ls -1 /boot/vmlinuz-* | sort -V -r); do
+		this_uname_r="$(echo "$kernel" | sed -nr 's#^/boot/vmlinuz-(.*)#\1#p' | sed 's#\.efi\.signed$##')"
+		if dpkg --compare-versions "$this_uname_r" lt "$uname_r"; then
+			continue
 		fi
-		if [ "$uname_r" = "$this_uname_r" ]; then
-			return 0
+		if ! is_signed $kernel; then
+			return 1
 		fi
 	done
 	return 0
