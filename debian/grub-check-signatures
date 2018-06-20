@@ -48,6 +48,7 @@ show_warning() {
 	db_fset grub2/unsigned_kernels seen 0 || error
 	db_input critical grub2/unsigned_kernels || error
 	db_go || error
+	error
 }
 
 if are_efi && ! have_signed; then
