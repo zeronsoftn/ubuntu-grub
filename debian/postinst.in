@@ -320,6 +320,10 @@ case "$1" in
 
     devicemap_regenerated=
 
+    if dpkg --compare-versions "$2" lt-nl 2.02-2ubuntu11; then
+      /usr/share/grub/grub-check-signatures || exit 1
+    fi
+
     if egrep -q '^[[:space:]]*post(inst|rm)_hook[[:space:]]*=[[:space:]]*(/sbin/|/usr/sbin/)?update-grub' /etc/kernel-img.conf 2>/dev/null; then
       echo 'Removing update-grub hooks from /etc/kernel-img.conf in favour of' >&2
       echo '/etc/kernel/ hooks.' >&2
@@ -776,7 +780,7 @@ case "$1" in
 
     # If grub.cfg has been generated, update it.
     if test -e /boot/grub/grub.cfg && ! running_in_container; then
-      update-grub
+      update-grub 3>&-
     fi
   ;;
   abort-upgrade|abort-remove|abort-deconfigure)
