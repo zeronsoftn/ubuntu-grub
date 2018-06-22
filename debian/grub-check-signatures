@@ -5,9 +5,37 @@ set -e
 . /usr/share/debconf/confmodule
 
 # Check if we are on an EFI system
-are_efi() {
-	test -d /sys/firmware/efi/
-	return $?
+efivars=/sys/firmware/efi/efivars
+secureboot_var=SecureBoot-8be4df61-93ca-11d2-aa0d-00e098032b8c
+moksbstatert_var=MokSBStateRT-605dab50-e046-4300-abb6-3dd810dd8b23
+
+on_secure_boot() {
+	# Validate any queued actions before we go try to do them.
+	local moksbstatert=0
+
+	if ! [ -d $efivars ]; then
+		return 1
+	fi
+
+	if ! [ -f $efivars/$secureboot_var ] \
+		|| [ "$(od -An -t u1 $efivars/$secureboot_var | awk '{ print $NF }')" -ne 1 ]
+	then
+		return 1
+	fi
+
+	if [ -f /proc/sys/kernel/moksbstate_disabled ]; then
+		moksbstatert=$(cat /proc/sys/kernel/moksbstate_disabled 2>/dev/null || echo 0)
+	elif [ -f $efivars/$moksbstatert_var ]; then
+		# MokSBStateRT set to 1 means validation is disabled
+		moksbstatert=$(od -An -t u1 $efivars/$moksbstatert_var | \
+					   awk '{ print $NF; }')
+	fi
+
+	if [ $moksbstatert -eq 1 ]; then
+		return 1
+	fi
+
+	return 0
 }
 
 # Check if a given kernel image is sized
@@ -51,6 +79,6 @@ show_warning() {
 	error
 }
 
-if are_efi && ! have_signed; then
+if on_secure_boot && ! have_signed; then
 	show_warning
 fi
