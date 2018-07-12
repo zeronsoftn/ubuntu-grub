@@ -49,7 +49,7 @@ is_signed() {
 }
 
 # Check that our current kernel and every newer one is signed
-have_signed() {
+find_unsigned() {
 	uname_r="$(uname -r)"
 	for kernel in $(ls -1 /boot/vmlinuz-* | sort -V -r); do
 		this_uname_r="$(echo "$kernel" | sed -nr 's#^/boot/vmlinuz-(.*)#\1#p' | sed 's#\.efi\.signed$##')"
@@ -57,10 +57,9 @@ have_signed() {
 			continue
 		fi
 		if ! is_signed $kernel; then
-			return 1
+			echo "$this_uname_r"
 		fi
 	done
-	return 0
 }
 
 # Only reached from show_warning
@@ -72,13 +71,20 @@ error() {
 # Either shows a debconf note or prints an error with error() above if
 # that fails
 show_warning() {
-	db_title "Unsigned kernel" || error
+	# kernels should be an indented list of one version per line
+	escaped="$(printf "%s" "$unsigned" | sed "s#^#     #" | debconf-escape -e )"
+	db_capb escape
+	db_settitle grub2/unsigned_kernels_title || error
 	db_fset grub2/unsigned_kernels seen 0 || error
+	db_subst grub2/unsigned_kernels unsigned_versions "$escaped" || error
 	db_input critical grub2/unsigned_kernels || error
 	db_go || error
 	error
 }
 
-if on_secure_boot && ! have_signed; then
-	show_warning
+if on_secure_boot; then
+	unsigned="$(find_unsigned)"
+	if [ "$unsigned" ]; then
+		show_warning "$unsigned"
+	fi
 fi
