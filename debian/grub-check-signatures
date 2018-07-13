@@ -38,7 +38,7 @@ on_secure_boot() {
 	return 0
 }
 
-# Check if a given kernel image is sized
+# Check if a given kernel image is signed
 is_signed() {
 	tmp=$(mktemp)
 	sbattach --detach $tmp $1 >/dev/null  	# that's ugly...
@@ -52,7 +52,11 @@ is_signed() {
 find_unsigned() {
 	uname_r="$(uname -r)"
 	for kernel in $(ls -1 /boot/vmlinuz-* | sort -V -r); do
-		this_uname_r="$(echo "$kernel" | sed -nr 's#^/boot/vmlinuz-(.*)#\1#p' | sed 's#\.efi\.signed$##')"
+		# no kernels :(
+		if [ "$kernel" = "/boot/vmlinuz-*" ]; then
+			break
+		fi
+		this_uname_r="$(echo "$kernel" | sed -r 's#^/boot/vmlinuz-(.*)#\1#; s#\.efi\.signed$##')"
 		if dpkg --compare-versions "$this_uname_r" lt "$uname_r"; then
 			continue
 		fi
@@ -84,7 +88,7 @@ show_warning() {
 
 if on_secure_boot; then
 	unsigned="$(find_unsigned)"
-	if [ "$unsigned" ]; then
+	if [ -n "$unsigned" ]; then
 		show_warning "$unsigned"
 	fi
 fi
