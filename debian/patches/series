@@ -75,5 +75,6 @@ bufio_sensible_block_sizes.patch
 shorter_version_info.patch
 skip_text_gfxpayload_where_not_supported.patch
 yylex-explicitly_cast_fprintf_to_void.patch
-add-an-auto-nvram-option-to-grub-install.patch
-grub-shell-test-helper-disable-seabios-sercon.patch
+0078-Add-an-auto-nvram-option-to-grub-install-for-auto-de.patch
+0079-In-the-grub-shell-test-helper-disable-seabios-s-seri.patch
+tests_update_for_new_qemu.patch
