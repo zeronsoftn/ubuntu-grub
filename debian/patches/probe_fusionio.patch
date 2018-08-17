@@ -38,7 +38,7 @@ index 90d92d3ad..7adc0f30e 100644
  
    return path;
 diff --git a/util/deviceiter.c b/util/deviceiter.c
-index 23d49aecd..bc68b2549 100644
+index a4971ef42..dddc50da7 100644
 --- a/util/deviceiter.c
 +++ b/util/deviceiter.c
 @@ -383,6 +383,12 @@ get_nvme_disk_name (char *name, int controller, int namespace)

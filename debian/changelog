@@ -1,3 +1,99 @@
+grub2 (2.02+dfsg1-5) unstable; urgency=medium
+
+  [ Colin Watson ]
+  * Change Maintainer to pkg-grub-devel@alioth-lists.debian.net, following
+    Alioth lists migration.
+  * Backport from upstream:
+    - Use grub-file to figure out whether multiboot2 should be used for
+      Xen.gz (closes: #898947).
+    - x86-64: Treat R_X86_64_PLT32 as R_X86_64_PC32.
+  * Fix some test failures:
+    - Disable sercon in SeaBIOS.
+    - Fix qemu options for UHCI test.
+
+  [ Philipp Hahn ]
+  * Disallow unsigned kernels if UEFI Secure Boot is enabled
+    (patch by Linn Crosetto <linn@hpe.com>)
+  * Add patch to fix lockdown mode
+    (patch by Luca Boccassi <bluca@debian.org>)
+  * Build monolithic EFI binaries for signing (closes: #851994)
+  * Add template for signing monolithic EFI binaries
+  * debian/build-efi-images: Use correct EFI vendor (closes: #769172)
+
+  [ Luca Boccassi ]
+  * template packages: install changelog and copyright
+  * Override lintian error about template rules file
+  * Add XB-Efi-Vendor metadata to efi-*-bin packages
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 30 Jul 2018 13:33:23 +0100
+
+grub2 (2.02+dfsg1-4) unstable; urgency=medium
+
+  * Adjust restore_mkdevicemap.patch to fix format-overflow warning with GCC
+    7 (the overflow was in fact impossible in practice, but GCC couldn't
+    prove that).
+  * Cherry-pick upstream patch to disable -Wformat-truncation on GCC >= 7 in
+    printf_unit_test.
+  * Build with GCC 7 (closes: #892397).
+
+ -- Colin Watson <cjwatson@debian.org>  Sun, 01 Apr 2018 10:49:48 +0100
+
+grub2 (2.02+dfsg1-3) unstable; urgency=medium
+
+  * sparc64: Don't use devspec to determine the OBP path (closes: #854568).
+  * ieee1275: Fix crash in of_path_of_nvme when of_path is empty (closes:
+    #891773).
+  * sparc64: Limit nvme of_path_of_nvme to just SPARC.
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 02 Mar 2018 12:53:34 +0000
+
+grub2 (2.02+dfsg1-2) unstable; urgency=medium
+
+  * Build-depend on libparted-dev on powerpc and ppc64 (closes: #891070).
+  * Add support for modern sparc64 hardware (thanks, Eric Snowberg via John
+    Paul Adrian Glaubitz; closes: #854568).
+  * Build without PIE on sparc and sparc64 (thanks, John Paul Adrian
+    Glaubitz; closes: #891733).
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 28 Feb 2018 12:03:49 +0000
+
+grub2 (2.02+dfsg1-1) unstable; urgency=medium
+
+  * Switch to tracking debian/grub-extras/ using "git subtree" rather than
+    submodules.
+  * Update debian/README.source for Salsa migration.
+  * Use pkg-config to find FreeType (closes: #887721).
+  * Change various binary packages' priorities to optional, since "Priority:
+    extra" is now deprecated.
+  * Repack upstream tarball without grub-core/lib/libgcrypt*/cipher/crc.c,
+    and provide a replacement implementation backported from more recent
+    versions of libgcrypt (closes: #745409).
+  * Cherry-pick upstream patch to avoid -Werror=unused-value build failure
+    (closes: #890431).
+  * Handle the case where udevadm exists but is non-functional, as warned
+    about by Lintian 2.5.75.
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 17 Feb 2018 21:28:41 +0000
+
+grub2 (2.02-3) unstable; urgency=medium
+
+  * Use current location for upstream signing key
+    (debian/upstream/signing-key.asc).
+  * Update upstream signing key to a non-expired version.
+  * Install bootinfo.txt and grub.chrp in grub-ieee1275-bin for ppc64, and
+    install and use prep-bootdev on powerpc and ppc64 as well as ppc64el
+    (thanks, John Paul Adrian Glaubitz; closes: #881730).
+  * Cherry-pick upstream patch to change the default TSC calibration method
+    to pmtimer on EFI systems (closes: #883193).
+  * Move VCS to salsa.debian.org.
+  * Consistently create /boot/grub in the postinst of all grub-<platform>
+    packages (closes: #884883).
+
+  [ Debconf translations ]
+  * [sq] Albanian (Silva Arapi; closes: #874497).
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 10 Feb 2018 03:00:30 +0000
+
 grub2 (2.02-2ubuntu13) cosmic; urgency=medium
 
   * debian/patches/tests_update_for_new_qemu.patch: update qemu options to
@@ -162,17 +258,6 @@ grub2 (2.02-2ubuntu1) bionic; urgency=medium
     with -Werror.
 
  -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Mon, 06 Nov 2017 15:37:12 -0500
-
-grub2 (2.02-3) UNRELEASED; urgency=medium
-
-  * Use current location for upstream signing key
-    (debian/upstream/signing-key.asc).
-  * Update upstream signing key to a non-expired version.
-
-  [ Debconf translations ]
-  * [sq] Albanian (Silva Arapi; closes: #874497).
-
- -- Colin Watson <cjwatson@debian.org>  Sun, 15 Oct 2017 13:43:06 +0100
 
 grub2 (2.02-2) unstable; urgency=medium
 
