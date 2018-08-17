@@ -1,4 +1,4 @@
-From ca276c998bb5010a98b66d24fe98499793534abe Mon Sep 17 00:00:00 2001
+From 7c8d2eccba22b8af217dbbdfe8ef5a419b522098 Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Thu, 22 Feb 2018 10:03:46 +0000
 Subject: Add support for modern sparc64 hardware
