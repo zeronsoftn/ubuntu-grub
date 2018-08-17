@@ -1,4 +1,4 @@
-From e32290dd73ee381c988156b4c9f5abc89535d08a Mon Sep 17 00:00:00 2001
+From 77c8817bfc8cdfc39148706ab9539c9671d59564 Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Tue, 17 Jul 2018 14:46:22 -0400
 Subject: tests/uhci_test.in: update for new qemu

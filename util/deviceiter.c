@@ -554,7 +554,7 @@ grub_util_iterate_devices (int (*hook) (const char *, int, void *), void *hook_d
   /* Floppies.  */
   for (i = 0; i < floppy_disks; i++)
     {
-      char name[32];
+      char name[16];
       struct stat st;
 
       get_floppy_disk_name (name, i);

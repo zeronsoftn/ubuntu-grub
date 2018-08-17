@@ -1,4 +1,4 @@
-From 95c987739871ae7d45174e3cd689410622c3e9b4 Mon Sep 17 00:00:00 2001
+From 93fc4ca385f511d10472775d3c5b6ad8c811b6fa Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Sun, 9 Aug 2015 16:12:39 -0700
 Subject: Rework linux command

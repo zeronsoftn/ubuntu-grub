@@ -1,4 +1,4 @@
-From 037c606bad73a979f5937922590fccb9d0b093b6 Mon Sep 17 00:00:00 2001
+From 921461eaa44bd378cce3efb602a7561cd627d776 Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Wed, 1 Nov 2017 13:48:26 -0400
 Subject: If running under UEFI secure boot, attempt to use linuxefi loader

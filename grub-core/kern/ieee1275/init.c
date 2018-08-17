@@ -30,9 +30,6 @@
 #include <grub/time.h>
 #include <grub/ieee1275/console.h>
 #include <grub/ieee1275/ofdisk.h>
-#ifdef __sparc__
-#include <grub/ieee1275/obdisk.h>
-#endif
 #include <grub/ieee1275/ieee1275.h>
 #include <grub/net.h>
 #include <grub/offsets.h>
@@ -106,13 +103,29 @@ grub_machine_get_bootlocation (char **device __attribute__ ((unused)),
 void
 grub_machine_get_bootlocation (char **device, char **path)
 {
-  char *bootpath = NULL;
+  char *bootpath;
+  grub_ssize_t bootpath_size;
   char *filename;
   char *type;
 
-  grub_ieee1275_get_boot_dev (&bootpath);
-  if (bootpath == NULL)
-    return;
+  if (grub_ieee1275_get_property_length (grub_ieee1275_chosen, "bootpath",
+					 &bootpath_size)
+      || bootpath_size <= 0)
+    {
+      /* Should never happen.  */
+      grub_printf ("/chosen/bootpath property missing!\n");
+      return;
+    }
+
+  bootpath = (char *) grub_malloc ((grub_size_t) bootpath_size + 64);
+  if (! bootpath)
+    {
+      grub_print_error ();
+      return;
+    }
+  grub_ieee1275_get_property (grub_ieee1275_chosen, "bootpath", bootpath,
+                              (grub_size_t) bootpath_size + 1, 0);
+  bootpath[bootpath_size] = '\0';
 
   /* Transform an OF device path to a GRUB path.  */
 
@@ -292,11 +305,8 @@ grub_machine_init (void)
   grub_console_init_early ();
   grub_claim_heap ();
   grub_console_init_lately ();
-#ifdef __sparc__
-  grub_obdisk_init ();
-#else
   grub_ofdisk_init ();
-#endif
+
   grub_parse_cmdline ();
 
 #ifdef __i386__
@@ -311,11 +321,7 @@ grub_machine_fini (int flags)
 {
   if (flags & GRUB_LOADER_FLAG_NORETURN)
     {
-#ifdef __sparc__
-      grub_obdisk_fini ();
-#else
       grub_ofdisk_fini ();
-#endif
       grub_console_fini ();
     }
 }
