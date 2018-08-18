@@ -1,4 +1,4 @@
-From 5a2ad7aefbacd52a66dbc1488d0c4d7e8f29f2ef Mon Sep 17 00:00:00 2001
+From ef626f8c785c39131b640debd875c385a34ec741 Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Wed, 1 Nov 2017 17:03:36 -0400
 Subject: Don't fail build on some warnings we know might show up building

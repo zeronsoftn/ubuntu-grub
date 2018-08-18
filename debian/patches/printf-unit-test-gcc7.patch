@@ -1,4 +1,4 @@
-From f3204303b523af44741665abbede608cbab104c4 Mon Sep 17 00:00:00 2001
+From edda43b771243cffec6c8dd44c1687fb046c9029 Mon Sep 17 00:00:00 2001
 From: Vladimir Serbinenko <phcoder@gmail.com>
 Date: Wed, 30 Aug 2017 16:59:25 +0200
 Subject: printf_unit_test: Disable Wformat-truncation on GCC >= 7

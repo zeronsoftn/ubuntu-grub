@@ -1,4 +1,4 @@
-From a6d954f5b307a53bdc42294eb949ca61f979287c Mon Sep 17 00:00:00 2001
+From ba89ee685404c25ac44baad3bd0ddd84492e499f Mon Sep 17 00:00:00 2001
 From: Leif Lindholm <leif.lindholm@linaro.org>
 Date: Fri, 3 Nov 2017 12:04:00 -0400
 Subject: efi: move fdt helper library

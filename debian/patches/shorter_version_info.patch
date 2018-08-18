@@ -1,4 +1,4 @@
-From 6dfddcdfe9277b0424d15439bbf28e150db2f131 Mon Sep 17 00:00:00 2001
+From 0dfd7f04597c370ff96ce19083965e8812863ca3 Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Thu, 8 Feb 2018 10:48:37 +0100
 Subject: Show only upstream version, hide rest in package_version variable

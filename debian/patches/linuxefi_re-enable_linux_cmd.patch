@@ -1,4 +1,4 @@
-From d05e47d06fe7ee8d82413c2568bf73918500b9ab Mon Sep 17 00:00:00 2001
+From d47bd55f483ef9ed947d7bf3d2a49ec97faf75f9 Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Wed, 1 Nov 2017 13:51:03 -0400
 Subject: Temporarily re-enable the generic linux loader

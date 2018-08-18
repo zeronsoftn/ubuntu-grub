@@ -1,4 +1,4 @@
-From 5d82735400b428dca0ed3fe0e40085f3b8a98e64 Mon Sep 17 00:00:00 2001
+From 6ac9b295d31dcc9307ccd7a1f9657f098edd208f Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@debian.org>
 Date: Mon, 13 Jan 2014 12:12:57 +0000
 Subject: Disable gfxpayload=keep by default

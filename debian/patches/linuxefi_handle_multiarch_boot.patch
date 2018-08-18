@@ -1,4 +1,4 @@
-From ba22cdf266aee52f49abdc30d2c5c86ac4a45113 Mon Sep 17 00:00:00 2001
+From b0fe67633a51ce64683527355c84e2cb0399fa1b Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Feb 2017 16:18:54 -0500
 Subject: Handle multi-arch (64-on-32) boot in linuxefi loader.
