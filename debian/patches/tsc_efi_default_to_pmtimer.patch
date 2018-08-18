@@ -1,4 +1,4 @@
-From b2de06a3c4c40d5c3a8b8ef6972d356451d47a8a Mon Sep 17 00:00:00 2001
+From 1f2a51d8f61c4bfc12693b7de17223d0e28fa3b7 Mon Sep 17 00:00:00 2001
 From: "David E. Box" <david.e.box@linux.intel.com>
 Date: Fri, 15 Sep 2017 15:37:05 -0700
 Subject: tsc: Change default tsc calibration method to pmtimer on EFI systems

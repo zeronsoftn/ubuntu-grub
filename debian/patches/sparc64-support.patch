@@ -1,4 +1,4 @@
-From 7c8d2eccba22b8af217dbbdfe8ef5a419b522098 Mon Sep 17 00:00:00 2001
+From f592068c2715db6665cdf93b0add5d2bb3f612af Mon Sep 17 00:00:00 2001
 From: Eric Snowberg <eric.snowberg@oracle.com>
 Date: Thu, 22 Feb 2018 10:03:46 +0000
 Subject: Add support for modern sparc64 hardware
@@ -35,7 +35,7 @@ Patch-Name: sparc64-support.patch
  create mode 100644 include/grub/ieee1275/obdisk.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 208b8c136..ab056660d 100644
+index e3662bb03..8254df96b 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -271,6 +271,7 @@ kernel = {

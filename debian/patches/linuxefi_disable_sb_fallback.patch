@@ -1,4 +1,4 @@
-From 7403d4f2cff037c2114560b37ad9ce492360c6f6 Mon Sep 17 00:00:00 2001
+From 2a941a99b894022d1621bec57a1030ece232483e Mon Sep 17 00:00:00 2001
 From: Linn Crosetto <linn@hpe.com>
 Date: Tue, 5 Apr 2016 11:49:05 -0600
 Subject: Disallow unsigned kernels if UEFI Secure Boot is enabled
