@@ -1,5 +1,9 @@
 grub2 (2.02+dfsg1-5ubuntu1) UNRELEASED; urgency=medium
 
+  /!\ MERGE IN PROGRESS. Mostly done, but still in progress.
+      Please contact cyphermox unless you're cjwatson or your really know
+      what you're doing. The code is "merged", but completely untested. 
+
   * Merge against Debian unstable; remaining changes:
     - debian/control: Update Vcs fields for code location on Ubuntu.
     - debian/control: Breaks shim (<< 13).
