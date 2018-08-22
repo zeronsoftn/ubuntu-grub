@@ -59,6 +59,8 @@ grub2 (2.02+dfsg1-5ubuntu1) UNRELEASED; urgency=medium
       the casting they do on some architectures: we don't want to fail build
       because of some of the warnings that can show up since we otherwise build
       with -Werror.
+  * debian/rules: shuffle files around for now to keep putting build artefacts
+    for signing at the same location as they were expected by Launchpad.
 
  -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 17 Aug 2018 17:05:33 -0400
 
