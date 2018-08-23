@@ -1,5 +1,6 @@
 grub2 (2.02+dfsg1-5ubuntu1) UNRELEASED; urgency=medium
 
+  [ Mathieu Trudel-Lapierre]
   * Merge against Debian unstable; remaining changes:
     - debian/control: Update Vcs fields for code location on Ubuntu.
     - debian/control: Breaks shim (<< 13).
@@ -57,6 +58,10 @@ grub2 (2.02+dfsg1-5ubuntu1) UNRELEASED; urgency=medium
       with -Werror.
   * debian/rules: shuffle files around for now to keep putting build artefacts
     for signing at the same location as they were expected by Launchpad.
+
+  [ Julian Andres Klode ]
+  * debian/patches/ofnet-init-structs-in-bootpath-parser.patch: initialize
+    structs in bootpath parser. Fixes netboot issues on ppc64el. (LP: #1785859)
 
  -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 17 Aug 2018 17:05:33 -0400
 
