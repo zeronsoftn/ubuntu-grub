@@ -1,4 +1,4 @@
-grub2 (2.02+dfsg1-5ubuntu1) UNRELEASED; urgency=medium
+grub2 (2.02+dfsg1-5ubuntu1) cosmic; urgency=medium
 
   [ Mathieu Trudel-Lapierre]
   * Merge against Debian unstable; remaining changes:
@@ -63,7 +63,7 @@ grub2 (2.02+dfsg1-5ubuntu1) UNRELEASED; urgency=medium
   * debian/patches/ofnet-init-structs-in-bootpath-parser.patch: initialize
     structs in bootpath parser. Fixes netboot issues on ppc64el. (LP: #1785859)
 
- -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 17 Aug 2018 17:05:33 -0400
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Thu, 23 Aug 2018 15:00:14 -0400
 
 grub2 (2.02+dfsg1-5) unstable; urgency=medium
 
