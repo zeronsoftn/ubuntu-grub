@@ -1,4 +1,4 @@
-grub2 (2.02+dfsg1-5ubuntu5) UNRELEASED; urgency=medium
+grub2 (2.02+dfsg1-5ubuntu5) cosmic; urgency=medium
 
   [ Mathieu Trudel-Lapierre ]
   * debian/patches/linuxefi_truncate_overlong_reloc_section.patch: The Windows
@@ -11,7 +11,7 @@ grub2 (2.02+dfsg1-5ubuntu5) UNRELEASED; urgency=medium
     capabilities. If a kernel fails to boot without initrd, grub will fallback
     to trying to boot the kernel with an initrd. Patch by Chris Glass.
 
- -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Tue, 25 Sep 2018 11:06:29 -0400
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Tue, 25 Sep 2018 16:05:13 -0400
 
 grub2 (2.02+dfsg1-5ubuntu4) cosmic; urgency=medium
 
