@@ -1,3 +1,11 @@
+grub2 (2.02+dfsg1-5ubuntu5) UNRELEASED; urgency=medium
+
+  * debian/patches/linuxefi_truncate_overlong_reloc_section.patch: The Windows
+    7 bootloader has inconsistent headers; truncate to the smaller, correct
+    size to fix chainloading Windows 7.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Tue, 25 Sep 2018 11:06:29 -0400
+
 grub2 (2.02+dfsg1-5ubuntu4) cosmic; urgency=medium
 
   * debian/patches/linuxefi_fix_relocate_coff.patch: fix typo in
