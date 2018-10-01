@@ -1,3 +1,10 @@
+grub2 (2.02+dfsg1-5ubuntu6) UNRELEASED; urgency=medium
+
+  * debian/grub-check-signatures: Handle the case where we have unsigned
+    vmlinuz and signed vmlinuz.efi.signed.  LP: #1795291.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Mon, 01 Oct 2018 00:58:46 -0700
+
 grub2 (2.02+dfsg1-5ubuntu5) cosmic; urgency=medium
 
   [ Mathieu Trudel-Lapierre ]
