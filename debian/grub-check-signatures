@@ -60,10 +60,11 @@ find_unsigned() {
 		if dpkg --compare-versions "$this_uname_r" lt "$uname_r"; then
 			continue
 		fi
-		if ! is_signed $kernel && ! echo "$signed" | grep -q "\b$this_uname_r"; then
+		if [ -e "$kernel.efi.signed" ]; then
+			continue
+		fi
+		if ! is_signed $kernel; then
 			echo "$this_uname_r"
-		else
-			signed="$signed $this_uname_r"
 		fi
 	done
 }
