@@ -1,3 +1,10 @@
+grub2 (2.02+dfsg1-5ubuntu7) UNRELEASED; urgency=medium
+
+  * debian/grub-common.install.in: install the systemd unit that's part of
+    initrd fallback handling, missed when the feature landed.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Thu, 11 Oct 2018 13:37:22 -0700
+
 grub2 (2.02+dfsg1-5ubuntu6) cosmic; urgency=medium
 
   [ Steve Langasek ]
