@@ -1,3 +1,10 @@
+grub2 (2.02+dfsg1-5ubuntu9) UNRELEASED; urgency=medium
+
+  * debian/patches/quick-boot-lvm.patch: If we don't have writable
+    grubenv and we're on EFI, always show the menu.  Closes LP: #1800722.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Tue, 30 Oct 2018 15:46:28 -0700
+
 grub2 (2.02+dfsg1-5ubuntu8) cosmic; urgency=medium
 
   * debian/patches/grub-install-extra-removable.patch: install mmx64.efi to
