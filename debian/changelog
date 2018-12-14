@@ -1,7 +1,13 @@
 grub2 (2.02+dfsg1-5ubuntu9) UNRELEASED; urgency=medium
 
+  [ Steve Langasek ]
   * debian/patches/quick-boot-lvm.patch: If we don't have writable
     grubenv and we're on EFI, always show the menu.  Closes LP: #1800722.
+
+  [ Mathieu Trudel-Lapierre ]
+  * debian/patches/mkconfig_leave_breadcrumbs.patch: make sure grub-mkconfig
+    leaves a trace of what files were sourced to help generate the config
+    we're building.
 
  -- Steve Langasek <steve.langasek@ubuntu.com>  Tue, 30 Oct 2018 15:46:28 -0700
 
