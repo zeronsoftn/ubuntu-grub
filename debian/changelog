@@ -1,3 +1,12 @@
+grub2 (2.02+dfsg1-5ubuntu11) UNRELEASED; urgency=medium
+
+  * debian/grub-check-signatures: properly account for DB showing as empty on
+    some broken firmwares: Guard against mokutil --export --db failing, and do
+    a better job at finding the DER certs for conversion to PEM format.
+    (LP: #1814575)
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Mon, 04 Feb 2019 13:12:23 -0500
+
 grub2 (2.02+dfsg1-5ubuntu10) disco; urgency=medium
 
   * debian/grub-check-signatures: check kernel signatures against keys known
