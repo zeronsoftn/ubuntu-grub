@@ -1,3 +1,16 @@
+grub2 (2.02+dfsg1-5ubuntu12) UNRELEASED; urgency=medium
+
+  * debian/postinst.in: apply debconf changes both to /etc/default/grub and
+    to the ucf template; this avoids us showing ucf prompts when nothing has
+    changed in either the config file or in the package-provided template.
+    LP: #564853.  ucf prompts will still be shown only in the case that
+    there is both a change to one of the debconf-managed settings since the
+    last update of grub, *and* there are local changes to
+    non-debconf-managed settings, because we cannot detect that these are
+    spurious.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Thu, 07 Feb 2019 07:41:52 -0800
+
 grub2 (2.02+dfsg1-5ubuntu11) disco; urgency=medium
 
   [ Mathieu Trudel-Lapierre ]

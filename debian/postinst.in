@@ -377,14 +377,18 @@ case "$1" in
 
     merge_debconf_into_conf "$tmp_default_grub" GRUB_CMDLINE_LINUX grub2/linux_cmdline
     merge_debconf_into_conf "$tmp_default_grub" GRUB_CMDLINE_LINUX_DEFAULT grub2/linux_cmdline_default
+    merge_debconf_into_conf /etc/default/grub GRUB_CMDLINE_LINUX grub2/linux_cmdline
+    merge_debconf_into_conf /etc/default/grub GRUB_CMDLINE_LINUX_DEFAULT grub2/linux_cmdline_default
 
     case @PACKAGE@ in
       grub-pc)
         merge_debconf_into_conf "$tmp_default_grub" GRUB_TIMEOUT grub-pc/timeout
+        merge_debconf_into_conf /etc/default/grub GRUB_TIMEOUT grub-pc/timeout
         sed -i -e 's/^\(GRUB_TIMEOUT=\)"\([0-9][0-9]*\)"/\1\2/' "$tmp_default_grub"
         db_get grub-pc/hidden_timeout
         if [ "$RET" = false ]; then
           sed -i -e 's/^GRUB_HIDDEN_TIMEOUT=/#&/' "$tmp_default_grub"
+          sed -i -e 's/^GRUB_HIDDEN_TIMEOUT=/#&/' /etc/default/grub
         fi
       ;;
       grub-ieee1275)
