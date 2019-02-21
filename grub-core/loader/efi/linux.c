@@ -50,7 +50,7 @@ grub_linuxefi_secure_validate (void *data, grub_uint32_t size)
 
   grub_dprintf ("secureboot", "Asking shim to verify kernel signature\n");
   status = shim_lock->verify (data, size);
-  grub_dprintf ("secureboot", "shim_lock->verify(): %ld\n", status);
+  grub_dprintf ("secureboot", "shim_lock->verify(): %zd\n", status);
   if (status == GRUB_EFI_SUCCESS)
     {
       grub_dprintf ("secureboot", "Kernel signature verification passed\n");
@@ -76,7 +76,7 @@ grub_efi_linux_boot (void *kernel_addr, grub_off_t handover_offset,
   offset = 512;
 #endif
 
-  hf = (handover_func)((char *)kernel_addr + handover_offset + offset);
+  hf = (handover_func)((grub_addr_t *)kernel_addr + handover_offset + offset);
   hf (grub_efi_image_handle, grub_efi_system_table, kernel_params);
 
   return GRUB_ERR_BUG;
