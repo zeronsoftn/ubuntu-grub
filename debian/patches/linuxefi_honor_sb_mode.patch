@@ -1,4 +1,4 @@
-From f0e2cdbca08343452d2e48af2f2aeb0935c90a4f Mon Sep 17 00:00:00 2001
+From 9428a8341d1677ed64fbba52a1846912fabfa65d Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 27 Feb 2019 12:42:08 -0500
 Subject: Make any of the loaders that link in efi mode honor secure boot.
@@ -7,6 +7,12 @@ And in this case "honor" means "even if somebody does link this in, they
 won't register commands if SB is enabled."
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
+
+Origin: vendor, https://github.com/rhboot/grub2/commit/3056bfc5044e976fa97f76b81b6a680731005095
+Forwarded: no
+Last-Update: 2019-02-27
+
+Patch-Name: linuxefi_honor_sb_mode.patch
 ---
  grub-core/Makefile.am              |  1 +
  grub-core/Makefile.core.def        |  1 +

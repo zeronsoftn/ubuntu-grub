@@ -1,4 +1,4 @@
-From 04ce045d68c00e29e0e9db9885964e012353e105 Mon Sep 17 00:00:00 2001
+From 98bc4f52034abb18e7bd028d424bde15375c14af Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 27 Feb 2019 12:38:13 -0500
 Subject: Load arm with SB enabled.
@@ -10,8 +10,10 @@ This means giving the kernel grub's loaded image as the vehicle for the
 kernel command line, because we can't call systab->bs->LoadImage() if SB
 is enabled.
 
-Patch-Name: linuxefi_load_arm_with_sb.patch
+Origin: vendor, https://github.com/rhboot/grub2/commit/2786ab864cf00c15123320671f653e9a36ba12b4
+Forwarded: no
 Last-Update: 2019-02-27
+Patch-Name: linuxefi_load_arm_with_sb.patch
 ---
  grub-core/Makefile.core.def       |   3 +
  grub-core/loader/arm64/linux.c    | 112 ++++++++++++++++--------------

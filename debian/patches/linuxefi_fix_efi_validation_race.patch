@@ -1,10 +1,13 @@
-From a67f1099ddf544ff01906185b56f878c2badc6a7 Mon Sep 17 00:00:00 2001
+From fc6929cd0e763737569f9b17edb4438c8821e863 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Tue, 14 Jul 2015 16:58:51 -0700
 Subject: Fix race in EFI validation
 
-Patch-Name: linxuefi_fix_race_in_efi_validation.patch
+Origin: vendor, https://github.com/rhboot/grub2/commit/57414c73c4e80baedcb96ff35be9306fb0599a09
+Forwarded: no
 Last-Update: 2019-02-27
+
+Patch-Name: linuxefi_fix_efi_validation_race.patch
 ---
  grub-core/loader/i386/efi/linux.c | 44 ++++++++-----------------------
  1 file changed, 11 insertions(+), 33 deletions(-)

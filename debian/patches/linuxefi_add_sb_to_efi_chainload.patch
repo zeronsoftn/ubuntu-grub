@@ -1,4 +1,4 @@
-From 56aaae6f008b5500c599d7a829d8c90316f05933 Mon Sep 17 00:00:00 2001
+From 818f6a920df3b9e14a38bea9e6caca2b423bcc6e Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 6 Oct 2015 13:04:37 -0400
 Subject: Add secureboot support on efi chainloader
@@ -16,6 +16,12 @@ such as xen.efi, and could be signed by any of MOK, KEK or DB.
 Based on https://build.opensuse.org/package/view_file/openSUSE:Factory/grub2/grub2-secureboot-chainloader.patch
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
+
+Origin: vendor, https://github.com/rhboot/grub2/commit/a00fc9f578d2c310438ced8d4be07f5fa4005873
+Forwarded: no
+Last-Update: 2019-02-27
+
+Patch-Name: linuxefi_add_sb_to_efi_chainload.patch
 ---
  grub-core/loader/efi/chainloader.c | 612 +++++++++++++++++++++++++++--
  include/grub/efi/pe32.h            |  20 +-

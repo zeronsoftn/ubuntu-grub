@@ -1,9 +1,15 @@
-From f59c7b3d1ac1b0b4a342154806f0d68d0955ce84 Mon Sep 17 00:00:00 2001
+From cb8ef71ee554d7243faea63e36881963d6491ecf Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 9 May 2016 14:15:17 -0400
 Subject: Add some grub_dprintf() in the linuxefi path.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
+
+Origin: vendor, https://github.com/rhboot/grub2/commit/527a427a8edf05d8994f679a16d0dc98106563f4
+Forwarded: no
+Last-Update: 2019-02-27
+
+Patch-Name: linuxefi_debug.patch
 ---
  grub-core/loader/efi/linux.c      | 16 +++++++++++++---
  grub-core/loader/i386/efi/linux.c | 10 +++++++++-

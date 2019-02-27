@@ -1,4 +1,4 @@
-From 6ca4db9fbd41cd8d871bb81e3086715f3aef5a75 Mon Sep 17 00:00:00 2001
+From 0a6fc7c5824f74c7c42fd1ae85f0921d77dc92ca Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 9 Jun 2016 12:22:29 -0400
 Subject: Re-work some intricacies of PE loading.
@@ -6,6 +6,12 @@ Subject: Re-work some intricacies of PE loading.
 The PE spec is not a well written document, and awesomely every place
 where there's an ambiguous way to read something, Windows' bootmgfw.efi
 takes a different read than either of them.
+
+Origin: vendor, https://github.com/rhboot/grub2/commit/3f023d25a1ceb6d23c1bb17b754fbc1f8321427d
+Forwarded: no
+Last-Update: 2019-02-27
+
+Patch-Name: linuxefi_rework_pe_loading.patch
 ---
  grub-core/loader/efi/chainloader.c | 156 +++++++++++++++++++++++------
  include/grub/efi/pe32.h            |  32 +++++-

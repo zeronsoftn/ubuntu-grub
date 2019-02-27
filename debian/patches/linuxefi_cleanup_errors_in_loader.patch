@@ -1,9 +1,15 @@
-From 04a71c13f36c4b35c12525bd48f4ff5a8089e1db Mon Sep 17 00:00:00 2001
+From 69e79fd88d50f4898f6ecc6e747d9ef1c7e04058 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 27 Feb 2019 12:44:37 -0500
 Subject: Clean up some errors in the linuxefi loader
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
+
+Origin: vendor, https://github.com/rhboot/grub2/commit/df0d3873162dd7e9352e1d4fbd589aa60e722f2e
+Forwarded: no
+Last-Update: 2019-02-27
+
+Patch-Name: linuxefi_cleanup_errors_in_loader.patch
 ---
  grub-core/loader/i386/efi/linux.c | 16 ++++++++--------
  grub-core/loader/i386/linux.c     |  5 ++++-

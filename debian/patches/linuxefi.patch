@@ -1,4 +1,4 @@
-From bed46c1099991d4268bb7ffb1886888fd3661c22 Mon Sep 17 00:00:00 2001
+From c08f142f5faaf4e18f9077d81b4e91f318fd11f9 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg@redhat.com>
 Date: Wed, 27 Feb 2019 12:20:48 -0500
 Subject: Add support for linuxefi
@@ -6,6 +6,7 @@ Subject: Add support for linuxefi
 Last-Update: 2019-02-27
 Patch-Name: linuxefi.patch
 Origin: vendor, https://github.com/rhboot/grub2/commit/c81a5cc77110c919da5bce565854fc38ab49303b
+Forwarded: no
 ---
  grub-core/Makefile.core.def       |   8 +
  grub-core/kern/efi/mm.c           |  32 +++

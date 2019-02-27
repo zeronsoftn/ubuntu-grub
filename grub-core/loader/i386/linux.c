@@ -36,7 +36,6 @@
 #include <grub/lib/cmdline.h>
 #include <grub/linux.h>
 #include <grub/machine/kernel.h>
-#include <grub/efi/sb.h>
 
 GRUB_MOD_LICENSE ("GPLv3+");
 
@@ -46,6 +45,7 @@ GRUB_MOD_LICENSE ("GPLv3+");
 
 #ifdef GRUB_MACHINE_EFI
 #include <grub/efi/efi.h>
+#include <grub/efi/sb.h>
 #define HAS_VGA_TEXT 0
 #define DEFAULT_VIDEO_MODE "auto"
 #define ACCEPTS_PURE_TEXT 0
@@ -709,10 +709,8 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
   using_linuxefi = 0;
   if (grub_efi_secure_boot ())
     {
-      /* Try linuxefi first, which will require a successful signature check
-	 and then hand over to the kernel without calling ExitBootServices.
-	 If that fails, however, fall back to calling ExitBootServices
-	 ourselves and then booting an unsigned kernel.  */
+      /* linuxefi requires a successful signature check and then hand over
+	 to the kernel without calling ExitBootServices. */
       grub_dl_t mod;
       grub_command_t linuxefi_cmd;
 
@@ -734,7 +732,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
 		  return GRUB_ERR_NONE;
 		}
 	      grub_dprintf ("linux", "linuxefi failed (%d)\n", grub_errno);
-	      grub_errno = GRUB_ERR_NONE;
+	      goto fail;
 	    }
 	}
     }
@@ -1205,9 +1203,6 @@ static grub_command_t cmd_linux, cmd_initrd;
 
 GRUB_MOD_INIT(linux)
 {
-  if (grub_efi_secure_boot())
-    return;
-
   cmd_linux = grub_register_command ("linux", grub_cmd_linux,
 				     0, N_("Load Linux."));
   cmd_initrd = grub_register_command ("initrd", grub_cmd_initrd,
@@ -1217,9 +1212,6 @@ GRUB_MOD_INIT(linux)
 
 GRUB_MOD_FINI(linux)
 {
-  if (grub_efi_secure_boot())
-    return;
-
   grub_unregister_command (cmd_linux);
   grub_unregister_command (cmd_initrd);
 }

@@ -1,4 +1,4 @@
-From d54efe3ba63f718965dda94fcb7a74e350b094b5 Mon Sep 17 00:00:00 2001
+From ec345fe93b49a3c933baa3c5d6464b9c385645d6 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Sun, 9 Aug 2015 16:20:58 -0700
 Subject: Rework linux16 command
@@ -6,6 +6,12 @@ Subject: Rework linux16 command
 We want a single buffer that contains the entire kernel image in order to
 perform a TPM measurement. Allocate one and copy the entire kernel int it
 before pulling out the individual blocks later on.
+
+Origin: vendor, https://github.com/rhboot/grub2/commit/78d85625026497d96a06e5b7880a1d4785af9d1f
+Forwarded: no
+Last-Update: 2019-02-27
+
+Patch-Name: linuxefi_rework_linux16_cmd.patch
 ---
  grub-core/loader/i386/pc/linux.c | 34 ++++++++++++++++++++------------
  1 file changed, 21 insertions(+), 13 deletions(-)

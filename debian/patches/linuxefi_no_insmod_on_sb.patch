@@ -1,4 +1,4 @@
-From dbd784a325f3248c2cee12d58cbae50e8453ec22 Mon Sep 17 00:00:00 2001
+From 43ddc5b008093e6d228a928a0b1d3a2012836937 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Tue, 23 Oct 2012 10:40:49 -0400
 Subject: Don't allow insmod when secure boot is enabled.
@@ -16,6 +16,13 @@ whatever you want to do and pointing $prefix at the malicious code.
 I'm currently test-building this patch (replacing your current
 grub-2.00-no-insmod-on-sb.patch), but this should be more correct.  It
 moves the check into grub_dl_load_file.
+
+Author: Colin Watson <cjwatson@ubuntu.com>
+Origin: vendor, https://github.com/rhboot/grub2/commit/7cd4b7642d1ce2c0ac48f62e0fa4954a432f65a5
+Forwarded: no
+Last-Update: 2019-02-27
+
+Patch-Name: linuxefi_no_insmod_on_sb.patch
 ---
  grub-core/kern/dl.c      | 21 +++++++++++++++++++++
  grub-core/kern/efi/efi.c | 28 ++++++++++++++++++++++++++++

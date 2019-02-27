@@ -1,4 +1,4 @@
-From fa4143aca5254b5b79c7aadc0ff3accfb5f42c74 Mon Sep 17 00:00:00 2001
+From e3bc7b32027ec10035e477d05095f29572714e9c Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 10 Jun 2016 14:06:15 -0400
 Subject: Rework even more of efi chainload so non-sb cases work right.
@@ -40,6 +40,12 @@ nosb + grub + win                   success     success
 Resolves: rhbz#1344512
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
+
+Origin: vendor, https://github.com/rhboot/grub2/commit/149cdec4f9e5fd039a698ef20530bad588b6aeeb
+Forwarded: no
+Last-Update: 2019-02-27
+
+Patch-Name: linuxefi_rework_non-sb_efi_chainload.patch
 ---
  grub-core/kern/efi/sb.c            |  14 +++-
  grub-core/loader/arm64/linux.c     |   4 +-

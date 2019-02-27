@@ -1,4 +1,4 @@
-From 997a9ad8ca145fb73562b3013fd330b345c3e64e Mon Sep 17 00:00:00 2001
+From 46bbfcf474e398f74fcccdda17019cd93ddd2f22 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Feb 2017 16:18:54 -0500
 Subject: Handle multi-arch (64-on-32) boot in linuxefi loader.
@@ -6,6 +6,12 @@ Subject: Handle multi-arch (64-on-32) boot in linuxefi loader.
 Allow booting 64-bit kernels on 32-bit EFI on x86.
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
+
+Origin: vendor, https://github.com/rhboot/grub2/commit/1c88c700148acf02863a350055a43eb87e16bbe5
+Forwarded: no
+Last-Update: 2019-02-27
+
+Patch-Name: linuxefi_handle_multiarch_boot.patch
 ---
  grub-core/loader/efi/linux.c      |   9 ++-
  grub-core/loader/i386/efi/linux.c | 108 +++++++++++++++++++++---------

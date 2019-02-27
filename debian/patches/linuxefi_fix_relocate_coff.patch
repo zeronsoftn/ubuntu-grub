@@ -1,4 +1,4 @@
-From 3c4b15723ca93f57d84e6e09ffc3b706810e8524 Mon Sep 17 00:00:00 2001
+From e62730442a20d0bd5e9c1016c13c337855681960 Mon Sep 17 00:00:00 2001
 From: Laszlo Ersek <lersek@redhat.com>
 Date: Wed, 27 Feb 2019 12:46:42 -0500
 Subject: efi/chainloader: fix wrong sanity check in relocate_coff()
@@ -16,7 +16,9 @@ Bugzilla: https://bugzilla.redhat.com/show_bug.cgi?id=1347291
 Signed-off-by: Laszlo Ersek <lersek@redhat.com>
 Tested-by: Bogdan Costescu <bcostescu@gmail.com>
 Tested-by: Juan Orti <j.orti.alcaine@gmail.com>
+
 Patch-Name: linuxefi_fix_relocate_coff.patch
+Last-Update: 2019-02-27
 ---
  grub-core/loader/efi/chainloader.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

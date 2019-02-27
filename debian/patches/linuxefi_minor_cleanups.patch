@@ -1,9 +1,15 @@
-From 41f4fb5d3d8968c163603eff825f4f03d4581c82 Mon Sep 17 00:00:00 2001
+From f93aeb5202b6d4a24bb73315c9a300da3ba394f5 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 14 Feb 2017 16:31:52 -0500
 Subject: linuxefi: minor cleanups
 
 Signed-off-by: Peter Jones <pjones@redhat.com>
+
+Origin: vendor, https://github.com/rhboot/grub2/commit/2c9a6edf8abbc7397174ec2696fce28822996a12
+Forwarded: no
+Last-Update: 2019-02-27
+
+Patch-Name: linuxefi_minor_cleanups.patch
 ---
  grub-core/loader/i386/efi/linux.c | 30 ++++++++++++++++++++----------
  1 file changed, 20 insertions(+), 10 deletions(-)

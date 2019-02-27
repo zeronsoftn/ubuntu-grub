@@ -1,4 +1,4 @@
-From de093eb3e1325322d46566b30ae5dad4fcd8a322 Mon Sep 17 00:00:00 2001
+From 9f26a7f60e30d57b02f5cb3952c5a4343491d95c Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg59@coreos.com>
 Date: Sun, 9 Aug 2015 16:12:39 -0700
 Subject: Rework linux command
@@ -6,6 +6,12 @@ Subject: Rework linux command
 We want a single buffer that contains the entire kernel image in order to
 perform a TPM measurement. Allocate one and copy the entire kernel into it
 before pulling out the individual blocks later on.
+
+Origin: vendor, https://github.com/rhboot/grub2/commit/97c97a2e9a95a29c42569952c8be7be1fdb5b4cf
+Forwarded: no
+Last-Update: 2019-02-27
+
+Patch-Name: linuxefi_rework_linux_cmd.patch
 ---
  grub-core/loader/i386/linux.c | 34 +++++++++++++++++++++-------------
  1 file changed, 21 insertions(+), 13 deletions(-)
