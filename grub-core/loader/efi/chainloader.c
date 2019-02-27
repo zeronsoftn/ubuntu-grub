@@ -556,7 +556,7 @@ handle_image (void *data, grub_efi_uint32_t datasize)
     section_alignment = 4096;
 
   buffer_size = context.image_size + section_alignment;
-  grub_dprintf ("chain", "image size is %08" PRIdGRUB_SSIZE ", datasize is %08x\n",
+  grub_dprintf ("chain", "image size is %08" PRIuGRUB_UINT64_T ", datasize is %08x\n",
 	       context.image_size, datasize);
 
   efi_status = efi_call_3 (b->allocate_pool, GRUB_EFI_LOADER_DATA,

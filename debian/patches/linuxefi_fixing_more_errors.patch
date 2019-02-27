@@ -1,4 +1,4 @@
-From c1df9802193766dad3a3cfb2c546dd57ce29558e Mon Sep 17 00:00:00 2001
+From 8018532f01c334b0c3bf2d3dd01709bc92c2d90d Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Thu, 21 Feb 2019 18:23:03 +0100
 Subject: Fix various format/cast errors in Secure Boot code
@@ -67,7 +67,7 @@ index f93d72100..0cba1b2ad 100644
    grub_err_t retval;
  
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
-index db1ffeefc..da9a73207 100644
+index db1ffeefc..4e65d4382 100644
 --- a/grub-core/loader/efi/chainloader.c
 +++ b/grub-core/loader/efi/chainloader.c
 @@ -322,12 +322,14 @@ relocate_coff (pe_coff_loader_image_context_t *context,
@@ -144,7 +144,7 @@ index db1ffeefc..da9a73207 100644
  
    buffer_size = context.image_size + section_alignment;
 -  grub_dprintf ("chain", "image size is %08lx, datasize is %08x\n",
-+  grub_dprintf ("chain", "image size is %08" PRIdGRUB_SSIZE ", datasize is %08x\n",
++  grub_dprintf ("chain", "image size is %08" PRIuGRUB_UINT64_T ", datasize is %08x\n",
  	       context.image_size, datasize);
  
    efi_status = efi_call_3 (b->allocate_pool, GRUB_EFI_LOADER_DATA,
