@@ -1,6 +1,6 @@
-From 7d368913de3eb39f514a4278327c993aa96385ee Mon Sep 17 00:00:00 2001
+From 3c4b15723ca93f57d84e6e09ffc3b706810e8524 Mon Sep 17 00:00:00 2001
 From: Laszlo Ersek <lersek@redhat.com>
-Date: Mon, 21 Nov 2016 15:34:00 +0100
+Date: Wed, 27 Feb 2019 12:46:42 -0500
 Subject: efi/chainloader: fix wrong sanity check in relocate_coff()
 
 In relocate_coff(), the relocation entries are parsed from the original
@@ -22,7 +22,7 @@ Patch-Name: linuxefi_fix_relocate_coff.patch
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
-index a2e2d1b6f..2353271cf 100644
+index 3e89de900..ed8c36478 100644
 --- a/grub-core/loader/efi/chainloader.c
 +++ b/grub-core/loader/efi/chainloader.c
 @@ -401,7 +401,7 @@ relocate_coff (pe_coff_loader_image_context_t *context,

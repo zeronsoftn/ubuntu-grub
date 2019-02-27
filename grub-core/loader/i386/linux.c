@@ -35,6 +35,7 @@
 #include <grub/i18n.h>
 #include <grub/lib/cmdline.h>
 #include <grub/linux.h>
+#include <grub/machine/kernel.h>
 #include <grub/efi/sb.h>
 
 GRUB_MOD_LICENSE ("GPLv3+");
@@ -76,8 +77,6 @@ static grub_size_t maximal_cmdline_size;
 static struct linux_kernel_params linux_params;
 static char *linux_cmdline;
 #ifdef GRUB_MACHINE_EFI
-static int using_linuxefi;
-static grub_command_t initrdefi_cmd;
 static grub_efi_uintn_t efi_mmap_size;
 #else
 static const grub_size_t efi_mmap_size = 0;
@@ -560,6 +559,10 @@ grub_linux_boot (void)
 	}
     }
 
+#ifdef GRUB_KERNEL_USE_RSDP_ADDR
+  linux_params.acpi_rsdp_addr = grub_le_to_cpu64 (grub_rsdp_addr);
+#endif
+
   mmap_size = find_mmap_size ();
   /* Make sure that each size is aligned to a page boundary.  */
   cl_offset = ALIGN_UP (mmap_size + sizeof (linux_params), 4096);
@@ -687,7 +690,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
 		int argc, char *argv[])
 {
   grub_file_t file = 0;
-  struct linux_kernel_header lh;
+  struct linux_i386_kernel_header lh;
   grub_uint8_t *linux_params_ptr;
   grub_uint8_t setup_sects;
   grub_size_t real_size, prot_size, prot_file_size, kernel_offset;
@@ -699,39 +702,6 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
   grub_uint8_t *kernel = NULL;
 
   grub_dl_ref (my_mod);
-
-#ifdef GRUB_MACHINE_EFI
-  using_linuxefi = 0;
-  if (grub_efi_secure_boot ())
-    {
-      /* linuxefi requires a successful signature check and then hand over
-	 to the kernel without calling ExitBootServices. */
-      grub_dl_t mod;
-      grub_command_t linuxefi_cmd;
-
-      grub_dprintf ("linux", "Secure Boot enabled: trying linuxefi\n");
-
-      mod = grub_dl_load ("linuxefi");
-      if (mod)
-	{
-	  grub_dl_ref (mod);
-	  linuxefi_cmd = grub_command_find ("linuxefi");
-	  initrdefi_cmd = grub_command_find ("initrdefi");
-	  if (linuxefi_cmd && initrdefi_cmd)
-	    {
-	      (linuxefi_cmd->func) (linuxefi_cmd, argc, argv);
-	      if (grub_errno == GRUB_ERR_NONE)
-		{
-		  grub_dprintf ("linux", "Handing off to linuxefi\n");
-		  using_linuxefi = 1;
-		  return GRUB_ERR_NONE;
-		}
-	      grub_dprintf ("linux", "linuxefi failed (%d)\n", grub_errno);
-	      goto fail;
-	    }
-	}
-    }
-#endif
 
   if (argc == 0)
     {
@@ -776,7 +746,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
 
   /* FIXME: 2.03 is not always good enough (Linux 2.4 can be 2.03 and
      still not support 32-bit boot.  */
-  if (lh.header != grub_cpu_to_le32_compile_time (GRUB_LINUX_MAGIC_SIGNATURE)
+  if (lh.header != grub_cpu_to_le32_compile_time (GRUB_LINUX_I386_MAGIC_SIGNATURE)
       || grub_le_to_cpu16 (lh.version) < 0x0203)
     {
       grub_error (GRUB_ERR_BAD_OS, "version too old for 32-bit boot"
@@ -1107,12 +1077,6 @@ grub_cmd_initrd (grub_command_t cmd __attribute__ ((unused)),
   grub_err_t err;
   struct grub_linux_initrd_context initrd_ctx = { 0, 0, 0 };
 
-#ifdef GRUB_MACHINE_EFI
-  /* If we're using linuxefi, just forward to initrdefi.  */
-  if (using_linuxefi && initrdefi_cmd)
-    return (initrdefi_cmd->func) (initrdefi_cmd, argc, argv);
-#endif
-
   if (argc == 0)
     {
       grub_error (GRUB_ERR_BAD_ARGUMENT, N_("filename expected"));
@@ -1198,6 +1162,9 @@ static grub_command_t cmd_linux, cmd_initrd;
 
 GRUB_MOD_INIT(linux)
 {
+  if (grub_efi_secure_boot())
+    return;
+
   cmd_linux = grub_register_command ("linux", grub_cmd_linux,
 				     0, N_("Load Linux."));
   cmd_initrd = grub_register_command ("initrd", grub_cmd_initrd,
@@ -1207,6 +1174,9 @@ GRUB_MOD_INIT(linux)
 
 GRUB_MOD_FINI(linux)
 {
+  if (grub_efi_secure_boot())
+    return;
+
   grub_unregister_command (cmd_linux);
   grub_unregister_command (cmd_initrd);
 }
