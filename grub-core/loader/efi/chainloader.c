@@ -325,7 +325,9 @@ relocate_coff (pe_coff_loader_image_context_t *context,
   grub_addr_t *fixup, *fixup_base, *fixup_data = NULL;
   grub_efi_uint16_t *fixup_16;
   grub_efi_uint32_t *fixup_32;
+#if defined(__x86_64__) || defined(__aarch64__)
   grub_efi_uint64_t *fixup_64;
+#endif /* defined(__x86_64__) || defined(__aarch64__) */
   grub_efi_uint64_t size = context->image_size;
   void *image_end = (grub_addr_t *)orig + size;
   int n = 0;
@@ -554,7 +556,7 @@ handle_image (void *data, grub_efi_uint32_t datasize)
     section_alignment = 4096;
 
   buffer_size = context.image_size + section_alignment;
-  grub_dprintf ("chain", "image size is %08zd, datasize is %08x\n",
+  grub_dprintf ("chain", "image size is %08" PRIdGRUB_SSIZE ", datasize is %08x\n",
 	       context.image_size, datasize);
 
   efi_status = efi_call_3 (b->allocate_pool, GRUB_EFI_LOADER_DATA,
@@ -863,10 +865,10 @@ static grub_err_t
 grub_secureboot_chainloader_boot (void)
 {
   int rc;
-  rc = handle_image ((grub_addr_t *)address, fsize);
+  rc = handle_image ((void *)((grub_addr_t) address), fsize);
   if (rc == 0)
     {
-      grub_load_and_start_image((grub_addr_t *)address);
+      grub_load_and_start_image((void *)((grub_addr_t) address));
     }
 
   grub_loader_unset ();
