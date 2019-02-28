@@ -1,4 +1,4 @@
-From 8018532f01c334b0c3bf2d3dd01709bc92c2d90d Mon Sep 17 00:00:00 2001
+From 05aa502e30ca88b70f57ae44ad2e3fef0b34bf60 Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Thu, 21 Feb 2019 18:23:03 +0100
 Subject: Fix various format/cast errors in Secure Boot code
@@ -8,10 +8,10 @@ Last-Update: 2019-02-22
 Patch-Name: linuxefi_fixing_more_errors.patch
 ---
  grub-core/kern/efi/sb.c            |  2 ++
- grub-core/loader/arm64/linux.c     | 14 ++++++++++---
+ grub-core/loader/arm64/linux.c     | 17 +++++++++++-----
  grub-core/loader/efi/chainloader.c | 32 +++++++++++++++++-------------
  grub-core/loader/efi/linux.c       |  4 ++--
- 4 files changed, 33 insertions(+), 19 deletions(-)
+ 4 files changed, 34 insertions(+), 21 deletions(-)
 
 diff --git a/grub-core/kern/efi/sb.c b/grub-core/kern/efi/sb.c
 index d74778b0c..c14f401d7 100644
@@ -28,7 +28,7 @@ index d74778b0c..c14f401d7 100644
  #include <grub/efi/pe32.h>
  #include <grub/efi/linux.h>
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index f93d72100..0cba1b2ad 100644
+index f93d72100..0bba6f5d6 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
 @@ -49,6 +49,13 @@ static grub_uint32_t cmdline_size;
@@ -55,7 +55,17 @@ index f93d72100..0cba1b2ad 100644
    if (!loaded_image->load_options)
      return grub_error(GRUB_ERR_BAD_OS, "failed to create kernel parameters");
  
-@@ -149,7 +155,9 @@ free_params (void)
+@@ -140,8 +146,7 @@ free_params (void)
+   if (loaded_image)
+     {
+       if (loaded_image->load_options)
+-	grub_efi_free_pages ((grub_efi_physical_address_t)
+-			      loaded_image->load_options,
++	grub_efi_free_pages ((grub_addr_t) loaded_image->load_options,
+ 			     GRUB_EFI_BYTES_TO_PAGES (loaded_image->load_options_size));
+       loaded_image->load_options = NULL;
+       loaded_image->load_options_size = 0;
+@@ -149,7 +154,9 @@ free_params (void)
  }
  
  grub_err_t
