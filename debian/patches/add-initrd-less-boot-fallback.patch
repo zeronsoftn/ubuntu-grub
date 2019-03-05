@@ -1,4 +1,4 @@
-From 03a677fc98ddec574d27a73dce1a0224fdaba389 Mon Sep 17 00:00:00 2001
+From 6ae792adf5da31660ba565a797193bf4ee624bc3 Mon Sep 17 00:00:00 2001
 From: Chris Glass <chris.glass@canonical.com>
 Date: Fri, 9 Mar 2018 13:47:07 +0100
 Subject: Added initrd-less boot capabilities.

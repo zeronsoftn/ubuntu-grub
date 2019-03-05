@@ -1,4 +1,4 @@
-From 4ad187954efdf47853ed275de622f137a96fc808 Mon Sep 17 00:00:00 2001
+From 62ee9cada568b5ca54d80afa51bb0e020c748751 Mon Sep 17 00:00:00 2001
 From: Leif Lindholm <leif.lindholm@linaro.org>
 Date: Thu, 15 Nov 2018 01:03:00 +0000
 Subject: i386/efi: update loader to new interfaces

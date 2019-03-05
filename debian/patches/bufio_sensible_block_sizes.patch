@@ -1,4 +1,4 @@
-From 9a27632bc8b08d1c6bd823acd9e14991b595a59a Mon Sep 17 00:00:00 2001
+From 479979949569189e90ae23384d99f670665b5993 Mon Sep 17 00:00:00 2001
 From: Steve Langasek <steve.langasek@ubuntu.com>
 Date: Fri, 2 Feb 2018 10:26:34 -0500
 Subject: Don't use arbitrary file sizes as block sizes in bufio

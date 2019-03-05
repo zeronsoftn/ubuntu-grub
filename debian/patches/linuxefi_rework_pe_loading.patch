@@ -1,4 +1,4 @@
-From 0a6fc7c5824f74c7c42fd1ae85f0921d77dc92ca Mon Sep 17 00:00:00 2001
+From f8a48daebcfe102585fe2431b14e0765d0ff5d97 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 9 Jun 2016 12:22:29 -0400
 Subject: Re-work some intricacies of PE loading.

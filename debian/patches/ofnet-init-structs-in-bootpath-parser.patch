@@ -1,4 +1,4 @@
-From 188f5f727b9d47757ab41545581caf34873d3589 Mon Sep 17 00:00:00 2001
+From 7c52efa9093592ade59a986c5606450741fb8e59 Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Thu, 23 Aug 2018 13:25:30 +0200
 Subject: ofnet: Initialize structs in bootpath parser

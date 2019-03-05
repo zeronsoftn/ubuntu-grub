@@ -1,4 +1,4 @@
-From e28813e6fa7a45c19c0903e6e67d818550cdd69b Mon Sep 17 00:00:00 2001
+From d1417bf48d9dd0cc341b5a9779fcda1bd4f35692 Mon Sep 17 00:00:00 2001
 From: dann frazier <dann.frazier@canonical.com>
 Date: Fri, 17 Aug 2018 17:33:44 -0600
 Subject: grub-reboot: Warn when "for the next boot only" promise cannot be
