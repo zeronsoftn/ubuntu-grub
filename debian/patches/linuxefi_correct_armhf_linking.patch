@@ -1,9 +1,12 @@
-From 86cd0ce316287e81090343418cc806b4f3274bbe Mon Sep 17 00:00:00 2001
+From c79c3c094f53de7bdab1051a973d73f5b4531a22 Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Thu, 28 Feb 2019 10:07:21 -0500
 Subject: Update sourcefiles linked from arm_efi arch to fix symbol checking
 
 Signed-off-by: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
+
+Patch-Name: linuxefi_correct_armhf_linking.patch
+Last-Update: 2019-03-05
 ---
  grub-core/Makefile.core.def | 2 ++
  1 file changed, 2 insertions(+)

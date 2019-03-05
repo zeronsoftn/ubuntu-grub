@@ -329,7 +329,7 @@ relocate_coff (pe_coff_loader_image_context_t *context,
   grub_efi_uint64_t *fixup_64;
 #endif /* defined(__x86_64__) || defined(__aarch64__) */
   grub_efi_uint64_t size = context->image_size;
-  void *image_end = (grub_addr_t *)orig + size;
+  void *image_end = (char *)orig + size;
   int n = 0;
 
   if (image_is_64_bit (context->pe_hdr))
@@ -381,7 +381,7 @@ relocate_coff (pe_coff_loader_image_context_t *context,
       return GRUB_EFI_UNSUPPORTED;
     }
 
-  adjust = (grub_uint64_t)(unsigned long)data - context->image_address;
+  adjust = (grub_uint64_t)(grub_addr_t)data - context->image_address;
   if (adjust == 0)
     return GRUB_EFI_SUCCESS;
 
@@ -401,7 +401,7 @@ relocate_coff (pe_coff_loader_image_context_t *context,
 
       entry = &reloc->entries[0];
       reloc_end = (struct grub_pe32_fixup_block *)
-	((grub_addr_t *)reloc_base + reloc_base->size);
+	((void *)((char *)reloc_base + reloc_base->size));
 
       if ((void *)reloc_end < orig || (void *)reloc_end > image_end)
         {
@@ -506,7 +506,7 @@ handle_image (void *data, grub_efi_uint32_t datasize)
 {
   grub_efi_boot_services_t *b;
   grub_efi_loaded_image_t *li, li_bak;
-  grub_efi_status_t efi_status;
+  int efi_status;
   char *buffer = NULL;
   char *buffer_aligned = NULL;
   grub_efi_uint32_t i;
@@ -790,7 +790,7 @@ handle_image (void *data, grub_efi_uint32_t datasize)
   efi_status = efi_call_2 (entry_point, grub_efi_image_handle,
 			   grub_efi_system_table);
 
-  grub_dprintf ("chain", "entry_point returned %zd\n", efi_status);
+  grub_dprintf ("chain", "entry_point returned %d\n", efi_status);
   grub_memcpy (li, &li_bak, sizeof (grub_efi_loaded_image_t));
   efi_status = efi_call_1 (b->free_pool, buffer);
 
