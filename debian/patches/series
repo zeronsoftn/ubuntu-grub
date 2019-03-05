@@ -154,4 +154,3 @@ linuxefi_disable_sb_fallback.patch
 linuxefi_missing_include.patch
 linuxefi_fixing_more_errors.patch
 linuxefi_re-enable_linux_cmd.patch
-linuxefi_correct_armhf_linking.patch

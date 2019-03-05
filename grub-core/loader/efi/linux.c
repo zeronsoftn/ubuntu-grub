@@ -70,7 +70,6 @@ grub_efi_linux_boot (void *kernel_addr, grub_off_t handover_offset,
 		     void *kernel_params)
 {
   handover_func hf;
-  void *hf_addr = NULL;
   int offset = 0;
 
 #ifdef __x86_64__
@@ -78,8 +77,7 @@ grub_efi_linux_boot (void *kernel_addr, grub_off_t handover_offset,
   offset = 512;
 #endif
 
-  hf_addr = (char *)kernel_addr + handover_offset + offset;
-  hf = *(handover_func *)hf_addr;
+  hf = (handover_func)((char *)kernel_addr + handover_offset + offset);
   hf (grub_efi_image_handle, grub_efi_system_table, kernel_params);
 
   return GRUB_ERR_BUG;

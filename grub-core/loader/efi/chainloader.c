@@ -322,7 +322,7 @@ relocate_coff (pe_coff_loader_image_context_t *context,
   struct grub_pe32_data_directory *reloc_base, *reloc_base_end;
   grub_efi_uint64_t adjust;
   struct grub_pe32_fixup_block *reloc, *reloc_end;
-  grub_addr_t *fixup, *fixup_base, *fixup_data = NULL;
+  char *fixup, *fixup_base, *fixup_data = NULL;
   grub_efi_uint16_t *fixup_16;
   grub_efi_uint32_t *fixup_32;
 #if defined(__x86_64__) || defined(__aarch64__)
@@ -401,7 +401,7 @@ relocate_coff (pe_coff_loader_image_context_t *context,
 
       entry = &reloc->entries[0];
       reloc_end = (struct grub_pe32_fixup_block *)
-	((void *)((char *)reloc_base + reloc_base->size));
+	((char *)reloc_base + reloc_base->size);
 
       if ((void *)reloc_end < orig || (void *)reloc_end > image_end)
         {
@@ -449,7 +449,7 @@ relocate_coff (pe_coff_loader_image_context_t *context,
                 *fixup_32 = *fixup_32 + (grub_uint32_t)adjust;
                 if (fixup_data != NULL)
                   {
-                    fixup_data = (grub_addr_t *)ALIGN_UP ((grub_addr_t)fixup_data, sizeof (grub_uint32_t));
+                    fixup_data = (char *)ALIGN_UP ((grub_addr_t)fixup_data, sizeof (grub_uint32_t));
                     *(grub_uint32_t *) fixup_data = *fixup_32;
                     fixup_data += sizeof (grub_uint32_t);
                   }
@@ -460,7 +460,7 @@ relocate_coff (pe_coff_loader_image_context_t *context,
                 *fixup_64 = *fixup_64 + (grub_uint64_t)adjust;
                 if (fixup_data != NULL)
                   {
-                    fixup_data = (grub_addr_t *)ALIGN_UP ((grub_addr_t)fixup_data, sizeof (grub_uint64_t));
+                    fixup_data = (char *)ALIGN_UP ((grub_addr_t)fixup_data, sizeof (grub_uint64_t));
                     *(grub_uint64_t *) fixup_data = *fixup_64;
                     fixup_data += sizeof (grub_uint64_t);
                   }
