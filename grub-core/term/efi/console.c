@@ -244,7 +244,7 @@ grub_console_getwh (struct grub_term_output *term)
 }
 
 static struct grub_term_coordinate
-grub_console_getxy (struct grub_term_output *term)
+grub_console_getxy (struct grub_term_output *term __attribute__ ((unused)))
 {
   grub_efi_simple_text_output_interface_t *o;
 
@@ -285,7 +285,7 @@ grub_console_cls (struct grub_term_output *term __attribute__ ((unused)))
 }
 
 static void
-grub_console_setcolorstate (struct grub_term_output *term,
+grub_console_setcolorstate (struct grub_term_output *term __attribute__ ((unused)),
 			    grub_term_color_state state)
 {
   grub_efi_simple_text_output_interface_t *o;
@@ -318,7 +318,7 @@ grub_console_setcolorstate (struct grub_term_output *term,
 }
 
 static void
-grub_console_setcursor (struct grub_term_output *term,
+grub_console_setcursor (struct grub_term_output *term __attribute__ ((unused)),
 			int on)
 {
   grub_efi_simple_text_output_interface_t *o;
