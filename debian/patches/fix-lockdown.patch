@@ -1,4 +1,4 @@
-From 5f17e85530102bc92cb09796d878d6e399a4986d Mon Sep 17 00:00:00 2001
+From 97ae4fdab844698f1fc6fd1d90e58cf9325587f9 Mon Sep 17 00:00:00 2001
 From: Luca Boccassi <bluca@debian.org>
 Date: Tue, 15 May 2018 11:36:46 +0100
 Subject: Do not overwrite sentinel byte in boot_params, breaks lockdown
@@ -17,29 +17,29 @@ Forwarded: no
 
 Patch-Name: fix-lockdown.patch
 ---
- grub-core/loader/i386/efi/linux.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ grub-core/loader/i386/efi/linux.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
 diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
-index 16372a0c8..34605dfed 100644
+index 6b6aef87f..aebbb5ef8 100644
 --- a/grub-core/loader/i386/efi/linux.c
 +++ b/grub-core/loader/i386/efi/linux.c
-@@ -28,6 +28,7 @@
+@@ -27,6 +27,7 @@
  #include <grub/lib/cmdline.h>
- #include <grub/linux.h>
  #include <grub/efi/efi.h>
+ #include <grub/efi/linux.h>
 +#include <stddef.h>
  
  GRUB_MOD_LICENSE ("GPLv3+");
  
-@@ -334,7 +335,9 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
-       lh.code32_start = (grub_uint32_t)(grub_addr_t) kernel_mem;
-     }
+@@ -324,6 +325,10 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+   grub_dprintf ("linuxefi", "setting lh->type_of_loader\n");
+   lh->type_of_loader = 0x6;
  
--  grub_memcpy (params, &lh, 2 * 512);
 +  /* do not overwrite below boot_params->hdr to avoid setting the sentinel byte */
 +  start = offsetof (struct linux_kernel_params, setup_sects);
 +  grub_memcpy ((grub_uint8_t *)params + start, (grub_uint8_t *)&lh + start, 2 * 512 - start);
- 
-   params->type_of_loader = 0x21;
- 
++
+   grub_dprintf ("linuxefi", "setting lh->ext_loader_{type,ver}\n");
+   params->ext_loader_type = 0;
+   params->ext_loader_ver = 2;
