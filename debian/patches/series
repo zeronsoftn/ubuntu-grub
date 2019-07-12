@@ -63,3 +63,4 @@ ubuntu-add-initrd-less-boot-fallback.patch
 ubuntu-mkconfig-leave-breadcrumbs.patch
 ubuntu-fix-lzma-decompressor-objcopy.patch
 ubuntu-clear-invalid-initrd-spacing.patch
+ubuntu-zfs-enhance-support.patch
