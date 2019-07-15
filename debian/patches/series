@@ -55,7 +55,6 @@ vsnprintf-upper-case-hex.patch
 efi-variable-storage-minimise-writes.patch
 no-devicetree-if-secure-boot.patch
 ubuntu-linuxefi.patch
-fix-lockdown.patch
 ubuntu-efi-console-set-text-mode-as-needed.patch
 ubuntu-support-initrd-less-boot.patch
 ubuntu-shorter-version-info.patch

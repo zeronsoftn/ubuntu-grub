@@ -1,4 +1,4 @@
-From b177b33f19363509d2cd94d4cd705353e37ec8d0 Mon Sep 17 00:00:00 2001
+From 43f4ea34f97f81612c2e7afb1c9e5a7d28342b77 Mon Sep 17 00:00:00 2001
 From: Chris Glass <chris.glass@canonical.com>
 Date: Fri, 9 Mar 2018 13:47:07 +0100
 Subject: UBUNTU: Added initrd-less boot capabilities.

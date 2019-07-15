@@ -27,7 +27,6 @@
 #include <grub/lib/cmdline.h>
 #include <grub/efi/efi.h>
 #include <grub/efi/linux.h>
-#include <stddef.h>
 
 GRUB_MOD_LICENSE ("GPLv3+");
 
@@ -324,10 +323,6 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
 
   grub_dprintf ("linuxefi", "setting lh->type_of_loader\n");
   lh->type_of_loader = 0x6;
-
-  /* do not overwrite below boot_params->hdr to avoid setting the sentinel byte */
-  start = offsetof (struct linux_kernel_params, setup_sects);
-  grub_memcpy ((grub_uint8_t *)params + start, (grub_uint8_t *)&lh + start, 2 * 512 - start);
 
   grub_dprintf ("linuxefi", "setting lh->ext_loader_{type,ver}\n");
   params->ext_loader_type = 0;

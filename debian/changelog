@@ -52,6 +52,8 @@ grub2 (2.04-1ubuntu1) UNRELEASED; urgency=medium
     spacing for the initrd command when not using early initrds.
   * debian/patches/ubuntu-add-initrd-less-boot-fallback.patch: move the initrd
     boot success/failure service to start later at boot time. (LP: #1823391)
+  * debian/patches/fix-lockdown.patch: Drop lockdown patch from Debian, which
+    breaks with new linuxefi patchset.
 
  -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Tue, 09 Jul 2019 11:32:10 -0400
 
