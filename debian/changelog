@@ -50,6 +50,8 @@ grub2 (2.04-1ubuntu1) UNRELEASED; urgency=medium
     to objcopy building an invalid binary padded with zeroes (LP: #1833234)
   * debian/patches/ubuntu-clear-invalid-initrd-spacing.patch: clear up invalid
     spacing for the initrd command when not using early initrds.
+  * debian/patches/ubuntu-add-initrd-less-boot-fallback.patch: move the initrd
+    boot success/failure service to start later at boot time. (LP: #1823391)
 
  -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Tue, 09 Jul 2019 11:32:10 -0400
 
