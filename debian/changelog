@@ -54,6 +54,10 @@ grub2 (2.04-1ubuntu1) UNRELEASED; urgency=medium
     boot success/failure service to start later at boot time. (LP: #1823391)
   * debian/patches/fix-lockdown.patch: Drop lockdown patch from Debian, which
     breaks with new linuxefi patchset.
+  * debian/patches/ubuntu-temp-keep-auto-nvram.patch: Temporarily keep the
+    --auto-nvram option we previously had as a supported option in grub-install
+    (with no effect now), to avoid breaking upgrades. "auto-nvram" is default
+    behavior now that we use libefivar instead of calling efibootmgr.
 
  -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Tue, 09 Jul 2019 11:32:10 -0400
 

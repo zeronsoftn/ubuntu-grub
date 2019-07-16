@@ -63,3 +63,4 @@ ubuntu-mkconfig-leave-breadcrumbs.patch
 ubuntu-fix-lzma-decompressor-objcopy.patch
 ubuntu-clear-invalid-initrd-spacing.patch
 ubuntu-zfs-enhance-support.patch
+ubuntu-temp-keep-auto-nvram.patch
