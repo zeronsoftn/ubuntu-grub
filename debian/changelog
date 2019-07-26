@@ -5,7 +5,8 @@ grub2 (2.04-1ubuntu3) UNRELEASED; urgency=medium
     into git-dpm: drop [PATCH] tag and add Patch-Name.
 
   [ Didier Roche ]
-  * debian/patches/zfs_enhance_support.patch:
+  * debian/patches/ubuntu-zfs-enhance-support.patch
+    - Don't patch autoregenerated files.
     - rewrite generate MenuMeta implementation in shell (LP: #1834095)
       mawk doesn't support \s and other array features.
       + Change \s by their space or tab equivalent.
