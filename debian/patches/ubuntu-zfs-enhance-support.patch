@@ -1,4 +1,4 @@
-From 4b96e56e76b71c82c44caf5c9a402900e13ff170 Mon Sep 17 00:00:00 2001
+From 805dbc9ccbad562bd6e62f4d0ad12cbf61cc37e8 Mon Sep 17 00:00:00 2001
 From: Didier Roche <didrocks@ubuntu.com>
 Date: Fri, 12 Jul 2019 11:06:06 -0400
 Subject: Enhance ZFS grub support
@@ -20,75 +20,12 @@ Patch-Name: ubuntu-zfs-enhance-support.patch
 
 Signed-off-by: Didier Roche <didier.roche@canonical.com>
 ---
- Makefile.in                 |  14 +-
- Makefile.util.am            |  11 +
  Makefile.util.def           |   7 +
  util/grub.d/10_linux.in     |   4 +
  util/grub.d/10_linux_zfs.in | 989 ++++++++++++++++++++++++++++++++++++
- 5 files changed, 1021 insertions(+), 4 deletions(-)
+ 3 files changed, 1000 insertions(+)
  create mode 100755 util/grub.d/10_linux_zfs.in
 
-diff --git a/Makefile.in b/Makefile.in
-index e6a185b1d..760601faa 100644
---- a/Makefile.in
-+++ b/Makefile.in
-@@ -221,10 +221,11 @@ TESTS = example_unit_test$(EXEEXT) printf_test$(EXEEXT) \
- @COND_HOST_NETBSD_TRUE@am__append_74 = 10_netbsd
- @COND_HOST_NETBSD_TRUE@am__append_75 = 
- @COND_HOST_NETBSD_TRUE@am__append_76 = util/grub.d/10_netbsd.in 
--@COND_HOST_LINUX_TRUE@am__append_77 = 10_linux
--@COND_HOST_LINUX_TRUE@am__append_78 = 10_linux
--@COND_HOST_LINUX_TRUE@am__append_79 = 
--@COND_HOST_LINUX_TRUE@am__append_80 = util/grub.d/10_linux.in 
-+@COND_HOST_LINUX_TRUE@am__append_77 = 10_linux 10_linux_zfs
-+@COND_HOST_LINUX_TRUE@am__append_78 = 10_linux 10_linux_zfs
-+@COND_HOST_LINUX_TRUE@am__append_79 =
-+@COND_HOST_LINUX_TRUE@am__append_80 = util/grub.d/10_linux.in \
-+@COND_HOST_LINUX_TRUE@	util/grub.d/10_linux_zfs.in
- @COND_HOST_XNU_TRUE@am__append_81 = 10_xnu
- @COND_HOST_XNU_TRUE@am__append_82 = 10_xnu
- @COND_HOST_XNU_TRUE@am__append_83 = 
-@@ -1254,6 +1255,7 @@ am__dist_noinst_DATA_DIST = grub-core/kern/disk_common.c \
- 	util/grub.d/10_windows.in util/grub.d/10_hurd.in \
- 	util/grub.d/10_kfreebsd.in util/grub.d/10_illumos.in \
- 	util/grub.d/10_netbsd.in util/grub.d/10_linux.in \
-+	util/grub.d/10_linux_zfs.in \
- 	util/grub.d/10_xnu.in util/grub.d/20_linux_xen.in \
- 	util/grub.d/30_os-prober.in util/grub.d/40_custom.in \
- 	util/grub.d/41_custom.in util/grub-mkconfig.in \
-@@ -12698,6 +12700,10 @@ $(top_srcdir)/grub-core/Makefile.core.am: $(top_srcdir)/gentpl.py $(top_srcdir)/
- @COND_HOST_LINUX_TRUE@	(for x in util/grub.d/10_linux.in ; do cat $(srcdir)/"$$x"; done) | $(top_builddir)/config.status --file=$@:-
- @COND_HOST_LINUX_TRUE@	chmod a+x 10_linux
- 
-+@COND_HOST_LINUX_TRUE@10_linux_zfs: $(top_builddir)/config.status util/grub.d/10_linux_zfs.in 
-+@COND_HOST_LINUX_TRUE@	(for x in util/grub.d/10_linux_zfs.in ; do cat $(srcdir)/"$$x"; done) | $(top_builddir)/config.status --file=$@:-
-+@COND_HOST_LINUX_TRUE@	chmod a+x 10_linux_zfs
-+
- @COND_HOST_XNU_TRUE@10_xnu: $(top_builddir)/config.status util/grub.d/10_xnu.in 
- @COND_HOST_XNU_TRUE@	(for x in util/grub.d/10_xnu.in ; do cat $(srcdir)/"$$x"; done) | $(top_builddir)/config.status --file=$@:-
- @COND_HOST_XNU_TRUE@	chmod a+x 10_xnu
-diff --git a/Makefile.util.am b/Makefile.util.am
-index ef9100495..5034b57d7 100644
---- a/Makefile.util.am
-+++ b/Makefile.util.am
-@@ -665,6 +665,17 @@ CLEANFILES += 10_linux
- EXTRA_DIST += 
- dist_noinst_DATA += util/grub.d/10_linux.in 
- endif COND_HOST_LINUX
-+if COND_HOST_LINUX
-+grubconf_SCRIPTS += 10_linux_zfs
-+
-+10_linux_zfs: $(top_builddir)/config.status util/grub.d/10_linux_zfs.in 
-+	(for x in util/grub.d/10_linux_zfs.in ; do cat $(srcdir)/"$$x"; done) | $(top_builddir)/config.status --file=$@:-
-+	chmod a+x 10_linux_zfs
-+	
-+CLEANFILES += 10_linux_zfs
-+EXTRA_DIST += 
-+dist_noinst_DATA += util/grub.d/10_linux_zfs.in 
-+endif COND_HOST_LINUX
- if COND_HOST_XNU
- grubconf_SCRIPTS += 10_xnu
- 
 diff --git a/Makefile.util.def b/Makefile.util.def
 index 59e41423b..504d1c058 100644
 --- a/Makefile.util.def
