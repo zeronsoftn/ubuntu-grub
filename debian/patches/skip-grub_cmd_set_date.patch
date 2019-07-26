@@ -1,4 +1,4 @@
-From de99f528e94b7005b978ee60156ba0556e417acb Mon Sep 17 00:00:00 2001
+From a79069e523f5216702a4a342b8ffe415e79deed7 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@debian.org>
 Date: Sun, 28 Oct 2018 19:45:56 +0000
 Subject: Skip flaky grub_cmd_set_date test

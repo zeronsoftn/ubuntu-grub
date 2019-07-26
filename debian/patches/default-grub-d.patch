@@ -1,4 +1,4 @@
-From 3ecef8712f95232814a5e10c163df31229afb441 Mon Sep 17 00:00:00 2001
+From 5482b4f22dcdf3c116edd79d3295d887d632a6cb Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:10 +0000
 Subject: Read /etc/default/grub.d/*.cfg after /etc/default/grub

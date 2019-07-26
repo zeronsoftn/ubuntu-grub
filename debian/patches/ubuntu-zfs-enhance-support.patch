@@ -1,7 +1,7 @@
-From 5a1e951e963fa4906feaf886f73f40a70fa93a5d Mon Sep 17 00:00:00 2001
+From 0f44997cd051ae4d7202dd5fa43ed191332a7118 Mon Sep 17 00:00:00 2001
 From: Didier Roche <didrocks@ubuntu.com>
 Date: Fri, 12 Jul 2019 11:06:06 -0400
-Subject: Enhance ZFS grub support
+Subject: UBUNTU: Enhance ZFS grub support
 
 * Support multiple zfs systems (grouped by machine-id)
 * Group zfs snapshots and clones with latest dataset for a given
