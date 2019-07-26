@@ -1,9 +1,20 @@
 grub2 (2.04-1ubuntu3) UNRELEASED; urgency=medium
 
+  [ Mathieu Trudel-Lapierre ]
   * debian/patches/ubuntu-add-devicetree-command-support.patch: import patch
     into git-dpm: drop [PATCH] tag and add Patch-Name.
 
- -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 26 Jul 2019 08:30:51 -0400
+  [ Didier Roche ]
+  * debian/patches/zfs_enhance_support.patch:
+    - rewrite generate MenuMeta implementation in shell (LP: #1834095)
+      mawk doesn't support \s and other array features.
+      + Change \s by their space or tab equivalent.
+      + Rewrite the menumeta generation in pure shell, which is easier to
+        debug, keeping globally the same algorithm
+      + Support i18n in entry name generation.
+      Co-authored with Jean-Baptiste.
+
+ -- Didier Roche <didrocks@ubuntu.com>  Fri, 26 Jul 2019 15:51:51 +0200
 
 grub2 (2.04-1ubuntu2) eoan; urgency=medium
 
