@@ -1,4 +1,4 @@
-From 752aa123d996765e95e37013e8fdfe4aac65ff7e Mon Sep 17 00:00:00 2001
+From 22599496c0c4f44597edc71dcfb0415cf55c5c64 Mon Sep 17 00:00:00 2001
 From: Evan Broder <evan@ebroder.net>
 Date: Mon, 13 Jan 2014 12:13:29 +0000
 Subject: Add configure option to enable gfxpayload=keep dynamically
@@ -290,7 +290,7 @@ index 2be66c702..09393c28e 100644
  # yet, so it's empty. In a submenu it will be equal to '\t' (one tab).
  submenu_indentation=""
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index e1a97f6ec..47f6e3c7e 100755
+index 8fdb484e2..0c3395a61 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -22,6 +22,7 @@ datarootdir="@datarootdir@"

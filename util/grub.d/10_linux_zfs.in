@@ -63,7 +63,7 @@ import_pools() {
     local all_pools=""
     local imported_pools=""
 
-    zpool import -a -N 2>/dev/null
+    zpool import -f -a -o cachefile=none -N 2>/dev/null
 
     all_pools="$(zpool list | awk '{if (NR>1) print $1}')"
     for pool in ${all_pools}; do

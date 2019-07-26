@@ -1,4 +1,4 @@
-From 8f01d8f0c573a7a07b89ce5e4998b059ae620d3f Mon Sep 17 00:00:00 2001
+From df12becea8488de269df8ad96fe2858b8dd58f2f Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:07 +0000
 Subject: Prefer translations from Ubuntu language packs if available

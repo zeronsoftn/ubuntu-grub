@@ -1,4 +1,4 @@
-From 49d5c080e1d7c4a26c451ec448a46a34cbec2e12 Mon Sep 17 00:00:00 2001
+From e8966a78c60e2a8c9490ef00c3ff44e6f91f3ba5 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:33 +0000
 Subject: Add GRUB_RECOVERY_TITLE option
@@ -104,7 +104,7 @@ index cc2dd855a..2c418c5ec 100644
  	      title="$(gettext_printf "%s, with Linux %s" "${os}" "${version}")" ;;
        esac
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index ec13d4412..9b6aa9244 100755
+index b76add4fa..38d3a8df2 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -871,7 +871,7 @@ generate_grub_menu() {

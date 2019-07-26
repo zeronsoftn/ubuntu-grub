@@ -1,4 +1,4 @@
-From 9a2ddfbc7c5fed4ad13ae56285eb449ca8a10c88 Mon Sep 17 00:00:00 2001
+From 169ad74f37725216cd2be7f483c267d2ca2e4269 Mon Sep 17 00:00:00 2001
 From: Chad MILLER <chad.miller@canonical.com>
 Date: Thu, 27 Oct 2016 17:15:07 -0400
 Subject: Tell zpool to emit full device names

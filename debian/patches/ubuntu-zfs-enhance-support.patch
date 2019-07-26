@@ -1,4 +1,4 @@
-From 0f44997cd051ae4d7202dd5fa43ed191332a7118 Mon Sep 17 00:00:00 2001
+From acd9c584f69fdaae6ea09c38512dd6c0af5b92ac Mon Sep 17 00:00:00 2001
 From: Didier Roche <didrocks@ubuntu.com>
 Date: Fri, 12 Jul 2019 11:06:06 -0400
 Subject: UBUNTU: Enhance ZFS grub support
@@ -61,7 +61,7 @@ index 4532266be..a75096609 100644
  	LINUX_ROOT_DEVICE="ZFS=${rpool}${bootfs%/}"
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
 new file mode 100755
-index 000000000..c84882fd1
+index 000000000..185f75dd2
 --- /dev/null
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -0,0 +1,871 @@
@@ -125,7 +125,7 @@ index 000000000..c84882fd1
 +    local all_pools=""
 +    local imported_pools=""
 +
-+    zpool import -a -N 2>/dev/null
++    zpool import -f -a -o cachefile=none -N 2>/dev/null
 +
 +    all_pools="$(zpool list | awk '{if (NR>1) print $1}')"
 +    for pool in ${all_pools}; do
