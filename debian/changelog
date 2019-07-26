@@ -1,3 +1,10 @@
+grub2 (2.04-1ubuntu3) UNRELEASED; urgency=medium
+
+  * debian/patches/ubuntu-add-devicetree-command-support.patch: import patch
+    into git-dpm: drop [PATCH] tag and add Patch-Name.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 26 Jul 2019 08:30:51 -0400
+
 grub2 (2.04-1ubuntu2) eoan; urgency=medium
 
   * Add device-tree command support as installed by flash-kernel.
