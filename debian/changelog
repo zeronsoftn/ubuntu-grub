@@ -14,6 +14,9 @@ grub2 (2.04-1ubuntu3) UNRELEASED; urgency=medium
         debug, keeping globally the same algorithm
       + Support i18n in entry name generation.
       Co-authored with Jean-Baptiste.
+    - Resplit all patches in debian/patches/*, so that we have upstreamable
+      and non upstreamable parts separate. Also, any change in 10_linux patch
+      will be reflected in 10_linux_zfs.
 
  -- Didier Roche <didrocks@ubuntu.com>  Fri, 26 Jul 2019 15:51:51 +0200
 
