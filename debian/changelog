@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu3) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu3) eoan; urgency=medium
 
   [ Mathieu Trudel-Lapierre ]
   * debian/patches/ubuntu-add-devicetree-command-support.patch: import patch
@@ -21,7 +21,7 @@ grub2 (2.04-1ubuntu3) UNRELEASED; urgency=medium
       that we don't update the host cache, as we import all pools, and not
       only those attached to that system.
 
- -- Didier Roche <didrocks@ubuntu.com>  Fri, 26 Jul 2019 15:51:51 +0200
+ -- Didier Roche <didrocks@ubuntu.com>  Mon, 29 Jul 2019 08:08:48 +0200
 
 grub2 (2.04-1ubuntu2) eoan; urgency=medium
 
