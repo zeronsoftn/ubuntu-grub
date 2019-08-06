@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu4) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu4) eoan; urgency=medium
 
   * d/patches/ubuntu-boot-from-multipath-dependent-symlink.patch: when / is
     multipathed there will be multiple paths to the partition, so using
