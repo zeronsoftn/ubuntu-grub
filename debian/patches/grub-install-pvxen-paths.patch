@@ -1,4 +1,4 @@
-From 76c25a18e0941706ac481c6de41ccd00f268c97b Mon Sep 17 00:00:00 2001
+From d6c8c0408609f4d7d3f07d67b7a537e4ef0b369f Mon Sep 17 00:00:00 2001
 From: Ian Campbell <ijc@hellion.org.uk>
 Date: Sat, 6 Sep 2014 12:20:12 +0100
 Subject: grub-install: Install PV Xen binaries into the upstream specified
@@ -28,7 +28,7 @@ v2: Respect bootdir, create /boot/xen as needed.
  1 file changed, 22 insertions(+), 2 deletions(-)
 
 diff --git a/util/grub-install.c b/util/grub-install.c
-index 03c153e62..7f01755ae 100644
+index 70d6700de..64c292383 100644
 --- a/util/grub-install.c
 +++ b/util/grub-install.c
 @@ -2058,6 +2058,28 @@ main (int argc, char *argv[])

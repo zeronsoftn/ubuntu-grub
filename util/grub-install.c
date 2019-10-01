@@ -2144,7 +2144,7 @@ main (int argc, char *argv[])
 		   won't be for older releases); but if we have MokManager,
 		   make sure it gets installed.  */
 		mok_src = grub_util_path_concat (2, "/usr/lib/shim/",
-						    mok_signed);
+						    mok_file);
 		mok_dst = grub_util_path_concat (2, efidir,
 						    mok_file);
 		grub_install_copy_file (mok_src,
