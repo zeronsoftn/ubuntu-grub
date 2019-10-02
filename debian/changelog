@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu9) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu9) eoan; urgency=medium
 
   * debian/patches/ubuntu-zfs-enhance-support.patch:
     - Handle case of pure zfs only snapshots giving additional "}", and as
