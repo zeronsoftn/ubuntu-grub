@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu10) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu10) eoan; urgency=medium
 
   * debian/patches/ubuntu-skip-disk-by-id-lvm-pvm-uuid-entries.patch:
     skip /dev/disk/by-id/lvm-pvm-uuid entries from device iteration.
