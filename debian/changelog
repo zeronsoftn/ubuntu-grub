@@ -1,10 +1,10 @@
-grub2 (2.04-1ubuntu12) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu12) eoan; urgency=medium
 
   * Move our identifier to com.ubuntu
     As we are not going to own org.zsys, move our identifier under
     com.ubuntu.zsys (LP: #1847711)
 
- -- Didier Roche <didrocks@ubuntu.com>  Fri, 11 Oct 2019 15:57:19 +0200
+ -- Didier Roche <didrocks@ubuntu.com>  Fri, 11 Oct 2019 15:57:47 +0200
 
 grub2 (2.04-1ubuntu11) eoan; urgency=medium
 
