@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu12.1) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu12.1) eoan; urgency=medium
 
   * debian/patches/ubuntu-tpm-unknown-error-non-fatal.patch: treat "unknown"
     TPM errors as non-fatal, but still write up the details as debug messages
@@ -9,7 +9,7 @@ grub2 (2.04-1ubuntu12.1) UNRELEASED; urgency=medium
     in chainload (like chainloading Windows) when SB is disabled.
     (LP: #1845289)
 
- -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 01 Nov 2019 15:15:35 -0400
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 01 Nov 2019 15:16:43 -0400
 
 grub2 (2.04-1ubuntu12) eoan; urgency=medium
 
