@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu14) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu14) focal; urgency=medium
 
   * debian/patches/ubuntu-zfs-enhance-support.patch:
     - Handle the case where grub-probe returns several devices for a single
