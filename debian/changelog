@@ -8,6 +8,7 @@ grub2 (2.04-1ubuntu15) UNRELEASED; urgency=medium
   * cherrypick-lsefisystab-show-dtb.patch:
     - If dtb is provided by the firmware / DtbLoader driver, display it in
     human form, rather than just UUID
+  * Add smbios module to build-efi-images script
 
  -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 13 Dec 2019 10:25:07 +0000
 
