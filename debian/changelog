@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu15) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu15) focal; urgency=medium
 
   * ubuntu-efi-allow-loopmount-chainload.patch:
     - Enable chainloading EFI apps from loopmounts
@@ -10,7 +10,7 @@ grub2 (2.04-1ubuntu15) UNRELEASED; urgency=medium
     human form, rather than just UUID
   * Add smbios module to build-efi-images script
 
- -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 13 Dec 2019 10:25:07 +0000
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 13 Dec 2019 11:24:21 +0000
 
 grub2 (2.04-1ubuntu14) focal; urgency=medium
 
