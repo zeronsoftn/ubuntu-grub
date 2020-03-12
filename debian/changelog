@@ -1,9 +1,9 @@
-grub2 (2.04-1ubuntu12.2) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu12.2) eoan; urgency=medium
 
   * Make the linux command in EFI grub always try EFI handover; thanks
     to Chris Coulson for the patches (LP: #1864533)
 
- -- Julian Andres Klode <juliank@ubuntu.com>  Wed, 11 Mar 2020 16:55:47 +0100
+ -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 12 Mar 2020 17:40:25 +0100
 
 grub2 (2.04-1ubuntu12.1) eoan; urgency=medium
 
