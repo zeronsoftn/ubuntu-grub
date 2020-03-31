@@ -1,4 +1,4 @@
-From 4c32f4fcf4a4c9d7697ee6e2ec4b55c53b5fcfc0 Mon Sep 17 00:00:00 2001
+From 7e6e735ce8a0255552a3f3007bc8568e839ab044 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@debian.org>
 Date: Mon, 13 Jan 2014 12:13:00 +0000
 Subject: Handle filesystems loop-mounted on file images
