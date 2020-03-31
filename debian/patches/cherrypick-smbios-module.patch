@@ -1,4 +1,4 @@
-From 54fa1de9fcb1fdcc225d2a5423d27ebc24d14a62 Mon Sep 17 00:00:00 2001
+From 2f085c6495d7cb91ab20604ad52c8e2af897a99b Mon Sep 17 00:00:00 2001
 From: David Michael <fedora.dm0@gmail.com>
 Date: Fri, 5 Jul 2019 08:47:09 -0400
 Subject: smbios: Add a module for retrieving SMBIOS information

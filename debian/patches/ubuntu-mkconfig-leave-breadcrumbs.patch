@@ -1,4 +1,4 @@
-From ac4caf6231b2405999c4f0ae6b04295559e96ee8 Mon Sep 17 00:00:00 2001
+From ef3df52f906d80c3548d4c365b7022dddc13d8a3 Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Fri, 14 Dec 2018 13:46:14 -0500
 Subject: UBUNTU: grub-mkconfig: leave a trace of what files were sourced to

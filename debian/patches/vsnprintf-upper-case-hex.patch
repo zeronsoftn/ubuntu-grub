@@ -1,4 +1,4 @@
-From 5e7746ea9a58a383d407c99fd782994ce5edd584 Mon Sep 17 00:00:00 2001
+From 00a43dcea08cb572ebf8dfcc91567f140f3407f6 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 11 Mar 2019 11:15:12 +0000
 Subject: Add %X to grub_vsnprintf_real and friends

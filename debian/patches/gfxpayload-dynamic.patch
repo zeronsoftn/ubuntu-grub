@@ -1,4 +1,4 @@
-From 0c2f47f0a04ed9c39f29be6e67122d6d745e516f Mon Sep 17 00:00:00 2001
+From 38f138e8d8346c4c2fff5345cdf989401ee72994 Mon Sep 17 00:00:00 2001
 From: Evan Broder <evan@ebroder.net>
 Date: Mon, 13 Jan 2014 12:13:29 +0000
 Subject: Add configure option to enable gfxpayload=keep dynamically
@@ -290,7 +290,7 @@ index 2be66c702..09393c28e 100644
  # yet, so it's empty. In a submenu it will be equal to '\t' (one tab).
  submenu_indentation=""
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 38d4121f9..26aa038c7 100755
+index 40a707e99..9286ecc86 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -22,6 +22,7 @@ datarootdir="@datarootdir@"
@@ -352,7 +352,7 @@ index 38d4121f9..26aa038c7 100755
 -        fi
 +    fi
 +
-+    if [ "${ubuntu_recovery}" = 0 ] || [ "${type}" != "recovery" ] && \
++    if ([ "${ubuntu_recovery}" = 0 ] || [ "${type}" != "recovery" ]) && \
 +        ([ "${GRUB_GFXPAYLOAD_LINUX}" != "" ] || [ "${gfxpayload_dynamic}" = 1 ]); then
 +        echo "${submenu_indentation}	set gfxpayload=\${linux_gfx_mode}"
      fi

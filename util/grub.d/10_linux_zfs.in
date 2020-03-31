@@ -755,15 +755,15 @@ prepare_grub_to_access_device_cached() {
     local boot_device="$1"
     local submenu_level="$2"
 
-    local boot_device_idx=$(echo ${boot_device} | tr '/' '_')
+    local boot_device_idx="$(echo ${boot_device} | tr '/' '_')"
 
     cache_file="${ZFSTMP}/$(echo boot_device${boot_device_idx})"
     if [ ! -f "${cache_file}" ]; then
         set +u
-        echo "$(prepare_grub_to_access_device ${boot_device})" > "${cache_file}"
+        echo "$(prepare_grub_to_access_device "${boot_device}")" > "${cache_file}"
         set -u
-        submenu_indentation="$(printf %${submenu_level}s | tr " " "${grub_tab}")"
         for i in 0 1 2; do
+            submenu_indentation="$(printf %${i}s | tr " " "${grub_tab}")"
             sed "s/^/${submenu_indentation}	/" "${cache_file}" > "${cache_file}--${i}"
         done
     fi
@@ -789,7 +789,7 @@ zfs_linux_entry () {
     echo "${submenu_indentation}menuentry '$(echo "${title}" | grub_quote)' ${CLASS} \${menuentry_id_option} 'gnulinux-${dataset}-${kernel_version}' {"
 
     if [ "${quick_boot}" = 1 ]; then
-        echo "	recordfail" | sed "s/^/${submenu_indentation}/"
+        echo "${submenu_indentation}   recordfail"
     fi
 
     if [ "${type}" != "recovery" ] ; then
@@ -810,7 +810,7 @@ zfs_linux_entry () {
         fi
     fi
 
-    if [ "${ubuntu_recovery}" = 0 ] || [ "${type}" != "recovery" ] && \
+    if ([ "${ubuntu_recovery}" = 0 ] || [ "${type}" != "recovery" ]) && \
         ([ "${GRUB_GFXPAYLOAD_LINUX}" != "" ] || [ "${gfxpayload_dynamic}" = 1 ]); then
         echo "${submenu_indentation}	gfxmode \${linux_gfx_mode}"
     fi
@@ -818,10 +818,10 @@ zfs_linux_entry () {
     echo "${submenu_indentation}	insmod gzio"
     echo "${submenu_indentation}	if [ \"\${grub_platform}\" = xen ]; then insmod xzio; insmod lzopio; fi"
 
-    echo "$(prepare_grub_to_access_device_cached ${boot_device} ${submenu_level})"
+    echo "$(prepare_grub_to_access_device_cached "${boot_device}" "${submenu_level}")"
 
     if [ "${quiet_boot}" = 0 ] || [ "${type}" != simple ]; then
-        echo "${submenu_indentation}	echo $(gettext_printf "Loading Linux %s ..." ${kernel_version} | grub_quote)"
+        echo "${submenu_indentation}	echo '$(gettext_printf "Loading Linux %s ..." ${kernel_version} | grub_quote)'"
     fi
 
     linux_default_args="${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}"
@@ -832,7 +832,7 @@ zfs_linux_entry () {
     echo "${submenu_indentation}	linux	${kernel} root=ZFS=${dataset} ro ${linux_default_args} ${kernel_additional_args}"
 
     if [ "${quiet_boot}" = 0 ] || [ "${type}" != simple ]; then
-        echo "${submenu_indentation}	echo $(gettext_printf "Loading initial ramdisk ..." | grub_quote)"
+        echo "${submenu_indentation}	echo '$(gettext_printf "Loading initial ramdisk ..." | grub_quote)'"
     fi
     echo "${submenu_indentation}	initrd	${initrd}"
     echo "${submenu_indentation}}"

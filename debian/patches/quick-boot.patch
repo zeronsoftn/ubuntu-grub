@@ -1,4 +1,4 @@
-From d405a05919dae40d277c26fe67f109c92d4091d8 Mon Sep 17 00:00:00 2001
+From 1c424e4373eca7a22d351b63c19c0347eab99f2d Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:28 +0000
 Subject: Add configure option to bypass boot menu if possible
@@ -281,7 +281,7 @@ index 479a8bf4e..2be66c702 100644
        save_default_entry | grub_add_tab
    fi
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index ddf2acfe7..38d4121f9 100755
+index dbb64ea2c..40a707e99 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -21,6 +21,7 @@ prefix="@prefix@"
@@ -297,7 +297,7 @@ index ddf2acfe7..38d4121f9 100755
      echo "${submenu_indentation}menuentry '$(echo "${title}" | grub_quote)' ${CLASS} \${menuentry_id_option} 'gnulinux-${dataset}-${kernel_version}' {"
  
 +    if [ "${quick_boot}" = 1 ]; then
-+        echo "	recordfail" | sed "s/^/${submenu_indentation}/"
++        echo "${submenu_indentation}   recordfail"
 +    fi
 +
      if [ "${type}" != "recovery" ] ; then

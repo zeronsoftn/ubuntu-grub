@@ -1,4 +1,4 @@
-From e9b1a7a85e72f232c1746f2a25efabec2957b549 Mon Sep 17 00:00:00 2001
+From f7ff64fc52c7ceb7e828b97c9660c2ea2ad53e20 Mon Sep 17 00:00:00 2001
 From: Michael Hudson-Doyle <michael.hudson@canonical.com>
 Date: Tue, 6 Aug 2019 12:31:47 +1200
 Subject: UBUNTU: Boot from multipath-dependent symlink when / is multipathed.

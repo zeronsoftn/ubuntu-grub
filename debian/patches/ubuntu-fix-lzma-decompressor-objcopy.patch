@@ -1,4 +1,4 @@
-From c5cfea8811ed6531882e00fadf5c7d272f747f82 Mon Sep 17 00:00:00 2001
+From 7f2e6820d6dff0c064ea5a800053aaec649afde5 Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Wed, 3 Jul 2019 15:21:16 -0400
 Subject: UBUNTU: Have the lzma decompressor image only contain the .text

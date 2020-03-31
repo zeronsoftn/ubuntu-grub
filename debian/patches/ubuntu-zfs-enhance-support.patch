@@ -1,4 +1,4 @@
-From a64c2547804c7cb03b5ad155389a3cfcf3743bb4 Mon Sep 17 00:00:00 2001
+From 01a1dc171d47030cccb5834d8af1b5f8c1698578 Mon Sep 17 00:00:00 2001
 From: Didier Roche <didrocks@ubuntu.com>
 Date: Fri, 12 Jul 2019 11:06:06 -0400
 Subject: UBUNTU: Enhance ZFS grub support
@@ -61,7 +61,7 @@ index 4532266be..a75096609 100644
  	LINUX_ROOT_DEVICE="ZFS=${rpool}${bootfs%/}"
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
 new file mode 100755
-index 000000000..d1d900693
+index 000000000..9c4873ac3
 --- /dev/null
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -0,0 +1,941 @@
@@ -744,15 +744,15 @@ index 000000000..d1d900693
 +    local boot_device="$1"
 +    local submenu_level="$2"
 +
-+    local boot_device_idx=$(echo ${boot_device} | tr '/' '_')
++    local boot_device_idx="$(echo ${boot_device} | tr '/' '_')"
 +
 +    cache_file="${ZFSTMP}/$(echo boot_device${boot_device_idx})"
 +    if [ ! -f "${cache_file}" ]; then
 +        set +u
-+        echo "$(prepare_grub_to_access_device ${boot_device})" > "${cache_file}"
++        echo "$(prepare_grub_to_access_device "${boot_device}")" > "${cache_file}"
 +        set -u
-+        submenu_indentation="$(printf %${submenu_level}s | tr " " "${grub_tab}")"
 +        for i in 0 1 2; do
++            submenu_indentation="$(printf %${i}s | tr " " "${grub_tab}")"
 +            sed "s/^/${submenu_indentation}	/" "${cache_file}" > "${cache_file}--${i}"
 +        done
 +    fi
@@ -802,9 +802,9 @@ index 000000000..d1d900693
 +
 +    echo "${submenu_indentation}	insmod gzio"
 +
-+    echo "$(prepare_grub_to_access_device_cached ${boot_device} ${submenu_level})"
++    echo "$(prepare_grub_to_access_device_cached "${boot_device}" "${submenu_level}")"
 +
-+    echo "${submenu_indentation}	echo $(gettext_printf "Loading Linux %s ..." ${kernel_version} | grub_quote)"
++    echo "${submenu_indentation}	echo '$(gettext_printf "Loading Linux %s ..." ${kernel_version} | grub_quote)'"
 +
 +    linux_default_args="${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}"
 +    if [ ${type} = "recovery" ]; then
@@ -813,7 +813,7 @@ index 000000000..d1d900693
 +
 +    echo "${submenu_indentation}	linux	${kernel} root=ZFS=${dataset} ro ${linux_default_args} ${kernel_additional_args}"
 +
-+    echo "${submenu_indentation}	echo $(gettext_printf "Loading initial ramdisk ..." | grub_quote)"
++    echo "${submenu_indentation}	echo '$(gettext_printf "Loading initial ramdisk ..." | grub_quote)'"
 +    echo "${submenu_indentation}	initrd	${initrd}"
 +    echo "${submenu_indentation}}"
 +}
