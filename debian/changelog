@@ -1,3 +1,9 @@
+grub2 (2.04-1ubuntu24) UNRELEASED; urgency=medium
+
+  * Support installing to multiple ESPs.
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 02 Apr 2020 09:37:30 +0200
+
 grub2 (2.04-1ubuntu23) focal; urgency=medium
 
   [ Jean-Baptiste Lallement ]
