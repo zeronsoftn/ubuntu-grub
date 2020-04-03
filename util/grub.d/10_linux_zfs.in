@@ -789,7 +789,7 @@ zfs_linux_entry () {
     echo "${submenu_indentation}menuentry '$(echo "${title}" | grub_quote)' ${CLASS} \${menuentry_id_option} 'gnulinux-${dataset}-${kernel_version}' {"
 
     if [ "${quick_boot}" = 1 ]; then
-        echo "${submenu_indentation}   recordfail"
+        echo "${submenu_indentation}	recordfail"
     fi
 
     if [ "${type}" != "recovery" ] ; then
