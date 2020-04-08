@@ -704,14 +704,14 @@ case "$1" in
           fi
         fi
 
-        if [ "$bootloader_id" ] && [ -d "/boot/efi/EFI/$bootloader_id" ]; then
-          case @PACKAGE@ in
-            grub-efi-ia32)  target=i386-efi ;;
-            grub-efi-amd64) target=x86_64-efi ;;
-            grub-efi-ia64)  target=ia64-efi ;;
-            grub-efi-arm)   target=arm-efi ;;
-            grub-efi-arm64) target=arm64-efi ;;
-          esac
+        case @PACKAGE@ in
+          grub-efi-ia32)  target=i386-efi ;;
+          grub-efi-amd64) target=x86_64-efi ;;
+          grub-efi-ia64)  target=ia64-efi ;;
+          grub-efi-arm)   target=arm-efi ;;
+          grub-efi-arm64) target=arm64-efi ;;
+        esac
+        if test -e /boot/grub/$target/core.efi; then
           db_get grub2/no_efi_extra_removable
           if [ "$RET" = true ]; then
             NO_EXTRA_REMOVABLE="--no-extra-removable"
