@@ -731,7 +731,7 @@ case "$1" in
         # Backwards /boot/efi compatibility: Move /boot/efi into the debconf
         # setting on upgrades and install.
         db_get grub-efi/install_devices || true
-        if [ -z "$RET" ] && dpkg --compare-versions "$2" lt 2.04-1ubuntu23~; then
+        if [ -z "$RET" ] && dpkg --compare-versions "$2" lt 2.04-1ubuntu24~; then
           esp="$(get_mounted_device /boot/efi)"
           if [ "$esp" ]; then
             esp="$(device_to_id "$esp")"
