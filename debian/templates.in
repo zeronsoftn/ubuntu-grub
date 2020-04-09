@@ -34,7 +34,7 @@ _Description: Update NVRAM variables to automatically boot into Debian?
  if your NVRAM variables have been set up such that your system contacts a
  PXE server on every boot, this would preserve that behavior.
 
-Template: grub2/efi_install_devices
+Template: grub-efi/install_devices
 Type: multiselect
 Choices-C: ${RAW_CHOICES}
 Choices: ${CHOICES}
@@ -46,7 +46,7 @@ _Description: GRUB EFI system partitions:
  prevent the installed GRUB core image from getting out of sync with GRUB
  modules or grub.cfg.
 
-Template: grub2/efi_install_devices_disks_changed
+Template: grub-efi/install_devices_disks_changed
 Type: multiselect
 Choices-C: ${RAW_CHOICES}
 Choices: ${CHOICES}
@@ -57,11 +57,11 @@ _Description: GRUB install devices:
  with GRUB modules and grub.cfg. Please check again to make sure that GRUB
  is written to the appropriate boot devices.
 
-Template: grub2/efi_partition_description
+Template: grub-efi/partition_description
 Type: text
 _Description: ${DEVICE} (${SIZE} MB; ${PATH}) on ${DISK_SIZE} MB ${DISK_MODEL}
 
-Template: grub2/efi_install_devices_failed
+Template: grub-efi/install_devices_failed
 Type: boolean
 Default: false
 #flag:translate!:3
@@ -73,7 +73,7 @@ _Description: Writing GRUB to boot device failed - continue?
  Do you want to continue anyway? If you do, your computer may not start up
  properly.
 
-Template: grub2/efi_install_devices_empty
+Template: grub-efi/install_devices_empty
 Type: boolean
 Default: false
 _Description: Continue without installing GRUB?

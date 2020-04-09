@@ -184,12 +184,12 @@ multi_describe_partition()
   fi
   size="$(sysfs_size "/sys$sysfs_path")"
 
-  db_subst grub2/efi_partition_description DEVICE "$part"
-  db_subst grub2/efi_partition_description SIZE "$size"
-  db_subst grub2/efi_partition_description PATH "$path"
-  db_subst grub2/efi_partition_description DISK_MODEL "$model"
-  db_subst grub2/efi_partition_description DISK_SIZE "$disk_size"
-  db_metaget grub2/efi_partition_description description
+  db_subst grub-efi/partition_description DEVICE "$part"
+  db_subst grub-efi/partition_description SIZE "$size"
+  db_subst grub-efi/partition_description PATH "$path"
+  db_subst grub-efi/partition_description DISK_MODEL "$model"
+  db_subst grub-efi/partition_description DISK_SIZE "$disk_size"
+  db_metaget grub-efi/partition_description description
 }
 
 
@@ -240,9 +240,9 @@ multi_usable_partitions()
 FALLBACK_MOUNTPOINT=/var/lib/grub/esp
 
 # Get configured value
-question=grub2/efi_install_devices
+question=grub-efi/install_devices
 priority=high
-db_get grub2/efi_install_devices
+db_get grub-efi/install_devices
 valid=1
 for device in $RET; do
   if [ ! -e "${device%,}" ]; then
@@ -278,11 +278,11 @@ fi
 
 
 if [ "$valid" = 0 ]; then
-  question=grub2/efi_install_devices_disks_changed
+  question=grub-efi/install_devices_disks_changed
   priority=critical
   db_set "$question" "$RET"
   db_fset "$question" seen false
-  db_fset grub2/efi_install_devices_empty seen false
+  db_fset grub-efi/install_devices_empty seen false
 fi
 
 while :; do
@@ -327,29 +327,29 @@ while :; do
     fi
   done
 
-  if [ "$question" != grub2/efi_install_devices ] && [ "$RET" ]; then
+  if [ "$question" != grub-efi/install_devices ] && [ "$RET" ]; then
     # XXX cjwatson 2019-02-26: The description of
-    # grub2/efi_install_devices_disks_changed ought to explain that
+    # grub-efi/install_devices_disks_changed ought to explain that
     # selecting no devices will leave the configuration unchanged
     # so that you'll be prompted again next time, but it's a bit
     # close to the Debian 10 release to be introducing new
     # translatable text.  For now, it should be sufficient to
     # avoid losing configuration data.
-    db_set grub2/efi_install_devices "$RET"
-    db_fset grub2/efi_install_devices seen true
+    db_set grub-efi/install_devices "$RET"
+    db_fset grub-efi/install_devices seen true
   fi
 
   if [ "$failed_devices" ]; then
-    db_subst grub2/efi_install_devices_failed FAILED_DEVICES "$failed_devices"
-    db_fset grub2/efi_install_devices_failed seen false
-    if db_input critical grub2/efi_install_devices_failed; then
+    db_subst grub-efi/install_devices_failed FAILED_DEVICES "$failed_devices"
+    db_fset grub-efi/install_devices_failed seen false
+    if db_input critical grub-efi/install_devices_failed; then
       db_go
-      db_get grub2/efi_install_devices_failed
+      db_get grub-efi/install_devices_failed
       if [ "$RET" = true ]; then
         break
       else
         db_fset "$question" seen false
-        db_fset grub2/efi_install_devices_failed seen false
+        db_fset grub-efi/install_devices_failed seen false
         continue
       fi
     else
@@ -361,18 +361,18 @@ while :; do
   if [ -z "$RET" ]; then
     # Reset the seen flag if the current answer is false, since
     # otherwise we'll loop with no indication of why.
-    db_get grub2/efi_install_devices_empty
+    db_get grub-efi/install_devices_empty
     if [ "$RET" = false ]; then
-      db_fset grub2/efi_install_devices_empty seen false
+      db_fset grub-efi/install_devices_empty seen false
     fi
-    if db_input critical grub2/efi_install_devices_empty; then
+    if db_input critical grub-efi/install_devices_empty; then
       db_go
-      db_get grub2/efi_install_devices_empty
+      db_get grub-efi/install_devices_empty
       if [ "$RET" = true ]; then
         break
       else
         db_fset "$question" seen false
-        db_fset grub2/efi_install_devices_empty seen false
+        db_fset grub-efi/install_devices_empty seen false
       fi
     else
       break # noninteractive
