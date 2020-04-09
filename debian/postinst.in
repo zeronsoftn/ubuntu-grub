@@ -749,6 +749,9 @@ case "$1" in
           grub-efi-arm)   target=arm-efi ;;
           grub-efi-arm64) target=arm64-efi ;;
         esac
+        # Check /boot/grub to see if we previously installed to an ESP. We don't
+        # want to trigger the install code just by installing the package,
+        # normally the installer installs grub itself first.
         if test -e /boot/grub/$target/core.efi; then
           db_get grub2/no_efi_extra_removable
           if [ "$RET" = true ]; then
