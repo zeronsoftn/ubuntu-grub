@@ -133,7 +133,7 @@ get_mountpoint()
 #
 # Merged version of describe_disk and describe_partition, as disks can't be
 # valid ESPs on their own, so we can't render them as an entry.
-multi_describe_partition()
+describe_efi_system_partition()
 {
   local disk part id path sysfs_path diskbase partbase size
   local disk_basename disk_size model
@@ -195,7 +195,7 @@ multi_describe_partition()
 
 # Parse /proc/mounts and find out the mount for the given device.
 # The device must be a real device in /dev, not a symlink to one.
-multi_find_mount_point()
+find_mount_point()
 {
   real_device="$1"
   cat /proc/mounts | while read -r line; do
@@ -210,7 +210,7 @@ multi_find_mount_point()
 }
 
 # Return all devices that are a valid ESP
-multi_usable_partitions()
+usable_efi_system_partitions()
 {
   local last_partition path partition partition_id
   local ID_PART_ENTRY_TYPE ID_PART_ENTRY_SCHEME
@@ -228,7 +228,7 @@ multi_usable_partitions()
     # unify the partition id
     partition_id="$(device_to_id "$partition" || true)"
     real_device="$(readlink -f "$partition")"
-    path="$(multi_find_mount_point $real_device)"
+    path="$(find_mount_point $real_device)"
     echo "$path:$partition_id"
   done
   ) | sort -t: -k2 -u
@@ -288,12 +288,12 @@ fi
 while :; do
   ids=
   descriptions=
-  partitions="$(multi_usable_partitions)"
+  partitions="$(usable_efi_system_partitions)"
 
   for partition_pair in $partitions; do
     partition_id="${partition_pair#*:}"
     ids="${ids:+$ids, }$partition_id"
-    multi_describe_partition "$(readlink -f "$device")" "$(readlink -f "$partition_id")" "$partition_id" "$(get_mountpoint "${partition_pair%%:*}")"
+    describe_efi_system_partition "$(readlink -f "$device")" "$(readlink -f "$partition_id")" "$partition_id" "$(get_mountpoint "${partition_pair%%:*}")"
     RET="$(printf %s "$RET" | sed 's/,/\\,/g')"
     descriptions="${descriptions:+$descriptions, }$RET"
   done
@@ -309,7 +309,7 @@ while :; do
   failed_devices=
   for i in `echo $RET | sed -e 's/, / /g'` ; do
     real_device="$(readlink -f "$i")"
-    mntpoint=$(multi_find_mount_point $real_device)
+    mntpoint=$(find_mount_point $real_device)
     if [ -z "$mntpoint" ]; then
       mntpoint=$FALLBACK_MOUNTPOINT
       mount $real_device $mntpoint
