@@ -1,4 +1,4 @@
-From ad20af260d1fa59c4480bdf38eedd879cc0b5e27 Mon Sep 17 00:00:00 2001
+From a5307d00cee7f22074b89f393cb99c968f657ddb Mon Sep 17 00:00:00 2001
 From: Mathieu Trudel-Lapierre <mathieu.trudel-lapierre@canonical.com>
 Date: Thu, 11 Jul 2019 09:07:47 -0400
 Subject: UBUNTU: Clear up incorrect spacing when not using early initrds

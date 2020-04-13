@@ -1,4 +1,4 @@
-From 73a4f4d8b8ef60f469f1d3df95ae43105c4de9fa Mon Sep 17 00:00:00 2001
+From 4c7457bc4f7cd1a516a7e255476a086270a4dbe4 Mon Sep 17 00:00:00 2001
 From: Didier Roche <didrocks@ubuntu.com>
 Date: Mon, 13 Apr 2020 15:12:21 +0200
 Subject: UBUNTU: Improve performance in bootmenu for zsys
@@ -17,7 +17,7 @@ Patch-Name: ubuntu-speed-zsys-history.patch
  1 file changed, 56 insertions(+), 21 deletions(-)
 
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 7b94a522c..4b0309f1b 100755
+index efdb8afae..d748f6a20 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -800,9 +800,10 @@ zfs_linux_entry () {
@@ -49,7 +49,7 @@ index 7b94a522c..4b0309f1b 100755
 +    fi
  
      if [ "${quiet_boot}" = 0 ] || [ "${type}" != simple ]; then
-         echo "${submenu_indentation}	echo '$(gettext_printf "Loading Linux %s ..." ${kernel_version} | grub_quote)'"
+         echo "${submenu_indentation}	echo $(gettext_printf "Loading Linux %s ..." ${kernel_version} | grub_quote)"
 @@ -905,6 +914,40 @@ generate_grub_menu() {
  
      print_menu_prologue
@@ -83,7 +83,7 @@ index 7b94a522c..4b0309f1b 100755
 +        zfs_linux_entry 1 "${title}" "recovery" '${root_dataset}' '${boot_device}' '${initrd}' '${kernel}' '${kversion}' '' "${boot_devices}"
 +
 +        title="$(gettext_printf "Revert system and user data (%s)" "$(gettext "${GRUB_RECOVERY_TITLE}")")"
-+        zfs_linux_entry 1 "${title}" "simple" '${root_dataset}' '${boot_device}' '${initrd}' '${kernel}' '${kversion}' 'zsys-revert=userdata' "${boot_devices}"
++        zfs_linux_entry 1 "${title}" "recovery" '${root_dataset}' '${boot_device}' '${initrd}' '${kernel}' '${kversion}' 'zsys-revert=userdata' "${boot_devices}"
 +    fi
 +echo "}"
 +echo

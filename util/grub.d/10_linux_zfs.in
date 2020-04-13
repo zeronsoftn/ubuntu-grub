@@ -849,7 +849,7 @@ zfs_linux_entry () {
     fi
 
     if [ "${quiet_boot}" = 0 ] || [ "${type}" != simple ]; then
-        echo "${submenu_indentation}	echo '$(gettext_printf "Loading Linux %s ..." ${kernel_version} | grub_quote)'"
+        echo "${submenu_indentation}	echo $(gettext_printf "Loading Linux %s ..." ${kernel_version} | grub_quote)"
     fi
 
     linux_default_args="${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}"
@@ -943,7 +943,7 @@ EOF
         zfs_linux_entry 1 "${title}" "recovery" '${root_dataset}' '${boot_device}' '${initrd}' '${kernel}' '${kversion}' '' "${boot_devices}"
 
         title="$(gettext_printf "Revert system and user data (%s)" "$(gettext "${GRUB_RECOVERY_TITLE}")")"
-        zfs_linux_entry 1 "${title}" "simple" '${root_dataset}' '${boot_device}' '${initrd}' '${kernel}' '${kversion}' 'zsys-revert=userdata' "${boot_devices}"
+        zfs_linux_entry 1 "${title}" "recovery" '${root_dataset}' '${boot_device}' '${initrd}' '${kernel}' '${kversion}' 'zsys-revert=userdata' "${boot_devices}"
     fi
 echo "}"
 echo
@@ -968,7 +968,7 @@ echo
                 # Close previous section wrapper
                 if [ "${last_section}" != "main" ]; then
                     echo "}"    # Add grub_tabs
-		    at_least_one_entry=0
+                    at_least_one_entry=0
                 fi
             fi
 
