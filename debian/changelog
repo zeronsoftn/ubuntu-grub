@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu25) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu25) focal; urgency=medium
 
   [ Jean-Baptiste Lallement ]
   [ Didier Roche ]
