@@ -1,4 +1,4 @@
-From 8c0357b2b61df26c5b3c715f250e32daaecba460 Mon Sep 17 00:00:00 2001
+From 440c52b28a65713c4d55d01c74ee618677256a6d Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Wed, 8 Apr 2020 11:05:25 +0200
 Subject: UBUNTU: efivar: Correctly handle boot order of multiple ESPs

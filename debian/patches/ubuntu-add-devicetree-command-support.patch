@@ -1,4 +1,4 @@
-From 40c3fda7690382af55cfcafc0adbcc1fb6321fa8 Mon Sep 17 00:00:00 2001
+From bdd4daa77a7c047499d8bf28b4e86c605ebf2a50 Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <xnox@ubuntu.com>
 Date: Wed, 22 May 2019 19:57:29 +0100
 Subject: Add devicetree command, if a dtb is present.
