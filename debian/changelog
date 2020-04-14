@@ -1,3 +1,10 @@
+grub2 (2.04-1ubuntu26) UNRELEASED; urgency=medium
+
+  * Move /boot/efi -> debconf migration into wrapper, so it runs everywhere
+    (LP: #1872077)
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Tue, 14 Apr 2020 11:57:34 +0200
+
 grub2 (2.04-1ubuntu25) focal; urgency=medium
 
   [ Jean-Baptiste Lallement ]
