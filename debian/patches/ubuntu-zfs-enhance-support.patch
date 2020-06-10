@@ -1,4 +1,4 @@
-From daa4db81742e0363c2b8c85b6a88ec3eca1efc19 Mon Sep 17 00:00:00 2001
+From 0f3f67aa23be0fa1ad5e0b4cda1c4a50225b8272 Mon Sep 17 00:00:00 2001
 From: Didier Roche <didrocks@ubuntu.com>
 Date: Fri, 12 Jul 2019 11:06:06 -0400
 Subject: UBUNTU: Enhance ZFS grub support
@@ -22,8 +22,8 @@ Signed-off-by: Didier Roche <didier.roche@canonical.com>
 ---
  Makefile.util.def           |   7 +
  util/grub.d/10_linux.in     |   4 +
- util/grub.d/10_linux_zfs.in | 961 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 972 insertions(+)
+ util/grub.d/10_linux_zfs.in | 964 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 975 insertions(+)
  create mode 100755 util/grub.d/10_linux_zfs.in
 
 diff --git a/Makefile.util.def b/Makefile.util.def
@@ -61,10 +61,10 @@ index 4532266be..a75096609 100644
  	LINUX_ROOT_DEVICE="ZFS=${rpool}${bootfs%/}"
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
 new file mode 100755
-index 000000000..f50e1231a
+index 000000000..5ec65fa94
 --- /dev/null
 +++ b/util/grub.d/10_linux_zfs.in
-@@ -0,0 +1,961 @@
+@@ -0,0 +1,964 @@
 +#! /bin/sh
 +set -e
 +
@@ -470,7 +470,10 @@ index 000000000..f50e1231a
 +
 +    initrd_list=""
 +    kernel_list=""
-+    for linux in $(find "${boot_dir}" -maxdepth 1 -type f -regex '.*/\(vmlinuz\|vmlinux\|kernel\)-.*'|sort -V); do
++    list=$(find "${boot_dir}" -maxdepth 1 -type f -regex '.*/\(vmlinuz\|vmlinux\|kernel\)-.*')
++    while [ "x$list" != "x" ] ; do
++        linux=`version_find_latest $list`
++        list=`echo $list | tr ' ' '\n' | fgrep -vx "$linux" | tr '\n' ' '`
 +        if ! grub_file_is_not_garbage "${linux}" ; then
 +            continue
 +        fi
@@ -506,12 +509,12 @@ index 000000000..f50e1231a
 +
 +        rel_linux_dirname=$(make_system_path_relative_to_its_root "${linux_dirname}")
 +
-+        initrd_list="${rel_linux_dirname}/${initrd}|${initrd_list}"
-+        kernel_list="${rel_linux_dirname}/${linux_basename}|${kernel_list}"
++        initrd_list="${initrd_list}|${rel_linux_dirname}/${initrd}"
++        kernel_list="${kernel_list}|${rel_linux_dirname}/${linux_basename}"
 +    done
 +
-+    initrd_list="${initrd_list%|}"
-+    kernel_list="${kernel_list%|}"
++    initrd_list="${initrd_list#|}"
++    kernel_list="${kernel_list#|}"
 +
 +    initrd_device=$(${grub_probe} --target=device "${boot_dir}" | head -1)
 +

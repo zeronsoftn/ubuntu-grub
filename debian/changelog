@@ -1,8 +1,15 @@
 grub2 (2.04-1ubuntu27) UNRELEASED; urgency=medium
 
   * Move gettext patches out of git-dpm's way, so it does not delete them
+  * debian/patches/ubuntu-flavour-order.patch:
+    - Add a (hidden) GRUB_FLAVOUR_ORDER setting that can mark certain kernel
+      flavours as preferred, and specify an order between those preferred
+      flavours (LP: #1882663)
+  * debian/patches/ubuntu-zfs-enhance-support.patch:
+    - Use version_find_latest for ordering kernels, so it also supports
+      the GRUB_FLAVOUR_ORDER setting.
 
- -- Julian Andres Klode <juliank@ubuntu.com>  Wed, 10 Jun 2020 11:22:22 +0200
+ -- Julian Andres Klode <juliank@ubuntu.com>  Wed, 10 Jun 2020 11:25:07 +0200
 
 grub2 (2.04-1ubuntu26) focal; urgency=medium
 

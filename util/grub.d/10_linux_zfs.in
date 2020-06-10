@@ -418,7 +418,10 @@ get_dataset_info() {
 
     initrd_list=""
     kernel_list=""
-    for linux in $(find "${boot_dir}" -maxdepth 1 -type f -regex '.*/\(vmlinuz\|vmlinux\|kernel\)-.*'|sort -V); do
+    list=$(find "${boot_dir}" -maxdepth 1 -type f -regex '.*/\(vmlinuz\|vmlinux\|kernel\)-.*')
+    while [ "x$list" != "x" ] ; do
+        linux=`version_find_latest $list`
+        list=`echo $list | tr ' ' '\n' | fgrep -vx "$linux" | tr '\n' ' '`
         if ! grub_file_is_not_garbage "${linux}" ; then
             continue
         fi
@@ -465,12 +468,12 @@ get_dataset_info() {
 
         rel_linux_dirname=$(make_system_path_relative_to_its_root "${linux_dirname}")
 
-        initrd_list="${rel_linux_dirname}/${initrd}|${initrd_list}"
-        kernel_list="${rel_linux_dirname}/${linux_basename}|${kernel_list}"
+        initrd_list="${initrd_list}|${rel_linux_dirname}/${initrd}"
+        kernel_list="${kernel_list}|${rel_linux_dirname}/${linux_basename}"
     done
 
-    initrd_list="${initrd_list%|}"
-    kernel_list="${kernel_list%|}"
+    initrd_list="${initrd_list#|}"
+    kernel_list="${kernel_list#|}"
 
     initrd_device=$(${grub_probe} --target=device "${boot_dir}" | head -1)
 
