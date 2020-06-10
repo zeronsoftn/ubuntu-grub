@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu27) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu27) groovy; urgency=medium
 
   * Move gettext patches out of git-dpm's way, so it does not delete them
   * debian/patches/ubuntu-flavour-order.patch:
@@ -13,7 +13,7 @@ grub2 (2.04-1ubuntu27) UNRELEASED; urgency=medium
       Thanks to Chris Coulson for the patch
   * Merge changes from xnox to fix multiple initrds support (LP: #1878705)
 
- -- Julian Andres Klode <juliank@ubuntu.com>  Wed, 10 Jun 2020 11:25:07 +0200
+ -- Julian Andres Klode <juliank@ubuntu.com>  Wed, 10 Jun 2020 20:42:09 +0200
 
 grub2 (2.04-1ubuntu26) focal; urgency=medium
 
