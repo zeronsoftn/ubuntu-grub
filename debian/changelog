@@ -1,6 +1,7 @@
 grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
 
-  * 
+  [ Julian Andres Klode ]
+  * Move gettext patches out of git-dpm's way, so it does not delete them
 
  -- Chris Coulson <chris.coulson@canonical.com>  Mon, 20 Jul 2020 19:19:08 +0100
 
