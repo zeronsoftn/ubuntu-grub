@@ -8,6 +8,9 @@ grub2 (2.04-1ubuntu27) UNRELEASED; urgency=medium
   * debian/patches/ubuntu-zfs-enhance-support.patch:
     - Use version_find_latest for ordering kernels, so it also supports
       the GRUB_FLAVOUR_ORDER setting.
+  * debian/patches/ubuntu-dont-verify-loopback-images.patch:
+    - disk/loopback: Don't verify loopback images (LP: #1878541),
+      Thanks to Chris Coulson for the patch
 
  -- Julian Andres Klode <juliank@ubuntu.com>  Wed, 10 Jun 2020 11:25:07 +0200
 
