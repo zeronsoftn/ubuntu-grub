@@ -11,6 +11,7 @@ grub2 (2.04-1ubuntu27) UNRELEASED; urgency=medium
   * debian/patches/ubuntu-dont-verify-loopback-images.patch:
     - disk/loopback: Don't verify loopback images (LP: #1878541),
       Thanks to Chris Coulson for the patch
+  * Merge changes from xnox to fix multiple initrds support (LP: #1878705)
 
  -- Julian Andres Klode <juliank@ubuntu.com>  Wed, 10 Jun 2020 11:25:07 +0200
 

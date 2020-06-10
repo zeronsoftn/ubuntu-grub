@@ -1,4 +1,4 @@
-From 29e19fc57024367d310d7efe8f5d1d0a14791960 Mon Sep 17 00:00:00 2001
+From ab2099f2c6c11ea45a6aadefeb785636477e7430 Mon Sep 17 00:00:00 2001
 From: Chris Glass <chris.glass@canonical.com>
 Date: Fri, 9 Mar 2018 13:47:07 +0100
 Subject: UBUNTU: Added initrd-less boot capabilities.
@@ -11,11 +11,11 @@ Signed-off-by: Steve Langasek <steve.langasek@canonical.com>
 Patch-Name: ubuntu-add-initrd-less-boot-fallback.patch
 ---
  Makefile.am                  |  3 ++
- configure.ac                 | 10 +++++++
- grub-initrd-fallback.service | 12 ++++++++
- util/grub.d/00_header.in     | 27 +++++++++++++++++
- util/grub.d/10_linux.in      | 56 +++++++++++++++++++++++++-----------
- 5 files changed, 91 insertions(+), 17 deletions(-)
+ configure.ac                 | 10 ++++++
+ grub-initrd-fallback.service | 12 +++++++
+ util/grub.d/00_header.in     | 27 ++++++++++++++
+ util/grub.d/10_linux.in      | 68 +++++++++++++++++++++++++++---------
+ 5 files changed, 104 insertions(+), 16 deletions(-)
  create mode 100644 grub-initrd-fallback.service
 
 diff --git a/Makefile.am b/Makefile.am
@@ -117,7 +117,7 @@ index b7135b655..2642f66c5 100644
      cat <<EOF
  function recordfail {
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index aa9666e5a..13f39b9f6 100644
+index aa9666e5a..af1e096bd 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -118,6 +118,10 @@ if [ "$vt_handoff" = 1 ]; then
@@ -131,7 +131,7 @@ index aa9666e5a..13f39b9f6 100644
  linux_entry ()
  {
    os="$1"
-@@ -193,31 +197,49 @@ EOF
+@@ -193,31 +197,63 @@ EOF
  	linux	${rel_dirname}/${basename}.efi.signed root=${linux_root_device_thisversion} ro ${args}
  EOF
    else
@@ -143,6 +143,14 @@ index aa9666e5a..13f39b9f6 100644
 +        linux_root_device_thisversion="PARTUUID=${GRUB_FORCE_PARTUUID}"
 +    fi
 +    message="$(gettext_printf "Loading initial ramdisk ...")"
++    initrd_path=
++    for i in ${initrd}; do
++        initrd_path="${initrd_path} ${rel_dirname}/${i}"
++    done
++    initrd_path_only_early=
++    for i in ${initrd_early}; do
++        initrd_path_only_early="${initrd_path_only_early} ${rel_dirname}/${i}"
++    done
 +    if test -n "${initrd}" && [ x"$GRUB_FORCE_PARTUUID" != x ]; then
 +        sed "s/^/$submenu_indentation/" << EOF
 +	if [ "\${initrdfail}" = 1 ]; then
@@ -153,12 +161,18 @@ index aa9666e5a..13f39b9f6 100644
 +	  echo	'$(echo "$message" | grub_quote)'
 +EOF
 +        fi
-+
          sed "s/^/$submenu_indentation/" << EOF
 -        linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
-+	  initrd	${rel_dirname}/${initrd}
++	  initrd	$(echo $initrd_path)
 +	else
 +	  linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args} panic=-1
++EOF
++        if [ -n "$initrd_path_only_early" ]; then
++          sed "s/^/$submenu_indentation/" << EOF
++	  initrd	$(echo $initrd_path_only_early)
++EOF
++        fi
++        sed "s/^/$submenu_indentation/" << EOF
 +	fi
 +	initrdfail
  EOF
@@ -188,10 +202,9 @@ index aa9666e5a..13f39b9f6 100644
 -      initrd_path="${initrd_path} ${rel_dirname}/${i}"
 -    done
 -    sed "s/^/$submenu_indentation/" << EOF
--	initrd	$(echo $initrd_path)
 +            fi
 +            sed "s/^/$submenu_indentation/" << EOF
-+	initrd	${rel_dirname}/${initrd}
+ 	initrd	$(echo $initrd_path)
  EOF
 +        fi
 +    fi

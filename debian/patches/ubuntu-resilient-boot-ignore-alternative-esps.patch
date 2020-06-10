@@ -1,4 +1,4 @@
-From f7e8057f7028b7f81e4d14d99bcd36583d9a419f Mon Sep 17 00:00:00 2001
+From 28f4a3b5e80e905042f5e68daa0150015fbdc470 Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Fri, 3 Apr 2020 13:43:49 +0200
 Subject: UBUNTU: efivar: Ignore alternative ESPs

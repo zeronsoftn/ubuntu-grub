@@ -1,4 +1,4 @@
-From 9481917492c1e56ba5521c0f06f611208f1311e4 Mon Sep 17 00:00:00 2001
+From cd73cd59b7e210a3e66af073c649c162930989ad Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Tue, 3 Mar 2020 16:06:34 +0100
 Subject: smbios: Add a --linux argument to apply linux modalias-like filtering
