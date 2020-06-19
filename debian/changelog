@@ -1,3 +1,9 @@
+grub2 (2.04-1ubuntu28) UNRELEASED; urgency=medium
+
+  * Pass dis_ucode_ldr to kernel for recovery mode (LP: #1831789)
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Fri, 19 Jun 2020 12:58:57 +0200
+
 grub2 (2.04-1ubuntu27) groovy; urgency=medium
 
   * Move gettext patches out of git-dpm's way, so it does not delete them
