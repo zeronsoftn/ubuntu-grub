@@ -1,0 +1,47 @@
+From d8b1fe38422efc282fd97790198b4a9a340a6bdf Mon Sep 17 00:00:00 2001
+From: Julian Andres Klode <julian.klode@canonical.com>
+Date: Tue, 9 Jun 2020 11:50:23 +0200
+Subject: UBUNTU: Add GRUB_FLAVOUR_ORDER configuration item
+
+This allows you to specify flavours that will be preferred
+over other ones, and the order in which they are preferred
+- items in the list win over items not in the list, and items
+earlier in the list win over later ones.
+
+We still have to sort out storage of this, as we need to
+inject that from packages or the UA client and similar,
+and we can't just modify /etc/default/grub for that.
+
+LP: #1882663
+Patch-Name: ubuntu-flavour-order.patch
+---
+ util/grub-mkconfig_lib.in | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/util/grub-mkconfig_lib.in b/util/grub-mkconfig_lib.in
+index fe6319abe..4a6614940 100644
+--- a/util/grub-mkconfig_lib.in
++++ b/util/grub-mkconfig_lib.in
+@@ -270,6 +270,22 @@ version_test_gt ()
+   if [ "x$version_test_gt_b" = "x" ] ; then
+     return 0
+   fi
++
++  # GRUB_FLAVOUR_ORDER is an ordered list of kernels, in decreasing
++  # priority. Any items in the list take precedence over other kernels,
++  # and earlier flavours are preferred over later ones.
++  for flavour in ${GRUB_FLAVOUR_ORDER:-}; do
++    echo "Checking flavour $flavour" >&2
++    version_test_gt_a_preferred=$(echo "$version_test_gt_a" | grep --  "-[0-9]*-$flavour\$")
++    version_test_gt_b_preferred=$(echo "$version_test_gt_b" | grep --  "-[0-9]*-$flavour\$")
++
++    if [ -n "$version_test_gt_a_preferred" -a -z "$version_test_gt_b_preferred" ] ; then
++      return 0
++    elif [ -z "$version_test_gt_a_preferred" -a -n "$version_test_gt_b_preferred" ] ; then
++      return 1
++    fi
++  done
++
+   case "$version_test_gt_a:$version_test_gt_b" in
+     *.old:*.old) ;;
+     *.old:*) version_test_gt_a="`echo "$version_test_gt_a" | sed -e 's/\.old$//'`" ; version_test_gt_cmp=gt ;;
