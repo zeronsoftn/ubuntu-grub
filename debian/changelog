@@ -1,10 +1,4 @@
-grub2 (2.04-1ubuntu28) groovy; urgency=medium
-
-  * Pass dis_ucode_ldr to kernel for recovery mode (LP: #1831789)
-
- -- Julian Andres Klode <juliank@ubuntu.com>  Fri, 19 Jun 2020 12:59:27 +0200
-
-grub2 (2.04-1ubuntu27) groovy; urgency=medium
+grub2 (2.04-1ubuntu26.1) focal; urgency=medium
 
   * Move gettext patches out of git-dpm's way, so it does not delete them
   * debian/patches/ubuntu-flavour-order.patch:
@@ -18,8 +12,9 @@ grub2 (2.04-1ubuntu27) groovy; urgency=medium
     - disk/loopback: Don't verify loopback images (LP: #1878541),
       Thanks to Chris Coulson for the patch
   * Merge changes from xnox to fix multiple initrds support (LP: #1878705)
+  * Pass dis_ucode_ldr to kernel for recovery mode (LP: #1831789)
 
- -- Julian Andres Klode <juliank@ubuntu.com>  Wed, 10 Jun 2020 20:42:09 +0200
+ -- Julian Andres Klode <juliank@ubuntu.com>  Mon, 22 Jun 2020 13:30:46 +0200
 
 grub2 (2.04-1ubuntu26) focal; urgency=medium
 
