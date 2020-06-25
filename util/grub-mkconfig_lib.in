@@ -275,7 +275,6 @@ version_test_gt ()
   # priority. Any items in the list take precedence over other kernels,
   # and earlier flavours are preferred over later ones.
   for flavour in ${GRUB_FLAVOUR_ORDER:-}; do
-    echo "Checking flavour $flavour" >&2
     version_test_gt_a_preferred=$(echo "$version_test_gt_a" | grep --  "-[0-9]*-$flavour\$")
     version_test_gt_b_preferred=$(echo "$version_test_gt_b" | grep --  "-[0-9]*-$flavour\$")
 

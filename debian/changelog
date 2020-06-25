@@ -1,3 +1,10 @@
+grub2 (2.04-1ubuntu29) UNRELEASED; urgency=medium
+
+  * debian/patches/ubuntu-flavour-order.patch: Remove debugging message and
+    export the variable so it actually works from /etc/default/grub.
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 25 Jun 2020 12:27:40 +0200
+
 grub2 (2.04-1ubuntu28) groovy; urgency=medium
 
   * Pass dis_ucode_ldr to kernel for recovery mode (LP: #1831789)
