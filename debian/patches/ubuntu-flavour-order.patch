@@ -1,4 +1,4 @@
-From d8b1fe38422efc282fd97790198b4a9a340a6bdf Mon Sep 17 00:00:00 2001
+From 2d236733ca4d74521cefab7fbf5e0f00967a028b Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Tue, 9 Jun 2020 11:50:23 +0200
 Subject: UBUNTU: Add GRUB_FLAVOUR_ORDER configuration item
@@ -15,14 +15,29 @@ and we can't just modify /etc/default/grub for that.
 LP: #1882663
 Patch-Name: ubuntu-flavour-order.patch
 ---
- util/grub-mkconfig_lib.in | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ util/grub-mkconfig.in     |  3 ++-
+ util/grub-mkconfig_lib.in | 15 +++++++++++++++
+ 2 files changed, 17 insertions(+), 1 deletion(-)
 
+diff --git a/util/grub-mkconfig.in b/util/grub-mkconfig.in
+index 72f1e25a03..6c8988fd60 100644
+--- a/util/grub-mkconfig.in
++++ b/util/grub-mkconfig.in
+@@ -260,7 +260,8 @@ export GRUB_DEFAULT \
+   GRUB_RECORDFAIL_TIMEOUT \
+   GRUB_RECOVERY_TITLE \
+   GRUB_FORCE_PARTUUID \
+-  GRUB_DISABLE_INITRD
++  GRUB_DISABLE_INITRD \
++  GRUB_FLAVOUR_ORDER
+ 
+ if test "x${grub_cfg}" != "x"; then
+   rm -f "${grub_cfg}.new"
 diff --git a/util/grub-mkconfig_lib.in b/util/grub-mkconfig_lib.in
-index fe6319abe..4a6614940 100644
+index fe6319abe0..7e2d1bc214 100644
 --- a/util/grub-mkconfig_lib.in
 +++ b/util/grub-mkconfig_lib.in
-@@ -270,6 +270,22 @@ version_test_gt ()
+@@ -270,6 +270,21 @@ version_test_gt ()
    if [ "x$version_test_gt_b" = "x" ] ; then
      return 0
    fi
@@ -31,7 +46,6 @@ index fe6319abe..4a6614940 100644
 +  # priority. Any items in the list take precedence over other kernels,
 +  # and earlier flavours are preferred over later ones.
 +  for flavour in ${GRUB_FLAVOUR_ORDER:-}; do
-+    echo "Checking flavour $flavour" >&2
 +    version_test_gt_a_preferred=$(echo "$version_test_gt_a" | grep --  "-[0-9]*-$flavour\$")
 +    version_test_gt_b_preferred=$(echo "$version_test_gt_b" | grep --  "-[0-9]*-$flavour\$")
 +

@@ -1,3 +1,10 @@
+grub2 (2.04-1ubuntu29) groovy; urgency=medium
+
+  * debian/patches/ubuntu-flavour-order.patch: Remove debugging message and
+    export the variable so it actually works from /etc/default/grub.
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 25 Jun 2020 12:28:19 +0200
+
 grub2 (2.04-1ubuntu26.1) focal; urgency=medium
 
   * Move gettext patches out of git-dpm's way, so it does not delete them
