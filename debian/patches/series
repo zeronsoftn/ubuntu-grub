@@ -85,3 +85,4 @@ ubuntu-speed-zsys-history.patch
 0085-calloc-Use-calloc-at-most-places.patch
 0086-malloc-Use-overflow-checking-primitives-where-we-do-.patch
 0087-iso9660-Don-t-leak-memory-on-realloc-failures.patch
+0088-font-Do-not-load-more-than-one-NAME-section.patch
