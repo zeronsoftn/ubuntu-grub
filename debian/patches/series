@@ -93,3 +93,4 @@ ubuntu-speed-zsys-history.patch
 0093-script-Avoid-a-use-after-free-when-redefining-a-func.patch
 0094-hfsplus-fix-two-more-overflows.patch
 0095-lvm-fix-two-more-potential-data-dependent-alloc-over.patch
+0096-efi-fix-some-malformed-device-path-arithmetic-errors.patch

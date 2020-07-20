@@ -37,6 +37,8 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
     - Fix integer overflows in hfsplus resulting in a heap buffer overflow
   * 0095-lvm-fix-two-more-potential-data-dependent-alloc-over.patch:
     - Fix more potential integer overflows in lvm
+  * 0096-efi-fix-some-malformed-device-path-arithmetic-errors.patch:
+    - Fix various arithmetic errors with malformed device paths
 
  -- Chris Coulson <chris.coulson@canonical.com>  Mon, 20 Jul 2020 19:19:08 +0100
 
