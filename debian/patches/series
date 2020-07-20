@@ -81,3 +81,4 @@ ubuntu-resilient-boot-boot-order.patch
 ubuntu-speed-zsys-history.patch
 0082-yylex-Make-lexer-fatal-errors-actually-be-fatal.patch
 0083-safemath-Add-some-arithmetic-primitives-that-check-f.patch
+0084-calloc-Make-sure-we-always-have-an-overflow-checking.patch

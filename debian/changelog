@@ -8,6 +8,9 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
     - Fix a buffer overflow by making fatal lexer errors actually be fatal
   * 0083-safemath-Add-some-arithmetic-primitives-that-check-f.patch:
     - Add arithmetic primitives that allow for overflows to be detected
+  * 0084-calloc-Make-sure-we-always-have-an-overflow-checking.patch:
+    - Make sure that there is always an overflow checking implementation of
+      calloc() available
 
  -- Chris Coulson <chris.coulson@canonical.com>  Mon, 20 Jul 2020 19:19:08 +0100
 
