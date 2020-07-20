@@ -33,6 +33,8 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
     - Remove unused fields from grub_script_function
   * 0093-script-Avoid-a-use-after-free-when-redefining-a-func.patch:
     - Avoid a use-after-free when redefining a function during execution
+  * 0094-hfsplus-fix-two-more-overflows.patch:
+    - Fix integer overflows in hfsplus resulting in a heap buffer overflow
 
  -- Chris Coulson <chris.coulson@canonical.com>  Mon, 20 Jul 2020 19:19:08 +0100
 

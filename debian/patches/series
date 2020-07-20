@@ -91,3 +91,4 @@ ubuntu-speed-zsys-history.patch
 0091-tftp-Do-not-use-priority-queue.patch
 0092-script-Remove-unused-fields-from-grub_script_functio.patch
 0093-script-Avoid-a-use-after-free-when-redefining-a-func.patch
+0094-hfsplus-fix-two-more-overflows.patch
