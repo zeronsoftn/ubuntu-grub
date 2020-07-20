@@ -88,3 +88,4 @@ ubuntu-speed-zsys-history.patch
 0088-font-Do-not-load-more-than-one-NAME-section.patch
 0089-gfxmenu-Fix-double-free-in-load_image.patch
 0090-lzma-Make-sure-we-don-t-dereference-past-array.patch
+0091-tftp-Do-not-use-priority-queue.patch

@@ -27,6 +27,8 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
       double free later on
   * 0090-lzma-Make-sure-we-don-t-dereference-past-array.patch:
     - Fix an out-of-bounds read in LzmaEncode
+  * 0091-tftp-Do-not-use-priority-queue.patch:
+    - Refactor tftp to not use priority queues and fix a double free
 
  -- Chris Coulson <chris.coulson@canonical.com>  Mon, 20 Jul 2020 19:19:08 +0100
 
