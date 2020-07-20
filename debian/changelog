@@ -11,6 +11,8 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
   * 0084-calloc-Make-sure-we-always-have-an-overflow-checking.patch:
     - Make sure that there is always an overflow checking implementation of
       calloc() available
+  * 0085-calloc-Use-calloc-at-most-places.patch:
+    - Use calloc where appropriate, to fix multiple heap buffer overflows
 
  -- Chris Coulson <chris.coulson@canonical.com>  Mon, 20 Jul 2020 19:19:08 +0100
 
