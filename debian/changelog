@@ -22,6 +22,9 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
   * 0088-font-Do-not-load-more-than-one-NAME-section.patch:
     - Fix a memory leak when processing font files with more than one NAME
       section
+  * 0089-gfxmenu-Fix-double-free-in-load_image.patch:
+    - Zero self->bitmap after it is freed in order to avoid a potential
+      double free later on
 
  -- Chris Coulson <chris.coulson@canonical.com>  Mon, 20 Jul 2020 19:19:08 +0100
 
