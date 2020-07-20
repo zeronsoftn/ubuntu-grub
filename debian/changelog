@@ -3,6 +3,10 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
   [ Julian Andres Klode ]
   * Move gettext patches out of git-dpm's way, so it does not delete them
 
+  [ Chris Coulson ]
+  * 0082-yylex-Make-lexer-fatal-errors-actually-be-fatal.patch:
+    - Fix a buffer overflow by making fatal lexer errors actually be fatal
+
  -- Chris Coulson <chris.coulson@canonical.com>  Mon, 20 Jul 2020 19:19:08 +0100
 
 grub2 (2.04-1ubuntu26) focal; urgency=medium

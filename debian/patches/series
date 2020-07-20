@@ -79,3 +79,4 @@ cherrypick-lsefisystab-show-dtb.patch
 ubuntu-resilient-boot-ignore-alternative-esps.patch
 ubuntu-resilient-boot-boot-order.patch
 ubuntu-speed-zsys-history.patch
+0082-yylex-Make-lexer-fatal-errors-actually-be-fatal.patch
