@@ -39,6 +39,9 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
     - Fix more potential integer overflows in lvm
   * 0096-efi-fix-some-malformed-device-path-arithmetic-errors.patch:
     - Fix various arithmetic errors with malformed device paths
+  * 0098-Fix-a-regression-caused-by-efi-fix-some-malformed-de.patch:
+    - Fix a NULL deref in the chainloader command introduced by a
+      previous patch
 
   [ Dimitri John Ledkov ]
   * 0097-linuxefi-fail-kernel-validation-without-shim-protoco.patch:
