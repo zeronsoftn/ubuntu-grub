@@ -40,6 +40,10 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
   * 0096-efi-fix-some-malformed-device-path-arithmetic-errors.patch:
     - Fix various arithmetic errors with malformed device paths
 
+  [ Dimitri John Ledkov ]
+  * 0097-linuxefi-fail-kernel-validation-without-shim-protoco.patch:
+    - Fail kernel validation if the shim protocol isn't available
+
  -- Chris Coulson <chris.coulson@canonical.com>  Mon, 20 Jul 2020 19:19:08 +0100
 
 grub2 (2.04-1ubuntu26) focal; urgency=medium
