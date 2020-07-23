@@ -94,3 +94,4 @@ ubuntu-speed-zsys-history.patch
 0094-hfsplus-fix-two-more-overflows.patch
 0095-lvm-fix-two-more-potential-data-dependent-alloc-over.patch
 0096-efi-fix-some-malformed-device-path-arithmetic-errors.patch
+0097-linuxefi-fail-kernel-validation-without-shim-protoco.patch
