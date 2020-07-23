@@ -45,6 +45,9 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
   * 0099-efi-Fix-use-after-free-in-halt-reboot-path.patch:
     - Fix a use-after-free in the halt and reboot commands by not freeing
       allocated memory in these paths
+  * 0100-chainloader-Avoid-a-double-free-when-validation-fail.patch:
+    - Avoid a double free in the chainloader command when validation
+      fails
 
   [ Dimitri John Ledkov ]
   * 0097-linuxefi-fail-kernel-validation-without-shim-protoco.patch:

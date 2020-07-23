@@ -97,3 +97,4 @@ ubuntu-speed-zsys-history.patch
 0097-linuxefi-fail-kernel-validation-without-shim-protoco.patch
 0098-Fix-a-regression-caused-by-efi-fix-some-malformed-de.patch
 0099-efi-Fix-use-after-free-in-halt-reboot-path.patch
+0100-chainloader-Avoid-a-double-free-when-validation-fail.patch
