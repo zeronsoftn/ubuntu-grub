@@ -42,6 +42,9 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
   * 0098-Fix-a-regression-caused-by-efi-fix-some-malformed-de.patch:
     - Fix a NULL deref in the chainloader command introduced by a
       previous patch
+  * 0099-efi-Fix-use-after-free-in-halt-reboot-path.patch:
+    - Fix a use-after-free in the halt and reboot commands by not freeing
+      allocated memory in these paths
 
   [ Dimitri John Ledkov ]
   * 0097-linuxefi-fail-kernel-validation-without-shim-protoco.patch:
