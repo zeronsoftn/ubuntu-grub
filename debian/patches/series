@@ -98,3 +98,4 @@ ubuntu-speed-zsys-history.patch
 0098-Fix-a-regression-caused-by-efi-fix-some-malformed-de.patch
 0099-efi-Fix-use-after-free-in-halt-reboot-path.patch
 0100-chainloader-Avoid-a-double-free-when-validation-fail.patch
+0101-relocator-Protect-grub_relocator_alloc_chunk_addr-in.patch

@@ -48,6 +48,9 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
   * 0100-chainloader-Avoid-a-double-free-when-validation-fail.patch:
     - Avoid a double free in the chainloader command when validation
       fails
+  * 0101-relocator-Protect-grub_relocator_alloc_chunk_addr-in.patch:
+    - Protect grub_relocator_alloc_chunk_addr input arguments against
+      integer overflow / underflow
 
   [ Dimitri John Ledkov ]
   * 0097-linuxefi-fail-kernel-validation-without-shim-protoco.patch:
