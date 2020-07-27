@@ -1,4 +1,4 @@
-From 6735478e185e0b56004d13978c14febd7e6c0707 Mon Sep 17 00:00:00 2001
+From 1ade4ce46b324418d9b3bcd447470b9a0fea6084 Mon Sep 17 00:00:00 2001
 From: Chris Coulson <chris.coulson@canonical.com>
 Date: Wed, 22 Jul 2020 17:06:04 +0100
 Subject: Fix a regression caused by "efi: fix some malformed device path

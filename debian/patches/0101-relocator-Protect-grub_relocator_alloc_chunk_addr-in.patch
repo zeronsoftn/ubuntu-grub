@@ -1,4 +1,4 @@
-From f664dd35931496975f890ac99f5a550d0023622a Mon Sep 17 00:00:00 2001
+From e4356ccb73aa1d54d319999de4ce46e2e1f79b59 Mon Sep 17 00:00:00 2001
 From: Alexey Makhalov <amakhalov@vmware.com>
 Date: Wed, 15 Jul 2020 06:42:37 +0000
 Subject: relocator: Protect grub_relocator_alloc_chunk_addr() input args

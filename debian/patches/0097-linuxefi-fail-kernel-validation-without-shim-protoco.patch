@@ -1,4 +1,4 @@
-From 02fdac962effd9278bef85644072f91853f6ef9f Mon Sep 17 00:00:00 2001
+From 67508ab68e6a5be869e049a0e6474f4b717d3ab9 Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <xnox@ubuntu.com>
 Date: Wed, 22 Jul 2020 11:31:43 +0100
 Subject: linuxefi: fail kernel validation without shim protocol.
@@ -13,17 +13,25 @@ CVE-2020-15705
 Reported-by: Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>
 Signed-off-by: Dimitri John Ledkov <xnox@ubuntu.com>
 ---
- grub-core/loader/arm64/linux.c     | 12 ++++++++----
+ grub-core/loader/arm64/linux.c     | 13 +++++++++----
  grub-core/loader/efi/chainloader.c |  1 +
  grub-core/loader/efi/linux.c       |  1 +
  grub-core/loader/i386/efi/linux.c  |  2 +-
- 4 files changed, 11 insertions(+), 5 deletions(-)
+ 4 files changed, 12 insertions(+), 5 deletions(-)
 
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index 1a5296a60..a4ec51949 100644
+index 1a5296a60..3f5496fc5 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
-@@ -342,11 +342,15 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+@@ -34,6 +34,7 @@
+ #include <grub/i18n.h>
+ #include <grub/lib/cmdline.h>
+ #include <grub/verify.h>
++#include <grub/efi/sb.h>
+ 
+ GRUB_MOD_LICENSE ("GPLv3+");
+ 
+@@ -342,11 +343,15 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
  
    grub_dprintf ("linux", "kernel @ %p\n", kernel_addr);
  

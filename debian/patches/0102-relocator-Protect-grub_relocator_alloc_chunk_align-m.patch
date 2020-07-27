@@ -1,4 +1,4 @@
-From b05589230726250444b4aad0e46dd79365454ed4 Mon Sep 17 00:00:00 2001
+From a55ad29707df6f2898852118272c455b43c82b98 Mon Sep 17 00:00:00 2001
 From: Alexey Makhalov <amakhalov@vmware.com>
 Date: Wed, 8 Jul 2020 01:44:38 +0000
 Subject: relocator: Protect grub_relocator_alloc_chunk_align() max_addr
