@@ -101,3 +101,4 @@ ubuntu-speed-zsys-history.patch
 0101-relocator-Protect-grub_relocator_alloc_chunk_addr-in.patch
 0102-relocator-Protect-grub_relocator_alloc_chunk_align-m.patch
 0103-relocator-Fix-grub_relocator_alloc_chunk_align-top-m.patch
+0104-linux-loader-avoid-overflow-on-initrd-size-calculati.patch
