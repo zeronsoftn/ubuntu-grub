@@ -1,4 +1,4 @@
-From e7a307d1be881fbead70e0f3bae52862a541d781 Mon Sep 17 00:00:00 2001
+From b04914c7bfa201c3eb5fea674d6ef4bc6a32cdf5 Mon Sep 17 00:00:00 2001
 From: Alexey Makhalov <amakhalov@vmware.com>
 Date: Mon, 20 Jul 2020 23:03:05 +0000
 Subject: efi: Fix use-after-free in halt/reboot path

@@ -1,4 +1,4 @@
-From 6ef40cdb663d37cfd9aa28fe2cfdcfa09058cc56 Mon Sep 17 00:00:00 2001
+From 490322f5dcc14af08f7ed5fa6cb7f8f4995396d6 Mon Sep 17 00:00:00 2001
 From: Chris Coulson <chris.coulson@canonical.com>
 Date: Thu, 23 Jul 2020 14:02:17 +0100
 Subject: chainloader: Avoid a double free when validation fails
