@@ -58,6 +58,8 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
     - Fix grub_relocator_alloc_chunk_align top memory allocation
   * 0104-linux-loader-avoid-overflow-on-initrd-size-calculati.patch:
     - Avoid overflow on initrd size calculation
+  * 0105-linux-Fix-integer-overflows-in-initrd-size-handling.patch:
+    - Fix integer overflows in initrd size handling
 
   [ Dimitri John Ledkov ]
   * 0097-linuxefi-fail-kernel-validation-without-shim-protoco.patch:
