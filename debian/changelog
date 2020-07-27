@@ -54,6 +54,8 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
   * 0102-relocator-Protect-grub_relocator_alloc_chunk_align-m.patch:
     - Protect grub_relocator_alloc_chunk_align max_addr argument against
       integer underflow
+  * 0103-relocator-Fix-grub_relocator_alloc_chunk_align-top-m.patch:
+    - Fix grub_relocator_alloc_chunk_align top memory allocation
 
   [ Dimitri John Ledkov ]
   * 0097-linuxefi-fail-kernel-validation-without-shim-protoco.patch:

@@ -100,3 +100,4 @@ ubuntu-speed-zsys-history.patch
 0100-chainloader-Avoid-a-double-free-when-validation-fail.patch
 0101-relocator-Protect-grub_relocator_alloc_chunk_addr-in.patch
 0102-relocator-Protect-grub_relocator_alloc_chunk_align-m.patch
+0103-relocator-Fix-grub_relocator_alloc_chunk_align-top-m.patch
