@@ -60,6 +60,8 @@ grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
     - Avoid overflow on initrd size calculation
   * 0105-linux-Fix-integer-overflows-in-initrd-size-handling.patch:
     - Fix integer overflows in initrd size handling
+  * 0106-efilinux-Fix-integer-overflows-in-grub_cmd_initrd.patch:
+    - Fix integer overflows in linuxefi grub_cmd_initrd
 
   [ Dimitri John Ledkov ]
   * 0097-linuxefi-fail-kernel-validation-without-shim-protoco.patch:
