@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu26.1~1) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu26.1) focal; urgency=medium
 
   [ Julian Andres Klode ]
   * Move gettext patches out of git-dpm's way, so it does not delete them
