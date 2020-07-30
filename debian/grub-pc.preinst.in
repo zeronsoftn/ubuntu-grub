@@ -219,14 +219,17 @@ check_install_devices()
         return 0
     fi
 
+    if [ -d /sys/firmware/efi/efivars ]; then
+        return 0
+    fi
+
     . /usr/share/debconf/confmodule
 
     # get devices
     question=grub-pc/install_devices
-    priority=high
     device_map="$(grub-mkdevicemap -m - | grep -v '^(fd[0-9]\+)' || true)"
     devices="$(echo "$device_map" | cut -f2)"
-    db_get grub-pc/install_devices
+    db_get "$question"
 
     # it's ok to not want grub
     if [ -z "$RET" ]; then
@@ -245,15 +248,11 @@ check_install_devices()
     # they are valid, great
     if [ "$valid" = 1 ]; then
         return 0
-    fi
-
-    # if not valid, switch to disks_changed question
-    if [ "$valid" = 0 ]; then
+    else
         question=grub-pc/install_devices_disks_changed
         priority=critical
         db_set "$question" "$RET"
         db_fset "$question" seen false
-        db_fset grub-pc/install_devices_empty seen false
     fi
 
     # populate possible devices
@@ -296,39 +295,22 @@ check_install_devices()
     done
     db_subst "$question" RAW_CHOICES "$ids"
     db_subst "$question" CHOICES "$descriptions"
-    db_input "$priority" "$question"
-    db_go
+    db_input "$priority" "$question" || return 1
+    db_go || return 1
     db_get "$question"
 
-    # one no longer wants grub installed, but did before
-    # this is confusing, abort
-    if [ -z "$RET" ]; then
-        return 1
-    fi
+    db_set grub-pc/install_devices "$RET"
+    db_fset grub-pc/install_devices seen true
 
-    # update devices list
-    if [ "$question" != grub-pc/install_devices ] && [ "$RET" ]; then
-        # XXX cjwatson 2019-02-26: The description of
-        # grub-pc/install_devices_disks_changed ought to explain that
-        # selecting no devices will leave the configuration unchanged
-        # so that you'll be prompted again next time, but it's a bit
-        # close to the Debian 10 release to be introducing new
-        # translatable text.  For now, it should be sufficient to
-        # avoid losing configuration data.
-        db_set grub-pc/install_devices "$RET"
-        db_fset grub-pc/install_devices seen true
-    fi
     return 0
 }
 
 case "$1" in
     upgrade)
-        # XXX what if we booted in EFI mode?
-        if [ "$DPKG_MAINTSCRIPT_PACKAGE" = "grub-pc" ]; then
-            if ! check_install_devices; then
-                echo Invalid grub-pc configuration, please run $ sudo dpkg-reconfigure grub-pc
-                exit 1
-            fi
+        if ! check_install_devices; then
+            echo No valid disks configured for grub-pc installation and could not prompt for input
+            echo Please run $ sudo dpkg-reconfigure grub-pc
+            exit 1
         fi
     ;;
 esac
