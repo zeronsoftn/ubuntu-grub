@@ -1,0 +1,338 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+  install|upgrade)
+    if dpkg --compare-versions "$2" lt 1.98+20100804-2 && \
+       test -h /etc/kernel/postrm.d/zz-update-grub; then
+      rm -f /etc/kernel/postrm.d/zz-update-grub
+    fi
+    ;;
+esac
+
+running_in_container()
+{
+  type systemd-detect-virt >/dev/null 2>&1 && systemd-detect-virt --quiet --container
+}
+
+# This only works on a Linux system with udev running.  This is probably the
+# vast majority of systems where we need any of this, though, and we fall
+# back reasonably gracefully if we don't have it.
+cached_available_ids=
+available_ids()
+{
+  local id path
+
+  if [ "$cached_available_ids" ]; then
+    echo "$cached_available_ids"
+    return
+  fi
+
+  [ -d /dev/disk/by-id ] || return
+  cached_available_ids="$(
+    for path in /dev/disk/by-id/*; do
+      [ -e "$path" ] || continue
+      printf '%s %s\n' "$path" "$(readlink -f "$path")"
+    done | sort -k2 -s -u | cut -d' ' -f1
+  )"
+  echo "$cached_available_ids"
+}
+
+# Returns non-zero and no output if no mapping can be found.
+device_to_id()
+{
+  local id
+  for id in $(available_ids); do
+    if [ "$(readlink -f "$id")" = "$(readlink -f "$1")" ]; then
+      echo "$id"
+      return 0
+    fi
+  done
+  # Fall back to the plain device name if there's no by-id link for it.
+  if [ -e "$1" ]; then
+    echo "$1"
+    return 0
+  fi
+  return 1
+}
+
+all_disks()
+{
+  local id
+  for id in $(available_ids); do
+    case $id in
+      *-part*) ;;
+      *) echo "$id" ;;
+    esac
+  done
+}
+
+all_partitions()
+{
+  local id ids
+  ids=
+  for id in $(available_ids); do
+    if [ "$id" != "$1" ] && [ "${id%-part*}" = "$1" ]; then
+      ids="${ids:+$ids }$id"
+    fi
+  done
+  echo "$ids"
+}
+
+# for Linux
+sysfs_size()
+{
+  local num_sectors sector_size size
+  # Try to find out the size without relying on a partitioning tool being
+  # installed. This isn't too hard on Linux 2.6 with sysfs, but we have to
+  # try a couple of variants on detection of the sector size.
+  if [ -e "$1/size" ]; then
+    num_sectors="$(cat "$1/size")"
+    sector_size=512
+    if [ -e "$1/queue/logical_block_size" ]; then
+      sector_size="$(cat "$1/queue/logical_block_size")"
+    elif [ -e "$1/queue/hw_sector_size" ]; then
+      sector_size="$(cat "$1/queue/hw_sector_size")"
+    fi
+    size="$(expr "$num_sectors" \* "$sector_size" / 1000 / 1000)"
+  fi
+  [ "$size" ] || size='???'
+  echo "$size"
+}
+
+# for kFreeBSD
+camcontrol_size()
+{
+  local num_sectors sector_size size=
+
+  if num_sectors="$(camcontrol readcap "$1" -q -s -N)"; then
+    sector_size="$(camcontrol readcap "$1" -q -b)"
+    size="$(expr "$num_sectors" \* "$sector_size" / 1000 / 1000)"
+  fi
+
+  [ "$size" ] || size='???'
+  echo "$size"
+}
+
+maybe_udevadm()
+{
+  if which udevadm >/dev/null 2>&1; then
+    udevadm "$@" || true
+  fi
+}
+
+# Returns value in $RET, like a debconf command.
+describe_disk()
+{
+  local disk id sysfs_path disk_basename size model
+  disk="$1"
+  id="$2"
+
+  model=
+  case $(uname -s) in
+    Linux)
+      sysfs_path="$(maybe_udevadm info -n "$disk" -q path)"
+      if [ -z "$sysfs_path" ]; then
+        sysfs_path="/block/$(printf %s "${disk#/dev/}" | sed 's,/,!,g')"
+      fi
+      size="$(sysfs_size "/sys$sysfs_path")"
+
+      model="$(maybe_udevadm info -n "$disk" -q property | sed -n 's/^ID_MODEL=//p')"
+      if [ -z "$model" ]; then
+        model="$(maybe_udevadm info -n "$disk" -q property | sed -n 's/^DM_NAME=//p')"
+        if [ -z "$model" ]; then
+          model="$(maybe_udevadm info -n "$disk" -q property | sed -n 's/^MD_NAME=//p')"
+          if [ -z "$model" ] && which dmsetup >/dev/null 2>&1; then
+            model="$(dmsetup info -c --noheadings -o name "$disk" 2>/dev/null || true)"
+          fi
+        fi
+      fi
+    ;;
+    GNU/kFreeBSD)
+      disk_basename=$(basename "$disk")
+      size="$(camcontrol_size "$disk_basename")"
+      model="$(camcontrol inquiry "$disk_basename" | sed -ne "s/^pass0: <\([^>]*\)>.*/\1/p")"
+    ;;
+  esac
+
+  [ "$model" ] || model='???'
+
+  db_subst grub-pc/disk_description DEVICE "$disk"
+  db_subst grub-pc/disk_description SIZE "$size"
+  db_subst grub-pc/disk_description MODEL "$model"
+  db_metaget grub-pc/disk_description description
+}
+
+# Returns value in $RET, like a debconf command.
+describe_partition()
+{
+  local disk part id path sysfs_path diskbase partbase size
+  disk="$1"
+  part="$2"
+  id="$3"
+  path="$4"
+
+  sysfs_path="$(maybe_udevadm info -n "$part" -q path)"
+  if [ -z "$sysfs_path" ]; then
+    diskbase="${disk#/dev/}"
+    diskbase="$(printf %s "$diskbase" | sed 's,/,!,g')"
+    partbase="${part#/dev/}"
+    partbase="$(printf %s "$partbase" | sed 's,/,!,g')"
+    sysfs_path="/block/$diskbase/$partbase"
+  fi
+  size="$(sysfs_size "/sys$sysfs_path")"
+
+  db_subst grub-pc/partition_description DEVICE "$part"
+  db_subst grub-pc/partition_description SIZE "$size"
+  db_subst grub-pc/partition_description PATH "$path"
+  db_metaget grub-pc/partition_description description
+}
+
+usable_partitions()
+{
+  local last_partition path partition partition_id
+
+  last_partition=
+  for path in / /boot /boot/grub; do
+    partition="$(grub-probe -t device "$path" || true)"
+    if [ -z "$partition" ] || [ "$partition" = "$last_partition" ]; then
+      continue
+    fi
+    partition_id="$(device_to_id "$partition" || true)"
+    echo "$path:$partition_id"
+    last_partition="$partition"
+  done | sort -t: -k2
+}
+
+get_mountpoint()
+{
+  local relpath boot_mountpoint
+
+  relpath="$(grub-mkrelpath "$1")"
+  boot_mountpoint="${1#$relpath}"
+  echo "${boot_mountpoint:-/}"
+}
+
+check_install_devices()
+{
+    if running_in_container; then
+        return 0
+    fi
+
+    . /usr/share/debconf/confmodule
+
+    # get devices
+    question=grub-pc/install_devices
+    priority=high
+    device_map="$(grub-mkdevicemap -m - | grep -v '^(fd[0-9]\+)' || true)"
+    devices="$(echo "$device_map" | cut -f2)"
+    db_get grub-pc/install_devices
+
+    # it's ok to not want grub
+    if [ -z "$RET" ]; then
+        return 0
+    fi
+
+    # check if valid
+    valid=1
+    for device in $RET; do
+        if [ ! -e "${device%,}" ]; then
+            valid=0
+            break
+        fi
+    done
+
+    # they are valid, great
+    if [ "$valid" = 1 ]; then
+        return 0
+    fi
+
+    # if not valid, switch to disks_changed question
+    if [ "$valid" = 0 ]; then
+        question=grub-pc/install_devices_disks_changed
+        priority=critical
+        db_set "$question" "$RET"
+        db_fset "$question" seen false
+        db_fset grub-pc/install_devices_empty seen false
+    fi
+
+    # populate possible devices
+    ids=
+    descriptions=
+    partitions="$(usable_partitions)"
+    for device in $devices; do
+        disk_id="$(device_to_id "$device" || true)"
+        if [ "$disk_id" ]; then
+            ids="${ids:+$ids, }$disk_id"
+            describe_disk "$(readlink -f "$device")" "$disk_id"
+            RET="$(printf %s "$RET" | sed 's/,/\\,/g')"
+            descriptions="${descriptions:+$descriptions, }$RET"
+            for partition_pair in $partitions; do
+                partition_id="${partition_pair#*:}"
+                if [ "${partition_id#$disk_id-part}" != "$partition_id" ]; then
+                    ids="${ids:+$ids, }$partition_id"
+                    describe_partition "$(readlink -f "$device")" "$(readlink -f "$partition_id")" "$partition_id" "$(get_mountpoint "${partition_pair%%:*}")"
+                    RET="$(printf %s "$RET" | sed 's/,/\\,/g')"
+                    descriptions="${descriptions:+$descriptions, }$RET"
+                fi
+            done
+        fi
+    done
+    # Some "partitions" may in fact be at the disk level, e.g. RAID.
+    # List these as well if they haven't already been listed.
+    for partition_pair in $partitions; do
+        partition_id="${partition_pair#*:}"
+        if [ "${partition_id#*-part}" = "$partition_id" ]; then
+            case ", $ids, " in
+                ", $partition_id, ") ;;
+                *)
+                    ids="${ids:+$ids, }$partition_id"
+                    describe_disk "$(readlink -f "$partition_id")" "$partition_id"
+                    RET="$(printf %s "$RET" | sed 's/,/\\,/g')"
+                    descriptions="${descriptions:+$descriptions, }$RET"
+                    ;;
+            esac
+        fi
+    done
+    db_subst "$question" RAW_CHOICES "$ids"
+    db_subst "$question" CHOICES "$descriptions"
+    db_input "$priority" "$question"
+    db_go
+    db_get "$question"
+
+    # one no longer wants grub installed, but did before
+    # this is confusing, abort
+    if [ -z "$RET" ]; then
+        return 1
+    fi
+
+    # update devices list
+    if [ "$question" != grub-pc/install_devices ] && [ "$RET" ]; then
+        # XXX cjwatson 2019-02-26: The description of
+        # grub-pc/install_devices_disks_changed ought to explain that
+        # selecting no devices will leave the configuration unchanged
+        # so that you'll be prompted again next time, but it's a bit
+        # close to the Debian 10 release to be introducing new
+        # translatable text.  For now, it should be sufficient to
+        # avoid losing configuration data.
+        db_set grub-pc/install_devices "$RET"
+        db_fset grub-pc/install_devices seen true
+    fi
+    return 0
+}
+
+case "$1" in
+    upgrade)
+        # XXX what if we booted in EFI mode?
+        if [ "$DPKG_MAINTSCRIPT_PACKAGE" = "grub-pc" ]; then
+            if ! check_install_devices; then
+                echo Invalid grub-pc configuration, please run $ sudo dpkg-reconfigure grub-pc
+                exit 1
+            fi
+        fi
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
