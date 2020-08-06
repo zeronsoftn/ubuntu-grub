@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu27) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu27) groovy; urgency=medium
 
   * debian/patches/ubuntu-flavour-order.patch:
     - Add a (hidden) GRUB_FLAVOUR_ORDER setting that can mark certain kernel
@@ -17,7 +17,7 @@ grub2 (2.04-1ubuntu27) UNRELEASED; urgency=medium
   * debian/patches/ubuntu-clear-invalid-initrd-spacing.patch:
     - Remove, no longer needed thanks to xnox's patch
 
- -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 06 Aug 2020 10:14:56 +0200
+ -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 06 Aug 2020 14:47:52 +0200
 
 grub2 (2.04-1ubuntu26.2) focal; urgency=medium
 
