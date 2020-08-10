@@ -1,3 +1,9 @@
+grub2 (2.04-1ubuntu28) UNRELEASED; urgency=medium
+
+  * Ensure that grub-multi-install can always find templates (LP: #1879948)
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Mon, 10 Aug 2020 14:42:23 +0200
+
 grub2 (2.04-1ubuntu27) groovy; urgency=medium
 
   * debian/patches/ubuntu-flavour-order.patch:
