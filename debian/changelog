@@ -1,8 +1,9 @@
-grub2 (2.04-1ubuntu28) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu28) groovy; urgency=medium
 
   * Ensure that grub-multi-install can always find templates (LP: #1879948)
+  * Fix changelog entries for security update
 
- -- Julian Andres Klode <juliank@ubuntu.com>  Mon, 10 Aug 2020 14:42:23 +0200
+ -- Julian Andres Klode <juliank@ubuntu.com>  Mon, 10 Aug 2020 15:07:29 +0200
 
 grub2 (2.04-1ubuntu27) groovy; urgency=medium
 
