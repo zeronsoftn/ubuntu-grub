@@ -1,12 +1,6 @@
-grub2 (2.04-1ubuntu28) groovy; urgency=medium
+grub2 (2.04-1ubuntu26.3) focal; urgency=medium
 
-  * Ensure that grub-multi-install can always find templates (LP: #1879948)
-  * Fix changelog entries for security update
-
- -- Julian Andres Klode <juliank@ubuntu.com>  Mon, 10 Aug 2020 15:07:29 +0200
-
-grub2 (2.04-1ubuntu27) groovy; urgency=medium
-
+  * 2.04-1ubuntu27 and 2.04-1ubuntu28 folded together for focal
   * debian/patches/ubuntu-flavour-order.patch:
     - Add a (hidden) GRUB_FLAVOUR_ORDER setting that can mark certain kernel
       flavours as preferred, and specify an order between those preferred
@@ -23,8 +17,9 @@ grub2 (2.04-1ubuntu27) groovy; urgency=medium
     - Merge changes from xnox to fix multiple initrds support (LP: #1878705)
   * debian/patches/ubuntu-clear-invalid-initrd-spacing.patch:
     - Remove, no longer needed thanks to xnox's patch
+  * Ensure that grub-multi-install can always find templates (LP: #1879948)
 
- -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 06 Aug 2020 14:47:52 +0200
+ -- Julian Andres Klode <juliank@ubuntu.com>  Mon, 17 Aug 2020 16:04:31 +0200
 
 grub2 (2.04-1ubuntu26.2) focal; urgency=medium
 
