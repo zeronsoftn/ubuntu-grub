@@ -662,7 +662,7 @@ case "$1" in
                     continue
                   fi
                 else
-                  break # noninteractive
+                  exit 1 # noninteractive
                 fi
               fi
             fi
@@ -685,7 +685,7 @@ case "$1" in
                   db_fset grub-pc/install_devices_empty seen false
                 fi
               else
-                break # noninteractive
+                exit 1 # noninteractive
               fi
             else
               break
