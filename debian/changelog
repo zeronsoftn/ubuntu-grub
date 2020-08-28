@@ -1,3 +1,11 @@
+grub2 (2.04-1ubuntu29) UNRELEASED; urgency=medium
+
+  * grub-install: cherry-pick patch from grub-devel to make grub-install
+    fault tolerant. Create backup of files in /boot/grub, and restore them
+    on failure to complete grub-install. LP: #1891680
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 28 Aug 2020 15:15:45 +0100
+
 grub2 (2.04-1ubuntu28) groovy; urgency=medium
 
   * Ensure that grub-multi-install can always find templates (LP: #1879948)
