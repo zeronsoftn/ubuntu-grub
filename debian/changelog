@@ -4,6 +4,8 @@ grub2 (2.04-1ubuntu26.4) UNRELEASED; urgency=medium
     grub-pc/install_devices_failed and grub-pc/install_devices_empty
     prompts in non-interactive mode. This enables surfacing upgrade errors
     to the users and/or automation. LP: #1891680
+  * postinst.in: Fixup postinst.in, to attempt grub-install upon explicit
+    dpkg-reconfigure grub-pc. LP: #1892526
 
  -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 08 Sep 2020 11:18:04 +0100
 

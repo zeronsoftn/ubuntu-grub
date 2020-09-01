@@ -538,7 +538,7 @@ case "$1" in
         elif running_in_container; then
           # Skip grub-install in containers.
           :
-        elif dpkg --compare-versions "$2" ge 2.04-1ubuntu26; then
+        elif dpkg --compare-versions "$2" ge 2.04-1ubuntu26 && [ -z "$DEBCONF_RECONFIGURE" ]; then
           # Avoid the possibility of breaking grub on SRU update
           # due to ABI change
           :
