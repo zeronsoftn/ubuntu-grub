@@ -1,3 +1,11 @@
+grub2 (2.04-1ubuntu30) UNRELEASED; urgency=medium
+
+  * postinst.in: do not attempt to call grub-install upon fresh install of
+    grub-pc because it it a job of installers to do that after fresh
+    install.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 03 Sep 2020 14:46:50 +0100
+
 grub2 (2.04-1ubuntu29) groovy; urgency=medium
 
   * grub-install: cherry-pick patch from grub-devel to make grub-install
