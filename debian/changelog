@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu26.4) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu26.4) focal; urgency=medium
 
   * grub-install: cherry-pick patch from grub-devel to make grub-install
     fault tolerant. Create backup of files in /boot/grub, and restore them
@@ -15,7 +15,7 @@ grub2 (2.04-1ubuntu26.4) UNRELEASED; urgency=medium
   * postinst.in: Fixup postinst.in, to attempt grub-install upon explicit
     dpkg-reconfigure grub-pc. LP: #1892526
 
- -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 08 Sep 2020 11:18:04 +0100
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 08 Sep 2020 11:24:35 +0100
 
 grub2 (2.04-1ubuntu26.3) focal; urgency=medium
 
