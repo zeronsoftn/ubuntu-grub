@@ -1,5 +1,8 @@
 grub2 (2.04-1ubuntu26.4) UNRELEASED; urgency=medium
 
+  * grub-install: cherry-pick patch from grub-devel to make grub-install
+    fault tolerant. Create backup of files in /boot/grub, and restore them
+    on failure to complete grub-install. LP: #1891680
   * postinst.in: do not exit successfully when failing to show critical
     grub-pc/install_devices_failed and grub-pc/install_devices_empty
     prompts in non-interactive mode. This enables surfacing upgrade errors
