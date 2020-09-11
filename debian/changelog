@@ -1,9 +1,9 @@
-grub2 (2.04-1ubuntu31) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu31) groovy; urgency=medium
 
   * ubuntu-linuxefi-arm64.patch: Restore arm64 parts of ubuntu-linuxefi.patch
     that got lost in the 2.04 rebase (LP: #1862279)
 
- -- Julian Andres Klode <juliank@ubuntu.com>  Fri, 11 Sep 2020 12:47:39 +0200
+ -- Julian Andres Klode <juliank@ubuntu.com>  Fri, 11 Sep 2020 17:49:50 +0200
 
 grub2 (2.04-1ubuntu30) groovy; urgency=medium
 
