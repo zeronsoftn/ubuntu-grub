@@ -150,7 +150,7 @@ free_params (void)
   if (loaded_image)
     {
       if (loaded_image->load_options)
-      grub_efi_free_pages ((grub_efi_physical_address_t)
+      grub_efi_free_pages ((grub_efi_physical_address_t)(grub_efi_uintn_t)
 			      loaded_image->load_options,
 			     GRUB_EFI_BYTES_TO_PAGES (loaded_image->load_options_size));
       loaded_image->load_options = NULL;

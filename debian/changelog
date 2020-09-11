@@ -1,3 +1,9 @@
+grub2 (2.04-1ubuntu32) UNRELEASED; urgency=medium
+
+  * ubuntu-linuxefi-arm64.patch: Fix build on armhf
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Fri, 11 Sep 2020 20:33:22 +0200
+
 grub2 (2.04-1ubuntu31) groovy; urgency=medium
 
   * ubuntu-linuxefi-arm64.patch: Restore arm64 parts of ubuntu-linuxefi.patch

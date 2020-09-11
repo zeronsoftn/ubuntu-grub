@@ -1,9 +1,13 @@
-From 3eca646b33623a6619c2ad71ad0151884c95e933 Mon Sep 17 00:00:00 2001
+From ea1b168fb36e6819f9ad435d16d9dd2f91d75b42 Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Fri, 11 Sep 2020 11:28:08 +0200
 Subject: Cherry-pick back parts of "Load arm with SB enabled."
 
 These parts got lost in our 2.04 rebase, let's add them back.
+
+Pick (grub_efi_physical_address_t)(grub_efi_uintn_t) cast from
+fedora-34 instead, it seems to cause compilation error on armhf
+to not do the (grub_efi_uintn_t) cast first.
 
 Bug-Ubuntu: https://bugs.launchpad.net/1862279
 Origin: vendor, https://github.com/rhboot/grub2/commit/2786ab864cf00c15123320671f653e9a36ba12b4
@@ -13,7 +17,7 @@ Patch-Name: ubuntu-linuxefi-arm64.patch
  1 file changed, 56 insertions(+), 47 deletions(-)
 
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index 3f5496fc55..8a1029be74 100644
+index 3f5496fc55..39ebcf5b52 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
 @@ -43,6 +43,8 @@ static int loaded;
@@ -75,7 +79,7 @@ index 3f5496fc55..8a1029be74 100644
 +  if (loaded_image)
 +    {
 +      if (loaded_image->load_options)
-+      grub_efi_free_pages ((grub_efi_physical_address_t)
++      grub_efi_free_pages ((grub_efi_physical_address_t)(grub_efi_uintn_t)
 +			      loaded_image->load_options,
 +			     GRUB_EFI_BYTES_TO_PAGES (loaded_image->load_options_size));
 +      loaded_image->load_options = NULL;
