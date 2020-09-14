@@ -1,3 +1,9 @@
+grub2 (2.04-1ubuntu33) UNRELEASED; urgency=medium
+
+  * Build-depend on fonts-dejavu-core, not obsolete ttf-dejavu-core.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Sun, 13 Sep 2020 23:48:34 -0700
+
 grub2 (2.04-1ubuntu32) groovy; urgency=medium
 
   * ubuntu-linuxefi-arm64.patch: Fix build on armhf
