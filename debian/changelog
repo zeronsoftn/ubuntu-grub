@@ -3,6 +3,7 @@ grub2 (2.04-1ubuntu35) UNRELEASED; urgency=medium
   * postinst.in, grub-multi-install: fix logic of skipping installing onto
     any device, if one chose to not install bootloader on any device. LP:
     #1896608
+  * Do not finalize params twice on arm64. LP: #1897819
 
  -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 28 Sep 2020 14:05:26 +0100
 
