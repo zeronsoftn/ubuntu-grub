@@ -1,3 +1,11 @@
+grub2 (2.04-1ubuntu26.6) UNRELEASED; urgency=medium
+
+  * postinst.in, grub-multi-install: fix logic of skipping installing onto
+    any device, if one chose to not install bootloader on any device. LP:
+    #1896608
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 28 Sep 2020 14:11:41 +0100
+
 grub2 (2.04-1ubuntu26.5) focal; urgency=medium
 
   * ubuntu-linuxefi-arm64.patch: Fix build on armhf (LP: #1862279)
