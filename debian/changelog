@@ -1,3 +1,11 @@
+grub2 (2.04-1ubuntu37) UNRELEASED; urgency=medium
+
+  * debian/patches/grub-install-backup-and-restore.patch: Fix-up the patch
+    to correctly initialyze the names of the modules to restore. LP:
+    #1907085
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 07 Dec 2020 10:44:30 +0000
+
 grub2 (2.04-1ubuntu36) hirsute; urgency=medium
 
   * Avoid "EFI stub: FIRMWARE BUG" message when booting >= 5.7 kernels
