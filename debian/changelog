@@ -3,6 +3,8 @@ grub2 (2.04-1ubuntu37) UNRELEASED; urgency=medium
   * debian/patches/grub-install-backup-and-restore.patch: Fix-up the patch
     to correctly initialyze the names of the modules to restore. LP:
     #1907085
+  * 10_linux: emit messages when initrdless boot is configured, attempted
+    and fails triggering fallback. LP: #1901553
 
  -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 07 Dec 2020 10:44:30 +0000
 
