@@ -111,3 +111,4 @@ ubuntu-linuxefi-arm64.patch
 ubuntu-dejavu-font-path.patch
 ubuntu-linuxefi-arm64-set-base-addr.patch
 tftp-rollover-block-counter.patch
+ubuntu-add-initrd-less-boot-messages.patch
