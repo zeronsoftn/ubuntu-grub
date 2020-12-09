@@ -176,6 +176,17 @@ override_dh_autoreconf:
 		< "debian/gettext-patches/$$patchname.patch"; \
 	done
 
+override_dh_autoreconf_clean:
+	[ ! -e debian/autoreconf.after ] || for patchname in \
+		0004-Use-SHELL-rather-than-bin-sh \
+		0003-Make-msgfmt-output-in-little-endian \
+		0002-Handle-gettext_printf-shell-function \
+		0001-Support-POTFILES-shell; do \
+		patch -d po -p3 -R \
+		< "debian/gettext-patches/$$patchname.patch"; \
+	done
+	dh_autoreconf_clean
+
 debian/stamps/configure-grub-common: debian/stamps/configure-grub-$(COMMON_PLATFORM)
 	touch $@
 

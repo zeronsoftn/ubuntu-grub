@@ -7,6 +7,8 @@ grub2 (2.04-1ubuntu37) UNRELEASED; urgency=medium
     and fails triggering fallback. LP: #1901553
   * grub-common.service: port init.d script to systemd unit. Add warning
     message, when initrdless boot fails triggering fallback. LP: #1901553
+  * debian/rules: undo po/ directory patching in
+    override_dh_autoreconf_clean.
 
  -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 07 Dec 2020 10:44:30 +0000
 
