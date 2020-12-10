@@ -15,6 +15,7 @@ grub2 (2.04-1ubuntu26.8) UNRELEASED; urgency=medium
     add support for link layer addresses of up to 32-bytes. LP: #1911439
   * rhboot-f34-make-pmtimer-tsc-calibration-fast.patch:
     speed up calibration time, especially when booting VMs. LP: #1911439
+  * minilzo: built using the distribution's minilzo. LP: #1911440
 
  -- Dimitri John Ledkov <xnox@ubuntu.com>  Wed, 13 Jan 2021 14:00:56 +0000
 
