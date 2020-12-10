@@ -10,6 +10,17 @@ grub2 (2.04-1ubuntu37) UNRELEASED; urgency=medium
   * debian/rules: undo po/ directory patching in
     override_dh_autoreconf_clean.
   * minilzo: built using the distribution's minilzo
+  * ubuntu-fix-reproducible-squashfs-test.patch: fix squashfs-test with
+    new squashfs-tools in hirsute.
+  * rhboot-f34-make-exit-take-a-return-code.patch,
+    rhboot-f34-dont-use-int-for-efi-status.patch: allow grub to exit
+    non-zero under EFI, this should allow falling back to the next
+    BootOrder BootEntry.
+  * rhboot-f34-tcp-add-window-scaling-support.patch: speed up netboot
+    transfer speed.
+  * rhboot-f34-support-non-ethernet.patch,
+    ubuntu-fixup-rhboot-f34-support-non-ethernet.patch: add support for
+    link layer addresses of up to 32-bytes.
 
  -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 10 Dec 2020 20:57:17 +0000
 
