@@ -9,8 +9,9 @@ grub2 (2.04-1ubuntu37) UNRELEASED; urgency=medium
     message, when initrdless boot fails triggering fallback. LP: #1901553
   * debian/rules: undo po/ directory patching in
     override_dh_autoreconf_clean.
+  * minilzo: built using the distribution's minilzo
 
- -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 07 Dec 2020 10:44:30 +0000
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 10 Dec 2020 20:57:17 +0000
 
 grub2 (2.04-1ubuntu36) hirsute; urgency=medium
 
