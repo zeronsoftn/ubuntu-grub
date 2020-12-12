@@ -15,7 +15,7 @@ Signed-off-by: Dimitri John Ledkov <xnox@ubuntu.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/tests/util/grub-fs-tester.in b/tests/util/grub-fs-tester.in
-index bc14a05ca..26989d58c 100644
+index bc14a05ca3..26989d58c7 100644
 --- a/tests/util/grub-fs-tester.in
 +++ b/tests/util/grub-fs-tester.in
 @@ -1048,8 +1048,8 @@ for LOGSECSIZE in $(range "$MINLOGSECSIZE" "$MAXLOGSECSIZE" 1); do

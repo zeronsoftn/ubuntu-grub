@@ -118,3 +118,4 @@ rhboot-f34-dont-use-int-for-efi-status.patch
 rhboot-f34-tcp-add-window-scaling-support.patch
 rhboot-f34-support-non-ethernet.patch
 ubuntu-fixup-rhboot-f34-support-non-ethernet.patch
+ubuntu-fixup-rhboot-f34-support-non-ethernet-2.patch
