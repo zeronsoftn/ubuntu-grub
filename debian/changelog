@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu37) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu37) hirsute; urgency=medium
 
   * debian/patches/grub-install-backup-and-restore.patch: Fix-up the patch
     to correctly initialyze the names of the modules to restore. LP:
@@ -25,7 +25,7 @@ grub2 (2.04-1ubuntu37) UNRELEASED; urgency=medium
   * rhboot-f34-make-pmtimer-tsc-calibration-fast.patch:
     speed up calibration time, especially when booting VMs.
 
- -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 10 Dec 2020 20:57:17 +0000
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Sat, 12 Dec 2020 00:50:47 +0000
 
 grub2 (2.04-1ubuntu36) hirsute; urgency=medium
 
