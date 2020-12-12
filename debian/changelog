@@ -19,8 +19,9 @@ grub2 (2.04-1ubuntu37) UNRELEASED; urgency=medium
   * rhboot-f34-tcp-add-window-scaling-support.patch: speed up netboot
     transfer speed.
   * rhboot-f34-support-non-ethernet.patch,
-    ubuntu-fixup-rhboot-f34-support-non-ethernet.patch: add support for
-    link layer addresses of up to 32-bytes.
+    ubuntu-fixup-rhboot-f34-support-non-ethernet.patch,
+    ubuntu-fixup-rhboot-f34-support-non-ethernet-2.patch:
+    add support for link layer addresses of up to 32-bytes.
 
  -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 10 Dec 2020 20:57:17 +0000
 
