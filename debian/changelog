@@ -22,6 +22,8 @@ grub2 (2.04-1ubuntu37) UNRELEASED; urgency=medium
     ubuntu-fixup-rhboot-f34-support-non-ethernet.patch,
     ubuntu-fixup-rhboot-f34-support-non-ethernet-2.patch:
     add support for link layer addresses of up to 32-bytes.
+  * rhboot-f34-make-pmtimer-tsc-calibration-fast.patch:
+    speed up calibration time, especially when booting VMs.
 
  -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 10 Dec 2020 20:57:17 +0000
 
