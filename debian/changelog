@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu26.8) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu26.8) focal; urgency=medium
 
   * debian/patches/grub-install-backup-and-restore.patch: Fix-up the patch
     to correctly initialyze the names of the modules to restore. LP:
@@ -17,7 +17,7 @@ grub2 (2.04-1ubuntu26.8) UNRELEASED; urgency=medium
     speed up calibration time, especially when booting VMs. LP: #1911439
   * minilzo: built using the distribution's minilzo. LP: #1911440
 
- -- Dimitri John Ledkov <xnox@ubuntu.com>  Wed, 13 Jan 2021 14:00:56 +0000
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Wed, 13 Jan 2021 14:12:38 +0000
 
 grub2 (2.04-1ubuntu26.7) focal; urgency=medium
 
