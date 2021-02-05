@@ -1,4 +1,4 @@
-From 7cb405298d3729d88b4e4ebc46ca1fc9b644bd6b Mon Sep 17 00:00:00 2001
+From 2d122d2439510b17c4f5235e65903d9524abd6cb Mon Sep 17 00:00:00 2001
 From: Chris Coulson <chris.coulson@canonical.com>
 Date: Mon, 1 Jun 2020 14:03:37 +0100
 Subject: UBUNTU: disk/loopback: Don't verify loopback images
@@ -22,7 +22,7 @@ Patch-Name: ubuntu-dont-verify-loopback-images.patch
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/grub-core/disk/loopback.c b/grub-core/disk/loopback.c
-index ccb4b167cc..210201d22d 100644
+index ccb4b167c..210201d22 100644
 --- a/grub-core/disk/loopback.c
 +++ b/grub-core/disk/loopback.c
 @@ -86,7 +86,8 @@ grub_cmd_loopback (grub_extcmd_context_t ctxt, int argc, char **args)

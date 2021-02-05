@@ -144,7 +144,7 @@ validate_system_dataset() {
         candidate_path="${first_mntdir}/.zfs/snapshot/${snapshot_name}"
     fi
 
-    if [ -n "$(ls ${candidate_path} 2>/dev/null)" ]; then
+    if [ -n "$(ls "${candidate_path}" 2>/dev/null)" ]; then
         echo "${candidate_path}"
         return
     else
@@ -223,7 +223,7 @@ get_system_directory() {
         fi
         candidate_path="${first_mntdir}/.zfs/snapshot/${snapshot_name}/${directory}"
     fi
-    if [ -n "$(ls ${candidate_path} 2>/dev/null)" ]; then
+    if [ -n "$(ls "${candidate_path"} 2>/dev/null)" ]; then
         echo "${candidate_path}"
         return
     fi
@@ -330,7 +330,7 @@ try_default_layout_bpool() {
 
     dataset_basename="${root_dataset_path##*/}"
     candidate_dataset="bpool/BOOT/${dataset_basename}"
-    dataset_properties="$(zfs get -H mountpoint,canmount ${candidate_dataset} | cut -f3 | paste -sd ' ')"
+    dataset_properties="$(zfs get -H mountpoint,canmount "${candidate_dataset}" 2>/dev/null | cut -f3 | paste -sd ' ')"
     if [ -z "${dataset_properties}" ]; then
         return
     fi
@@ -419,10 +419,19 @@ get_dataset_info() {
 
     initrd_list=""
     kernel_list=""
-    list=$(find "${boot_dir}" -maxdepth 1 -type f -regex '.*/\(vmlinuz\|vmlinux\|kernel\)-.*')
-    while [ "x$list" != "x" ] ; do
-        linux=`version_find_latest $list`
-        list=`echo $list | tr ' ' '\n' | fgrep -vx "$linux" | tr '\n' ' '`
+    candidate_kernel_list="$(find "${boot_dir}" -maxdepth 1 -type f -regex '.*/\(vmlinuz\|vmlinux\|kernel\)-.*')"
+    while [ -n "${candidate_kernel_list}" ] ; do
+        list_basename="$(echo "${candidate_kernel_list}" | sed -e 's#.*/##')"
+        linux=$(version_find_latest ${list_basename})
+        linux=$(echo "${candidate_kernel_list}" | while read k; do
+            if [ "$(basename "${k}")" = "${linux}" ]; then
+                echo -n "${k}"
+                break
+            fi
+        done)
+        # || true to not abort even if candidate_kernel_list is empty on last entry
+        candidate_kernel_list="$(echo "${candidate_kernel_list}" | fgrep -vx "${linux}"||true)"
+
         if ! grub_file_is_not_garbage "${linux}" ; then
             continue
         fi
@@ -486,7 +495,7 @@ get_dataset_info() {
     esac
 
     # for zsys snapshots: we want to know which kernel we successful last booted with
-    last_booted_kernel=$(zfs get -H com.ubuntu.zsys:last-booted-kernel "${dataset}" | awk '{print $3}')
+    last_booted_kernel=$(zfs get -H com.ubuntu.zsys:last-booted-kernel "${dataset}" | awk -v FS='\t' '{print $3}')
 
     # snapshot: last_used is dataset creation time
     if [ "${is_snapshot}" = "true" ]; then
@@ -521,7 +530,7 @@ get_dataset_info() {
     umount "${mntdir}" || true
     # We needed to look in / for snapshots on root dataset, umount the snapshot for etc before zfs lazily unmount it
     case "${etc_dir}" in /.zfs/snapshot/*/etc)
-        snapshot_path="$(findmnt -n -o TARGET -T ${etc_dir})"
+        snapshot_path="$(findmnt -n -o TARGET -T "${etc_dir}")"
         umount "${snapshot_path}" || true
         ;;
     esac
@@ -535,12 +544,13 @@ bootlist() {
 
     for dataset in $(get_root_datasets); do
         # get information from current root dataset
-        boot_list="${boot_list}$(get_dataset_info ${dataset} ${mntdir})\n"
+        boot_list="${boot_list}$(get_dataset_info "${dataset}" ${mntdir})\n"
 
         # get information from snapshots of this root dataset
-        for snapshot_dataset in $(zfs list -H -o name -t snapshot "${dataset}"); do
-            boot_list="${boot_list}$(get_dataset_info ${snapshot_dataset} ${mntdir})\n"
-        done
+        snapshots="$(zfs list -H -o name -t snapshot "${dataset}"|while read snapshot_dataset; do
+            get_dataset_info "${snapshot_dataset}" ${mntdir}
+        done)"
+        [ -n "${snapshots}" ] && boot_list="${boot_list}${snapshots}\n"
     done
     echo "${boot_list}"
 }
@@ -682,7 +692,7 @@ history_entries_meta() {
             # get initrd and pop to the next one
             candidate_initrd="$1"; shift
 
-            kernel_basename=$(basename "${k}")
+            kernel_basename=$(basename -- "${k}")
             if [ "${kernel_basename}" = "${last_used_kernel}" ]; then
                 kernel="${k}"
                 initrd="${candidate_initrd}"
@@ -861,12 +871,12 @@ zfs_linux_entry () {
         linux_default_args="${GRUB_CMDLINE_LINUX_RECOVERY} ${GRUB_CMDLINE_LINUX}"
     fi
 
-    echo "${submenu_indentation}	linux	${kernel} root=ZFS=${dataset} ro ${linux_default_args} ${kernel_additional_args}"
+    echo "${submenu_indentation}	linux	\"${kernel}\" root=ZFS=\"${dataset}\" ro ${linux_default_args} ${kernel_additional_args}"
 
     if [ "${quiet_boot}" = 0 ] || [ "${type}" != simple ]; then
         echo "${submenu_indentation}	echo '$(gettext_printf "Loading initial ramdisk ..." | grub_quote)'"
     fi
-    echo "${submenu_indentation}	initrd	${initrd}"
+    echo "${submenu_indentation}	initrd	\"${initrd}\""
     echo "${submenu_indentation}}"
 }
 

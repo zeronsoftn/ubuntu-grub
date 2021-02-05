@@ -1,4 +1,4 @@
-From f528124f98fded6ffb8a906593eb206db1e3c38b Mon Sep 17 00:00:00 2001
+From 45638bfd986858a7239cfe34827dfdc9ea63d2ba Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Fri, 11 Sep 2020 11:28:08 +0200
 Subject: Cherry-pick back parts of "Load arm with SB enabled."
@@ -17,7 +17,7 @@ Patch-Name: ubuntu-linuxefi-arm64.patch
  1 file changed, 56 insertions(+), 50 deletions(-)
 
 diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
-index 3f5496fc55..130e9c09b4 100644
+index 3f5496fc5..130e9c09b 100644
 --- a/grub-core/loader/arm64/linux.c
 +++ b/grub-core/loader/arm64/linux.c
 @@ -43,6 +43,8 @@ static int loaded;

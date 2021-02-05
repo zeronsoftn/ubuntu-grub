@@ -1,4 +1,4 @@
-From 3a80091a585e71363cd4f62f93fd48e5631362d2 Mon Sep 17 00:00:00 2001
+From e562020b27cf78d5e46f989fd258e3bdd32de540 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:44:59 -0400
 Subject: don't use int for efi status
@@ -10,7 +10,7 @@ Patch-Name: rhboot-f34-dont-use-int-for-efi-status.patch
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/kern/efi/efi.c b/grub-core/kern/efi/efi.c
-index d4a4be57cb..7cf003f713 100644
+index d4a4be57c..7cf003f71 100644
 --- a/grub-core/kern/efi/efi.c
 +++ b/grub-core/kern/efi/efi.c
 @@ -167,7 +167,7 @@ grub_reboot (void)

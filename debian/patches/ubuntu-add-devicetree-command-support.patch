@@ -1,4 +1,4 @@
-From 56ec016fe65a634c583cd347fc4e90992cb0c111 Mon Sep 17 00:00:00 2001
+From ee8077f7be39f0b92c192c0f3dec44634d628576 Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <xnox@ubuntu.com>
 Date: Wed, 22 May 2019 19:57:29 +0100
 Subject: Add devicetree command, if a dtb is present.
@@ -14,7 +14,7 @@ Patch-Name: ubuntu-add-devicetree-command-support.patch
  1 file changed, 19 insertions(+)
 
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index af1e096bd6..bbf5d73e39 100644
+index af1e096bd..bbf5d73e3 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -254,6 +254,17 @@ EOF

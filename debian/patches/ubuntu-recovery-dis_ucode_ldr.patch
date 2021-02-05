@@ -1,4 +1,4 @@
-From 398371c71cd52b6c48fa1d888903bd8a85682ec0 Mon Sep 17 00:00:00 2001
+From 110801930d0a2e16ba36ece02ba4e8df9f4f9ce7 Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Fri, 19 Jun 2020 12:57:19 +0200
 Subject: Pass dis_ucode_ldr to kernel for recovery mode
@@ -19,7 +19,7 @@ Patch-Name: ubuntu-recovery-dis_ucode_ldr.patch
  2 files changed, 19 insertions(+), 9 deletions(-)
 
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index 14a89ba13d..49e627228f 100644
+index 14a89ba13..49e627228 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -334,6 +334,10 @@ case "$machine" in
@@ -34,7 +34,7 @@ index 14a89ba13d..49e627228f 100644
  prepare_root_cache=
  boot_device_id=
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 712d832802..d9b79e29a7 100755
+index 7109585b8..e828d1bb1 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -41,6 +41,16 @@ imported_pools=""
@@ -69,8 +69,8 @@ index 712d832802..d9b79e29a7 100755
 -
      initrd_list=""
      kernel_list=""
-     list=$(find "${boot_dir}" -maxdepth 1 -type f -regex '.*/\(vmlinuz\|vmlinux\|kernel\)-.*')
-@@ -907,6 +908,11 @@ generate_grub_menu() {
+     candidate_kernel_list="$(find "${boot_dir}" -maxdepth 1 -type f -regex '.*/\(vmlinuz\|vmlinux\|kernel\)-.*')"
+@@ -917,6 +918,11 @@ generate_grub_menu() {
          GRUB_CMDLINE_LINUX_RECOVERY="${GRUB_CMDLINE_LINUX_RECOVERY} nomodeset"
      fi
  

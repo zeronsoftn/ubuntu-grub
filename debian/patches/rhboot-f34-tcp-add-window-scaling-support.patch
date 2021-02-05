@@ -1,4 +1,4 @@
-From e236246964433c2acd448707bdcaf0197d97e69d Mon Sep 17 00:00:00 2001
+From e9a59b8ecde102d06f0d35881778818c3d0b9aff Mon Sep 17 00:00:00 2001
 From: Josef Bacik <jbacik@fb.com>
 Date: Wed, 12 Aug 2015 08:57:55 -0700
 Subject: tcp: add window scaling support
@@ -20,7 +20,7 @@ Patch-Name: rhboot-f34-tcp-add-window-scaling-support.patch
  1 file changed, 29 insertions(+), 13 deletions(-)
 
 diff --git a/grub-core/net/tcp.c b/grub-core/net/tcp.c
-index e8ad34b84d..7d4b822626 100644
+index e8ad34b84..7d4b82262 100644
 --- a/grub-core/net/tcp.c
 +++ b/grub-core/net/tcp.c
 @@ -106,6 +106,18 @@ struct tcphdr

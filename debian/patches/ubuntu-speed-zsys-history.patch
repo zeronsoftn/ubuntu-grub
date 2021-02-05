@@ -1,4 +1,4 @@
-From 9b0c52034a7de1c8749706ceef878b72f04ed115 Mon Sep 17 00:00:00 2001
+From 8f605e784efe8fe26e7ff60caf4d82021a07c7de Mon Sep 17 00:00:00 2001
 From: Didier Roche <didrocks@ubuntu.com>
 Date: Mon, 13 Apr 2020 15:12:21 +0200
 Subject: UBUNTU: Improve performance in bootmenu for zsys
@@ -17,10 +17,10 @@ Patch-Name: ubuntu-speed-zsys-history.patch
  1 file changed, 56 insertions(+), 21 deletions(-)
 
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 4c48abef01..712d832802 100755
+index fe5f9c037..7109585b8 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
-@@ -803,9 +803,10 @@ zfs_linux_entry () {
+@@ -813,9 +813,10 @@ zfs_linux_entry () {
      boot_device="$5"
      initrd="$6"
      kernel="$7"
@@ -33,7 +33,7 @@ index 4c48abef01..712d832802 100755
      submenu_indentation="$(printf %${submenu_level}s | tr " " "${grub_tab}")"
  
      echo "${submenu_indentation}menuentry '$(echo "${title}" | grub_quote)' ${CLASS} \${menuentry_id_option} 'gnulinux-${dataset}-${kernel_version}' {"
-@@ -840,7 +841,15 @@ zfs_linux_entry () {
+@@ -850,7 +851,15 @@ zfs_linux_entry () {
      echo "${submenu_indentation}	insmod gzio"
      echo "${submenu_indentation}	if [ \"\${grub_platform}\" = xen ]; then insmod xzio; insmod lzopio; fi"
  
@@ -50,7 +50,7 @@ index 4c48abef01..712d832802 100755
  
      if [ "${quiet_boot}" = 0 ] || [ "${type}" != simple ]; then
          echo "${submenu_indentation}	echo $(gettext_printf "Loading Linux %s ..." ${kernel_version} | grub_quote)"
-@@ -908,6 +917,40 @@ generate_grub_menu() {
+@@ -918,6 +927,40 @@ generate_grub_menu() {
  
      print_menu_prologue
  
@@ -91,7 +91,7 @@ index 4c48abef01..712d832802 100755
      # IFS is set to TAB (ASCII 0x09)
      echo "${menu_metadata}" |
      {
-@@ -938,7 +981,8 @@ generate_grub_menu() {
+@@ -948,7 +991,8 @@ generate_grub_menu() {
                      main_dataset_name="${name}"
                      main_dataset="${dataset}"
  
@@ -101,7 +101,7 @@ index 4c48abef01..712d832802 100755
                      at_least_one_entry=1
                  ;;
                  advanced)
-@@ -954,12 +998,12 @@ generate_grub_menu() {
+@@ -964,12 +1008,12 @@ generate_grub_menu() {
  
                      kernel_version=$(basename "${kernel}" | sed -e "s,^[^0-9]*-,,g")
                      title="$(gettext_printf "%s%s, with Linux %s" "${last_booted_kernel_marker}" "${name}" "${kernel_version}")"
@@ -116,7 +116,7 @@ index 4c48abef01..712d832802 100755
                      fi
                      at_least_one_entry=1
                  ;;
-@@ -977,33 +1021,24 @@ generate_grub_menu() {
+@@ -987,33 +1031,24 @@ generate_grub_menu() {
                      fi
                      echo "	submenu '${title}' \${menuentry_id_option} 'gnulinux-history-${dataset}' {"
  

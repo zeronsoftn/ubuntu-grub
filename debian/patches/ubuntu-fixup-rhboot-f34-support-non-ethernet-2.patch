@@ -1,4 +1,4 @@
-From 72cff34035e5ba35d01fc6cbc00f3b9b135ff5a6 Mon Sep 17 00:00:00 2001
+From 255607e2b8b027d65875442a78ac8a5e41ac1220 Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <xnox@ubuntu.com>
 Date: Sat, 12 Dec 2020 00:21:15 +0000
 Subject: UBUNTU: fixup unaligned access.
@@ -15,7 +15,7 @@ Patch-Name: ubuntu-fixup-rhboot-f34-support-non-ethernet-2.patch
  1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/grub-core/net/ethernet.c b/grub-core/net/ethernet.c
-index 9aae83a5eb..01cd21785a 100644
+index 9aae83a5e..01cd21785 100644
 --- a/grub-core/net/ethernet.c
 +++ b/grub-core/net/ethernet.c
 @@ -74,12 +74,12 @@ send_ethernet_packet (struct grub_net_network_level_interface *inf,
