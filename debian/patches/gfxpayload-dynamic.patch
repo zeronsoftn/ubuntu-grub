@@ -1,4 +1,4 @@
-From 6e472c282b7798a01a24815bc31926d188ea8c25 Mon Sep 17 00:00:00 2001
+From 99430fd454a67498bbff164d6b9ce46604a92a4d Mon Sep 17 00:00:00 2001
 From: Evan Broder <evan@ebroder.net>
 Date: Mon, 13 Jan 2014 12:13:29 +0000
 Subject: Add configure option to enable gfxpayload=keep dynamically
@@ -290,7 +290,7 @@ index 2be66c702..09393c28e 100644
  # yet, so it's empty. In a submenu it will be equal to '\t' (one tab).
  submenu_indentation=""
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 4f81f97e2..1193f342e 100755
+index a7ec94099..ceca548e9 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -22,6 +22,7 @@ datarootdir="@datarootdir@"
@@ -301,7 +301,7 @@ index 4f81f97e2..1193f342e 100755
  
  . "${pkgdatadir}/grub-mkconfig_lib"
  
-@@ -726,6 +727,41 @@ generate_grub_menu_metadata() {
+@@ -732,6 +733,41 @@ generate_grub_menu_metadata() {
      done
  }
  
@@ -343,7 +343,7 @@ index 4f81f97e2..1193f342e 100755
  # Cache for prepare_grub_to_access_device call
  # $1: boot_device
  # $2: submenu_level
-@@ -786,9 +822,11 @@ zfs_linux_entry () {
+@@ -792,9 +828,11 @@ zfs_linux_entry () {
          if [ "${GRUB_GFXPAYLOAD_LINUX}" != "text" ]; then
              echo "${submenu_indentation}	load_video"
          fi
@@ -358,7 +358,7 @@ index 4f81f97e2..1193f342e 100755
      fi
  
      echo "${submenu_indentation}	insmod gzio"
-@@ -851,6 +889,8 @@ generate_grub_menu() {
+@@ -858,6 +896,8 @@ generate_grub_menu() {
          GRUB_CMDLINE_LINUX_RECOVERY="${GRUB_CMDLINE_LINUX_RECOVERY} nomodeset"
      fi
  

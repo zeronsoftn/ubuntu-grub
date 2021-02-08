@@ -1,4 +1,4 @@
-From a68e2c54dc7f5daea5ba5d6687775e876650e9a2 Mon Sep 17 00:00:00 2001
+From 120a161752a16d5f5330879da8795ffcf9839bf2 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 15 Jun 2020 12:26:01 -0400
 Subject: calloc: Use calloc() at most places

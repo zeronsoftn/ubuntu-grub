@@ -1,4 +1,4 @@
-From d8d16760e51578365c575f1d45c9045e4c79f333 Mon Sep 17 00:00:00 2001
+From c55e8cdd0186db1d4a3965a6bb6c538e796c20dd Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <xnox@ubuntu.com>
 Date: Mon, 24 Feb 2020 20:29:53 +0000
 Subject: uefi-firmware: rename fwsetup menuentry to UEFI Firmware Settings

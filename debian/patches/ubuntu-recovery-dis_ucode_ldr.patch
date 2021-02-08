@@ -1,4 +1,4 @@
-From 110801930d0a2e16ba36ece02ba4e8df9f4f9ce7 Mon Sep 17 00:00:00 2001
+From 9660ce712c83a48d92aed98b203a7aaa445a566f Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Fri, 19 Jun 2020 12:57:19 +0200
 Subject: Pass dis_ucode_ldr to kernel for recovery mode
@@ -34,7 +34,7 @@ index 14a89ba13..49e627228 100644
  prepare_root_cache=
  boot_device_id=
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 7109585b8..e828d1bb1 100755
+index 556cc5ecf..8f66fefe6 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -41,6 +41,16 @@ imported_pools=""
@@ -70,7 +70,7 @@ index 7109585b8..e828d1bb1 100755
      initrd_list=""
      kernel_list=""
      candidate_kernel_list="$(find "${boot_dir}" -maxdepth 1 -type f -regex '.*/\(vmlinuz\|vmlinux\|kernel\)-.*')"
-@@ -917,6 +918,11 @@ generate_grub_menu() {
+@@ -924,6 +925,11 @@ generate_grub_menu() {
          GRUB_CMDLINE_LINUX_RECOVERY="${GRUB_CMDLINE_LINUX_RECOVERY} nomodeset"
      fi
  

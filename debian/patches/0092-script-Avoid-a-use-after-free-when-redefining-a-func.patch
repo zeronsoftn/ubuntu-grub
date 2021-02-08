@@ -1,4 +1,4 @@
-From 60ed0c11995488c7fef4de892404558eb021c9d8 Mon Sep 17 00:00:00 2001
+From d50837ee1b6bafc9ceec86e4bb47d0e976f1bc43 Mon Sep 17 00:00:00 2001
 From: Chris Coulson <chris.coulson@canonical.com>
 Date: Fri, 10 Jul 2020 14:41:45 +0100
 Subject: script: Avoid a use-after-free when redefining a function during

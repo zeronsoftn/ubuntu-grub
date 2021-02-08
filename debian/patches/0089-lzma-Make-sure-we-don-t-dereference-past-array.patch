@@ -1,4 +1,4 @@
-From 7ed04f1a50eb84cafc6b5c4f53cae64ca96d2455 Mon Sep 17 00:00:00 2001
+From 5aa49eb4c0c65fdb38d012cb01ed8aaeedd62022 Mon Sep 17 00:00:00 2001
 From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
 Date: Thu, 9 Jul 2020 03:05:23 +0000
 Subject: lzma: Make sure we don't dereference past array

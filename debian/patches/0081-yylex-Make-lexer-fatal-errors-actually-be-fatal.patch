@@ -1,4 +1,4 @@
-From c77f0d14115a1326eb2b971c791aab3b599a5cbe Mon Sep 17 00:00:00 2001
+From 41e27a5c28fd9a9ad2c72fec483bb0478c5dea00 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 15 Apr 2020 15:45:02 -0400
 Subject: yylex: Make lexer fatal errors actually be fatal

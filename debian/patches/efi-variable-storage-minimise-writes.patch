@@ -1,4 +1,4 @@
-From 393b80bff97450e19d41dfcd029bcde750628cb3 Mon Sep 17 00:00:00 2001
+From e610cdc423320419df1767fa6f1aa37535abfff2 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 11 Mar 2019 11:17:43 +0000
 Subject: Minimise writes to EFI variable storage

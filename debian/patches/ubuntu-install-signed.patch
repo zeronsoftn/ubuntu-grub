@@ -1,4 +1,4 @@
-From 3d53bf6d675465affd5148be761a8ef75bead09c Mon Sep 17 00:00:00 2001
+From 33bc504e84b19c8eba65f81d1ca87e6910e8cfa0 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:22 +0000
 Subject: UBUNTU: Install signed images if UEFI Secure Boot is enabled

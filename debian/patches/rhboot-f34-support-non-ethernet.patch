@@ -1,4 +1,4 @@
-From efd33169b9719897ca42ebc26b2994b294022d16 Mon Sep 17 00:00:00 2001
+From 42be2555ecd4c4288faa1d7a0c1ac8acccf1f11a Mon Sep 17 00:00:00 2001
 From: Andrzej Kacprowski <andrzej.kacprowski@intel.com>
 Date: Wed, 10 Jul 2019 15:22:29 +0200
 Subject: Add support for non-Ethernet network cards

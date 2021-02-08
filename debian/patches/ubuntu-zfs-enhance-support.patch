@@ -1,4 +1,4 @@
-From 6b342f6ac8c13133cb0713866a29e9eda089d9bd Mon Sep 17 00:00:00 2001
+From 3da2a097c174bf29ba8e1ea7b83a649a36e10a39 Mon Sep 17 00:00:00 2001
 From: Didier Roche <didrocks@ubuntu.com>
 Date: Fri, 12 Jul 2019 11:06:06 -0400
 Subject: UBUNTU: Enhance ZFS grub support
@@ -22,8 +22,8 @@ Signed-off-by: Didier Roche <didier.roche@canonical.com>
 ---
  Makefile.util.def           |   7 +
  util/grub.d/10_linux.in     |   4 +
- util/grub.d/10_linux_zfs.in | 974 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 985 insertions(+)
+ util/grub.d/10_linux_zfs.in | 981 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 992 insertions(+)
  create mode 100755 util/grub.d/10_linux_zfs.in
 
 diff --git a/Makefile.util.def b/Makefile.util.def
@@ -61,10 +61,10 @@ index 4532266be..a75096609 100644
  	LINUX_ROOT_DEVICE="ZFS=${rpool}${bootfs%/}"
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
 new file mode 100755
-index 000000000..219280022
+index 000000000..7e90fc034
 --- /dev/null
 +++ b/util/grub.d/10_linux_zfs.in
-@@ -0,0 +1,974 @@
+@@ -0,0 +1,981 @@
 +#! /bin/sh
 +set -e
 +
@@ -275,7 +275,7 @@ index 000000000..219280022
 +        fi
 +        candidate_path="${first_mntdir}/.zfs/snapshot/${snapshot_name}/${directory}"
 +    fi
-+    if [ -n "$(ls "${candidate_path"} 2>/dev/null)" ]; then
++    if [ -n "$(ls "${candidate_path}" 2>/dev/null)" ]; then
 +        echo "${candidate_path}"
 +        return
 +    fi
@@ -649,8 +649,10 @@ index 000000000..219280022
 +
 +    # We must align initrds with kernels.
 +    # Adds initrds to the stack then pop them 1 by 1 as we process the kernels
-+    set -- $(get_field_from_entry "${main_entry}" 7 | tr "|" " ")
-+    for kernel in $(get_field_from_entry "${main_entry}" 8 | tr "|" " "); do
++    oldIFS="$IFS"
++    export IFS='|'
++    set -- $(get_field_from_entry "${main_entry}" 7)
++    for kernel in $(get_field_from_entry "${main_entry}" 8); do
 +        # get initrd and pop to the next one
 +        initrd="$1"; shift
 +
@@ -662,6 +664,7 @@ index 000000000..219280022
 +
 +        echo "${main_entry}" | awk "BEGIN{ FS=\"\t\"; OFS=\"\t\"}    {print \$3, \$2, \"advanced\", \$4, \$1, \$6, \"$initrd\", \"$kernel\", \"$was_last_used_kernel\"}"
 +    done
++    IFS="$oldIFS"
 +}
 +
 +# Get history metadata
@@ -727,8 +730,10 @@ index 000000000..219280022
 +
 +        # We must align initrds with kernels.
 +        # Adds initrds to the stack then pop them 1 by 1 as we process the kernels
-+        set -- $(get_field_from_entry "${entry}" 7 | tr "|" " ")
-+        for k in $(get_field_from_entry "${entry}" 8|tr "|" " "); do
++        oldIFS="$IFS"
++        export IFS='|'
++        set -- $(get_field_from_entry "${entry}" 7)
++        for k in $(get_field_from_entry "${entry}" 8); do
 +            # get initrd and pop to the next one
 +            candidate_initrd="$1"; shift
 +
@@ -739,6 +744,7 @@ index 000000000..219280022
 +                break
 +            fi
 +        done
++        IFS="$oldIFS"
 +
 +        echo "${entry}" | awk "BEGIN{ FS=\"\t\"; OFS=\"\t\"}    {print \$3, \$2, \"history\", \"$name\", \$1, \$6, \"$initrd\", \"$kernel\"}"
 +    done
@@ -843,7 +849,8 @@ index 000000000..219280022
 +        linux_default_args="single ${GRUB_CMDLINE_LINUX}"
 +    fi
 +
-+    echo "${submenu_indentation}	linux	\"${kernel}\" root=ZFS=\"${dataset}\" ro ${linux_default_args} ${kernel_additional_args}"
++    # echo in echo trims end of line spaces
++    echo "${submenu_indentation}	linux	\"${kernel}\" root=ZFS=\"${dataset}\" ro $(echo ${linux_default_args} ${kernel_additional_args})"
 +
 +    echo "${submenu_indentation}	echo '$(gettext_printf "Loading initial ramdisk ..." | grub_quote)'"
 +    echo "${submenu_indentation}	initrd	\"${initrd}\""

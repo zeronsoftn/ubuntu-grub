@@ -1,4 +1,4 @@
-From 7a9ba34db55671be26590e10b8dbd11b49718797 Mon Sep 17 00:00:00 2001
+From 80d39f8063ec2c79ea1e2d21dd6d76a5fbed28e8 Mon Sep 17 00:00:00 2001
 From: Chris Coulson <chris.coulson@canonical.com>
 Date: Wed, 11 Mar 2020 16:46:00 +0100
 Subject: ubuntu: Make the linux command in EFI grub always try EFI handover

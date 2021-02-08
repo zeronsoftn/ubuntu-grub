@@ -1,4 +1,4 @@
-From 08313d05ad9a3fbfc6461ca77845eac9b44f0607 Mon Sep 17 00:00:00 2001
+From f40bc577504f695042dd85f3611ca3fe0df59e53 Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Thu, 8 Feb 2018 10:48:37 +0100
 Subject: UBUNTU: Show only upstream version, hide rest in package_version

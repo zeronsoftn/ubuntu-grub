@@ -1,4 +1,4 @@
-From 2ad1d9b23e15a73e076fa92d67f7b8106ab6f348 Mon Sep 17 00:00:00 2001
+From d6a82ab1fe945cb839713a427c8b7628f0d9be7f Mon Sep 17 00:00:00 2001
 From: Mario Limonciello <Mario_Limonciello@dell.com>
 Date: Mon, 13 Jan 2014 12:13:14 +0000
 Subject: Remove GNU/Linux from default distributor string for Ubuntu
@@ -37,10 +37,10 @@ index fcd303387..19e4df4ad 100644
  fi
  
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 270235035..bfa74b6c0 100755
+index 98b3e151a..f2e34ec66 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
-@@ -800,7 +800,14 @@ generate_grub_menu() {
+@@ -807,7 +807,14 @@ generate_grub_menu() {
      if [ "${GRUB_DISTRIBUTOR}" = "" ] ; then
          OS=GNU/Linux
      else

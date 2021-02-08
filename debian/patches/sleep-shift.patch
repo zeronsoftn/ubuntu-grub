@@ -1,4 +1,4 @@
-From 549e7d146493422f500946f9da1ca1a807062eb4 Mon Sep 17 00:00:00 2001
+From 3b8960516bc54061dfb9dad6f91d5a89b4c1e8fa Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:23 +0000
 Subject: Allow Shift to interrupt 'sleep --interruptible'

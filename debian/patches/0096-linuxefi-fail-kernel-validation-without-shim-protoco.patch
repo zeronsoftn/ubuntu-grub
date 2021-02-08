@@ -1,4 +1,4 @@
-From edd647f568559cce8ee9b3fc38dbbe4499968ff3 Mon Sep 17 00:00:00 2001
+From eb1e5a4f34b05f94e4637c7f85cd22dda7a2cc09 Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <xnox@ubuntu.com>
 Date: Wed, 22 Jul 2020 11:31:43 +0100
 Subject: linuxefi: fail kernel validation without shim protocol.

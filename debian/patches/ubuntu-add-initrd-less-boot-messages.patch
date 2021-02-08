@@ -1,4 +1,4 @@
-From f02b971046dd042972eef22ceb125607237444f6 Mon Sep 17 00:00:00 2001
+From 2091abd5ad6154cab32bd83df03d7f9cda8a5d4a Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <xnox@ubuntu.com>
 Date: Mon, 26 Oct 2020 11:38:34 +0000
 Subject: Ubuntu: add initrd-less-boot informational messages

@@ -223,7 +223,7 @@ get_system_directory() {
         fi
         candidate_path="${first_mntdir}/.zfs/snapshot/${snapshot_name}/${directory}"
     fi
-    if [ -n "$(ls "${candidate_path"} 2>/dev/null)" ]; then
+    if [ -n "$(ls "${candidate_path}" 2>/dev/null)" ]; then
         echo "${candidate_path}"
         return
     fi
@@ -609,8 +609,10 @@ advanced_entries_meta() {
 
     # We must align initrds with kernels.
     # Adds initrds to the stack then pop them 1 by 1 as we process the kernels
-    set -- $(get_field_from_entry "${main_entry}" 7 | tr "|" " ")
-    for kernel in $(get_field_from_entry "${main_entry}" 8 | tr "|" " "); do
+    oldIFS="$IFS"
+    export IFS='|'
+    set -- $(get_field_from_entry "${main_entry}" 7)
+    for kernel in $(get_field_from_entry "${main_entry}" 8); do
         # get initrd and pop to the next one
         initrd="$1"; shift
 
@@ -622,6 +624,7 @@ advanced_entries_meta() {
 
         echo "${main_entry}" | awk "BEGIN{ FS=\"\t\"; OFS=\"\t\"}    {print \$3, \$2, \"advanced\", \$4, \$1, \$6, \"$initrd\", \"$kernel\", \"$was_last_used_kernel\"}"
     done
+    IFS="$oldIFS"
 }
 
 # Get history metadata
@@ -687,8 +690,10 @@ history_entries_meta() {
 
         # We must align initrds with kernels.
         # Adds initrds to the stack then pop them 1 by 1 as we process the kernels
-        set -- $(get_field_from_entry "${entry}" 7 | tr "|" " ")
-        for k in $(get_field_from_entry "${entry}" 8|tr "|" " "); do
+        oldIFS="$IFS"
+        export IFS='|'
+        set -- $(get_field_from_entry "${entry}" 7)
+        for k in $(get_field_from_entry "${entry}" 8); do
             # get initrd and pop to the next one
             candidate_initrd="$1"; shift
 
@@ -699,6 +704,7 @@ history_entries_meta() {
                 break
             fi
         done
+        IFS="$oldIFS"
 
         echo "${entry}" | awk "BEGIN{ FS=\"\t\"; OFS=\"\t\"}    {print \$3, \$2, \"history\", \"$name\", \$1, \$6, \"$initrd\", \"$kernel\"}"
     done
@@ -871,7 +877,8 @@ zfs_linux_entry () {
         linux_default_args="${GRUB_CMDLINE_LINUX_RECOVERY} ${GRUB_CMDLINE_LINUX}"
     fi
 
-    echo "${submenu_indentation}	linux	\"${kernel}\" root=ZFS=\"${dataset}\" ro ${linux_default_args} ${kernel_additional_args}"
+    # echo in echo trims end of line spaces
+    echo "${submenu_indentation}	linux	\"${kernel}\" root=ZFS=\"${dataset}\" ro $(echo ${linux_default_args} ${kernel_additional_args})"
 
     if [ "${quiet_boot}" = 0 ] || [ "${type}" != simple ]; then
         echo "${submenu_indentation}	echo '$(gettext_printf "Loading initial ramdisk ..." | grub_quote)'"
