@@ -1,3 +1,16 @@
+grub2 (2.04-1ubuntu38) hirsute; urgency=medium
+
+  [ Jean-Baptiste Lallement ]
+  [ Didier Roche ]
+  * Fix warnings during grub menu generation.  Thanks wdoekes for the patch
+    (LP: #1898177)
+    - Fix warnings when bpool doesn't exist.
+    - Fix warnings when snapshot name contains dashes.
+  * Do not fail to generate grub menu when name of the snapshot contains
+    spaces. (LP: #1903524)
+
+ -- Jean-Baptiste Lallement <jean-baptiste.lallement@ubuntu.com>  Mon, 08 Feb 2021 10:50:21 +0100
+
 grub2 (2.04-1ubuntu37) hirsute; urgency=medium
 
   * debian/patches/grub-install-backup-and-restore.patch: Fix-up the patch
