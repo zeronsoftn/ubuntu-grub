@@ -1,4 +1,4 @@
-From 3da2a097c174bf29ba8e1ea7b83a649a36e10a39 Mon Sep 17 00:00:00 2001
+From 475bed83826673e9bcaf68de4e818b57bdd66959 Mon Sep 17 00:00:00 2001
 From: Didier Roche <didrocks@ubuntu.com>
 Date: Fri, 12 Jul 2019 11:06:06 -0400
 Subject: UBUNTU: Enhance ZFS grub support
@@ -61,7 +61,7 @@ index 4532266be..a75096609 100644
  	LINUX_ROOT_DEVICE="ZFS=${rpool}${bootfs%/}"
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
 new file mode 100755
-index 000000000..7e90fc034
+index 000000000..f321fe214
 --- /dev/null
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -0,0 +1,981 @@
@@ -543,7 +543,7 @@ index 000000000..7e90fc034
 +    # otherwise, last_used is manually marked at boot/shutdown on a root dataset for zsys
 +    else
 +        # if current system, take current time
-+        if zfs mount | awk '/[ \t]+\/$/ {print $1}' | grep -q ${dataset}; then
++        if zfs mount | awk '/[ \t]+\/$/ {print $1}' | grep -q "${dataset}"; then
 +            last_used=$(date +%s)
 +        else
 +            last_used=$(zfs get -H com.ubuntu.zsys:last-used "${dataset}" | awk '{print $3}')

@@ -1,4 +1,4 @@
-From 9660ce712c83a48d92aed98b203a7aaa445a566f Mon Sep 17 00:00:00 2001
+From c63366b0083297f56ae53d73cc80a7b9e8591c48 Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Fri, 19 Jun 2020 12:57:19 +0200
 Subject: Pass dis_ucode_ldr to kernel for recovery mode
@@ -34,7 +34,7 @@ index 14a89ba13..49e627228 100644
  prepare_root_cache=
  boot_device_id=
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 556cc5ecf..8f66fefe6 100755
+index 8c2e7e5c1..cc4f6bd77 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -41,6 +41,16 @@ imported_pools=""

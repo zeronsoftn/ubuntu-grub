@@ -503,7 +503,7 @@ get_dataset_info() {
     # otherwise, last_used is manually marked at boot/shutdown on a root dataset for zsys
     else
         # if current system, take current time
-        if zfs mount | awk '/[ \t]+\/$/ {print $1}' | grep -q ${dataset}; then
+        if zfs mount | awk '/[ \t]+\/$/ {print $1}' | grep -q "${dataset}"; then
             last_used=$(date +%s)
         else
             last_used=$(zfs get -H com.ubuntu.zsys:last-used "${dataset}" | awk '{print $3}')

@@ -1,4 +1,4 @@
-From b019d56fbbe5b1e829b47b2d65f82ebee89c6418 Mon Sep 17 00:00:00 2001
+From dd26db90bdd5eb3245365767765ab8797ef3656b Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Thu, 27 Oct 2016 17:41:21 -0400
 Subject: efinet: UEFI IPv6 PXE support

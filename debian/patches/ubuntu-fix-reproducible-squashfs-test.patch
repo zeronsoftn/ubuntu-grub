@@ -1,4 +1,4 @@
-From 891478e8644a9286a31b051112ab68f2be58a074 Mon Sep 17 00:00:00 2001
+From 6ce47a31fe001c8e316952230bdf5f126283b0f4 Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <xnox@ubuntu.com>
 Date: Wed, 9 Dec 2020 16:07:10 +0000
 Subject: grub-fs-tester: Add compatibility with reproducible squashfs-tools

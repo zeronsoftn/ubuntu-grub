@@ -1,4 +1,4 @@
-From 3a0ae90f8aa9aedb104b62c2d90d524eae4d2fee Mon Sep 17 00:00:00 2001
+From 9c04cf6281cc524c8fb376d6e5b94e6a6f9425e1 Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <xnox@ubuntu.com>
 Date: Mon, 14 Sep 2020 10:51:32 +0100
 Subject: configure.ac: one more dejavu font search path

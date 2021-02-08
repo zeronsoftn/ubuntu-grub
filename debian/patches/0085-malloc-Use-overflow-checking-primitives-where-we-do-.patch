@@ -1,4 +1,4 @@
-From 88568c998407c65a09b1c256aaa797dc61087390 Mon Sep 17 00:00:00 2001
+From 44214e555b6ab1316abd2c85930fd087736898ab Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 15 Jun 2020 12:28:27 -0400
 Subject: malloc: Use overflow checking primitives where we do complex

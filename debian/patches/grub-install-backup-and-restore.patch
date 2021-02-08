@@ -1,4 +1,4 @@
-From dcd8a82be71b635ec1b26fbdca83247e99d256e7 Mon Sep 17 00:00:00 2001
+From 20231008f0d3d4cb06ccedb5565c49517ca8d84a Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <xnox@ubuntu.com>
 Date: Wed, 19 Aug 2020 01:49:09 +0100
 Subject: grub-install: Add backup and restore

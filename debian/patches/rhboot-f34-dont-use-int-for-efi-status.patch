@@ -1,4 +1,4 @@
-From 241ecafd52d5f6d658e019b7f1eb03e18a407706 Mon Sep 17 00:00:00 2001
+From 24207042450d2849d34fa81ca446cff58902aca4 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 26 Jun 2017 12:44:59 -0400
 Subject: don't use int for efi status

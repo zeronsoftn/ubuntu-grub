@@ -1,4 +1,4 @@
-From 54c5c525ee8031fba608ae6cfee0ef37418fc3c0 Mon Sep 17 00:00:00 2001
+From 9755b634d1a07c1a779dacc7b9838d9ee6633769 Mon Sep 17 00:00:00 2001
 From: Daniel Kiper <daniel.kiper@oracle.com>
 Date: Tue, 7 Jul 2020 15:36:26 +0200
 Subject: font: Do not load more than one NAME section

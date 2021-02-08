@@ -1,4 +1,4 @@
-From ea6708d9c22a529474315557feff832ae3001cfd Mon Sep 17 00:00:00 2001
+From cd670342a14217e5a931f0eab117a1b8677fba76 Mon Sep 17 00:00:00 2001
 From: Chris Coulson <chris.coulson@canonical.com>
 Date: Wed, 11 Mar 2020 16:46:41 +0100
 Subject: ubuntu: Update the linux boot protocol version check.

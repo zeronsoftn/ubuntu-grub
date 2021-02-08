@@ -1,4 +1,4 @@
-From 4324dd39884e92d49291639297baa79b3814f042 Mon Sep 17 00:00:00 2001
+From 50589b94645fcbc04073d8398ac1c327024d9178 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 24 Jul 2020 13:57:27 -0400
 Subject: linux loader: avoid overflow on initrd size calculation

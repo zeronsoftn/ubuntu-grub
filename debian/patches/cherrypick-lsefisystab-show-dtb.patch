@@ -1,4 +1,4 @@
-From 7d6ad7810c821e1127b59908120ad3f4702416d1 Mon Sep 17 00:00:00 2001
+From 54b54dc1e7e0d0739e803fa3e4a77a785196ebf4 Mon Sep 17 00:00:00 2001
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Date: Sat, 6 Jul 2019 11:11:02 +0200
 Subject: lsefisystab: Add support for device tree table

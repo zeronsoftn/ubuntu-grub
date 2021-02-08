@@ -1,4 +1,4 @@
-From 4f9608da8d4ce77dc3b6be3f678265312aad6908 Mon Sep 17 00:00:00 2001
+From 86f800eb735957521c6ff0e5da256eb2ad500f4f Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:30 +0000
 Subject: Add configure option to use vt.handoff=7
@@ -101,7 +101,7 @@ index 09393c28e..cc2dd855a 100644
  # FIXME: We need an interface to select vesafb in case efifb can't be used.
  if [ "x$GRUB_GFXPAYLOAD_LINUX" != x ] || [ "$gfxpayload_dynamic" = 0 ]; then
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index ceca548e9..3e2e851c3 100755
+index ee1d1d272..055a54234 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -23,6 +23,7 @@ ubuntu_recovery="@UBUNTU_RECOVERY@"

@@ -1,4 +1,4 @@
-From a183f56bc9b63379fa6865867d71952fecaf6b02 Mon Sep 17 00:00:00 2001
+From 26683415a86d55b1a8e337ba735b6589a482be04 Mon Sep 17 00:00:00 2001
 From: Chris Coulson <chris.coulson@canonical.com>
 Date: Fri, 10 Jul 2020 11:21:14 +0100
 Subject: script: Remove unused fields from grub_script_function struct

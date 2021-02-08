@@ -1,4 +1,4 @@
-From 4f965f9c0b89088e33c10456368a07d8d2436197 Mon Sep 17 00:00:00 2001
+From 1f96f57300303ec4312ee991b38152f9f4b206fe Mon Sep 17 00:00:00 2001
 From: Alexey Makhalov <amakhalov@vmware.com>
 Date: Thu, 9 Jul 2020 08:10:40 +0000
 Subject: tftp: Do not use priority queue

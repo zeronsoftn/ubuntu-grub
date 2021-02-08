@@ -1,4 +1,4 @@
-From a457fa1eaf88024eb4ec91571264169a2df66227 Mon Sep 17 00:00:00 2001
+From 959cc3f8d5f0316fcf691d7933679f44deacea64 Mon Sep 17 00:00:00 2001
 From: Didier Roche <didrocks@ubuntu.com>
 Date: Tue, 31 Mar 2020 15:17:45 +0200
 Subject: Generate configuration for signed UEFI kernels if available
@@ -48,7 +48,7 @@ index 19e4df4ad..cb1cc200e 100644
    basename=`basename $linux`
    dirname=`dirname $linux`
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index f2e34ec66..abc156b87 100755
+index 2149864f2..511c18294 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -339,6 +339,16 @@ try_default_layout_bpool() {
