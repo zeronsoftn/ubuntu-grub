@@ -6,8 +6,10 @@ grub2 (2.04-1ubuntu39) UNRELEASED; urgency=medium
     - use UEFI protocols for http & https networking
     - make netboot search for by-mac/by-uuid/by-ip for grub.cfg
     - update documentation for netboot search paths of grub.cfg
+  * Make prebuilt netboot image look for MAAS grub.cfg
+  * Fix grub-initrd-fallback.service thanks to JawnSmith LP: #1910815
 
- -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 11 Feb 2021 15:38:55 +0000
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 11 Feb 2021 16:31:57 +0000
 
 grub2 (2.04-1ubuntu38) hirsute; urgency=medium
 
