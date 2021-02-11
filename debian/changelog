@@ -1,6 +1,7 @@
-grub2 (2.04-1ubuntu39) hirsute; urgency=medium
+grub2 (2.04-1ubuntu39) UNRELEASED; urgency=medium
 
   * Cherrypick a bunch of patches:
+    - fix crash in http
     - add bootp6 documentation
     - add support for UEFI boot protocols
     - use UEFI protocols for http & https networking
