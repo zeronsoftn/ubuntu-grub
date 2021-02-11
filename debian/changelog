@@ -1,3 +1,14 @@
+grub2 (2.04-1ubuntu39) UNRELEASED; urgency=medium
+
+  * Cherrypick a bunch of patches:
+    - add bootp6 documentation
+    - add support for UEFI boot protocols
+    - use UEFI protocols for http & https networking
+    - make netboot search for by-mac/by-uuid/by-ip for grub.cfg
+    - update documentation for netboot search paths of grub.cfg
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 11 Feb 2021 15:38:55 +0000
+
 grub2 (2.04-1ubuntu38) hirsute; urgency=medium
 
   [ Jean-Baptiste Lallement ]
