@@ -1679,6 +1679,7 @@ module = {
 
 module = {
   name = datetime;
+  common = lib/datetime.c;
   cmos = lib/cmos_datetime.c;
   efi = lib/efi/datetime.c;
   uboot = lib/dummy/datetime.c;
@@ -1691,7 +1692,6 @@ module = {
   i386_xen_pvh = lib/xen/datetime.c;
 
   mips_arc = lib/arc/datetime.c;
-  enable = noemu;
 };
 
 module = {
@@ -1931,7 +1931,6 @@ module = {
   common = normal/autofs.c;
   common = normal/color.c;
   common = normal/completion.c;
-  common = normal/datetime.c;
   common = normal/menu.c;
   common = normal/menu_entry.c;
   common = normal/menu_text.c;
@@ -2308,6 +2307,12 @@ module = {
   common = net/ethernet.c;
   common = net/arp.c;
   common = net/netbuff.c;
+  efi = net/efi/net.c;
+  efi = net/efi/http.c;
+  efi = net/efi/pxe.c;
+  efi = net/efi/ip4_config.c;
+  efi = net/efi/ip6_config.c;
+  efi = net/efi/dhcp.c;
 };
 
 module = {

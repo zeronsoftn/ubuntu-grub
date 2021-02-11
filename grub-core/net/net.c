@@ -32,6 +32,9 @@
 #include <grub/loader.h>
 #include <grub/bufio.h>
 #include <grub/kernel.h>
+#ifdef GRUB_MACHINE_EFI
+#include <grub/net/efi.h>
+#endif
 
 GRUB_MOD_LICENSE ("GPLv3+");
 
@@ -1822,14 +1825,186 @@ grub_net_restore_hw (void)
   return GRUB_ERR_NONE;
 }
 
+grub_err_t
+grub_net_search_config_file (char *config)
+{
+  grub_size_t config_len;
+  char *suffix;
+
+  auto int search_through (grub_size_t num_tries, grub_size_t slice_size);
+  int search_through (grub_size_t num_tries, grub_size_t slice_size)
+  {
+    while (num_tries-- > 0)
+      {
+        grub_file_t file;
+
+        grub_dprintf ("net", "attempt to fetch config %s\n", config);
+
+        file = grub_file_open (config, GRUB_FILE_TYPE_CONFIG);
+
+        if (file)
+          {
+            grub_file_close (file);
+            return 0;
+          }
+        else
+          {
+            if (grub_errno == GRUB_ERR_IO)
+              grub_errno = GRUB_ERR_NONE;
+          }
+
+        if (grub_strlen (suffix) < slice_size)
+          break;
+
+        config[grub_strlen (config) - slice_size] = '\0';
+      }
+
+    return 1;
+  }
+
+  config_len = grub_strlen (config);
+  config[config_len] = '-';
+  suffix = config + config_len + 1;
+
+  struct grub_net_network_level_interface *inf;
+  FOR_NET_NETWORK_LEVEL_INTERFACES (inf)
+    {
+      /* By the Client UUID. */
+      char *ptr;
+      int client_uuid_len;
+      char *client_uuid_var;
+      const char *client_uuid;
+
+      client_uuid_len = sizeof ("net_") + grub_strlen (inf->name) +
+                        sizeof ("_clientuuid") + 1;
+
+      client_uuid_var = grub_zalloc (client_uuid_len);
+      if (!client_uuid_var)
+        return grub_errno;
+
+      grub_snprintf (client_uuid_var, client_uuid_len,
+                     "net_%s_clientuuid", inf->name);
+
+      client_uuid = grub_env_get (client_uuid_var);
+      grub_free (client_uuid_var);
+
+      if (client_uuid)
+        {
+          grub_strcpy (suffix, client_uuid);
+          if (search_through (1, 0) == 0)
+            return GRUB_ERR_NONE;
+        }
+
+      /* By the MAC address. */
+
+      /* Add ethernet type */
+      grub_strcpy (suffix, "01-");
+
+      grub_net_hwaddr_to_str (&inf->hwaddress, suffix + 3);
+
+      for (ptr = suffix; *ptr; ptr++)
+        if (*ptr == ':')
+          *ptr = '-';
+
+      if (search_through (1, 0) == 0)
+        return GRUB_ERR_NONE;
+
+      /* By IP address */
+
+      switch ((&inf->address)->type)
+        {
+        case GRUB_NET_NETWORK_LEVEL_PROTOCOL_IPV4:
+          {
+            grub_uint32_t n = grub_be_to_cpu32 ((&inf->address)->ipv4);
+
+            grub_snprintf (suffix, GRUB_NET_MAX_STR_ADDR_LEN, "%02X%02X%02X%02X", \
+                           ((n >> 24) & 0xff), ((n >> 16) & 0xff),      \
+                           ((n >> 8) & 0xff), ((n >> 0) & 0xff));
+
+            if (search_through (8, 1) == 0)
+              return GRUB_ERR_NONE;
+            break;
+          }
+        case GRUB_NET_NETWORK_LEVEL_PROTOCOL_IPV6:
+          {
+            char buf[GRUB_NET_MAX_STR_ADDR_LEN];
+            struct grub_net_network_level_address base;
+            base.type = GRUB_NET_NETWORK_LEVEL_PROTOCOL_IPV6;
+            grub_memcpy (&base.ipv6, ((&inf->address)->ipv6), 16);
+            grub_net_addr_to_str (&base, buf);
+
+            for (ptr = buf; *ptr; ptr++)
+              if (*ptr == ':')
+                *ptr = '-';
+
+            grub_snprintf (suffix, GRUB_NET_MAX_STR_ADDR_LEN, "%s", buf);
+            if (search_through (1, 0) == 0)
+              return GRUB_ERR_NONE;
+            break;
+          }
+        case GRUB_NET_NETWORK_LEVEL_PROTOCOL_DHCP_RECV:
+          return grub_error (GRUB_ERR_BUG, "shouldn't reach here");
+        default:
+          return grub_error (GRUB_ERR_BUG,
+                             "unsupported address type %d", (&inf->address)->type);
+        }
+    }
+
+  /* Remove the remaining minus sign at the end. */
+  config[config_len] = '\0';
+
+  return GRUB_ERR_NONE;
+}
+
 static struct grub_preboot *fini_hnd;
 
 static grub_command_t cmd_addaddr, cmd_deladdr, cmd_addroute, cmd_delroute;
 static grub_command_t cmd_lsroutes, cmd_lscards;
 static grub_command_t cmd_lsaddr, cmd_slaac;
 
+#ifdef GRUB_MACHINE_EFI
+
+static enum {
+  INIT_MODE_NONE,
+  INIT_MODE_GRUB,
+  INIT_MODE_EFI
+} init_mode;
+
+static grub_command_t cmd_bootp, cmd_bootp6;
+
+#endif
+
 GRUB_MOD_INIT(net)
 {
+#ifdef GRUB_MACHINE_EFI
+  if (grub_net_open)
+    return;
+
+  if ((grub_efi_net_boot_from_https () || grub_efi_net_boot_from_opa ())
+      && grub_efi_net_fs_init ())
+    {
+      cmd_lsroutes = grub_register_command ("net_ls_routes", grub_efi_net_list_routes,
+					    "", N_("list network routes"));
+      cmd_lscards = grub_register_command ("net_ls_cards", grub_efi_net_list_cards,
+					   "", N_("list network cards"));
+      cmd_lsaddr = grub_register_command ("net_ls_addr", grub_efi_net_list_addrs,
+					  "", N_("list network addresses"));
+      cmd_addaddr = grub_register_command ("net_add_addr", grub_efi_net_add_addr,
+					    /* TRANSLATORS: HWADDRESS stands for
+					       "hardware address".  */
+					  N_("SHORTNAME CARD ADDRESS [HWADDRESS]"),
+					  N_("Add a network address."));
+      cmd_bootp = grub_register_command ("net_bootp", grub_efi_net_bootp,
+					 N_("[CARD]"),
+					 N_("perform a bootp autoconfiguration"));
+      cmd_bootp6 = grub_register_command ("net_bootp6", grub_efi_net_bootp6,
+					 N_("[CARD]"),
+					 N_("perform a bootp autoconfiguration"));
+      init_mode = INIT_MODE_EFI;
+      return;
+    }
+#endif
+
   grub_register_variable_hook ("net_default_server", defserver_get_env,
 			       defserver_set_env);
   grub_env_export ("net_default_server");
@@ -1877,10 +2052,37 @@ GRUB_MOD_INIT(net)
 						grub_net_restore_hw,
 						GRUB_LOADER_PREBOOT_HOOK_PRIO_DISK);
   grub_net_poll_cards_idle = grub_net_poll_cards_idle_real;
+
+#ifdef GRUB_MACHINE_EFI
+  grub_env_set ("grub_netfs_type", "grub");
+  grub_register_variable_hook ("grub_netfs_type", 0, grub_env_write_readonly);
+  grub_env_export ("grub_netfs_type");
+  init_mode = INIT_MODE_GRUB;
+#endif
+
 }
 
 GRUB_MOD_FINI(net)
 {
+
+#ifdef GRUB_MACHINE_EFI
+  if (init_mode == INIT_MODE_NONE)
+    return;
+
+  if (init_mode == INIT_MODE_EFI)
+    {
+      grub_unregister_command (cmd_lsroutes);
+      grub_unregister_command (cmd_lscards);
+      grub_unregister_command (cmd_lsaddr);
+      grub_unregister_command (cmd_addaddr);
+      grub_unregister_command (cmd_bootp);
+      grub_unregister_command (cmd_bootp6);
+      grub_efi_net_fs_fini ();
+      init_mode = INIT_MODE_NONE;
+      return;
+    }
+#endif
+
   grub_register_variable_hook ("net_default_server", 0, 0);
   grub_register_variable_hook ("pxe_default_server", 0, 0);
 
@@ -1899,4 +2101,7 @@ GRUB_MOD_FINI(net)
   grub_net_fini_hw (0);
   grub_loader_unregister_preboot_hook (fini_hnd);
   grub_net_poll_cards_idle = grub_net_poll_cards_idle_real;
+#ifdef GRUB_MACHINE_EFI
+  init_mode = INIT_MODE_NONE;
+#endif
 }

@@ -2518,6 +2518,48 @@ grub-mknetdir --net-directory=/srv/tftp --subdir=/boot/grub -d /usr/lib/grub/i38
 Then follow instructions printed out by grub-mknetdir on configuring your DHCP
 server.
 
+The grub.cfg file is placed in the same directory as the path output by
+grub-mknetdir hereafter referred to as FWPATH. GRUB will search for its 
+configuration files in order using the following rules where the appended
+value corresponds to a value on the client machine.
+
+@example
+@group
+@samp{(FWPATH)}/grub.cfg-@samp{(UUID OF NIC)}
+@samp{(FWPATH)}/grub.cfg-@samp{(MAC ADDRESS OF NIC)}
+@samp{(FWPATH)}/grub.cfg-@samp{(IPv4 OR IPv6 ADDRESS)}
+@samp{(FWPATH)}/grub.cfg
+@end group
+@end example
+
+The client will only attempt to look up an IPv6 address config once, however,
+it will try the IPv4 multiple times. The concrete example below shows what
+would happen under the IPv4 case.
+
+@example
+@group
+UUID: 7726a678-7fc0-4853-a4f6-c85ac36a120a
+MAC:  52:54:00:ec:33:81
+IPV4: 10.0.0.130 (0A000082)
+@end group
+@end example
+
+@example
+@group
+@samp{(FWPATH)}/grub.cfg-7726a678-7fc0-4853-a4f6-c85ac36a120a
+@samp{(FWPATH)}/grub.cfg-52-54-00-ec-33-81
+@samp{(FWPATH)}/grub.cfg-0A000082
+@samp{(FWPATH)}/grub.cfg-0A00008
+@samp{(FWPATH)}/grub.cfg-0A0000
+@samp{(FWPATH)}/grub.cfg-0A000
+@samp{(FWPATH)}/grub.cfg-0A00
+@samp{(FWPATH)}/grub.cfg-0A0
+@samp{(FWPATH)}/grub.cfg-0A
+@samp{(FWPATH)}/grub.cfg-0
+@samp{(FWPATH)}/grub.cfg
+@end group
+@end example
+
 After GRUB has started, files on the TFTP server will be accessible via the
 @samp{(tftp)} device.
 
@@ -5396,6 +5438,7 @@ This command is only available on AArch64 systems.
 * net_add_dns::                 Add a DNS server
 * net_add_route::               Add routing entry
 * net_bootp::                   Perform a bootp autoconfiguration
+* net_bootp6::                  Perform a DHCPv6 autoconfiguration
 * net_del_addr::                Remove IP address from interface
 * net_del_dns::                 Remove a DNS server
 * net_del_route::               Remove a route entry
@@ -5477,6 +5520,22 @@ Sets environment variable @samp{net_}@var{<card>}@samp{_dhcp_extensionspath}
 
 @end deffn
 
+@node net_bootp6
+@subsection net_bootp6
+
+@deffn Command net_bootp6 [@var{card}]
+Perform configuration of @var{card} using DHCPv6 protocol. If no card name is
+specified, try to configure all existing cards. If configuration was
+successful, interface with name @var{card}@samp{:dhcp6} and configured address
+is added to @var{card}.
+
+@table @samp
+@item 1 (Domain Name Server)
+Adds all servers from option value to the list of servers used during name
+resolution.
+@end table
+
+@end deffn
 
 @node net_del_addr
 @subsection net_del_addr

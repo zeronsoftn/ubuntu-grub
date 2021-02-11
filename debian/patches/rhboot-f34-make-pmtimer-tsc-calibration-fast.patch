@@ -66,7 +66,7 @@ Patch-Name: rhboot-f34-make-pmtimer-tsc-calibration-fast.patch
  1 file changed, 89 insertions(+), 20 deletions(-)
 
 diff --git a/grub-core/kern/i386/tsc_pmtimer.c b/grub-core/kern/i386/tsc_pmtimer.c
-index c9c361699..ca15c3aac 100644
+index c9c3616997..ca15c3aacd 100644
 --- a/grub-core/kern/i386/tsc_pmtimer.c
 +++ b/grub-core/kern/i386/tsc_pmtimer.c
 @@ -28,40 +28,101 @@

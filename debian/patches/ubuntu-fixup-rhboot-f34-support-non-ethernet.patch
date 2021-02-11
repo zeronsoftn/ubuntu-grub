@@ -11,7 +11,7 @@ Patch-Name: ubuntu-fixup-rhboot-f34-support-non-ethernet.patch
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/net/drivers/ieee1275/ofnet.c b/grub-core/net/drivers/ieee1275/ofnet.c
-index 057ba8597..4621b0a34 100644
+index 057ba85973..4621b0a346 100644
 --- a/grub-core/net/drivers/ieee1275/ofnet.c
 +++ b/grub-core/net/drivers/ieee1275/ofnet.c
 @@ -154,7 +154,7 @@ grub_ieee1275_parse_bootpath (const char *devpath, char *bootpath,

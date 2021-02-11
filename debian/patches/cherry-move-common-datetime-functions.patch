@@ -1,0 +1,88 @@
+From 4224985c8fc37991a10289e4810638cdd41455f6 Mon Sep 17 00:00:00 2001
+From: Javier Martinez Canillas <javierm@redhat.com>
+Date: Fri, 14 Feb 2020 12:44:14 +0100
+Subject: normal: Move common datetime functions out of the normal module
+
+The common datetime helper functions are currently included in the normal
+module, but this makes any other module that calls these functions to have
+a dependency with the normal module only for this reason.
+
+Since the normal module does a lot of stuff, it calls functions from other
+modules. But since other modules may depend on it for calling the datetime
+helpers, this could lead to circular dependencies between modules.
+
+As an example, when platform == xen the grub_get_datetime() function from
+the datetime module calls to the grub_unixtime2datetime() helper function
+from the normal module. Which leads to the following module dependency:
+
+    datetime -> normal
+
+and send_dhcp_packet() from the net module calls the grub_get_datetime()
+function, which leads to the following module dependency:
+
+    net -> datetime -> normal
+
+but that means that the normal module is not allowed to depend on net or
+any other module that depends on it due the transitive dependency caused
+by datetime. A recent patch attempted to add support to fetch the config
+file over the network, which leads to the following circular dependency:
+
+    normal -> net -> datetime -> normal
+
+So having the datetime helpers in the normal module makes it quite fragile
+and easy to add circular dependencies like these, that break the build due
+the genmoddep.awk script catching the issues.
+
+Fix this by taking the datetime helper functions out of the normal module
+and instead add them to the datetime module itself. Besides fixing these
+issues, it makes more sense to have these helper functions there anyways.
+
+Reported-by: Daniel Kiper <daniel.kiper@oracle.com>
+Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+
+Patch-Name: cherry-move-common-datetime-functions.patch
+---
+ Makefile.util.def                    | 2 +-
+ grub-core/Makefile.core.def          | 2 +-
+ grub-core/{normal => lib}/datetime.c | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename grub-core/{normal => lib}/datetime.c (100%)
+
+diff --git a/Makefile.util.def b/Makefile.util.def
+index 504d1c0581..fd5a9b87d7 100644
+--- a/Makefile.util.def
++++ b/Makefile.util.def
+@@ -139,7 +139,7 @@ library = {
+   common = grub-core/lib/crc.c;
+   common = grub-core/lib/adler32.c;
+   common = grub-core/lib/crc64.c;
+-  common = grub-core/normal/datetime.c;
++  common = grub-core/lib/datetime.c;
+   common = grub-core/normal/misc.c;
+   common = grub-core/partmap/acorn.c;
+   common = grub-core/partmap/amiga.c;
+diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
+index 20be18575f..1c71233d06 100644
+--- a/grub-core/Makefile.core.def
++++ b/grub-core/Makefile.core.def
+@@ -1679,6 +1679,7 @@ module = {
+ 
+ module = {
+   name = datetime;
++  common = lib/datetime.c;
+   cmos = lib/cmos_datetime.c;
+   efi = lib/efi/datetime.c;
+   uboot = lib/dummy/datetime.c;
+@@ -1931,7 +1932,6 @@ module = {
+   common = normal/autofs.c;
+   common = normal/color.c;
+   common = normal/completion.c;
+-  common = normal/datetime.c;
+   common = normal/menu.c;
+   common = normal/menu_entry.c;
+   common = normal/menu_text.c;
+diff --git a/grub-core/normal/datetime.c b/grub-core/lib/datetime.c
+similarity index 100%
+rename from grub-core/normal/datetime.c
+rename to grub-core/lib/datetime.c

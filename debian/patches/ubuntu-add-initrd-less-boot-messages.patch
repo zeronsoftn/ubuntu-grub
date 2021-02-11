@@ -13,7 +13,7 @@ Patch-Name: ubuntu-add-initrd-less-boot-messages.patch
  1 file changed, 10 insertions(+)
 
 diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
-index 49e627228..47daf51ee 100644
+index 49e627228f..47daf51eed 100644
 --- a/util/grub.d/10_linux.in
 +++ b/util/grub.d/10_linux.in
 @@ -160,6 +160,12 @@ if [ "$vt_handoff" = 1 ]; then

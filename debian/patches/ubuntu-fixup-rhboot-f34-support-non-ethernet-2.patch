@@ -15,7 +15,7 @@ Patch-Name: ubuntu-fixup-rhboot-f34-support-non-ethernet-2.patch
  1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/grub-core/net/ethernet.c b/grub-core/net/ethernet.c
-index 9aae83a5e..01cd21785 100644
+index 9aae83a5eb..01cd21785a 100644
 --- a/grub-core/net/ethernet.c
 +++ b/grub-core/net/ethernet.c
 @@ -74,12 +74,12 @@ send_ethernet_packet (struct grub_net_network_level_interface *inf,

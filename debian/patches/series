@@ -120,3 +120,11 @@ rhboot-f34-support-non-ethernet.patch
 ubuntu-fixup-rhboot-f34-support-non-ethernet.patch
 ubuntu-fixup-rhboot-f34-support-non-ethernet-2.patch
 rhboot-f34-make-pmtimer-tsc-calibration-fast.patch
+suse-grub.texi-add-net_bootp6-document.patch
+suse-add-support-for-UEFI-network-protocols.patch
+suse-AUDIT-0-http-boot-tracker-bug.patch
+rhboot-f34-efinet-also-use-the-firmware-acceleration-for-http.patch
+cherry-move-common-datetime-functions.patch
+suse-search-for-specific-config-files-for-netboot.patch
+cherry-enable-datetime-emu.patch
+rhboot-f34-update-info-with-grub.cfg-netboot-selection-order.patch
