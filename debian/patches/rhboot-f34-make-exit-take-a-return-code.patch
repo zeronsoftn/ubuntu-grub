@@ -1,4 +1,4 @@
-From 42a49ae342b30e15a54f3417b35b9914941b0637 Mon Sep 17 00:00:00 2001
+From c953a05d3af4a53eb217939355ac455045f26628 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Wed, 26 Feb 2014 21:49:12 -0500
 Subject: Make "exit" take a return code.

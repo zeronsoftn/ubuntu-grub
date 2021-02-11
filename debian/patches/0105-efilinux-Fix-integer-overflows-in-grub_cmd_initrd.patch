@@ -1,4 +1,4 @@
-From b4e238136e0ade63f109fb6ecfd8b31239a44c1d Mon Sep 17 00:00:00 2001
+From c7c111b9583d0fee45c420629e5be1a9e50fab37 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@debian.org>
 Date: Mon, 27 Jul 2020 14:22:12 +0100
 Subject: efilinux: Fix integer overflows in grub_cmd_initrd

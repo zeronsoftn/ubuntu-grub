@@ -1,4 +1,4 @@
-From 414138707cedfee00b3752f5fb266e433b758790 Mon Sep 17 00:00:00 2001
+From 467fea2d8a8f78af2d04fc5a65e2f19c0ea0be6a Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Wed, 22 Jan 2020 12:01:55 +0100
 Subject: normal/main: Search for specific config files for netboot

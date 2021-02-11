@@ -1,4 +1,4 @@
-From 9446dbb70696e1e2a890b68ef17f4e43b4e2cde1 Mon Sep 17 00:00:00 2001
+From 20fe7d87ad8451f61b313e482be3422ded38a59e Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 15 Jun 2020 12:15:29 -0400
 Subject: calloc: Make sure we always have an overflow-checking calloc()

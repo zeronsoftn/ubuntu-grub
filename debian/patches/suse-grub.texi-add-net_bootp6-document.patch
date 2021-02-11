@@ -1,4 +1,4 @@
-From f3d4b1ed487cc2dca0a5007f0a0a70d261d9a979 Mon Sep 17 00:00:00 2001
+From 24b14f5c2188eb2fc44d774845b21f10f8fbcedc Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Tue, 5 May 2015 14:19:24 +0800
 Subject: grub.texi: Add net_bootp6 document

@@ -1,4 +1,4 @@
-From d824066328ed73269ebc8c901a8984cfab8bb0ef Mon Sep 17 00:00:00 2001
+From 88154250a8b2be9cce677384e0ab71e6ae4284ff Mon Sep 17 00:00:00 2001
 From: Chris Coulson <chris.coulson@canonical.com>
 Date: Mon, 1 Jun 2020 14:03:37 +0100
 Subject: UBUNTU: disk/loopback: Don't verify loopback images

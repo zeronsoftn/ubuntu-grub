@@ -1,4 +1,4 @@
-From 897d00cd09ff5040fb08db4c4e632966fa712eb3 Mon Sep 17 00:00:00 2001
+From edde11e535d34c8513a10c97ce5d0dbad4a10d58 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Sun, 19 Jul 2020 16:53:27 -0400
 Subject: efi: fix some malformed device path arithmetic errors.

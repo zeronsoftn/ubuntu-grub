@@ -1,4 +1,4 @@
-From 4400bd9637020e645164af87e47780d9f05fc850 Mon Sep 17 00:00:00 2001
+From 5ee32ec2cad926af30576a4231c124dca00fce0b Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Sat, 4 Jul 2020 12:25:09 -0400
 Subject: iso9660: Don't leak memory on realloc() failures

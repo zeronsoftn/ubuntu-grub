@@ -1,4 +1,4 @@
-From de2d4e44af03ef574ccbe969eb4da1a34035c731 Mon Sep 17 00:00:00 2001
+From 55104d5764c31ec9b716dfbbae5dc10091e2ee60 Mon Sep 17 00:00:00 2001
 From: Didier Roche <didrocks@ubuntu.com>
 Date: Mon, 13 Apr 2020 15:12:21 +0200
 Subject: UBUNTU: Improve performance in bootmenu for zsys

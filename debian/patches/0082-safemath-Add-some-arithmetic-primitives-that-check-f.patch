@@ -1,4 +1,4 @@
-From 9084c5db0431a72531694e61f421e921ca0cd001 Mon Sep 17 00:00:00 2001
+From 90dff2044d8f86bbf1ca1999ba3f6c9e452f275e Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 15 Jun 2020 10:58:42 -0400
 Subject: safemath: Add some arithmetic primitives that check for overflow

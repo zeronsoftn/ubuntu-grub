@@ -1,4 +1,4 @@
-From 7ae923f6038b9591d3f7627a0dd02d96ad7ce104 Mon Sep 17 00:00:00 2001
+From 0247661a49f4e891ebb4a647f26bf9d649d624f5 Mon Sep 17 00:00:00 2001
 From: Mike Gilbert <floppym@gentoo.org>
 Date: Thu, 5 Mar 2020 16:52:18 -0500
 Subject: datetime: Enable the datetime module for the emu platform

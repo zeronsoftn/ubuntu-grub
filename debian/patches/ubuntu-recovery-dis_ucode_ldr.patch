@@ -1,4 +1,4 @@
-From c63366b0083297f56ae53d73cc80a7b9e8591c48 Mon Sep 17 00:00:00 2001
+From 70ba6b38a813b78f81f9298f4fe9964b9c347909 Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Fri, 19 Jun 2020 12:57:19 +0200
 Subject: Pass dis_ucode_ldr to kernel for recovery mode
