@@ -128,3 +128,4 @@ cherry-move-common-datetime-functions.patch
 suse-search-for-specific-config-files-for-netboot.patch
 cherry-enable-datetime-emu.patch
 rhboot-f34-update-info-with-grub.cfg-netboot-selection-order.patch
+cherry-fix-crash-on-http.patch
