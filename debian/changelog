@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu39) groovy; urgency=medium
+grub2 (2.04-1ubuntu39) hirsute; urgency=medium
 
   * Cherrypick a bunch of patches:
     - add bootp6 documentation
