@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu39) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu39) groovy; urgency=medium
 
   * Cherrypick a bunch of patches:
     - add bootp6 documentation
@@ -9,7 +9,7 @@ grub2 (2.04-1ubuntu39) UNRELEASED; urgency=medium
   * Make prebuilt netboot image look for MAAS grub.cfg
   * Fix grub-initrd-fallback.service thanks to JawnSmith LP: #1910815
 
- -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 11 Feb 2021 16:31:57 +0000
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 11 Feb 2021 16:34:27 +0000
 
 grub2 (2.04-1ubuntu38) hirsute; urgency=medium
 
