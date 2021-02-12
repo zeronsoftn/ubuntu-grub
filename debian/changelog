@@ -1,3 +1,9 @@
+grub2 (2.04-1ubuntu35.4) groovy; urgency=medium
+
+  * Fix grub-initrd-fallback.service thanks to JawnSmith LP: #1910815
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 12 Feb 2021 22:11:53 +0000
+
 grub2 (2.04-1ubuntu35.3) groovy; urgency=medium
 
   * Revert: rhboot-f34-tcp-add-window-scaling-support.patch,
