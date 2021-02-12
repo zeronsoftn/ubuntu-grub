@@ -1,4 +1,4 @@
-From 49c2e8fc7a47c92d9ded8327083865a9ba924100 Mon Sep 17 00:00:00 2001
+From 704eda6a05a499d001b983be887c328ef47dc526 Mon Sep 17 00:00:00 2001
 From: Gustavo Luiz Duarte <gustavold@linux.vnet.ibm.com>
 Date: Tue, 17 Sep 2019 17:44:58 +0200
 Subject: net: Fix crash on http

@@ -1,4 +1,4 @@
-From 97097f61859e9bdd6fc5c32f0d5768e25a08f292 Mon Sep 17 00:00:00 2001
+From f7a9310c4a072b2de5113c868c5620ea8f4b23ca Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Thu, 23 Apr 2020 15:06:46 +0200
 Subject: efi: Set image base address before jumping to the PE/COFF entry point
