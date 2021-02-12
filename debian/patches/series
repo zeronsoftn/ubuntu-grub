@@ -115,10 +115,6 @@ ubuntu-add-initrd-less-boot-messages.patch
 ubuntu-fix-reproducible-squashfs-test.patch
 rhboot-f34-make-exit-take-a-return-code.patch
 rhboot-f34-dont-use-int-for-efi-status.patch
-rhboot-f34-tcp-add-window-scaling-support.patch
-rhboot-f34-support-non-ethernet.patch
-ubuntu-fixup-rhboot-f34-support-non-ethernet.patch
-ubuntu-fixup-rhboot-f34-support-non-ethernet-2.patch
 rhboot-f34-make-pmtimer-tsc-calibration-fast.patch
 suse-grub.texi-add-net_bootp6-document.patch
 suse-add-support-for-UEFI-network-protocols.patch

@@ -1,4 +1,4 @@
-From c4b4731148734ba67f02ed8fa252d58e4da84999 Mon Sep 17 00:00:00 2001
+From c0dfbc49747fa829f56e6b358bace9fe4873d6da Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 30 Jul 2018 14:06:42 -0400
 Subject: efinet: also use the firmware acceleration for http

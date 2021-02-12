@@ -1,4 +1,4 @@
-From c6c371d6bb6ce2af379bb2fafd950ff4d9c7d993 Mon Sep 17 00:00:00 2001
+From 90d5226d9ebee1201531388589df4c17deb4c7e8 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Wed, 22 Feb 2017 14:27:50 +0800
 Subject: Support UEFI networking protocols
@@ -232,7 +232,7 @@ index 7cf003f713..ff200a0457 100644
  	      grub_printf ("/UnknownMessaging(%x)", (unsigned) subtype);
  	      break;
 diff --git a/grub-core/net/drivers/efi/efinet.c b/grub-core/net/drivers/efi/efinet.c
-index e771364045..8d229e2221 100644
+index 82a28fb6e9..f189209ba7 100644
 --- a/grub-core/net/drivers/efi/efinet.c
 +++ b/grub-core/net/drivers/efi/efinet.c
 @@ -24,6 +24,7 @@
@@ -243,7 +243,7 @@ index e771364045..8d229e2221 100644
  
  GRUB_MOD_LICENSE ("GPLv3+");
  
-@@ -485,6 +486,17 @@ grub_efinet_create_dhcp_ack_from_device_path (grub_efi_device_path_t *dp, int *u
+@@ -481,6 +482,17 @@ grub_efinet_create_dhcp_ack_from_device_path (grub_efi_device_path_t *dp, int *u
  
    ldp = grub_efi_find_last_device_path (ddp);
  
@@ -261,7 +261,7 @@ index e771364045..8d229e2221 100644
    if (GRUB_EFI_DEVICE_PATH_TYPE (ldp) != GRUB_EFI_MESSAGING_DEVICE_PATH_TYPE
        || (GRUB_EFI_DEVICE_PATH_SUBTYPE (ldp) != GRUB_EFI_IPV4_DEVICE_PATH_SUBTYPE
            && GRUB_EFI_DEVICE_PATH_SUBTYPE (ldp) != GRUB_EFI_IPV6_DEVICE_PATH_SUBTYPE))
-@@ -748,6 +760,7 @@ grub_efi_net_config_real (grub_efi_handle_t hnd, char **device,
+@@ -744,6 +756,7 @@ grub_efi_net_config_real (grub_efi_handle_t hnd, char **device,
  	if (GRUB_EFI_DEVICE_PATH_TYPE (ldp) != GRUB_EFI_MESSAGING_DEVICE_PATH_TYPE
  	    || (GRUB_EFI_DEVICE_PATH_SUBTYPE (ldp) != GRUB_EFI_IPV4_DEVICE_PATH_SUBTYPE
  		&& GRUB_EFI_DEVICE_PATH_SUBTYPE (ldp) != GRUB_EFI_IPV6_DEVICE_PATH_SUBTYPE
@@ -269,7 +269,7 @@ index e771364045..8d229e2221 100644
  		&& GRUB_EFI_DEVICE_PATH_SUBTYPE (ldp) != GRUB_EFI_URI_DEVICE_PATH_SUBTYPE))
  	  continue;
  	dup_dp = grub_efi_duplicate_device_path (dp);
-@@ -762,6 +775,15 @@ grub_efi_net_config_real (grub_efi_handle_t hnd, char **device,
+@@ -758,6 +771,15 @@ grub_efi_net_config_real (grub_efi_handle_t hnd, char **device,
  	    dup_ldp->length = sizeof (*dup_ldp);
  	  }
  
@@ -285,7 +285,7 @@ index e771364045..8d229e2221 100644
  	dup_ldp = grub_efi_find_last_device_path (dup_dp);
  	dup_ldp->type = GRUB_EFI_END_DEVICE_PATH_TYPE;
  	dup_ldp->subtype = GRUB_EFI_END_ENTIRE_DEVICE_PATH_SUBTYPE;
-@@ -820,6 +842,9 @@ grub_efi_net_config_real (grub_efi_handle_t hnd, char **device,
+@@ -816,6 +838,9 @@ grub_efi_net_config_real (grub_efi_handle_t hnd, char **device,
  
  GRUB_MOD_INIT(efinet)
  {
@@ -295,7 +295,7 @@ index e771364045..8d229e2221 100644
    grub_efinet_findcards ();
    grub_efi_net_config = grub_efi_net_config_real;
  }
-@@ -831,5 +856,7 @@ GRUB_MOD_FINI(efinet)
+@@ -827,5 +852,7 @@ GRUB_MOD_FINI(efinet)
    FOR_NET_CARDS_SAFE (card, next) 
      if (card->driver == &efidriver)
        grub_net_card_unregister (card);
@@ -3866,7 +3866,7 @@ index 0000000000..4b6b48cb12
 +  };
 +
 diff --git a/grub-core/net/net.c b/grub-core/net/net.c
-index cdae1fe398..dfe29db4ca 100644
+index fed7bc57cb..2f869390ec 100644
 --- a/grub-core/net/net.c
 +++ b/grub-core/net/net.c
 @@ -32,6 +32,9 @@
@@ -3879,7 +3879,7 @@ index cdae1fe398..dfe29db4ca 100644
  
  GRUB_MOD_LICENSE ("GPLv3+");
  
-@@ -1828,8 +1831,49 @@ static grub_command_t cmd_addaddr, cmd_deladdr, cmd_addroute, cmd_delroute;
+@@ -1822,8 +1825,49 @@ static grub_command_t cmd_addaddr, cmd_deladdr, cmd_addroute, cmd_delroute;
  static grub_command_t cmd_lsroutes, cmd_lscards;
  static grub_command_t cmd_lsaddr, cmd_slaac;
  
@@ -3929,7 +3929,7 @@ index cdae1fe398..dfe29db4ca 100644
    grub_register_variable_hook ("net_default_server", defserver_get_env,
  			       defserver_set_env);
    grub_env_export ("net_default_server");
-@@ -1877,10 +1921,37 @@ GRUB_MOD_INIT(net)
+@@ -1871,10 +1915,37 @@ GRUB_MOD_INIT(net)
  						grub_net_restore_hw,
  						GRUB_LOADER_PREBOOT_HOOK_PRIO_DISK);
    grub_net_poll_cards_idle = grub_net_poll_cards_idle_real;
@@ -3967,7 +3967,7 @@ index cdae1fe398..dfe29db4ca 100644
    grub_register_variable_hook ("net_default_server", 0, 0);
    grub_register_variable_hook ("pxe_default_server", 0, 0);
  
-@@ -1899,4 +1970,7 @@ GRUB_MOD_FINI(net)
+@@ -1893,4 +1964,7 @@ GRUB_MOD_FINI(net)
    grub_net_fini_hw (0);
    grub_loader_unregister_preboot_hook (fini_hnd);
    grub_net_poll_cards_idle = grub_net_poll_cards_idle_real;

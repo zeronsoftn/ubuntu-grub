@@ -1,4 +1,4 @@
-From 7d5696d34d9ef11aec2f4447d656eb22041db977 Mon Sep 17 00:00:00 2001
+From 3a136af48f2f05b7e21617076213008f48b32efe Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Fri, 14 Feb 2020 12:44:14 +0100
 Subject: normal: Move common datetime functions out of the normal module
