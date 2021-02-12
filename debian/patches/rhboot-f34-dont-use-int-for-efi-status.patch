@@ -12,7 +12,7 @@ Patch-Name: rhboot-f34-dont-use-int-for-efi-status.patch
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/kern/efi/efi.c b/grub-core/kern/efi/efi.c
-index d4a4be57cb..7cf003f713 100644
+index d4a4be57c..7cf003f71 100644
 --- a/grub-core/kern/efi/efi.c
 +++ b/grub-core/kern/efi/efi.c
 @@ -167,7 +167,7 @@ grub_reboot (void)

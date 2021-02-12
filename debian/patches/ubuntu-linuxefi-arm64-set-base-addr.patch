@@ -34,7 +34,7 @@ Patch-Name: ubuntu-linuxefi-arm64-set-base-addr.patch
  1 file changed, 15 insertions(+)
 
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
-index f6d30bcf7c..a09479cd6d 100644
+index f6d30bcf7..a09479cd6 100644
 --- a/grub-core/loader/efi/linux.c
 +++ b/grub-core/loader/efi/linux.c
 @@ -72,6 +72,7 @@ grub_err_t

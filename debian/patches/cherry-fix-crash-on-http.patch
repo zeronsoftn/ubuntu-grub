@@ -19,7 +19,7 @@ Patch-Name: cherry-fix-crash-on-http.patch
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/net/http.c b/grub-core/net/http.c
-index f182d7b871..dfa849e85b 100644
+index f182d7b87..dfa849e85 100644
 --- a/grub-core/net/http.c
 +++ b/grub-core/net/http.c
 @@ -405,7 +405,7 @@ http_establish (struct grub_file *file, grub_off_t offset, int initial)
