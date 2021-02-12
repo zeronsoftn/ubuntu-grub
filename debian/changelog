@@ -1,7 +1,17 @@
+grub2 (2.04-1ubuntu40) hirsute; urgency=medium
+
+  * Revert: rhboot-f34-tcp-add-window-scaling-support.patch,
+    rhboot-f34-support-non-ethernet.patch,
+    ubuntu-fixup-rhboot-f34-support-non-ethernet.patch,
+    ubuntu-fixup-rhboot-f34-support-non-ethernet-2.patch: these break MAAS
+    LXD KVM pod deployments. LP: #1915288
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 12 Feb 2021 20:29:16 +0000
+
 grub2 (2.04-1ubuntu39) hirsute; urgency=medium
 
   * Cherrypick a bunch of patches:
-    - fix crash in http
+    - fix crash in http LP: #1915288
     - add bootp6 documentation
     - add support for UEFI boot protocols
     - use UEFI protocols for http & https networking
