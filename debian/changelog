@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu35.3) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu35.3) groovy; urgency=medium
 
   * Revert: rhboot-f34-tcp-add-window-scaling-support.patch,
     rhboot-f34-support-non-ethernet.patch,
@@ -7,7 +7,7 @@ grub2 (2.04-1ubuntu35.3) UNRELEASED; urgency=medium
     LXD KVM pod deployments. LP: #1915288
   * Cherrypick fix crash in http LP: #1915288
   
- -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 14 Jan 2021 12:30:56 +0000
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 12 Feb 2021 21:22:17 +0000
 
 grub2 (2.04-1ubuntu35.2) groovy; urgency=medium
 
