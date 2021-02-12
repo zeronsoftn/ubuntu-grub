@@ -1,4 +1,4 @@
-From f73e6b20bdcbebeba12668f4b3a93e9731865110 Mon Sep 17 00:00:00 2001
+From 69a41a5501e6252da39bce87a824e35be14cce32 Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Fri, 11 Sep 2020 11:28:08 +0200
 Subject: Cherry-pick back parts of "Load arm with SB enabled."

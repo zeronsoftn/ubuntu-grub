@@ -1,4 +1,4 @@
-From 8f4642af583c253259e8ca40d8aff776976d8d5d Mon Sep 17 00:00:00 2001
+From 3ab428259c8eda64784be5dfd0b6ef1f01eb2f3d Mon Sep 17 00:00:00 2001
 From: Julian Andres Klode <julian.klode@canonical.com>
 Date: Tue, 9 Jun 2020 11:50:23 +0200
 Subject: UBUNTU: Add GRUB_FLAVOUR_ORDER configuration item

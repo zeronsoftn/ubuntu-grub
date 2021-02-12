@@ -1,4 +1,4 @@
-From 4be2c61fdd94238b4e529f018eddea12f6ba5361 Mon Sep 17 00:00:00 2001
+From 2fb9ac70c2d0befdf6f66f6d742dcd09b29bb1a6 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Sun, 19 Jul 2020 14:43:31 -0400
 Subject: hfsplus: fix two more overflows

@@ -1,4 +1,4 @@
-From aa08be99df3978b44838e60f571fc965d9d963c4 Mon Sep 17 00:00:00 2001
+From 49624dd4f54562d803d32b6ffd9884d7aae98e23 Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <xnox@ubuntu.com>
 Date: Wed, 27 Nov 2019 23:12:35 +0000
 Subject: UBUNTU: Allow chainloading EFI apps from loop mounts.

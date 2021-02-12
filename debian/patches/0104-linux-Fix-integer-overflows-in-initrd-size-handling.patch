@@ -1,4 +1,4 @@
-From 5ae3595759c09e23b48fa2bb35abbe1f66c529bc Mon Sep 17 00:00:00 2001
+From 1aef52e6a40b9f20c23b9f07f3ac46b2f5b0dd8b Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@debian.org>
 Date: Sat, 25 Jul 2020 12:15:37 +0100
 Subject: linux: Fix integer overflows in initrd size handling
