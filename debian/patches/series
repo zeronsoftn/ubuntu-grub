@@ -111,3 +111,7 @@ ubuntu-linuxefi-arm64.patch
 ubuntu-dejavu-font-path.patch
 ubuntu-linuxefi-arm64-set-base-addr.patch
 tftp-rollover-block-counter.patch
+rhboot-f34-make-exit-take-a-return-code.patch
+rhboot-f34-dont-use-int-for-efi-status.patch
+rhboot-f34-make-pmtimer-tsc-calibration-fast.patch
+cherry-fix-crash-on-http.patch

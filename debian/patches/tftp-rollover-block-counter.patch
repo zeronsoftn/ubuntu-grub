@@ -49,7 +49,7 @@ Patch-Name: tftp-rollover-block-counter.patch
  1 file changed, 14 insertions(+), 3 deletions(-)
 
 diff --git a/grub-core/net/tftp.c b/grub-core/net/tftp.c
-index e6566fa17..33c0b8214 100644
+index e6566fa176..33c0b8214e 100644
 --- a/grub-core/net/tftp.c
 +++ b/grub-core/net/tftp.c
 @@ -183,11 +183,22 @@ tftp_receive (grub_net_udp_socket_t sock __attribute__ ((unused)),
