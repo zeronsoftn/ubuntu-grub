@@ -7,6 +7,7 @@ grub2 (2.04-1ubuntu45) UNRELEASED; urgency=medium
   * It would be nice to separate patches into topic subdirs -
     i.e. reverts, upstream cherry picks, debian, ubuntu, rhel, security,
     etc.
+  * Drop redundant dh-systemd build-dependency.
 
  -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 30 Mar 2021 11:34:55 +0100
 
