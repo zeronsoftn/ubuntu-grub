@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu45) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu45) hirsute; urgency=medium
 
   * Unapply all patches.
   * Stop using git-dpm.
@@ -9,7 +9,7 @@ grub2 (2.04-1ubuntu45) UNRELEASED; urgency=medium
     etc.
   * Drop redundant dh-systemd build-dependency.
 
- -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 30 Mar 2021 11:34:55 +0100
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 30 Mar 2021 11:55:05 +0100
 
 grub2 (2.04-1ubuntu44) hirsute; urgency=medium
 
