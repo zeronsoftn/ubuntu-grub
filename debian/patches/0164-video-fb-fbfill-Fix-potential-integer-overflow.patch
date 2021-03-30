@@ -1,4 +1,3 @@
-From 41c90c9842623e15dfaa56a73f5b588a0dc99b76 Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Wed, 4 Nov 2020 15:10:51 +0000
 Subject: video/fb/fbfill: Fix potential integer overflow
@@ -18,7 +17,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 13 insertions(+), 4 deletions(-)
 
 diff --git a/grub-core/video/fb/fbfill.c b/grub-core/video/fb/fbfill.c
-index 11816d07a0..a37acd1e29 100644
+index 11816d0..a37acd1 100644
 --- a/grub-core/video/fb/fbfill.c
 +++ b/grub-core/video/fb/fbfill.c
 @@ -31,6 +31,7 @@

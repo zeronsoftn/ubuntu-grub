@@ -1,4 +1,3 @@
-From e6ee4d07aaeea7074107e8c9eadcede1e2dc1777 Mon Sep 17 00:00:00 2001
 From: Daniel Axtens <dja@axtens.net>
 Date: Mon, 18 Jan 2021 17:17:16 +1100
 Subject: fs/btrfs: Validate the number of stripes/parities in RAID5/6
@@ -14,7 +13,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 3 insertions(+)
 
 diff --git a/grub-core/fs/btrfs.c b/grub-core/fs/btrfs.c
-index 2b65bd56a0..e4e87bae6b 100644
+index 2b65bd5..e4e87ba 100644
 --- a/grub-core/fs/btrfs.c
 +++ b/grub-core/fs/btrfs.c
 @@ -1076,6 +1076,9 @@ grub_btrfs_read_logical (struct grub_btrfs_data *data, grub_disk_addr_t addr,

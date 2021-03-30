@@ -1,4 +1,3 @@
-From 24d9b34795c31b2d8b3b55fe37fd0060ce0f0c36 Mon Sep 17 00:00:00 2001
 From: Chris Coulson <chris.coulson@canonical.com>
 Date: Thu, 7 Jan 2021 19:53:55 +0000
 Subject: kern/parser: Introduce terminate_arg() helper
@@ -13,7 +12,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 13 insertions(+), 10 deletions(-)
 
 diff --git a/grub-core/kern/parser.c b/grub-core/kern/parser.c
-index 0d3582bd87..572c67089f 100644
+index 0d3582b..572c670 100644
 --- a/grub-core/kern/parser.c
 +++ b/grub-core/kern/parser.c
 @@ -129,6 +129,16 @@ add_var (char *varname, char **bp, char **vp,

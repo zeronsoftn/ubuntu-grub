@@ -1,4 +1,3 @@
-From 31292c59c9cead04ec13dd7d7a8fa927061e43a3 Mon Sep 17 00:00:00 2001
 From: Daniel Axtens <dja@axtens.net>
 Date: Mon, 18 Jan 2021 14:51:11 +1100
 Subject: fs/jfs: Do not move to leaf level if name length is negative
@@ -16,7 +15,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/fs/jfs.c b/grub-core/fs/jfs.c
-index d5a6d65278..e5bbda61c5 100644
+index d5a6d65..e5bbda6 100644
 --- a/grub-core/fs/jfs.c
 +++ b/grub-core/fs/jfs.c
 @@ -567,7 +567,7 @@ grub_jfs_getent (struct grub_jfs_diropen *diro)

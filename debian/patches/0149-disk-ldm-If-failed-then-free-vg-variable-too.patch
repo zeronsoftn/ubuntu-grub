@@ -1,4 +1,3 @@
-From 6bf8cb83f29c5c0a7518b106238ec3ea1d665a01 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@canonical.com>
 Date: Mon, 7 Dec 2020 10:07:47 -0300
 Subject: disk/ldm: If failed then free vg variable too
@@ -12,7 +11,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/grub-core/disk/ldm.c b/grub-core/disk/ldm.c
-index 428415fac2..54713f45a1 100644
+index 428415f..54713f4 100644
 --- a/grub-core/disk/ldm.c
 +++ b/grub-core/disk/ldm.c
 @@ -199,6 +199,7 @@ make_vg (grub_disk_t disk,

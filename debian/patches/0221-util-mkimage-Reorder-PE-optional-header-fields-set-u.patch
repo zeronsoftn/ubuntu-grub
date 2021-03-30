@@ -1,4 +1,3 @@
-From 569e6142eb0fb71cd4f64301625d0381967a0b81 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 15 Feb 2021 14:21:48 +0100
 Subject: util/mkimage: Reorder PE optional header fields set-up
@@ -14,7 +13,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/util/mkimage.c b/util/mkimage.c
-index a039039db0..deaef56669 100644
+index a039039..deaef56 100644
 --- a/util/mkimage.c
 +++ b/util/mkimage.c
 @@ -1332,16 +1332,12 @@ grub_install_generate_image (const char *dir, const char *prefix,

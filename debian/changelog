@@ -1,3 +1,15 @@
+grub2 (2.04-1ubuntu45) UNRELEASED; urgency=medium
+
+  * Unapply all patches.
+  * Stop using git-dpm.
+  * Start using gbp pq import|export --no-patch-numbers, this brings grub2
+    packaging closer to other non-debian distributions.
+  * It would be nice to separate patches into topic subdirs -
+    i.e. reverts, upstream cherry picks, debian, ubuntu, rhel, security,
+    etc.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 30 Mar 2021 11:34:55 +0100
+
 grub2 (2.04-1ubuntu44) hirsute; urgency=medium
 
   * Compile grub-efi-amd64 installable i386 platform on hirsute, to make

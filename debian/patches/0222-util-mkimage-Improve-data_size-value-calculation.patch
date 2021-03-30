@@ -1,4 +1,3 @@
-From 77b2092f3fb7f1fb0ace2f180e3acfc9e9a14ccf Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Thu, 11 Feb 2021 17:07:33 +0100
 Subject: util/mkimage: Improve data_size value calculation
@@ -21,7 +20,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/util/mkimage.c b/util/mkimage.c
-index deaef56669..853a521792 100644
+index deaef56..853a521 100644
 --- a/util/mkimage.c
 +++ b/util/mkimage.c
 @@ -1260,6 +1260,7 @@ grub_install_generate_image (const char *dir, const char *prefix,

@@ -1,4 +1,3 @@
-From 91370b89d34344d09d7f705d2dba0697b127bb84 Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Fri, 4 Dec 2020 15:39:00 +0000
 Subject: video/readers/jpeg: Test for an invalid next marker reference from a
@@ -17,7 +16,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 6 insertions(+)
 
 diff --git a/grub-core/video/readers/jpeg.c b/grub-core/video/readers/jpeg.c
-index 31359a4c9c..0b6ce3cee6 100644
+index 31359a4..0b6ce3c 100644
 --- a/grub-core/video/readers/jpeg.c
 +++ b/grub-core/video/readers/jpeg.c
 @@ -253,6 +253,12 @@ grub_jpeg_decode_quan_table (struct grub_jpeg_data *data)

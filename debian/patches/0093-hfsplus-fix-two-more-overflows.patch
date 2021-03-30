@@ -1,4 +1,3 @@
-From 0edb485feec47c243d20b85a51bc5924d68d6b45 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Sun, 19 Jul 2020 14:43:31 -0400
 Subject: hfsplus: fix two more overflows
@@ -15,7 +14,7 @@ Reviewed-by: Darren Kenny <darren.kenny@oracle.com>
  1 file changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/grub-core/fs/hfsplus.c b/grub-core/fs/hfsplus.c
-index dae43becc9..9c4e4c88c9 100644
+index dae43be..9c4e4c8 100644
 --- a/grub-core/fs/hfsplus.c
 +++ b/grub-core/fs/hfsplus.c
 @@ -31,6 +31,7 @@

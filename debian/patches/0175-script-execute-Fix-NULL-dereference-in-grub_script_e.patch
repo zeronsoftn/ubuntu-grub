@@ -1,7 +1,7 @@
-From fef3fbf561e8bdd660e018cf23c642bcb1eea58a Mon Sep 17 00:00:00 2001
 From: Daniel Axtens <dja@axtens.net>
 Date: Fri, 3 Apr 2020 23:05:13 +1100
-Subject: script/execute: Fix NULL dereference in grub_script_execute_cmdline()
+Subject: script/execute: Fix NULL dereference in
+ grub_script_execute_cmdline()
 
 Signed-off-by: Daniel Axtens <dja@axtens.net>
 Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
@@ -10,7 +10,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/script/execute.c b/grub-core/script/execute.c
-index 7e028e1355..5ea2aefb88 100644
+index 7e028e1..5ea2aef 100644
 --- a/grub-core/script/execute.c
 +++ b/grub-core/script/execute.c
 @@ -940,7 +940,7 @@ grub_script_execute_cmdline (struct grub_script_cmd *cmd)

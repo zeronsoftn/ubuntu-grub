@@ -1,4 +1,3 @@
-From 4c0e9cdbe1a9d1ebe7fb1017030d7d103cbbaafc Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Fri, 22 Jan 2021 12:32:41 +0000
 Subject: kern/parser: Fix resource leak if argc == 0
@@ -23,7 +22,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 5 insertions(+)
 
 diff --git a/grub-core/kern/parser.c b/grub-core/kern/parser.c
-index 619db3122a..d1cf061ad6 100644
+index 619db31..d1cf061 100644
 --- a/grub-core/kern/parser.c
 +++ b/grub-core/kern/parser.c
 @@ -146,6 +146,7 @@ grub_parser_split_cmdline (const char *cmdline,

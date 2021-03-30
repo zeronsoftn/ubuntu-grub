@@ -1,4 +1,3 @@
-From 5556f1521d03c094ad3eb20d651d9d52e0e97b30 Mon Sep 17 00:00:00 2001
 From: Chris Coulson <chris.coulson@canonical.com>
 Date: Thu, 7 Jan 2021 15:15:43 +0000
 Subject: kern/buffer: Add variable sized heap buffer
@@ -11,14 +10,14 @@ Signed-off-by: Chris Coulson <chris.coulson@canonical.com>
 Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
 ---
  grub-core/Makefile.core.def |   1 +
- grub-core/kern/buffer.c     | 117 +++++++++++++++++++++++++++++
- include/grub/buffer.h       | 144 ++++++++++++++++++++++++++++++++++++
+ grub-core/kern/buffer.c     | 117 +++++++++++++++++++++++++++++++++++
+ include/grub/buffer.h       | 144 ++++++++++++++++++++++++++++++++++++++++++++
  3 files changed, 262 insertions(+)
  create mode 100644 grub-core/kern/buffer.c
  create mode 100644 include/grub/buffer.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 72a9d4b66b..0fa336f72e 100644
+index 72a9d4b..0fa336f 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -123,6 +123,7 @@ kernel = {
@@ -31,7 +30,7 @@ index 72a9d4b66b..0fa336f72e 100644
    common = kern/device.c;
 diff --git a/grub-core/kern/buffer.c b/grub-core/kern/buffer.c
 new file mode 100644
-index 0000000000..9f5f8b8670
+index 0000000..9f5f8b8
 --- /dev/null
 +++ b/grub-core/kern/buffer.c
 @@ -0,0 +1,117 @@
@@ -154,7 +153,7 @@ index 0000000000..9f5f8b8670
 +}
 diff --git a/include/grub/buffer.h b/include/grub/buffer.h
 new file mode 100644
-index 0000000000..f4b10cf281
+index 0000000..f4b10cf
 --- /dev/null
 +++ b/include/grub/buffer.h
 @@ -0,0 +1,144 @@

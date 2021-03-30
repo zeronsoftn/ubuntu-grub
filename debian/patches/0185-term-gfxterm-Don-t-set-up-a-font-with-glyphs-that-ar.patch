@@ -1,4 +1,3 @@
-From b1725fb68af57f7f94c02fff11d7a0cf6b213a1e Mon Sep 17 00:00:00 2001
 From: Daniel Axtens <dja@axtens.net>
 Date: Fri, 15 Jan 2021 20:03:20 +1100
 Subject: term/gfxterm: Don't set up a font with glyphs that are too big
@@ -26,7 +25,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 9 insertions(+)
 
 diff --git a/grub-core/term/gfxterm.c b/grub-core/term/gfxterm.c
-index af7c090a3e..b40fcce915 100644
+index af7c090..b40fcce 100644
 --- a/grub-core/term/gfxterm.c
 +++ b/grub-core/term/gfxterm.c
 @@ -232,6 +232,15 @@ grub_virtual_screen_setup (unsigned int x, unsigned int y,

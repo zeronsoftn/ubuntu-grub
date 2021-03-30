@@ -1,4 +1,3 @@
-From 687d60db13c0ada7390f762bf5b50f1028dd6ed4 Mon Sep 17 00:00:00 2001
 From: Dimitri John Ledkov <xnox@ubuntu.com>
 Date: Mon, 14 Sep 2020 10:51:32 +0100
 Subject: configure.ac: one more dejavu font search path
@@ -11,7 +10,7 @@ Patch-Name: ubuntu-dejavu-font-path.patch
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index 6a88b9b0c0..fae9171022 100644
+index 6a88b9b..fae9171 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -1671,7 +1671,7 @@ fi

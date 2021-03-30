@@ -1,4 +1,3 @@
-From 6fb933d5fe1e8dc73e05990012230abff994b55f Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Mon, 28 Sep 2020 20:08:33 +0200
 Subject: efi: Use grub_is_lockdown() instead of hardcoding a disabled modules
@@ -24,7 +23,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  4 files changed, 36 insertions(+), 43 deletions(-)
 
 diff --git a/docs/grub.texi b/docs/grub.texi
-index eed542594f..1f23edcb71 100644
+index eed5425..1f23edc 100644
 --- a/docs/grub.texi
 +++ b/docs/grub.texi
 @@ -5405,6 +5405,9 @@ only applies to the particular cpu/core/thread that runs the command.
@@ -64,7 +63,7 @@ index eed542594f..1f23edcb71 100644
  @node Measured Boot
  @section Measuring boot components
 diff --git a/grub-core/commands/i386/wrmsr.c b/grub-core/commands/i386/wrmsr.c
-index 9c5e510eb4..56a29c29f4 100644
+index 9c5e510..56a29c2 100644
 --- a/grub-core/commands/i386/wrmsr.c
 +++ b/grub-core/commands/i386/wrmsr.c
 @@ -24,6 +24,7 @@
@@ -87,7 +86,7 @@ index 9c5e510eb4..56a29c29f4 100644
  
  GRUB_MOD_FINI(wrmsr)
 diff --git a/grub-core/commands/iorw.c b/grub-core/commands/iorw.c
-index 41a7f3f046..584baec8f9 100644
+index 41a7f3f..584baec 100644
 --- a/grub-core/commands/iorw.c
 +++ b/grub-core/commands/iorw.c
 @@ -23,7 +23,7 @@
@@ -144,7 +143,7 @@ index 41a7f3f046..584baec8f9 100644
    grub_unregister_extcmd (cmd_read_word);
    grub_unregister_extcmd (cmd_read_dword);
 diff --git a/grub-core/commands/memrw.c b/grub-core/commands/memrw.c
-index 088cbe9e2b..d401a6db0e 100644
+index 088cbe9..d401a6d 100644
 --- a/grub-core/commands/memrw.c
 +++ b/grub-core/commands/memrw.c
 @@ -22,7 +22,7 @@

@@ -1,4 +1,3 @@
-From 420751277f2d9272cc59fc557409a2a4dccbc306 Mon Sep 17 00:00:00 2001
 From: Daniel Axtens <dja@axtens.net>
 Date: Fri, 22 Jan 2021 16:18:26 +1100
 Subject: script/execute: Don't crash on a "for" loop with no items
@@ -21,7 +20,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 3 insertions(+)
 
 diff --git a/grub-core/script/execute.c b/grub-core/script/execute.c
-index 23d34bd77e..31dac254dc 100644
+index 23d34bd..31dac25 100644
 --- a/grub-core/script/execute.c
 +++ b/grub-core/script/execute.c
 @@ -624,6 +624,9 @@ grub_script_arglist_to_argv (struct grub_script_arglist *arglist,

@@ -1,4 +1,3 @@
-From 09c71638fe8b05e1c91326d016d1e326ed21cb48 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 15 Feb 2021 14:58:06 +0100
 Subject: util/mkimage: Refactor section setup to use a helper
@@ -10,11 +9,11 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
 Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
 Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
 ---
- util/mkimage.c | 143 ++++++++++++++++++++++++++-----------------------
+ util/mkimage.c | 143 +++++++++++++++++++++++++++++++--------------------------
  1 file changed, 77 insertions(+), 66 deletions(-)
 
 diff --git a/util/mkimage.c b/util/mkimage.c
-index 853a521792..8b475a6910 100644
+index 853a521..8b475a6 100644
 --- a/util/mkimage.c
 +++ b/util/mkimage.c
 @@ -816,6 +816,38 @@ grub_install_get_image_targets_string (void)

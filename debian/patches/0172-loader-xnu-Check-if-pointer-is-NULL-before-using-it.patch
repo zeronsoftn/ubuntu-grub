@@ -1,4 +1,3 @@
-From d1a35425c74abe01008d9e899b483bc54c8f09f3 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@canonical.com>
 Date: Mon, 30 Nov 2020 10:36:00 -0300
 Subject: loader/xnu: Check if pointer is NULL before using it
@@ -12,7 +11,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/grub-core/loader/xnu.c b/grub-core/loader/xnu.c
-index 9f90dc42e8..46d1b3fab5 100644
+index 9f90dc4..46d1b3f 100644
 --- a/grub-core/loader/xnu.c
 +++ b/grub-core/loader/xnu.c
 @@ -671,6 +671,9 @@ grub_xnu_load_driver (char *infoplistname, grub_file_t binaryfile,

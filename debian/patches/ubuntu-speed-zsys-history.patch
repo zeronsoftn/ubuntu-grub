@@ -1,4 +1,3 @@
-From 55104d5764c31ec9b716dfbbae5dc10091e2ee60 Mon Sep 17 00:00:00 2001
 From: Didier Roche <didrocks@ubuntu.com>
 Date: Mon, 13 Apr 2020 15:12:21 +0200
 Subject: UBUNTU: Improve performance in bootmenu for zsys
@@ -13,11 +12,11 @@ parameters.
 
 Patch-Name: ubuntu-speed-zsys-history.patch
 ---
- util/grub.d/10_linux_zfs.in | 77 +++++++++++++++++++++++++++----------
+ util/grub.d/10_linux_zfs.in | 77 ++++++++++++++++++++++++++++++++-------------
  1 file changed, 56 insertions(+), 21 deletions(-)
 
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 735b46af65..8c2e7e5c15 100755
+index 735b46a..8c2e7e5 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -819,9 +819,10 @@ zfs_linux_entry () {

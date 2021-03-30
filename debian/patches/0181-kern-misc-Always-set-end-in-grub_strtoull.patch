@@ -1,4 +1,3 @@
-From 3ab1de941ecf2165737c80fb44b963fbf6eb67bf Mon Sep 17 00:00:00 2001
 From: Daniel Axtens <dja@axtens.net>
 Date: Wed, 13 Jan 2021 22:19:01 +1100
 Subject: kern/misc: Always set *end in grub_strtoull()
@@ -16,7 +15,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 8 insertions(+)
 
 diff --git a/grub-core/kern/misc.c b/grub-core/kern/misc.c
-index e742f56d20..8e95d9c464 100644
+index e742f56..8e95d9c 100644
 --- a/grub-core/kern/misc.c
 +++ b/grub-core/kern/misc.c
 @@ -406,6 +406,10 @@ grub_strtoull (const char *str, char **end, int base)

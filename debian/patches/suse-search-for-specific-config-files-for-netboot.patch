@@ -1,4 +1,3 @@
-From be1df389eddb18a458e2c66c18d29527c94c6028 Mon Sep 17 00:00:00 2001
 From: Paulo Flabiano Smorigo <pfsmorigo@br.ibm.com>
 Date: Wed, 22 Jan 2020 12:01:55 +0100
 Subject: normal/main: Search for specific config files for netboot
@@ -24,13 +23,13 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
 
 Patch-Name: suse-search-for-specific-config-files-for-netboot.patch
 ---
- grub-core/net/net.c     | 131 ++++++++++++++++++++++++++++++++++++++++
- grub-core/normal/main.c |  26 ++++++--
+ grub-core/net/net.c     | 131 ++++++++++++++++++++++++++++++++++++++++++++++++
+ grub-core/normal/main.c |  26 ++++++++--
  include/grub/net.h      |   2 +
  3 files changed, 155 insertions(+), 4 deletions(-)
 
 diff --git a/grub-core/net/net.c b/grub-core/net/net.c
-index 2f869390ec..ab506401bf 100644
+index 2f86939..ab50640 100644
 --- a/grub-core/net/net.c
 +++ b/grub-core/net/net.c
 @@ -1819,6 +1819,137 @@ grub_net_restore_hw (void)
@@ -172,7 +171,7 @@ index 2f869390ec..ab506401bf 100644
  
  static grub_command_t cmd_addaddr, cmd_deladdr, cmd_addroute, cmd_delroute;
 diff --git a/grub-core/normal/main.c b/grub-core/normal/main.c
-index d25a8212c7..99faf41a8d 100644
+index d25a821..99faf41 100644
 --- a/grub-core/normal/main.c
 +++ b/grub-core/normal/main.c
 @@ -18,6 +18,7 @@
@@ -216,7 +215,7 @@ index d25a8212c7..99faf41a8d 100644
  	  grub_enter_normal_mode (config);
  	  grub_free (config);
 diff --git a/include/grub/net.h b/include/grub/net.h
-index b5f9e617e5..b32d02e66c 100644
+index b5f9e61..b32d02e 100644
 --- a/include/grub/net.h
 +++ b/include/grub/net.h
 @@ -641,6 +641,8 @@ grub_net_add_dns_server (const struct grub_net_network_level_address *s);

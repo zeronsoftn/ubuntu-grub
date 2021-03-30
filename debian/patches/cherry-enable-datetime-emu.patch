@@ -1,4 +1,3 @@
-From bfa0b5ccc528e116d523384f877d1b61e9f33b0f Mon Sep 17 00:00:00 2001
 From: Mike Gilbert <floppym@gentoo.org>
 Date: Thu, 5 Mar 2020 16:52:18 -0500
 Subject: datetime: Enable the datetime module for the emu platform
@@ -21,7 +20,7 @@ Patch-Name: cherry-enable-datetime-emu.patch
  1 file changed, 1 deletion(-)
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 1c71233d06..01819d1044 100644
+index 1c71233..01819d1 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -1692,7 +1692,6 @@ module = {

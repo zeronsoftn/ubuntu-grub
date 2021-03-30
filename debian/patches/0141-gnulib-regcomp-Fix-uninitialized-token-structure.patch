@@ -1,4 +1,3 @@
-From 0d1dd6942d5ffe92c2964d6321ab55d4c4c4f7c0 Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Thu, 22 Oct 2020 13:54:06 +0000
 Subject: gnulib/regcomp: Fix uninitialized token structure
@@ -14,14 +13,14 @@ Fixes: CID 73749
 Signed-off-by: Darren Kenny <darren.kenny@oracle.com>
 Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
 ---
- conf/Makefile.extra-dist                              |  1 +
- .../lib/gnulib-patches/fix-uninit-structure.patch     | 11 +++++++++++
- grub-core/lib/gnulib/regcomp.c                        |  2 +-
+ conf/Makefile.extra-dist                                |  1 +
+ grub-core/lib/gnulib-patches/fix-uninit-structure.patch | 11 +++++++++++
+ grub-core/lib/gnulib/regcomp.c                          |  2 +-
  3 files changed, 13 insertions(+), 1 deletion(-)
  create mode 100644 grub-core/lib/gnulib-patches/fix-uninit-structure.patch
 
 diff --git a/conf/Makefile.extra-dist b/conf/Makefile.extra-dist
-index 9b01152d99..9e55458134 100644
+index 9b01152..9e55458 100644
 --- a/conf/Makefile.extra-dist
 +++ b/conf/Makefile.extra-dist
 @@ -29,6 +29,7 @@ EXTRA_DIST += grub-core/genemuinit.sh
@@ -34,7 +33,7 @@ index 9b01152d99..9e55458134 100644
  EXTRA_DIST += grub-core/lib/gnulib-patches/no-abort.patch
 diff --git a/grub-core/lib/gnulib-patches/fix-uninit-structure.patch b/grub-core/lib/gnulib-patches/fix-uninit-structure.patch
 new file mode 100644
-index 0000000000..7b4d9f67af
+index 0000000..7b4d9f6
 --- /dev/null
 +++ b/grub-core/lib/gnulib-patches/fix-uninit-structure.patch
 @@ -0,0 +1,11 @@
@@ -50,7 +49,7 @@ index 0000000000..7b4d9f67af
 + 
 +   sbcset = (re_bitset_ptr_t) calloc (sizeof (bitset_t), 1);
 diff --git a/grub-core/lib/gnulib/regcomp.c b/grub-core/lib/gnulib/regcomp.c
-index fe7dfcbe56..2545d3e674 100644
+index fe7dfcb..2545d3e 100644
 --- a/grub-core/lib/gnulib/regcomp.c
 +++ b/grub-core/lib/gnulib/regcomp.c
 @@ -3662,7 +3662,7 @@ build_charclass_op (re_dfa_t *dfa, RE_TRANSLATE_TYPE trans,

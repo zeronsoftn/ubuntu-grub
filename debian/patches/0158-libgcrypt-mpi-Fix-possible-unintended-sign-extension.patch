@@ -1,4 +1,3 @@
-From e1872c3f48ccab6a6e4de7a44e21a412ade7ce1f Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Tue, 3 Nov 2020 16:43:37 +0000
 Subject: libgcrypt/mpi: Fix possible unintended sign extension
@@ -18,7 +17,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/lib/libgcrypt/mpi/mpicoder.c b/grub-core/lib/libgcrypt/mpi/mpicoder.c
-index a3435ed142..7ecad27b23 100644
+index a3435ed..7ecad27 100644
 --- a/grub-core/lib/libgcrypt/mpi/mpicoder.c
 +++ b/grub-core/lib/libgcrypt/mpi/mpicoder.c
 @@ -458,7 +458,7 @@ gcry_mpi_scan (struct gcry_mpi **ret_mpi, enum gcry_mpi_format format,

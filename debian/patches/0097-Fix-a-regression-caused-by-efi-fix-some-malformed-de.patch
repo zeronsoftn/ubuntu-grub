@@ -1,4 +1,3 @@
-From f87f39f286a5ed66b1fcccd329c4c1f5e6fb3b88 Mon Sep 17 00:00:00 2001
 From: Chris Coulson <chris.coulson@canonical.com>
 Date: Wed, 22 Jul 2020 17:06:04 +0100
 Subject: Fix a regression caused by "efi: fix some malformed device path
@@ -21,7 +20,7 @@ Remove the bogus check, and also propagate errors from copy_file_path.
  1 file changed, 13 insertions(+), 12 deletions(-)
 
 diff --git a/grub-core/loader/efi/chainloader.c b/grub-core/loader/efi/chainloader.c
-index cf89cedf8d..d0c53077e8 100644
+index cf89ced..d0c5307 100644
 --- a/grub-core/loader/efi/chainloader.c
 +++ b/grub-core/loader/efi/chainloader.c
 @@ -116,7 +116,7 @@ grub_chainloader_boot (void)

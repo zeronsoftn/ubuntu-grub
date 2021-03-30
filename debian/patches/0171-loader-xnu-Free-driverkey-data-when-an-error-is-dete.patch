@@ -1,4 +1,3 @@
-From 2af419a656fd12382ec54f30b3518f7eeee2cf4f Mon Sep 17 00:00:00 2001
 From: Marco A Benatto <mbenatto@redhat.com>
 Date: Mon, 30 Nov 2020 12:18:24 -0300
 Subject: loader/xnu: Free driverkey data when an error is detected in
@@ -15,7 +14,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 20 insertions(+), 4 deletions(-)
 
 diff --git a/grub-core/loader/xnu.c b/grub-core/loader/xnu.c
-index ac551658ed..9f90dc42e8 100644
+index ac55165..9f90dc4 100644
 --- a/grub-core/loader/xnu.c
 +++ b/grub-core/loader/xnu.c
 @@ -228,26 +228,33 @@ grub_xnu_writetree_toheap (grub_addr_t *target, grub_size_t *size)

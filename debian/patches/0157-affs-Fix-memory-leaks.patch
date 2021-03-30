@@ -1,4 +1,3 @@
-From 557f1e24ea388e949db9bc8da1d3f0383bb502d0 Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Thu, 26 Nov 2020 12:48:07 +0000
 Subject: affs: Fix memory leaks
@@ -25,7 +24,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 8 insertions(+), 10 deletions(-)
 
 diff --git a/grub-core/fs/affs.c b/grub-core/fs/affs.c
-index 220b3712f2..230e26af0f 100644
+index 220b371..230e26a 100644
 --- a/grub-core/fs/affs.c
 +++ b/grub-core/fs/affs.c
 @@ -400,12 +400,12 @@ grub_affs_iterate_dir (grub_fshelp_node_t dir,

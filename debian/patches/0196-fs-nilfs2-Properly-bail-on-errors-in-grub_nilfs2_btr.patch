@@ -1,7 +1,7 @@
-From d0fe9749b0243fd6d8800abf38646f9ccce6086e Mon Sep 17 00:00:00 2001
 From: Daniel Axtens <dja@axtens.net>
 Date: Mon, 18 Jan 2021 17:06:19 +1100
-Subject: fs/nilfs2: Properly bail on errors in grub_nilfs2_btree_node_lookup()
+Subject: fs/nilfs2: Properly bail on errors in
+ grub_nilfs2_btree_node_lookup()
 
 We just introduced an error return in grub_nilfs2_btree_node_lookup().
 Make sure the callers catch it.
@@ -16,7 +16,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/grub-core/fs/nilfs2.c b/grub-core/fs/nilfs2.c
-index 43ac1add38..aaba002666 100644
+index 43ac1ad..aaba002 100644
 --- a/grub-core/fs/nilfs2.c
 +++ b/grub-core/fs/nilfs2.c
 @@ -433,7 +433,7 @@ grub_nilfs2_btree_node_lookup (struct grub_nilfs2_data *data,

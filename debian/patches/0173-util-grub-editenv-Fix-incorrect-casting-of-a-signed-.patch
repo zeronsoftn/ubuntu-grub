@@ -1,4 +1,3 @@
-From fcc414af17cf4152a4920a033c5960e5d85fdfb3 Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Thu, 5 Nov 2020 14:33:50 +0000
 Subject: util/grub-editenv: Fix incorrect casting of a signed value
@@ -16,7 +15,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 7 insertions(+), 1 deletion(-)
 
 diff --git a/util/grub-editenv.c b/util/grub-editenv.c
-index f3662c95ba..db6f187cc6 100644
+index f3662c9..db6f187 100644
 --- a/util/grub-editenv.c
 +++ b/util/grub-editenv.c
 @@ -125,6 +125,7 @@ open_envblk_file (const char *name)

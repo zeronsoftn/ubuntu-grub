@@ -1,4 +1,3 @@
-From 868d2e56986759584777dbf88a54f634df955fa9 Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Thu, 5 Nov 2020 10:29:59 +0000
 Subject: zstd: Initialize seq_t structure fully
@@ -17,7 +16,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/lib/zstd/zstd_decompress.c b/grub-core/lib/zstd/zstd_decompress.c
-index 711b5b6d7a..e4b5670c26 100644
+index 711b5b6..e4b5670 100644
 --- a/grub-core/lib/zstd/zstd_decompress.c
 +++ b/grub-core/lib/zstd/zstd_decompress.c
 @@ -1325,7 +1325,7 @@ typedef enum { ZSTD_lo_isRegularOffset, ZSTD_lo_isLongOffset=1 } ZSTD_longOffset

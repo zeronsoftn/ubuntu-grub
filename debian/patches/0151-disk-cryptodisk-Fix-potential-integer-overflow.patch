@@ -1,4 +1,3 @@
-From 2142b5e45d724319ad2f8e129e13d829cf9c4887 Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Thu, 21 Jan 2021 11:38:31 +0000
 Subject: disk/cryptodisk: Fix potential integer overflow
@@ -16,7 +15,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/grub-core/disk/cryptodisk.c b/grub-core/disk/cryptodisk.c
-index 5037768fc3..6883f48844 100644
+index 5037768..6883f48 100644
 --- a/grub-core/disk/cryptodisk.c
 +++ b/grub-core/disk/cryptodisk.c
 @@ -311,10 +311,10 @@ grub_cryptodisk_endecrypt (struct grub_cryptodisk *dev,

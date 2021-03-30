@@ -1,4 +1,3 @@
-From 8e3c2594f4ee4637b1e81704c76ed1a8f36d8c62 Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Thu, 5 Nov 2020 10:57:14 +0000
 Subject: gnulib/regexec: Fix possible null-dereference
@@ -13,14 +12,14 @@ Fixes: CID 86720
 Signed-off-by: Darren Kenny <darren.kenny@oracle.com>
 Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
 ---
- conf/Makefile.extra-dist                             |  1 +
- .../lib/gnulib-patches/fix-regexec-null-deref.patch  | 12 ++++++++++++
- grub-core/lib/gnulib/regexec.c                       |  3 +++
+ conf/Makefile.extra-dist                                  |  1 +
+ grub-core/lib/gnulib-patches/fix-regexec-null-deref.patch | 12 ++++++++++++
+ grub-core/lib/gnulib/regexec.c                            |  3 +++
  3 files changed, 16 insertions(+)
  create mode 100644 grub-core/lib/gnulib-patches/fix-regexec-null-deref.patch
 
 diff --git a/conf/Makefile.extra-dist b/conf/Makefile.extra-dist
-index 96d7e696eb..d27d3a9d0d 100644
+index 96d7e69..d27d3a9 100644
 --- a/conf/Makefile.extra-dist
 +++ b/conf/Makefile.extra-dist
 @@ -30,6 +30,7 @@ EXTRA_DIST += grub-core/genemuinitheader.sh
@@ -33,7 +32,7 @@ index 96d7e696eb..d27d3a9d0d 100644
  EXTRA_DIST += grub-core/lib/gnulib-patches/fix-width.patch
 diff --git a/grub-core/lib/gnulib-patches/fix-regexec-null-deref.patch b/grub-core/lib/gnulib-patches/fix-regexec-null-deref.patch
 new file mode 100644
-index 0000000000..db6dac9c9e
+index 0000000..db6dac9
 --- /dev/null
 +++ b/grub-core/lib/gnulib-patches/fix-regexec-null-deref.patch
 @@ -0,0 +1,12 @@
@@ -50,7 +49,7 @@ index 0000000000..db6dac9c9e
 +        && mctx->input.bufs_len < mctx->input.len)
 +       || (next_state_log_idx >= mctx->input.valid_len
 diff --git a/grub-core/lib/gnulib/regexec.c b/grub-core/lib/gnulib/regexec.c
-index e472e2514f..be787f0f36 100644
+index e472e25..be787f0 100644
 --- a/grub-core/lib/gnulib/regexec.c
 +++ b/grub-core/lib/gnulib/regexec.c
 @@ -1696,6 +1696,9 @@ clean_state_log_if_needed (re_match_context_t *mctx, Idx next_state_log_idx)

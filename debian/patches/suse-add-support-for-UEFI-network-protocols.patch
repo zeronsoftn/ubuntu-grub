@@ -1,4 +1,3 @@
-From 90d5226d9ebee1201531388589df4c17deb4c7e8 Mon Sep 17 00:00:00 2001
 From: Michael Chang <mchang@suse.com>
 Date: Wed, 22 Feb 2017 14:27:50 +0800
 Subject: Support UEFI networking protocols
@@ -46,19 +45,19 @@ Patch-Name: suse-add-support-for-UEFI-network-protocols.patch
 ---
  grub-core/Makefile.core.def        |    6 +
  grub-core/io/bufio.c               |    2 +-
- grub-core/kern/efi/efi.c           |   96 +-
+ grub-core/kern/efi/efi.c           |   96 ++-
  grub-core/net/drivers/efi/efinet.c |   27 +
- grub-core/net/efi/dhcp.c           |  399 ++++++++
- grub-core/net/efi/http.c           |  424 ++++++++
- grub-core/net/efi/ip4_config.c     |  409 ++++++++
- grub-core/net/efi/ip6_config.c     |  430 +++++++++
- grub-core/net/efi/net.c            | 1440 ++++++++++++++++++++++++++++
- grub-core/net/efi/pxe.c            |  424 ++++++++
+ grub-core/net/efi/dhcp.c           |  399 ++++++++++
+ grub-core/net/efi/http.c           |  424 +++++++++++
+ grub-core/net/efi/ip4_config.c     |  409 ++++++++++
+ grub-core/net/efi/ip6_config.c     |  430 +++++++++++
+ grub-core/net/efi/net.c            | 1440 ++++++++++++++++++++++++++++++++++++
+ grub-core/net/efi/pxe.c            |  424 +++++++++++
  grub-core/net/net.c                |   74 ++
- include/grub/efi/api.h             |  181 +++-
- include/grub/efi/dhcp.h            |  343 +++++++
- include/grub/efi/http.h            |  215 +++++
- include/grub/net/efi.h             |  144 +++
+ include/grub/efi/api.h             |  181 ++++-
+ include/grub/efi/dhcp.h            |  343 +++++++++
+ include/grub/efi/http.h            |  215 ++++++
+ include/grub/net/efi.h             |  144 ++++
  15 files changed, 4577 insertions(+), 37 deletions(-)
  create mode 100644 grub-core/net/efi/dhcp.c
  create mode 100644 grub-core/net/efi/http.c
@@ -71,7 +70,7 @@ Patch-Name: suse-add-support-for-UEFI-network-protocols.patch
  create mode 100644 include/grub/net/efi.h
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index 9b20f33355..20be18575f 100644
+index 9b20f33..20be185 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -2308,6 +2308,12 @@ module = {
@@ -88,7 +87,7 @@ index 9b20f33355..20be18575f 100644
  
  module = {
 diff --git a/grub-core/io/bufio.c b/grub-core/io/bufio.c
-index a458c3aca7..1637731535 100644
+index a458c3a..1637731 100644
 --- a/grub-core/io/bufio.c
 +++ b/grub-core/io/bufio.c
 @@ -139,7 +139,7 @@ grub_bufio_read (grub_file_t file, char *buf, grub_size_t len)
@@ -101,7 +100,7 @@ index a458c3aca7..1637731535 100644
    if (file->offset + res < next_buf)
      {
 diff --git a/grub-core/kern/efi/efi.c b/grub-core/kern/efi/efi.c
-index 7cf003f713..ff200a0457 100644
+index 7cf003f..ff200a0 100644
 --- a/grub-core/kern/efi/efi.c
 +++ b/grub-core/kern/efi/efi.c
 @@ -732,7 +732,7 @@ grub_efi_print_device_path (grub_efi_device_path_t *dp)
@@ -232,7 +231,7 @@ index 7cf003f713..ff200a0457 100644
  	      grub_printf ("/UnknownMessaging(%x)", (unsigned) subtype);
  	      break;
 diff --git a/grub-core/net/drivers/efi/efinet.c b/grub-core/net/drivers/efi/efinet.c
-index 82a28fb6e9..f189209ba7 100644
+index 82a28fb..f189209 100644
 --- a/grub-core/net/drivers/efi/efinet.c
 +++ b/grub-core/net/drivers/efi/efinet.c
 @@ -24,6 +24,7 @@
@@ -305,7 +304,7 @@ index 82a28fb6e9..f189209ba7 100644
  
 diff --git a/grub-core/net/efi/dhcp.c b/grub-core/net/efi/dhcp.c
 new file mode 100644
-index 0000000000..4001c04a22
+index 0000000..4001c04
 --- /dev/null
 +++ b/grub-core/net/efi/dhcp.c
 @@ -0,0 +1,399 @@
@@ -710,7 +709,7 @@ index 0000000000..4001c04a22
 +grub_command_func_t grub_efi_net_bootp6 = grub_cmd_efi_bootp6;
 diff --git a/grub-core/net/efi/http.c b/grub-core/net/efi/http.c
 new file mode 100644
-index 0000000000..5fb472cb30
+index 0000000..5fb472c
 --- /dev/null
 +++ b/grub-core/net/efi/http.c
 @@ -0,0 +1,424 @@
@@ -1140,7 +1139,7 @@ index 0000000000..5fb472cb30
 +  };
 diff --git a/grub-core/net/efi/ip4_config.c b/grub-core/net/efi/ip4_config.c
 new file mode 100644
-index 0000000000..cbed31a21e
+index 0000000..cbed31a
 --- /dev/null
 +++ b/grub-core/net/efi/ip4_config.c
 @@ -0,0 +1,409 @@
@@ -1555,7 +1554,7 @@ index 0000000000..cbed31a21e
 +  };
 diff --git a/grub-core/net/efi/ip6_config.c b/grub-core/net/efi/ip6_config.c
 new file mode 100644
-index 0000000000..df92b69d42
+index 0000000..df92b69
 --- /dev/null
 +++ b/grub-core/net/efi/ip6_config.c
 @@ -0,0 +1,430 @@
@@ -1991,7 +1990,7 @@ index 0000000000..df92b69d42
 +  };
 diff --git a/grub-core/net/efi/net.c b/grub-core/net/efi/net.c
 new file mode 100644
-index 0000000000..2fe5fb63ca
+index 0000000..2fe5fb6
 --- /dev/null
 +++ b/grub-core/net/efi/net.c
 @@ -0,0 +1,1440 @@
@@ -3437,7 +3436,7 @@ index 0000000000..2fe5fb63ca
 +}
 diff --git a/grub-core/net/efi/pxe.c b/grub-core/net/efi/pxe.c
 new file mode 100644
-index 0000000000..4b6b48cb12
+index 0000000..4b6b48c
 --- /dev/null
 +++ b/grub-core/net/efi/pxe.c
 @@ -0,0 +1,424 @@
@@ -3866,7 +3865,7 @@ index 0000000000..4b6b48cb12
 +  };
 +
 diff --git a/grub-core/net/net.c b/grub-core/net/net.c
-index fed7bc57cb..2f869390ec 100644
+index fed7bc5..2f86939 100644
 --- a/grub-core/net/net.c
 +++ b/grub-core/net/net.c
 @@ -32,6 +32,9 @@
@@ -3976,7 +3975,7 @@ index fed7bc57cb..2f869390ec 100644
 +#endif
  }
 diff --git a/include/grub/efi/api.h b/include/grub/efi/api.h
-index 08bff60b51..49275e4117 100644
+index 08bff60..49275e4 100644
 --- a/include/grub/efi/api.h
 +++ b/include/grub/efi/api.h
 @@ -593,6 +593,23 @@ typedef grub_uint16_t grub_efi_ipv6_address_t[8];
@@ -4228,7 +4227,7 @@ index 08bff60b51..49275e4117 100644
    || defined(__riscv)
 diff --git a/include/grub/efi/dhcp.h b/include/grub/efi/dhcp.h
 new file mode 100644
-index 0000000000..fdb88eb810
+index 0000000..fdb88eb
 --- /dev/null
 +++ b/include/grub/efi/dhcp.h
 @@ -0,0 +1,343 @@
@@ -4577,7 +4576,7 @@ index 0000000000..fdb88eb810
 +#endif /* ! GRUB_EFI_DHCP_HEADER */
 diff --git a/include/grub/efi/http.h b/include/grub/efi/http.h
 new file mode 100644
-index 0000000000..c5e9a89f50
+index 0000000..c5e9a89
 --- /dev/null
 +++ b/include/grub/efi/http.h
 @@ -0,0 +1,215 @@
@@ -4798,7 +4797,7 @@ index 0000000000..c5e9a89f50
 +#endif /* !GRUB_EFI_HTTP_HEADER */
 diff --git a/include/grub/net/efi.h b/include/grub/net/efi.h
 new file mode 100644
-index 0000000000..de90d223e8
+index 0000000..de90d22
 --- /dev/null
 +++ b/include/grub/net/efi.h
 @@ -0,0 +1,144 @@

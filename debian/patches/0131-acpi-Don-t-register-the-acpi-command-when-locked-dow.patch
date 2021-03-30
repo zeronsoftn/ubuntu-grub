@@ -1,9 +1,8 @@
-From 1e57f66a6b1b53ee61a8bdb558ef9961542ea8c5 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Mon, 28 Sep 2020 20:08:41 +0200
 Subject: acpi: Don't register the acpi command when locked down
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 The command is not allowed when lockdown is enforced. Otherwise an
@@ -22,7 +21,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  2 files changed, 13 insertions(+), 7 deletions(-)
 
 diff --git a/docs/grub.texi b/docs/grub.texi
-index 1f23edcb71..b7f2f0d3c4 100644
+index 1f23edc..b7f2f0d 100644
 --- a/docs/grub.texi
 +++ b/docs/grub.texi
 @@ -4061,6 +4061,11 @@ Normally, this command will replace the Root System Description Pointer
@@ -38,7 +37,7 @@ index 1f23edcb71..b7f2f0d3c4 100644
  
  
 diff --git a/grub-core/commands/acpi.c b/grub-core/commands/acpi.c
-index 5a1499aa0e..1215f2a62e 100644
+index 5a1499a..1215f2a 100644
 --- a/grub-core/commands/acpi.c
 +++ b/grub-core/commands/acpi.c
 @@ -27,6 +27,7 @@

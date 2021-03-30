@@ -1,4 +1,3 @@
-From ff2614382ea5af66e162d9832cb7f66b40ca83c1 Mon Sep 17 00:00:00 2001
 From: Daniel Axtens <dja@axtens.net>
 Date: Mon, 18 Jan 2021 11:46:39 +1100
 Subject: fs/fshelp: Catch impermissibly large block sizes in read helper
@@ -18,7 +17,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 12 insertions(+)
 
 diff --git a/grub-core/fs/fshelp.c b/grub-core/fs/fshelp.c
-index 4c902adf38..a2d0d297a5 100644
+index 4c902ad..a2d0d29 100644
 --- a/grub-core/fs/fshelp.c
 +++ b/grub-core/fs/fshelp.c
 @@ -362,6 +362,18 @@ grub_fshelp_read_file (grub_disk_t disk, grub_fshelp_node_t node,

@@ -1,4 +1,3 @@
-From 3f75a6852e6c01003cee0a78688e0c520fde2407 Mon Sep 17 00:00:00 2001
 From: Daniel Axtens <dja@axtens.net>
 Date: Tue, 2 Feb 2021 16:59:35 +1100
 Subject: fs/hfsplus: Don't use uninitialized data on corrupt filesystems
@@ -50,7 +49,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  2 files changed, 16 insertions(+)
 
 diff --git a/grub-core/fs/hfsplus.c b/grub-core/fs/hfsplus.c
-index 1c7791b027..361e5be492 100644
+index 1c7791b..361e5be 100644
 --- a/grub-core/fs/hfsplus.c
 +++ b/grub-core/fs/hfsplus.c
 @@ -177,6 +177,17 @@ grub_hfsplus_read_block (grub_fshelp_node_t node, grub_disk_addr_t fileblock)
@@ -89,7 +88,7 @@ index 1c7791b027..361e5be492 100644
  			      sizeof (struct grub_hfsplus_btnode),
  			      sizeof (header), (char *) &header) <= 0)
 diff --git a/include/grub/hfsplus.h b/include/grub/hfsplus.h
-index 117740ae26..e14dd31ff5 100644
+index 117740a..e14dd31 100644
 --- a/include/grub/hfsplus.h
 +++ b/include/grub/hfsplus.h
 @@ -113,6 +113,8 @@ struct grub_hfsplus_data

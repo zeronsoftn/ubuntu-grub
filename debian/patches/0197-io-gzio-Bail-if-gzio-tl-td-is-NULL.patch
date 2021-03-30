@@ -1,4 +1,3 @@
-From 628d23f1c6a90aca9ec35e646a8c3ed2aef84a8d Mon Sep 17 00:00:00 2001
 From: Daniel Axtens <dja@axtens.net>
 Date: Wed, 13 Jan 2021 20:59:09 +1100
 Subject: io/gzio: Bail if gzio->tl/td is NULL
@@ -17,7 +16,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 20 insertions(+)
 
 diff --git a/grub-core/io/gzio.c b/grub-core/io/gzio.c
-index 43d98a7bdf..4a8eaeae28 100644
+index 43d98a7..4a8eaea 100644
 --- a/grub-core/io/gzio.c
 +++ b/grub-core/io/gzio.c
 @@ -669,6 +669,13 @@ inflate_codes_in_window (grub_gzio_t gzio)

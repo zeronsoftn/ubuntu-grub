@@ -1,7 +1,7 @@
-From 215ac19c547ea0448d3218f551a3e7d66480bee5 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Fri, 11 Dec 2020 19:19:21 +0100
-Subject: usb: Avoid possible out-of-bound accesses caused by malicious devices
+Subject: usb: Avoid possible out-of-bound accesses caused by malicious
+ devices
 
 The maximum number of configurations and interfaces are fixed but there is
 no out-of-bound checking to prevent a malicious USB device to report large
@@ -18,7 +18,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  2 files changed, 19 insertions(+), 6 deletions(-)
 
 diff --git a/grub-core/bus/usb/usb.c b/grub-core/bus/usb/usb.c
-index 8da5e4c749..7cb3cc230b 100644
+index 8da5e4c..7cb3cc2 100644
 --- a/grub-core/bus/usb/usb.c
 +++ b/grub-core/bus/usb/usb.c
 @@ -75,6 +75,9 @@ grub_usb_controller_iterate (grub_usb_controller_iterate_hook_t hook,
@@ -67,7 +67,7 @@ index 8da5e4c749..7cb3cc230b 100644
  
    return err;
 diff --git a/include/grub/usb.h b/include/grub/usb.h
-index 512ae1dd0e..6475c552fc 100644
+index 512ae1d..6475c55 100644
 --- a/include/grub/usb.h
 +++ b/include/grub/usb.h
 @@ -23,6 +23,10 @@

@@ -1,4 +1,3 @@
-From 7fcfd002718938add9d174ac52c679376a46d81c Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Fri, 24 Jul 2020 13:57:27 -0400
 Subject: linux loader: avoid overflow on initrd size calculation
@@ -9,7 +8,7 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/grub-core/loader/linux.c b/grub-core/loader/linux.c
-index 471b214d6c..25624ebc11 100644
+index 471b214..25624eb 100644
 --- a/grub-core/loader/linux.c
 +++ b/grub-core/loader/linux.c
 @@ -151,8 +151,8 @@ grub_initrd_init (int argc, char *argv[],

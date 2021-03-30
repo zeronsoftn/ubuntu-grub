@@ -1,4 +1,3 @@
-From 79a73459c3e240056f30e6e050fccba62b7ccf47 Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Thu, 26 Nov 2020 12:53:10 +0000
 Subject: loader/xnu: Fix memory leak
@@ -19,7 +18,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/loader/xnu.c b/grub-core/loader/xnu.c
-index 3fd653993f..ac551658ed 100644
+index 3fd6539..ac55165 100644
 --- a/grub-core/loader/xnu.c
 +++ b/grub-core/loader/xnu.c
 @@ -1392,9 +1392,9 @@ grub_xnu_fill_devicetree (void)

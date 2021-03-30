@@ -1,4 +1,3 @@
-From 19623dcb7584cd39936d68ba9db5f242213cff93 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Wed, 24 Feb 2021 22:59:59 +0100
 Subject: commands/setpci: Restrict setpci command when locked down
@@ -13,7 +12,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/grub-core/commands/setpci.c b/grub-core/commands/setpci.c
-index d5bc97d60b..fa2ba7d891 100644
+index d5bc97d..fa2ba7d 100644
 --- a/grub-core/commands/setpci.c
 +++ b/grub-core/commands/setpci.c
 @@ -329,10 +329,10 @@ static grub_extcmd_t cmd;

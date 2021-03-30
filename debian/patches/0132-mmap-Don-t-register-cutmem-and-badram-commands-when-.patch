@@ -1,4 +1,3 @@
-From 87b5d5985b179eabdbbc8fe9caddc47e5fb333e1 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Wed, 14 Oct 2020 16:33:42 +0200
 Subject: mmap: Don't register cutmem and badram commands when lockdown is
@@ -19,7 +18,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  2 files changed, 11 insertions(+), 6 deletions(-)
 
 diff --git a/docs/grub.texi b/docs/grub.texi
-index b7f2f0d3c4..787ed1c454 100644
+index b7f2f0d..787ed1c 100644
 --- a/docs/grub.texi
 +++ b/docs/grub.texi
 @@ -4126,6 +4126,10 @@ this page is to be filtered.  This syntax makes it easy to represent patterns
@@ -34,7 +33,7 @@ index b7f2f0d3c4..787ed1c454 100644
  @subsection blocklist
  
 diff --git a/grub-core/mmap/mmap.c b/grub-core/mmap/mmap.c
-index 57b4e9a72a..7ebf32e1e5 100644
+index 57b4e9a..7ebf32e 100644
 --- a/grub-core/mmap/mmap.c
 +++ b/grub-core/mmap/mmap.c
 @@ -20,6 +20,7 @@

@@ -1,4 +1,3 @@
-From bade03b870fc579fccf27e39ea65b7850e77f179 Mon Sep 17 00:00:00 2001
 From: Chris Coulson <chris.coulson@canonical.com>
 Date: Tue, 1 Dec 2020 23:03:39 +0000
 Subject: kern/efi: Add initial stack protector implementation
@@ -11,17 +10,17 @@ Signed-off-by: Daniel Kiper <daniel.kiper@oracle.com>
 Reviewed-by: Marco A Benatto <mbenatto@redhat.com>
 Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
 ---
- acinclude.m4                   | 38 ++++++++++++++++++++++--
- configure.ac                   | 44 +++++++++++++++++++++++----
+ acinclude.m4                   | 38 +++++++++++++++++++++++++++--
+ configure.ac                   | 44 ++++++++++++++++++++++++++++++----
  grub-core/Makefile.am          |  1 +
- grub-core/kern/efi/init.c      | 54 ++++++++++++++++++++++++++++++++++
- include/grub/efi/api.h         | 19 ++++++++++++
- include/grub/stack_protector.h | 30 +++++++++++++++++++
+ grub-core/kern/efi/init.c      | 54 ++++++++++++++++++++++++++++++++++++++++++
+ include/grub/efi/api.h         | 19 +++++++++++++++
+ include/grub/stack_protector.h | 30 +++++++++++++++++++++++
  6 files changed, 179 insertions(+), 7 deletions(-)
  create mode 100644 include/grub/stack_protector.h
 
 diff --git a/acinclude.m4 b/acinclude.m4
-index 78cdf6e1d0..6e14bb553c 100644
+index 78cdf6e..6e14bb5 100644
 --- a/acinclude.m4
 +++ b/acinclude.m4
 @@ -305,9 +305,9 @@ fi
@@ -78,7 +77,7 @@ index 78cdf6e1d0..6e14bb553c 100644
  
  dnl Check if the C compiler supports `-mstack-arg-probe' (Cygwin).
 diff --git a/configure.ac b/configure.ac
-index fae9171022..e187c91f65 100644
+index fae9171..e187c91 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -1307,12 +1307,41 @@ fi]
@@ -141,7 +140,7 @@ index fae9171022..e187c91f65 100644
  echo With quiet boot: Yes
  else
 diff --git a/grub-core/Makefile.am b/grub-core/Makefile.am
-index b704b77195..f90ab521a2 100644
+index b704b77..f90ab52 100644
 --- a/grub-core/Makefile.am
 +++ b/grub-core/Makefile.am
 @@ -90,6 +90,7 @@ endif
@@ -153,7 +152,7 @@ index b704b77195..f90ab521a2 100644
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/time.h
  KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/mm_private.h
 diff --git a/grub-core/kern/efi/init.c b/grub-core/kern/efi/init.c
-index 01d64d906e..e60d3af3a6 100644
+index 01d64d9..e60d3af 100644
 --- a/grub-core/kern/efi/init.c
 +++ b/grub-core/kern/efi/init.c
 @@ -27,6 +27,58 @@
@@ -225,7 +224,7 @@ index 01d64d906e..e60d3af3a6 100644
    grub_efi_mm_init ();
  
 diff --git a/include/grub/efi/api.h b/include/grub/efi/api.h
-index 49275e4117..863cf71f63 100644
+index 49275e4..863cf71 100644
 --- a/include/grub/efi/api.h
 +++ b/include/grub/efi/api.h
 @@ -349,6 +349,11 @@
@@ -263,7 +262,7 @@ index 49275e4117..863cf71f63 100644
    || defined(__riscv)
 diff --git a/include/grub/stack_protector.h b/include/grub/stack_protector.h
 new file mode 100644
-index 0000000000..c88dc00b5f
+index 0000000..c88dc00
 --- /dev/null
 +++ b/include/grub/stack_protector.h
 @@ -0,0 +1,30 @@

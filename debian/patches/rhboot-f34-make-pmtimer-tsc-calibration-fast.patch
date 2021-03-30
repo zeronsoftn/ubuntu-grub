@@ -1,4 +1,3 @@
-From 6b6fec4b640a3ebea20ed727ca0cdb10358d58b6 Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Tue, 7 Nov 2017 17:12:17 -0500
 Subject: Make pmtimer tsc calibration not take 51 seconds to fail.
@@ -62,11 +61,11 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
 
 Patch-Name: rhboot-f34-make-pmtimer-tsc-calibration-fast.patch
 ---
- grub-core/kern/i386/tsc_pmtimer.c | 109 ++++++++++++++++++++++++------
+ grub-core/kern/i386/tsc_pmtimer.c | 109 +++++++++++++++++++++++++++++++-------
  1 file changed, 89 insertions(+), 20 deletions(-)
 
 diff --git a/grub-core/kern/i386/tsc_pmtimer.c b/grub-core/kern/i386/tsc_pmtimer.c
-index c9c3616997..ca15c3aacd 100644
+index c9c3616..ca15c3a 100644
 --- a/grub-core/kern/i386/tsc_pmtimer.c
 +++ b/grub-core/kern/i386/tsc_pmtimer.c
 @@ -28,40 +28,101 @@

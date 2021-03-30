@@ -1,4 +1,3 @@
-From 590404c9b3e52c6f7cb83ce0814a7937549b166c Mon Sep 17 00:00:00 2001
 From: Gustavo Luiz Duarte <gustavold@linux.vnet.ibm.com>
 Date: Tue, 17 Sep 2019 17:44:58 +0200
 Subject: net: Fix crash on http
@@ -19,7 +18,7 @@ Patch-Name: cherry-fix-crash-on-http.patch
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/net/http.c b/grub-core/net/http.c
-index 5004ecfee4..da70e16150 100644
+index 5004ecf..da70e16 100644
 --- a/grub-core/net/http.c
 +++ b/grub-core/net/http.c
 @@ -408,7 +408,7 @@ http_establish (struct grub_file *file, grub_off_t offset, int initial)

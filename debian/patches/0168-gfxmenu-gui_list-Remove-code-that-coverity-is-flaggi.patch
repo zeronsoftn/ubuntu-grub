@@ -1,4 +1,3 @@
-From f799b4688409656b0c186dc594074c1a29e2b2b9 Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Mon, 7 Dec 2020 14:44:47 +0000
 Subject: gfxmenu/gui_list: Remove code that coverity is flagging as dead
@@ -16,7 +15,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/grub-core/gfxmenu/gui_list.c b/grub-core/gfxmenu/gui_list.c
-index 01477cdf2b..df334a6c56 100644
+index 01477cd..df334a6 100644
 --- a/grub-core/gfxmenu/gui_list.c
 +++ b/grub-core/gfxmenu/gui_list.c
 @@ -771,7 +771,7 @@ list_set_property (void *vself, const char *name, const char *value)

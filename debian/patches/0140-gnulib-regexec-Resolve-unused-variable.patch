@@ -1,4 +1,3 @@
-From 93011687483c00e7d8903a62ce7702988ea698cf Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Wed, 21 Oct 2020 14:41:27 +0000
 Subject: gnulib/regexec: Resolve unused variable
@@ -17,14 +16,14 @@ Fixes: CID 292459
 Signed-off-by: Darren Kenny <darren.kenny@oracle.com>
 Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
 ---
- conf/Makefile.extra-dist                           |  1 +
- .../lib/gnulib-patches/fix-unused-value.patch      | 14 ++++++++++++++
- grub-core/lib/gnulib/regexec.c                     |  4 ++++
+ conf/Makefile.extra-dist                            |  1 +
+ grub-core/lib/gnulib-patches/fix-unused-value.patch | 14 ++++++++++++++
+ grub-core/lib/gnulib/regexec.c                      |  4 ++++
  3 files changed, 19 insertions(+)
  create mode 100644 grub-core/lib/gnulib-patches/fix-unused-value.patch
 
 diff --git a/conf/Makefile.extra-dist b/conf/Makefile.extra-dist
-index 46c4e95e2f..9b01152d99 100644
+index 46c4e95..9b01152 100644
 --- a/conf/Makefile.extra-dist
 +++ b/conf/Makefile.extra-dist
 @@ -29,6 +29,7 @@ EXTRA_DIST += grub-core/genemuinit.sh
@@ -37,7 +36,7 @@ index 46c4e95e2f..9b01152d99 100644
  
 diff --git a/grub-core/lib/gnulib-patches/fix-unused-value.patch b/grub-core/lib/gnulib-patches/fix-unused-value.patch
 new file mode 100644
-index 0000000000..ba51f1bf22
+index 0000000..ba51f1b
 --- /dev/null
 +++ b/grub-core/lib/gnulib-patches/fix-unused-value.patch
 @@ -0,0 +1,14 @@
@@ -56,7 +55,7 @@ index 0000000000..ba51f1bf22
 + 	      else
 + 		break; /* We found a match.  */
 diff --git a/grub-core/lib/gnulib/regexec.c b/grub-core/lib/gnulib/regexec.c
-index 21cf7915f7..e472e2514f 100644
+index 21cf791..e472e25 100644
 --- a/grub-core/lib/gnulib/regexec.c
 +++ b/grub-core/lib/gnulib/regexec.c
 @@ -828,7 +828,11 @@ re_search_internal (const regex_t *preg, const char *string, Idx length,

@@ -1,4 +1,3 @@
-From 0378f0444b420c542796d7ed8ff2d7852cfd3e2a Mon Sep 17 00:00:00 2001
 From: Thomas Frauendorfer | Miray Software <tf@miray.de>
 Date: Tue, 4 Aug 2020 13:49:51 +0200
 Subject: gfxmenu/gui: Check printf() format in the gui_progress_bar and
@@ -28,7 +27,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  2 files changed, 7 insertions(+)
 
 diff --git a/grub-core/gfxmenu/gui_label.c b/grub-core/gfxmenu/gui_label.c
-index a4c817891e..1c190542a2 100644
+index a4c8178..1c19054 100644
 --- a/grub-core/gfxmenu/gui_label.c
 +++ b/grub-core/gfxmenu/gui_label.c
 @@ -193,6 +193,10 @@ label_set_property (void *vself, const char *name, const char *value)
@@ -43,7 +42,7 @@ index a4c817891e..1c190542a2 100644
  	  self->text = grub_xasprintf (value, self->value);
  	}
 diff --git a/grub-core/gfxmenu/gui_progress_bar.c b/grub-core/gfxmenu/gui_progress_bar.c
-index b128f08668..ace85a1256 100644
+index b128f08..ace85a1 100644
 --- a/grub-core/gfxmenu/gui_progress_bar.c
 +++ b/grub-core/gfxmenu/gui_progress_bar.c
 @@ -348,6 +348,9 @@ progress_bar_set_property (void *vself, const char *name, const char *value)

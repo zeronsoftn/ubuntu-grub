@@ -1,4 +1,3 @@
-From 164512b59e1b44d7aa93b0cf473f121fa1cf908f Mon Sep 17 00:00:00 2001
 From: Daniel Axtens <dja@axtens.net>
 Date: Fri, 15 Jan 2021 13:29:53 +1100
 Subject: video/readers/jpeg: Catch OOB reads/writes in grub_jpeg_decode_du()
@@ -23,7 +22,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 8 insertions(+)
 
 diff --git a/grub-core/video/readers/jpeg.c b/grub-core/video/readers/jpeg.c
-index 23f919aa07..e5148120f6 100644
+index 23f919a..e514812 100644
 --- a/grub-core/video/readers/jpeg.c
 +++ b/grub-core/video/readers/jpeg.c
 @@ -526,6 +526,14 @@ grub_jpeg_decode_du (struct grub_jpeg_data *data, int id, jpeg_data_unit_t du)

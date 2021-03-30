@@ -1,4 +1,3 @@
-From 76cef0efbb41d5ce83ffa3c50ce379b164bd52ac Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Wed, 24 Feb 2021 15:03:26 +0100
 Subject: gdb: Restrict GDB access when locked down
@@ -14,7 +13,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 18 insertions(+), 14 deletions(-)
 
 diff --git a/grub-core/gdb/gdb.c b/grub-core/gdb/gdb.c
-index 847a1e1e36..1818cb6f8e 100644
+index 847a1e1..1818cb6 100644
 --- a/grub-core/gdb/gdb.c
 +++ b/grub-core/gdb/gdb.c
 @@ -75,20 +75,24 @@ static grub_command_t cmd, cmd_stop, cmd_break;

@@ -1,4 +1,3 @@
-From 84538ac4dbe81d2f01845aa1cd50fa66b937f6e2 Mon Sep 17 00:00:00 2001
 From: Javier Martinez Canillas <javierm@redhat.com>
 Date: Wed, 24 Feb 2021 12:59:29 +0100
 Subject: commands/hdparm: Restrict hdparm command when locked down
@@ -13,7 +12,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/grub-core/commands/hdparm.c b/grub-core/commands/hdparm.c
-index d3fa9661e5..2e2319e645 100644
+index d3fa966..2e2319e 100644
 --- a/grub-core/commands/hdparm.c
 +++ b/grub-core/commands/hdparm.c
 @@ -436,9 +436,9 @@ static grub_extcmd_t cmd;

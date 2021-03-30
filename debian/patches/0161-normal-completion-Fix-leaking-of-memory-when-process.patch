@@ -1,7 +1,7 @@
-From 969cd75b32d8996af852758ac1e229055f80adac Mon Sep 17 00:00:00 2001
 From: Darren Kenny <darren.kenny@oracle.com>
 Date: Fri, 4 Dec 2020 18:56:48 +0000
-Subject: normal/completion: Fix leaking of memory when processing a completion
+Subject: normal/completion: Fix leaking of memory when processing a
+ completion
 
 It is possible for the code to reach the end of the function without
 freeing the memory allocated to argv and argc still to be 0.
@@ -19,7 +19,7 @@ Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
  1 file changed, 4 insertions(+), 6 deletions(-)
 
 diff --git a/grub-core/normal/completion.c b/grub-core/normal/completion.c
-index 596102848c..46e473c8f2 100644
+index 5961028..46e473c 100644
 --- a/grub-core/normal/completion.c
 +++ b/grub-core/normal/completion.c
 @@ -400,8 +400,8 @@ char *

@@ -1,4 +1,3 @@
-From 8ce0fe0c4fe9d16de8698d36d1b8e7b8876fe1af Mon Sep 17 00:00:00 2001
 From: Peter Jones <pjones@redhat.com>
 Date: Mon, 15 Feb 2021 14:19:31 +0100
 Subject: util/mkimage: Unify more of the PE32 and PE32+ header set-up
@@ -14,11 +13,11 @@ Signed-off-by: Peter Jones <pjones@redhat.com>
 Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
 Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
 ---
- util/mkimage.c | 111 +++++++++++++++++++++++--------------------------
+ util/mkimage.c | 111 ++++++++++++++++++++++++++-------------------------------
  1 file changed, 51 insertions(+), 60 deletions(-)
 
 diff --git a/util/mkimage.c b/util/mkimage.c
-index b94bfb781a..a039039db0 100644
+index b94bfb7..a039039 100644
 --- a/util/mkimage.c
 +++ b/util/mkimage.c
 @@ -816,6 +816,21 @@ grub_install_get_image_targets_string (void)
