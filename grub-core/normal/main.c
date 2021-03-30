@@ -18,7 +18,6 @@
  */
 
 #include <grub/kernel.h>
-#include <grub/net.h>
 #include <grub/normal.h>
 #include <grub/dl.h>
 #include <grub/misc.h>
@@ -209,7 +208,7 @@ grub_normal_init_page (struct grub_term_output *term,
  
   grub_term_cls (term);
 
-  msg_formatted = grub_xasprintf (_("GNU GRUB  version %s"), VERSION);
+  msg_formatted = grub_xasprintf (_("GNU GRUB  version %s"), PACKAGE_VERSION);
   if (!msg_formatted)
     return;
  
@@ -324,27 +323,10 @@ grub_cmd_normal (struct grub_command *cmd __attribute__ ((unused)),
 
       prefix = grub_env_get ("prefix");
       if (prefix)
-        {
-          grub_size_t config_len;
-          int disable_net_search = 0;
-          const char *net_search_cfg;
-
-          config_len = grub_strlen (prefix) +
-                       sizeof ("/grub.cfg-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
-          config = grub_malloc (config_len);
-
-          if (!config)
-            goto quit;
-
-          grub_snprintf (config, config_len, "%s/grub.cfg", prefix);
-
-          net_search_cfg = grub_env_get ("feature_net_search_cfg");
-          if (net_search_cfg && net_search_cfg[0] == 'n')
-            disable_net_search = 1;
-
-          if (grub_strncmp (prefix + 1, "tftp", sizeof ("tftp") - 1) == 0 &&
-              !disable_net_search)
-            grub_net_search_config_file (config);
+	{
+	  config = grub_xasprintf ("%s/grub.cfg", prefix);
+	  if (! config)
+	    goto quit;
 
 	  grub_enter_normal_mode (config);
 	  grub_free (config);
@@ -407,15 +389,6 @@ static grub_err_t
 grub_normal_read_line_real (char **line, int cont, int nested)
 {
   const char *prompt;
-#if QUIET_BOOT
-  static int displayed_intro;
-
-  if (! displayed_intro)
-    {
-      grub_normal_reader_init (nested);
-      displayed_intro = 1;
-    }
-#endif
 
   if (cont)
     /* TRANSLATORS: it's command line prompt.  */
@@ -468,9 +441,7 @@ grub_cmdline_run (int nested, int force_auth)
       return;
     }
 
-#if !QUIET_BOOT
   grub_normal_reader_init (nested);
-#endif
 
   while (1)
     {
@@ -578,9 +549,6 @@ GRUB_MOD_INIT(normal)
   grub_env_export ("grub_cpu");
   grub_env_set ("grub_platform", GRUB_PLATFORM);
   grub_env_export ("grub_platform");
-
-  grub_env_set ("package_version", PACKAGE_VERSION);
-  grub_env_export ("package_version");
 
   grub_boot_time ("Normal module prepared");
 }

@@ -1,3 +1,88 @@
+grub2 (2.04-1ubuntu44) hirsute; urgency=medium
+
+  * Compile grub-efi-amd64 installable i386 platform on hirsute, to make
+    it available in bionic and earlier as part of onegrub builds.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Wed, 03 Mar 2021 11:42:28 +0000
+
+grub2 (2.04-1ubuntu42) hirsute; urgency=medium
+
+  * SECURITY UPDATE: acpi command allows privilleged user to load crafted
+    ACPI tables when secure boot is enabled.
+    - 0126-acpi-Don-t-register-the-acpi-command-when-locked-dow.patch: Don't
+      register the acpi command when secure boot is enabled.
+    - CVE-2020-14372
+  * SECURITY UPDATE: use-after-free in rmmod command
+    - 0128-dl-Only-allow-unloading-modules-that-are-not-depende.patch: Don't
+      allow rmmod to unload modules that are dependencies of other modules.
+    - CVE-2020-25632
+  * SECURITY UPDATE: out-of-bound write in grub_usb_device_initialize()
+    - 0129-usb-Avoid-possible-out-of-bound-accesses-caused-by-m.patch
+    - CVE-2020-25647
+  * SECURITY UPDATE: Stack buffer overflow in grub_parser_split_cmdline
+    - 0206-kern-parser-Introduce-process_char-helper.patch,
+      0207-kern-parser-Introduce-terminate_arg-helper.patch,
+      0208-kern-parser-Refactor-grub_parser_split_cmdline-clean.patch,
+      0209-kern-buffer-Add-variable-sized-heap-buffer.patch,
+      0210-kern-parser-Fix-a-stack-buffer-overflow.patch: Add a variable
+      sized heap buffer type and use this.
+    - CVE-2020-27749
+  * SECURITY UPDATE: cutmem command allows privileged user to remove memory
+    regions when Secure Boot is enabled.
+    - 0127-mmap-Don-t-register-cutmem-and-badram-commands-when-.patch:
+      Don't register cutmem and badram commands when secure boot is enabled.
+    - CVE-2020-27779
+  * SECURITY UPDATE: heap out-of-bounds write in short form option parser.
+    - 0173-lib-arg-Block-repeated-short-options-that-require-an.patch:
+      Block repeated short options that require an argument.
+    - CVE-2021-20225
+  * SECURITY UPDATE: heap out-of-bound write due to mis-calculation of space
+    required for quoting.
+    - 0175-commands-menuentry-Fix-quoting-in-setparams_prefix.patch: Fix
+      quoting in setparams_prefix()
+    - CVE-2021-20233
+  * Partially backport the lockdown framework to restrict certain features
+    when secure boot is enabled.
+  * Backport various fixes for Coverity defects.
+  * Add SBAT metadata to the grub EFI binary.
+    - Backport patches to support adding SBAT metadata with grub-mkimage:
+      + 0212-util-mkimage-Remove-unused-code-to-add-BSS-section.patch
+      + 0213-util-mkimage-Use-grub_host_to_target32-instead-of-gr.patch
+      + 0214-util-mkimage-Always-use-grub_host_to_target32-to-ini.patch
+      + 0215-util-mkimage-Unify-more-of-the-PE32-and-PE32-header-.patch
+      + 0216-util-mkimage-Reorder-PE-optional-header-fields-set-u.patch
+      + 0217-util-mkimage-Improve-data_size-value-calculation.patch
+      + 0218-util-mkimage-Refactor-section-setup-to-use-a-helper.patch
+      + 0219-util-mkimage-Add-an-option-to-import-SBAT-metadata-i.patch
+    - Add debian/sbat.csv.in
+    - Update debian/build-efi-image and debian/rules
+
+  [ Dimitri John Ledkov & Steve Langasek LP: #1915536 ]
+  * Allow grub-efi-amd64|arm64 & -bin & -dbg be built by
+    src:grub2-unsigned (potentially of a higher version number).
+  * Add debian/rules generate-grub2-unsigned target to quickly build
+    src:grub2-unsigned for binary-copy backports.
+  * postinst: allow postinst to with with or without grub-multi-install
+    binary.
+  * postinst: allow using various grub-install options to achieve
+    --no-extra-removable.
+  * postinst: only call grub-check-signatures if it exists.
+  * control: relax dependency on grub2-common, as maintainer script got
+    fixed up to work with grub2-common/grub-common as far back as trusty.
+  * control: allow higher version depdencies from grub-efi package.
+  * dirs.in: create var/lib/grub/ucf in grub-efi-amd64 (and similar) as
+    postinst script uses that directory, and yet relies on grub-common to
+    create/ship it, which is not true in older releases. Also make sure
+    dh_installdirs runs after the .dirs files are generated.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 23 Feb 2021 16:23:39 +0000
+
+grub2 (2.04-1ubuntu41) hirsute; urgency=medium
+
+  * No-change rebuild to drop the udeb package.
+
+ -- Matthias Klose <doko@ubuntu.com>  Mon, 22 Feb 2021 10:33:38 +0100
+
 grub2 (2.04-1ubuntu40) hirsute; urgency=medium
 
   * Revert: rhboot-f34-tcp-add-window-scaling-support.patch,

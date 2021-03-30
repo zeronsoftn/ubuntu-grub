@@ -16,6 +16,8 @@ HOST_CPPFLAGS := $(shell dpkg-buildflags --get CPPFLAGS)
 HOST_CFLAGS := -Wall -Wno-error=unused-result $(shell dpkg-buildflags --get CFLAGS | perl -pe 's/-O3\b/-O2/')
 HOST_LDFLAGS := $(shell dpkg-buildflags --get LDFLAGS)
 
+include /usr/share/dpkg/pkg-info.mk
+
 # to get new minilzo, with CVE fixes, patched to build with our compiler
 BUILT_USING=$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), \n' -W liblzo2-dev)
 
@@ -61,8 +63,12 @@ BUILD_PACKAGES := $(strip $(shell dh_listpackages))
 REAL_PACKAGES = grub-common grub-emu grub-pc grub-coreboot grub-efi-ia32 grub-efi-amd64 grub-efi-ia64 grub-efi-arm grub-efi-arm64 grub-ieee1275 grub-firmware-qemu grub-uboot grub-xen grub-yeeloong
 EXTRA_PACKAGES = grub-rescue-pc grub-xen-host
 
-ifneq (,$(filter i386 amd64,$(DEB_HOST_ARCH_CPU)))
+ifneq (,$(filter amd64,$(DEB_HOST_ARCH_CPU)))
 COMMON_PLATFORM := pc
+else ifeq (i386,$(DEB_HOST_ARCH_CPU))
+#for one grub we only build efi-amd64 platform in hirsute+
+COMMON_PLATFORM := efi-amd64
+BUILD_PACKAGES := $(strip $(shell dh_listpackages | grep -e common -e efi-amd64 ))
 else ifneq (,$(filter powerpc ppc64 ppc64el sparc sparc64,$(DEB_HOST_ARCH_CPU)))
 COMMON_PLATFORM := ieee1275
 else ifeq (mipsel,$(DEB_HOST_ARCH_CPU))
@@ -120,12 +126,68 @@ debian/stamps/build-grub-efi-amd64 install/grub-efi-amd64: export SB_EFI_NAME :=
 debian/stamps/build-grub-efi-arm64 install/grub-efi-arm64: export SB_PLATFORM := arm64-efi
 debian/stamps/build-grub-efi-arm64 install/grub-efi-arm64: export SB_EFI_NAME := aa64
 SB_PACKAGE :=
+ONLY_BUILD :=
 ifeq (yes,$(shell dpkg-vendor --derives-from Ubuntu && echo yes))
+generate-grub2-unsigned:
+	rm -f debian/files
+	sed '1s/^grub2 /grub2-unsigned /' -i debian/changelog
+	sed '1s/ grub2$$/ grub2-unsigned/' -i debian/control
+	cp debian/changelog debian/changelog.unsigned
+	grep-dctrl -r -F Source grub2 debian/control | sed '1s/ grub2$$/ grub2-unsigned/' > debian/control.unsigned
+	grep-dctrl -r -F Package '^grub-efi-a.*64$$' debian/control >> debian/control.unsigned
+	grep-dctrl -r -F Package '^grub-efi-a.*64.*-bin$$' debian/control >> debian/control.unsigned
+	grep-dctrl -r -F Package '^grub-efi-a.*64.*-dbg$$' debian/control >> debian/control.unsigned
+	cp ../grub2_$(DEB_VERSION_UPSTREAM).orig.tar.xz ../grub2-unsigned_$(DEB_VERSION_UPSTREAM).orig.tar.xz
+	dch --append -c debian/changelog.unsigned 'Source package generated from src:grub2 using make -f ./debian/rules generate-grub2-unsigned'
+	rm -f debian/files
+	dpkg-buildpackage -S -d -nc -sa -uc -us \
+	--source-option=-I --source-option=-Idebian/control.unsigned --source-option=-Idebian/changelog.unsigned \
+	--source-option=-c$(CURDIR)/debian/control.unsigned --changes-option=-c$(CURDIR)/debian/control.unsigned --buildinfo-option=-c$(CURDIR)/debian/control.unsigned \
+	--source-option=-l$(CURDIR)/debian/changelog.unsigned --changes-option=-l$(CURDIR)/debian/changelog.unsigned  --buildinfo-option=-l$(CURDIR)/debian/changelog.unsigned
+	rm debian/changelog.unsigned debian/control.unsigned
+	rm -f debian/files
+	sed '1s/^grub2-unsigned /grub2 /' -i debian/changelog
+	sed '1s/ grub2-unsigned$$/ grub2/' -i debian/control
+
+# Submit this build of grub for raw-uefi signing?
+ifeq ($(DEB_SOURCE),grub2)
+SB_SUBMIT := no
+else
+SB_SUBMIT := yes
+endif
 ifeq ($(DEB_HOST_ARCH),amd64)
 SB_PACKAGE := grub-efi-amd64
+override_dh_builddeb: SB_PLATFORM := x86_64-efi
+ifeq ($(SB_SUBMIT),yes)
+# on amd64, src:grub2-unsigned builds efi-amd64 (-bin & -dbg)
+ONLY_BUILD := -pgrub-efi-$(DEB_HOST_ARCH) -pgrub-efi-$(DEB_HOST_ARCH)-bin -pgrub-efi-$(DEB_HOST_ARCH)-dbg
+else
+# on amd64, src:grub2 does not build efi-amd64 (-bin & -dbg)
+ONLY_BUILD := -Ngrub-efi-$(DEB_HOST_ARCH) -Ngrub-efi-$(DEB_HOST_ARCH)-bin -Ngrub-efi-$(DEB_HOST_ARCH)-dbg
 endif
-ifeq ($(DEB_HOST_ARCH),arm64)
+else ifeq ($(DEB_HOST_ARCH),arm64)
 SB_PACKAGE := grub-efi-arm64
+override_dh_builddeb: SB_PLATFORM := arm64-efi
+ifeq ($(SB_SUBMIT),yes)
+# on amd64, src:grub2-unsigned builds efi-arm64 (-bin & -dbg)
+ONLY_BUILD := -pgrub-efi-$(DEB_HOST_ARCH) -pgrub-efi-$(DEB_HOST_ARCH)-bin -pgrub-efi-$(DEB_HOST_ARCH)-dbg
+else
+# on arm64, src:grub2 does not build efi-arm64 (-bin & -dbg)
+ONLY_BUILD := -Ngrub-efi-$(DEB_HOST_ARCH) -Ngrub-efi-$(DEB_HOST_ARCH)-bin -Ngrub-efi-$(DEB_HOST_ARCH)-dbg
+endif
+else ifeq ($(DEB_HOST_ARCH),i386)
+ifeq ($(SB_SUBMIT),yes)
+# on i386, src:grub2-unsigned builds efi-amd64 (-bin & -dbg)
+ONLY_BUILD := -pgrub-efi-amd64 -pgrub-efi-amd64-bin -pgrub-efi-amd64-dbg
+else
+# on i386, src:grub2 only builds common packages
+ONLY_BUILD := -pgrub-common -pgrub2-common
+endif
+else
+ifeq ($(SB_SUBMIT),yes)
+# on all other arches src:grub2-unsigned FTBFS
+ONLY_BUILD := -pnone
+endif
 endif
 endif
 
@@ -143,6 +205,9 @@ override_dh_auto_configure: $(patsubst %,configure/%,$(BUILD_PACKAGES))
 override_dh_auto_build: $(patsubst %,build/%,$(BUILD_PACKAGES))
 
 override_dh_auto_install: $(patsubst %,install/%,$(BUILD_PACKAGES))
+
+override_dh_installdirs: $(patsubst %,install/%,$(BUILD_PACKAGES))
+	dh_installdirs
 
 $(patsubst %,configure/%,$(REAL_PACKAGES)) :: configure/% : debian/stamps/configure-%
 $(patsubst %,build/%,$(REAL_PACKAGES) $(EXTRA_PACKAGES)) :: build/% : debian/stamps/build-%
@@ -238,11 +303,19 @@ debian/stamps/build-grub-none debian/stamps/build-grub-efi-ia64 debian/stamps/bu
 
 debian/stamps/build-grub-efi-ia32 debian/stamps/build-grub-efi-amd64 debian/stamps/build-grub-efi-arm64: debian/stamps/build-%: debian/stamps/configure-% debian/stamps/build-grub-$(COMMON_PLATFORM)
 	dh_auto_build
+ifneq (i386,$(DEB_HOST_ARCH_CPU))
+	grub_dir=`mktemp -d` ; \
+	sed -e "s/@DEB_VERSION@/$(deb_version)/g" \
+		-e "s/@UPSTREAM_VERSION@/$(upstream_version)/g" \
+		<debian/sbat.csv.in \
+		>$${grub_dir}/sbat.csv; \
 	debian/build-efi-images \
 		obj/grub-$(COMMON_PLATFORM)/grub-mkimage \
 		obj/$(package)/grub-core \
 		obj/monolithic/$(package) \
-		$(DEB_HOST_ARCH) $(SB_PLATFORM) $(SB_EFI_NAME) $(SB_EFI_VENDOR)
+		$(DEB_HOST_ARCH) $(SB_PLATFORM) $(SB_EFI_NAME) $${grub_dir}/sbat.csv \
+		$(SB_EFI_VENDOR)
+endif
 	touch $@
 
 debian/stamps/build-grub-xen-host-i386: PVBOOT_ARCH := i386
@@ -551,6 +624,8 @@ endif
 override_dh_installdocs:
 	dh_installdocs $(patsubst %,-p%,$(filter grub-common grub-rescue-pc grub-firmware-qemu grub-xen-host,$(BUILD_PACKAGES))) -A AUTHORS NEWS README THANKS TODO
 	dh_installdocs $(patsubst %,-p%,$(filter grub-efi-%-signed-template,$(BUILD_PACKAGES)))
+	dh_installdocs -pgrub-efi-amd64 -pgrub-efi-amd64-bin -pgrub-efi-amd64-dbg --link-doc=grub-efi-amd64-bin
+	dh_installdocs -pgrub-efi-arm64 -pgrub-efi-arm64-bin -pgrub-efi-arm64-dbg --link-doc=grub-efi-arm64-bin
 	dh_installdocs --remaining-packages --link-doc=grub-common
 
 ifeq ($(FLICKER_FREE_BOOT),yes)
@@ -577,12 +652,12 @@ LEGACY_DOC_BR := grub-doc (<< 0.97-32), grub-legacy-doc (<< 0.97-59)
 endif
 
 override_dh_gencontrol:
-	dh_gencontrol -- -Vlegacy-doc-br="$(LEGACY_DOC_BR)" -V"efi:Vendor=$(SB_EFI_VENDOR)" -VBuilt-Using="$(BUILT_USING)" $(substvars)
+	dh_gencontrol $(ONLY_BUILD) -- -Vlegacy-doc-br="$(LEGACY_DOC_BR)" -V"efi:Vendor=$(SB_EFI_VENDOR)" -VBuilt-Using="$(BUILT_USING)" $(substvars)
 
 TARNAME := grub2_$(deb_version)_$(DEB_HOST_ARCH).tar.gz
 
 override_dh_builddeb:
-	dh_builddeb
+	dh_builddeb $(ONLY_BUILD)
 ifneq (,$(SB_PACKAGE))
 	echo $(deb_version) > obj/monolithic/$(SB_PACKAGE)/version
 ifeq (yes,$(shell dpkg-vendor --derives-from Ubuntu && echo yes))
@@ -593,7 +668,9 @@ ifeq (yes,$(shell dpkg-vendor --derives-from Ubuntu && echo yes))
 	ln -v obj/monolithic/$(SB_PACKAGE)/* obj/monolithic/$(SB_PACKAGE)/$(deb_version) || :
 endif
 	tar -c -f ../$(TARNAME) -a -C obj/monolithic/$(SB_PACKAGE) -v $(deb_version)
+ifeq ($(SB_SUBMIT),yes)
 	dpkg-distaddfile $(TARNAME) raw-uefi -
+endif
 endif
 
 override_dh_auto_clean:

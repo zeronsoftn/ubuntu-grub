@@ -332,6 +332,28 @@ running_in_container()
   type systemd-detect-virt >/dev/null 2>&1 && systemd-detect-virt --quiet --container
 }
 
+
+no_extra_removable_arg()
+{
+    if grub-install --help | grep -q no-extra-removable; then
+	    removable=""
+	    no_removable="--no-extra-removable"
+    elif grub-install --help | grep -q force-extra-removable; then
+	    removable="--force-extra-removable"
+	    no_removable=""
+    else
+	    removable=""
+	    no_removable=""
+    fi
+    db_get grub2/no_efi_extra_removable
+    if [ "$RET" = true ]; then
+        NO_EXTRA_REMOVABLE="$no_removable"
+    else
+        NO_EXTRA_REMOVABLE="$removable"
+    fi
+}
+
+
 no_nvram_arg() {
     db_get grub2/update_nvram
     if [ "$RET" = false ]; then
@@ -349,7 +371,11 @@ run_grub_install()
 
 run_grub_multi_install()
 {
-    if ! /usr/lib/grub/grub-multi-install $@ ; then
+    tool=/usr/lib/grub/grub-multi-install
+    if [ ! -x $tool ]; then
+	    tool=grub-install
+    fi
+    if ! $tool $@ ; then
         echo "Failed: grub-install $@" >&2
         echo "WARNING: Bootloader is not properly installed, system may not be bootable" >&2
     fi
@@ -362,7 +388,9 @@ case "$1" in
     devicemap_regenerated=
 
     if [ @PACKAGE@ = "grub-efi-amd64" ] && dpkg --compare-versions "$2" lt-nl 2.02-2ubuntu11; then
-      /usr/share/grub/grub-check-signatures
+      if [ -x /usr/share/grub/grub-check-signatures ]; then
+        /usr/share/grub/grub-check-signatures
+      fi
     fi
 
     if egrep -q '^[[:space:]]*post(inst|rm)_hook[[:space:]]*=[[:space:]]*(/sbin/|/usr/sbin/)?update-grub' /etc/kernel-img.conf 2>/dev/null; then
@@ -750,10 +778,7 @@ case "$1" in
         # want to trigger the install code just by installing the package,
         # normally the installer installs grub itself first.
         if test -e /boot/grub/$target/core.efi; then
-          db_get grub2/no_efi_extra_removable
-          if [ "$RET" = true ]; then
-            NO_EXTRA_REMOVABLE="--no-extra-removable"
-          fi
+          NO_EXTRA_REMOVABLE="$(no_extra_removable_arg)"
           NO_NVRAM="$(no_nvram_arg)"
           run_grub_multi_install --target="$target" "$NO_EXTRA_REMOVABLE" "$NO_NVRAM"
         fi
