@@ -11,10 +11,10 @@ Patch-Name: ubuntu-add-initrd-less-boot-fallback.patch
 ---
  Makefile.am                  |  3 ++
  configure.ac                 | 10 +++++++
- grub-initrd-fallback.service | 13 +++++++++
+ grub-initrd-fallback.service | 14 +++++++++
  util/grub.d/00_header.in     | 27 ++++++++++++++++++
  util/grub.d/10_linux.in      | 68 +++++++++++++++++++++++++++++++++-----------
- 5 files changed, 105 insertions(+), 16 deletions(-)
+ 5 files changed, 106 insertions(+), 16 deletions(-)
  create mode 100644 grub-initrd-fallback.service
 
 diff --git a/Makefile.am b/Makefile.am
@@ -54,14 +54,15 @@ index 8832455..1819188 100644
  #
 diff --git a/grub-initrd-fallback.service b/grub-initrd-fallback.service
 new file mode 100644
-index 0000000..fb0b76e
+index 0000000..1a0a4e5
 --- /dev/null
 +++ b/grub-initrd-fallback.service
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,14 @@
 +[Unit]
 +Description=GRUB failed boot detection
 +After=local-fs.target
 +After=grub-common.service
++After=sleep.target
 +
 +[Service]
 +Type=oneshot
@@ -70,7 +71,7 @@ index 0000000..fb0b76e
 +TimeoutSec=0
 +
 +[Install]
-+WantedBy=multi-user.target rescue.target emergency.target
++WantedBy=multi-user.target rescue.target emergency.target sleep.target
 diff --git a/util/grub.d/00_header.in b/util/grub.d/00_header.in
 index b7135b6..2642f66 100644
 --- a/util/grub.d/00_header.in

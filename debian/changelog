@@ -3,6 +3,9 @@ grub2 (2.04-1ubuntu46) UNRELEASED; urgency=medium
   * debian/grub-common.service: change type to oneshot, add wantedby
     sleep.target, after sleep.target. The service will now start after
     resume from hybernation. LP: #1929860
+  * grub-initrd-fallback.service: add wantedby sleep.target, after
+    sleep.target. The service will now start after resume from
+    hybernation. LP: #1929860
 
  -- Dimitri John Ledkov <dimitri.ledkov@canonical.com>  Thu, 15 Jul 2021 16:55:39 +0100
 
