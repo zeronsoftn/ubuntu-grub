@@ -7,6 +7,7 @@ grub2 (2.04-1ubuntu46) UNRELEASED; urgency=medium
     sleep.target. The service will now start after resume from
     hybernation. LP: #1929860
   * cherrypick upstream fix to make armhf efi boot work. LP: #1788940
+  * debian/rules: disable LTO. LP: #1922005
 
  -- Dimitri John Ledkov <dimitri.ledkov@canonical.com>  Thu, 15 Jul 2021 16:55:39 +0100
 
