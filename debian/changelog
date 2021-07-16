@@ -8,6 +8,9 @@ grub2 (2.04-1ubuntu46) UNRELEASED; urgency=medium
     hybernation. LP: #1929860
   * cherrypick upstream fix to make armhf efi boot work. LP: #1788940
   * debian/rules: disable LTO. LP: #1922005
+  * grub-initrd-fallback.service, debian/grub-common.service: only start
+    units when booted with grub. Use presence of /boot/grub/grub.cfg as
+    proxy. LP: #1925507
 
  -- Dimitri John Ledkov <dimitri.ledkov@canonical.com>  Thu, 15 Jul 2021 16:55:39 +0100
 
