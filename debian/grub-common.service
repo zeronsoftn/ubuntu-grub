@@ -1,6 +1,7 @@
 [Unit]
 Description=Record successful boot for GRUB
 After=sleep.target
+ConditionPathExists=/boot/grub/grub.cfg
 
 [Service]
 Type=oneshot
