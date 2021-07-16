@@ -11,6 +11,8 @@ grub2 (2.04-1ubuntu46) UNRELEASED; urgency=medium
   * grub-initrd-fallback.service, debian/grub-common.service: only start
     units when booted with grub. Use presence of /boot/grub/grub.cfg as
     proxy. LP: #1925507
+  * tests: patch qemu command to use ide-hd instead of the removed
+    ide-drive.
 
  -- Dimitri John Ledkov <dimitri.ledkov@canonical.com>  Thu, 15 Jul 2021 16:55:39 +0100
 
