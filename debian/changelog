@@ -1,8 +1,8 @@
-grub2 (2.04-1ubuntu47) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu47) impish; urgency=medium
 
   * Drop grub.cfg-400.patch (LP: #1933826)
 
- -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 02 Sep 2021 14:37:02 +0200
+ -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 02 Sep 2021 14:37:43 +0200
 
 grub2 (2.04-1ubuntu46) impish; urgency=medium
 
