@@ -37,7 +37,7 @@ index a835d0a..3ec35d3 100644
  
  The following options are still accepted for compatibility with existing
 diff --git a/util/grub-mkconfig.in b/util/grub-mkconfig.in
-index 3072143..9c1da64 100644
+index f4ef79b..aaef3ab 100644
 --- a/util/grub-mkconfig.in
 +++ b/util/grub-mkconfig.in
 @@ -196,6 +196,10 @@ GRUB_ACTUAL_DEFAULT="$GRUB_DEFAULT"

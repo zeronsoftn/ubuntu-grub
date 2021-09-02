@@ -115,7 +115,7 @@ index ebf5a0f..42c8229 100644
  	{
  	  pos = grub_term_save_pos ();
 diff --git a/util/grub-mkconfig.in b/util/grub-mkconfig.in
-index d18bf97..3072143 100644
+index e7ef32e..f4ef79b 100644
 --- a/util/grub-mkconfig.in
 +++ b/util/grub-mkconfig.in
 @@ -250,7 +250,8 @@ export GRUB_DEFAULT \

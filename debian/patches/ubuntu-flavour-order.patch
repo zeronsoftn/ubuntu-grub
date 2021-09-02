@@ -19,7 +19,7 @@ Patch-Name: ubuntu-flavour-order.patch
  2 files changed, 17 insertions(+), 1 deletion(-)
 
 diff --git a/util/grub-mkconfig.in b/util/grub-mkconfig.in
-index 72f1e25..6c8988f 100644
+index 9942123..0f3da9d 100644
 --- a/util/grub-mkconfig.in
 +++ b/util/grub-mkconfig.in
 @@ -260,7 +260,8 @@ export GRUB_DEFAULT \

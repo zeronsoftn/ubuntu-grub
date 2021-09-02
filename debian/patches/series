@@ -3,7 +3,6 @@ core-in-fs.patch
 dpkg-version-comparison.patch
 grub-legacy-0-based-partitions.patch
 disable-floppies.patch
-grub.cfg-400.patch
 ubuntu-zfs-enhance-support.patch
 gfxpayload-keep-default.patch
 install-stage2-confusion.patch

@@ -177,7 +177,7 @@ index 65effa9..5478030 100644
 +  free (cfgdir);
  }
 diff --git a/util/grub-mkconfig.in b/util/grub-mkconfig.in
-index b506d63..d18bf97 100644
+index 5d29aa4..e7ef32e 100644
 --- a/util/grub-mkconfig.in
 +++ b/util/grub-mkconfig.in
 @@ -164,6 +164,11 @@ fi
