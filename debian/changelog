@@ -4,6 +4,8 @@ grub2 (2.06-1) UNRELEASED; urgency=medium
   * New upstream release.
     - Switch to the upstream shim_lock verifier, dropping several more
       manual checks for UEFI Secure Boot.
+  * Cherry-pick from upstream:
+    - fs/xfs: Fix unreadable filesystem with v4 superblock
 
  -- Colin Watson <cjwatson@debian.org>  Wed, 18 Aug 2021 13:03:23 +0100
 
