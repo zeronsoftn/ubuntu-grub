@@ -1,4 +1,4 @@
-From fa61055163d00a0c38bb9a468aa39d9b5e21b586 Mon Sep 17 00:00:00 2001
+From 55796e3e90a55d54aff94f2dfeb6e02055e08e30 Mon Sep 17 00:00:00 2001
 From: Steve McIntyre <93sam@debian.org>
 Date: Sat, 17 Apr 2021 22:05:47 +0100
 Subject: Add debug to display what's going on with verifiers

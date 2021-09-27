@@ -1,4 +1,4 @@
-From c50a3ed395c5a08bba44c8ade364650b901bc30b Mon Sep 17 00:00:00 2001
+From 1a1c93cd19a9ec67d6237d5a537976ff9297ab78 Mon Sep 17 00:00:00 2001
 From: Marius Bakke <marius@gnu.org>
 Date: Sun, 13 Jun 2021 15:11:51 +0200
 Subject: tests/ahci: Change "ide-drive" deprecated QEMU device name to

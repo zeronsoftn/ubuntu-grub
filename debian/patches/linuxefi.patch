@@ -1,4 +1,4 @@
-From 36359c7ae68660ec10e4b7cb4dd330e17d3e658f Mon Sep 17 00:00:00 2001
+From fc550c31c25dcf9eb58ca1e987f3ce2be8ebac28 Mon Sep 17 00:00:00 2001
 From: Matthew Garrett <mjg@redhat.com>
 Date: Mon, 13 Jan 2014 12:13:15 +0000
 Subject: Add "linuxefi" loader which avoids ExitBootServices
@@ -14,10 +14,10 @@ Patch-Name: linuxefi.patch
 ---
  grub-core/Makefile.core.def       |   7 +
  grub-core/kern/efi/mm.c           |  32 +++
- grub-core/loader/i386/efi/linux.c | 382 ++++++++++++++++++++++++++++++
+ grub-core/loader/i386/efi/linux.c | 383 ++++++++++++++++++++++++++++++
  grub-core/loader/i386/linux.c     |  41 ++++
  include/grub/efi/efi.h            |   3 +
- 5 files changed, 465 insertions(+)
+ 5 files changed, 466 insertions(+)
  create mode 100644 grub-core/loader/i386/efi/linux.c
 
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
@@ -83,10 +83,10 @@ index 9838fb2f5..f6aef0ef6 100644
  grub_efi_allocate_pages_real (grub_efi_physical_address_t address,
 diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
 new file mode 100644
-index 000000000..01fa98dd8
+index 000000000..45b68c05a
 --- /dev/null
 +++ b/grub-core/loader/i386/efi/linux.c
-@@ -0,0 +1,382 @@
+@@ -0,0 +1,383 @@
 +/*
 + *  GRUB  --  GRand Unified Bootloader
 + *  Copyright (C) 2012  Free Software Foundation, Inc.
@@ -401,6 +401,7 @@ index 000000000..01fa98dd8
 +      grub_error (GRUB_ERR_OUT_OF_MEMORY, N_("can't allocate kernel"));
 +      goto fail;
 +    }
++  grub_errno = GRUB_ERR_NONE;
 +
 +  grub_dprintf ("linuxefi", "kernel_mem = %lx\n", (unsigned long) kernel_mem);
 +

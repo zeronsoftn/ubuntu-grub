@@ -1,4 +1,4 @@
-From eaa8b853b8a4b2d32a6e719b5ed8cfd742a69b38 Mon Sep 17 00:00:00 2001
+From 973e040bdeddcf366a7a45bb5d9f77e06f4784c7 Mon Sep 17 00:00:00 2001
 From: Fabian Greffrath <fabian@greffrath.com>
 Date: Tue, 19 May 2020 12:19:26 +0200
 Subject: add /u/s/fonts/truetype/dejavu to the DejaVu fonts search paths

@@ -1,4 +1,4 @@
-From 99ca38de3fc5eec9953a89ff176262dc8a12ce46 Mon Sep 17 00:00:00 2001
+From 11ea79546da850296fabeb94bfc8c110a98fe7f6 Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:27 +0000
 Subject: Adjust efi_distributor for some distributions

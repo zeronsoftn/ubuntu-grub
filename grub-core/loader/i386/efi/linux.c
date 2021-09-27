@@ -313,6 +313,7 @@ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
       grub_error (GRUB_ERR_OUT_OF_MEMORY, N_("can't allocate kernel"));
       goto fail;
     }
+  grub_errno = GRUB_ERR_NONE;
 
   grub_dprintf ("linuxefi", "kernel_mem = %lx\n", (unsigned long) kernel_mem);
 
