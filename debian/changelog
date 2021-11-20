@@ -7,6 +7,7 @@ grub2 (2.06-1) UNRELEASED; urgency=medium
   * Cherry-pick from upstream:
     - fs/xfs: Fix unreadable filesystem with v4 superblock
     - tests/ahci: Change "ide-drive" deprecated QEMU device name to "ide-hd"
+      (closes: #997100)
   * Remove dir_to_symlink maintainer script code, which was only needed for
     upgrades from before jessie.
 
