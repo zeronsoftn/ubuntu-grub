@@ -1,4 +1,4 @@
-grub2 (2.06-1) UNRELEASED; urgency=medium
+grub2 (2.06-1) unstable; urgency=medium
 
   * Use "command -v" in maintainer scripts rather than "which".
   * New upstream release.
@@ -11,7 +11,7 @@ grub2 (2.06-1) UNRELEASED; urgency=medium
   * Remove dir_to_symlink maintainer script code, which was only needed for
     upgrades from before jessie.
 
- -- Colin Watson <cjwatson@debian.org>  Wed, 18 Aug 2021 13:03:23 +0100
+ -- Colin Watson <cjwatson@debian.org>  Sun, 28 Nov 2021 13:30:32 +0000
 
 grub2 (2.04-20) unstable; urgency=medium
 
