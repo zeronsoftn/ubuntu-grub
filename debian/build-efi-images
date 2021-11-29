@@ -97,7 +97,6 @@ CD_MODULES="
 	ext2
 	fat
 	font
-	f2fs
 	gettext
 	gfxmenu
 	gfxterm
