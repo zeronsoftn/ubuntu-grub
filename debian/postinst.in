@@ -332,6 +332,28 @@ running_in_container()
   type systemd-detect-virt >/dev/null 2>&1 && systemd-detect-virt --quiet --container
 }
 
+
+no_extra_removable_arg()
+{
+    if grub-install --help | grep -q no-extra-removable; then
+	    removable=""
+	    no_removable="--no-extra-removable"
+    elif grub-install --help | grep -q force-extra-removable; then
+	    removable="--force-extra-removable"
+	    no_removable=""
+    else
+	    removable=""
+	    no_removable=""
+    fi
+    db_get grub2/no_efi_extra_removable
+    if [ "$RET" = true ]; then
+        NO_EXTRA_REMOVABLE="$no_removable"
+    else
+        NO_EXTRA_REMOVABLE="$removable"
+    fi
+}
+
+
 no_nvram_arg() {
     db_get grub2/update_nvram
     if [ "$RET" = false ]; then
@@ -735,18 +757,33 @@ case "$1" in
           kubuntu) bootloader_id=ubuntu ;;
           devuan) bootloader_id=debian ;;
         esac
-        if [ "$bootloader_id" ] && [ -d "/boot/efi/EFI/$bootloader_id" ]; then
-          case @PACKAGE@ in
-            grub-efi-ia32)  target=i386-efi ;;
-            grub-efi-amd64) target=x86_64-efi ;;
-            grub-efi-ia64)  target=ia64-efi ;;
-            grub-efi-arm)   target=arm-efi ;;
-            grub-efi-arm64) target=arm64-efi ;;
-          esac
-          db_get grub2/force_efi_extra_removable
-          if [ "$RET" = true ]; then
-            FORCE_EXTRA_REMOVABLE="--force-extra-removable"
+
+        if dpkg --compare-versions "$2" lt-nl 2.02-1~; then
+          # Try to not break people upgrading by suddenly installing things
+          # to /EFI/BOOT without knowing if it might break.
+          db_get grub2/force_efi_extra_removable || true
+          if [ "$RET" = false ]; then
+            db_set grub2/no_efi_extra_removable true
+            db_fset grub2/no_efi_extra_removable seen true
           fi
+          db_reset grub2/force_efi_extra_removable || true
+          if [ -e "/boot/efi/EFI/${bootloader_id}/fbx64.efi" ]; then
+            rm -f "/boot/efi/EFI/${bootloader_id}/fbx64.efi";
+          fi
+        fi
+
+        case @PACKAGE@ in
+          grub-efi-ia32)  target=i386-efi ;;
+          grub-efi-amd64) target=x86_64-efi ;;
+          grub-efi-ia64)  target=ia64-efi ;;
+          grub-efi-arm)   target=arm-efi ;;
+          grub-efi-arm64) target=arm64-efi ;;
+        esac
+        # Check /boot/grub to see if we previously installed to an ESP. We don't
+        # want to trigger the install code just by installing the package,
+        # normally the installer installs grub itself first.
+        if test -e /boot/grub/$target/core.efi; then
+          NO_EXTRA_REMOVABLE="$(no_extra_removable_arg)"
           NO_NVRAM="$(no_nvram_arg)"
           run_grub_multi_install --target="$target" "$NO_EXTRA_REMOVABLE" "$NO_NVRAM"
         fi
