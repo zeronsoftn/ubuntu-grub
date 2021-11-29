@@ -208,6 +208,9 @@ override_dh_auto_build: $(patsubst %,build/%,$(BUILD_PACKAGES))
 
 override_dh_auto_install: $(patsubst %,install/%,$(BUILD_PACKAGES))
 
+override_dh_installdirs: $(patsubst %,install/%,$(BUILD_PACKAGES))
+	dh_installdirs
+
 $(patsubst %,configure/%,$(REAL_PACKAGES)) :: configure/% : debian/stamps/configure-%
 $(patsubst %,build/%,$(REAL_PACKAGES) $(EXTRA_PACKAGES)) :: build/% : debian/stamps/build-%
 
