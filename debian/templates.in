@@ -49,3 +49,19 @@ Default: @DEFAULT_CMDLINE@
 _Description: kFreeBSD default command line:
  The following string will be used as kFreeBSD parameters for the default menu
  entry but not for the recovery mode.
+
+Template: grub2/unsigned_kernels_title
+Type: title
+_Description: unsigned kernels
+
+Template: grub2/unsigned_kernels
+Type: note
+_Description: Cannot upgrade Secure Boot enforcement policy due to unsigned kernels
+ Your system has UEFI Secure Boot enabled in firmware, and the following kernels
+ present on your system are unsigned:
+ .
+  ${unsigned_versions}
+ .
+ These kernels cannot be verified under Secure Boot.  To ensure your system
+ remains bootable, GRUB will not be upgraded on your disk until these kernels are
+ removed or replaced with signed kernels.
