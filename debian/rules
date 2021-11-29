@@ -607,6 +607,8 @@ endif
 override_dh_installdocs:
 	dh_installdocs $(patsubst %,-p%,$(filter grub-common grub-rescue-pc grub-firmware-qemu grub-xen-host,$(BUILD_PACKAGES))) -A AUTHORS NEWS README THANKS TODO
 	dh_installdocs $(patsubst %,-p%,$(filter grub-efi-%-signed-template,$(BUILD_PACKAGES)))
+	dh_installdocs -pgrub-efi-amd64 -pgrub-efi-amd64-bin -pgrub-efi-amd64-dbg --link-doc=grub-efi-amd64-bin
+	dh_installdocs -pgrub-efi-arm64 -pgrub-efi-arm64-bin -pgrub-efi-arm64-dbg --link-doc=grub-efi-arm64-bin
 	dh_installdocs --remaining-packages --link-doc=grub-common
 
 ifeq ($(FLICKER_FREE_BOOT),yes)
