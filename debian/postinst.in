@@ -347,6 +347,18 @@ run_grub_install()
     fi
 }
 
+run_grub_multi_install()
+{
+    tool=/usr/lib/grub/grub-multi-install
+    if [ ! -x $tool ]; then
+	    tool=grub-install
+    fi
+    if ! $tool $@ ; then
+        echo "Failed: grub-install $@" >&2
+        echo "WARNING: Bootloader is not properly installed, system may not be bootable" >&2
+    fi
+}
+
 case "$1" in
   configure)
     . /usr/share/debconf/confmodule
@@ -732,7 +744,7 @@ case "$1" in
             FORCE_EXTRA_REMOVABLE="--force-extra-removable"
           fi
           NO_NVRAM="$(no_nvram_arg)"
-          run_grub_install --target="$target" "$FORCE_EXTRA_REMOVABLE" "$NO_NVRAM"
+          run_grub_multi_install --target="$target" "$NO_EXTRA_REMOVABLE" "$NO_NVRAM"
         fi
 
         # /boot/grub/ has more chances of being accessible by GRUB
