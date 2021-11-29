@@ -65,8 +65,12 @@ BUILD_PACKAGES := $(strip $(shell dh_listpackages))
 REAL_PACKAGES = grub-common grub-emu grub-pc grub-coreboot grub-efi-ia32 grub-efi-amd64 grub-efi-ia64 grub-efi-arm grub-efi-arm64 grub-ieee1275 grub-firmware-qemu grub-uboot grub-xen grub-yeeloong
 EXTRA_PACKAGES = grub-rescue-pc grub-xen-host
 
-ifneq (,$(filter i386 amd64,$(DEB_HOST_ARCH_CPU)))
+ifneq (,$(filter amd64,$(DEB_HOST_ARCH_CPU)))
 COMMON_PLATFORM := pc
+else ifeq (i386,$(DEB_HOST_ARCH_CPU))
+#for one grub we only build efi-amd64 platform in hirsute+
+COMMON_PLATFORM := efi-amd64
+BUILD_PACKAGES := $(strip $(shell dh_listpackages | grep -e common -e efi-amd64 ))
 else ifneq (,$(filter powerpc ppc64 ppc64el sparc sparc64,$(DEB_HOST_ARCH_CPU)))
 COMMON_PLATFORM := ieee1275
 else ifeq (mipsel,$(DEB_HOST_ARCH_CPU))
@@ -224,6 +228,7 @@ debian/stamps/build-grub-none debian/stamps/build-grub-efi-ia64 debian/stamps/bu
 
 debian/stamps/build-grub-efi-ia32 debian/stamps/build-grub-efi-amd64 debian/stamps/build-grub-efi-arm64: debian/stamps/build-%: debian/stamps/configure-% debian/stamps/build-grub-$(COMMON_PLATFORM)
 	dh_auto_build
+ifneq (i386,$(DEB_HOST_ARCH_CPU))
 	grub_dir=`mktemp -d` ; \
 	sed -e "s/@DEB_VERSION@/$(deb_version)/g" \
 		-e "s/@UPSTREAM_VERSION@/$(upstream_version)/g" \
@@ -235,6 +240,7 @@ debian/stamps/build-grub-efi-ia32 debian/stamps/build-grub-efi-amd64 debian/stam
 		obj/monolithic/$(package) \
 		$(DEB_HOST_ARCH) $(SB_PLATFORM) $(SB_EFI_NAME) \
 		$${grub_dir}/sbat.$(SB_EFI_VENDOR).csv $(SB_EFI_VENDOR)
+endif
 	touch $@
 
 debian/stamps/build-grub-xen-host-i386: PVBOOT_ARCH := i386
