@@ -1,9 +1,8 @@
-From 0bd31f4c7468f0b42ff6673f47112b9167c6381c Mon Sep 17 00:00:00 2001
 From: Colin Watson <cjwatson@ubuntu.com>
 Date: Mon, 13 Jan 2014 12:13:22 +0000
 Subject: Install signed images if UEFI Secure Boot is enabled
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 Author: Stéphane Graber <stgraber@ubuntu.com>
@@ -15,11 +14,11 @@ Last-Update: 2021-09-24
 
 Patch-Name: install-signed.patch
 ---
- util/grub-install.c | 212 ++++++++++++++++++++++++++++++++------------
+ util/grub-install.c | 212 +++++++++++++++++++++++++++++++++++++---------------
  1 file changed, 153 insertions(+), 59 deletions(-)
 
 diff --git a/util/grub-install.c b/util/grub-install.c
-index 48e2d3779..f49c78d0b 100644
+index 48e2d37..f49c78d 100644
 --- a/util/grub-install.c
 +++ b/util/grub-install.c
 @@ -80,6 +80,7 @@ static char *label_color;

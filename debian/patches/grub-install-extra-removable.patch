@@ -1,4 +1,3 @@
-From a0bfbdf9139bc127d28c4102b941ee504f7f0041 Mon Sep 17 00:00:00 2001
 From: Steve McIntyre <93sam@debian.org>
 Date: Wed, 3 Dec 2014 01:25:12 +0000
 Subject: Add support for forcing EFI installation to the removable media path
@@ -18,11 +17,11 @@ Last-Update: 2021-09-24
 
 Patch-Name: grub-install-extra-removable.patch
 ---
- util/grub-install.c | 110 +++++++++++++++++++++++++++++++++++++++++++-
+ util/grub-install.c | 110 +++++++++++++++++++++++++++++++++++++++++++++++++++-
  1 file changed, 108 insertions(+), 2 deletions(-)
 
 diff --git a/util/grub-install.c b/util/grub-install.c
-index 2304cc5c4..b51fe4710 100644
+index 2304cc5..b51fe47 100644
 --- a/util/grub-install.c
 +++ b/util/grub-install.c
 @@ -56,6 +56,7 @@
