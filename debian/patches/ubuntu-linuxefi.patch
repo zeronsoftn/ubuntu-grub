@@ -479,7 +479,7 @@ index a110452..70998c0 100644
 +				  void *kernel_param);
 +
 diff --git a/grub-core/kern/dl.c b/grub-core/kern/dl.c
-index 48f8a79..3557f4b 100644
+index 51a800a..1fea604 100644
 --- a/grub-core/kern/dl.c
 +++ b/grub-core/kern/dl.c
 @@ -32,6 +32,7 @@
