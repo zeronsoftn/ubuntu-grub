@@ -17,7 +17,7 @@ mkconfig-nonexistent-loopback.patch
 default-grub-d.patch
 blacklist-1440x900x32.patch
 mkconfig-ubuntu-distributor.patch
-linuxefi.patch
+ubuntu-linuxefi.patch
 mkconfig-signed-kernel.patch
 install-signed.patch
 wubi-no-windows.patch
@@ -44,7 +44,6 @@ efinet-uefi-ipv6-pxe-support.patch
 bootp-process-dhcpack-http-boot.patch
 efinet-set-network-from-uefi-devpath.patch
 efinet-set-dns-from-uefi-proto.patch
-fix-lockdown.patch
 skip-grub_cmd_set_date.patch
 bash-completion-drop-have-checks.patch
 at_keyboard-module-init.patch

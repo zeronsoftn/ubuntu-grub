@@ -43,7 +43,7 @@ index c42e4c7..947fd52 100644
  
  AC_SUBST([FONT_SOURCE])
 diff --git a/grub-core/Makefile.core.def b/grub-core/Makefile.core.def
-index e5b3d27..2ff2668 100644
+index 715d137..10f839b 100644
 --- a/grub-core/Makefile.core.def
 +++ b/grub-core/Makefile.core.def
 @@ -964,6 +964,14 @@ module = {
