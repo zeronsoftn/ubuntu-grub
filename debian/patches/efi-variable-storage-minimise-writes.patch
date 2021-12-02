@@ -871,7 +871,7 @@ index 135ba48..134b862 100644
  grub_install_register_efi (grub_device_t efidir_grub_dev,
  			   const char *efifile_path,
 diff --git a/util/grub-install.c b/util/grub-install.c
-index 9d58bd0..0c3c1e0 100644
+index 3f40163..d482fdc 100644
 --- a/util/grub-install.c
 +++ b/util/grub-install.c
 @@ -2111,7 +2111,7 @@ main (int argc, char *argv[])
@@ -883,7 +883,7 @@ index 9d58bd0..0c3c1e0 100644
  				 strerror (ret));
  	    }
  
-@@ -2228,7 +2228,7 @@ main (int argc, char *argv[])
+@@ -2231,7 +2231,7 @@ main (int argc, char *argv[])
  	  ret = grub_install_register_efi (efidir_grub_dev,
  					   efifile_path, efi_distributor);
  	  if (ret)

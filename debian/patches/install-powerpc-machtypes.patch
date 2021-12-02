@@ -195,7 +195,7 @@ index 7df3191..135ba48 100644
  grub_install_register_efi (grub_device_t efidir_grub_dev,
  			   const char *efifile_path,
 diff --git a/util/grub-install.c b/util/grub-install.c
-index 48c8c03..d02bd48 100644
+index 3a06718..4af831f 100644
 --- a/util/grub-install.c
 +++ b/util/grub-install.c
 @@ -1187,7 +1187,18 @@ main (int argc, char *argv[])
