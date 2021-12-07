@@ -15,7 +15,11 @@ export DEB_BUILD_MAINT_OPTIONS = optimize=-lto
 HOST_CPPFLAGS := $(shell dpkg-buildflags --get CPPFLAGS)
 # -O3 (default on Ubuntu ppc64el) introduces various -Werror failures, and
 # isn't worth it here.
+ifneq (,$(filter s390x,$(DEB_HOST_ARCH_CPU)))
+HOST_CFLAGS := -Wall -Wno-error=unused-result $(shell dpkg-buildflags --get CFLAGS | perl -pe 's/-O[23]\b/-O1/')
+else
 HOST_CFLAGS := -Wall -Wno-error=unused-result $(shell dpkg-buildflags --get CFLAGS | perl -pe 's/-O3\b/-O2/')
+endif
 HOST_LDFLAGS := $(shell dpkg-buildflags --get LDFLAGS)
 
 include /usr/share/dpkg/pkg-info.mk
