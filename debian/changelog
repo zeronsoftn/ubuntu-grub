@@ -1,3 +1,107 @@
+grub2 (2.06-2ubuntu1) jammy; urgency=medium
+
+  * Merge from Debian unstable; remaining changes:
+    - Build without lto
+    - Add Ubuntu sbat data
+    - Make prebuilt netboot image look for MAAS grub.cfg
+    - build-efi-images: add smbios module to the prebuilt signed EFI images
+      (LP: 1856424)
+    - build-efi-images: do not produce -installer.efi.signed. LP: 1863994
+    - build-efi-images: Add http to netboot images
+    - grub-common: Install canonical-uefi-ca.crt
+    - Check signatures
+    - minilzo: built using the distribution's minilzo
+    - Support installing to multiple ESP (LP: 1871821)
+    - Disable various bits on i386
+    - Split out unsigned artefacts into grub2-unsigned
+    - Vcs-Git: Point to ubuntu packaging branch
+    - Relax dependencies on grub-common and grub2-common
+    - grub-pc: Avoid the possibility of breaking grub on SRU update due
+      to ABI change
+    - UBUNTU: Default timeout changes
+    - Disable os-prober for ppc64el on the PowerNV platform (for Petitboot)
+    - dirs.in: create var/lib/grub/ucf in grub-efi-amd64 (and similar)
+    - Link grub-efi-{amd64,arm64}-bin docs directory
+    - grub-common.service: port init.d script to systemd unit. Add warning
+      message, when initrdless boot fails triggering fallback. LP: 1901553
+    - Removed patches:
+      - grub-install-extra-removable.patch
+      - grub-install-removable-shim.patch
+    - Added patches:
+      + ubuntu-grub-install-extra-removable.patch
+      + ubuntu-zfs-enhance-support.patch
+      + ubuntu-zfs-gfxpayload-keep-default.patch
+      + ubuntu-zfs-mkconfig-ubuntu-distributor.patch
+      + ubuntu-zfs-mkconfig-signed-kernel.patch
+      + ubuntu-zfs-maybe-quiet.patch
+      + ubuntu-zfs-quick-boot.patch
+      + ubuntu-zfs-gfxpayload-dynamic.patch
+      + ubuntu-zfs-vt-handoff.patch
+      + ubuntu-zfs-mkconfig-recovery-title.patch
+      + ubuntu-zfs-insmod-xzio-and-lzopio-on-xen.patch
+      + ubuntu-support-initrd-less-boot.patch
+      + ubuntu-shorter-version-info.patch
+      + ubuntu-add-initrd-less-boot-fallback.patch
+      + ubuntu-mkconfig-leave-breadcrumbs.patch
+      + ubuntu-fix-lzma-decompressor-objcopy.patch
+      + ubuntu-temp-keep-auto-nvram.patch
+      + ubuntu-add-devicetree-command-support.patch
+      + ubuntu-boot-from-multipath-dependent-symlink.patch
+      + ubuntu-skip-disk-by-id-lvm-pvm-uuid-entries.patch
+      + ubuntu-efi-allow-loopmount-chainload.patch
+      + 0076-ubuntu-Make-the-linux-command-in-EFI-grub-always-try.patch
+      + ubuntu-resilient-boot-ignore-alternative-esps.patch
+      + ubuntu-resilient-boot-boot-order.patch
+      + ubuntu-speed-zsys-history.patch
+      + ubuntu-flavour-order.patch
+      + ubuntu-dont-verify-loopback-images.patch
+      + ubuntu-recovery-dis_ucode_ldr.patch
+      + ubuntu-linuxefi-arm64.patch
+      + ubuntu-add-initrd-less-boot-messages.patch
+      + ubuntu-fix-reproducible-squashfs-test.patch
+      + rhboot-f34-make-exit-take-a-return-code.patch
+      + rhboot-f34-dont-use-int-for-efi-status.patch
+      + rhboot-f34-make-pmtimer-tsc-calibration-fast.patch
+      + suse-add-support-for-UEFI-network-protocols.patch
+      + suse-AUDIT-0-http-boot-tracker-bug.patch
+      + rhboot-f34-efinet-also-use-the-firmware-acceleration-for-http.patch
+      + 0241-Call-hwmatch-only-on-the-grub-pc-platform.patch
+  * Dropped changes:
+    - Remove obsolete dependencies on dh-autoreconf and automake
+    - Remove explicit --with systemd in debhelper invocation
+    - Remove debian/gettext-patches; they do not seem to be necessary anymore
+    - Remove inadvertent change to debian/signing-template.json.in, we do not
+      use that file anyway.
+    - Merged upstream:
+      + merged: 0074-uefi-firmware-rename-fwsetup-menuentry-to-UEFI-Firmw.patch
+      + merged: 0075-smbios-Add-a-linux-argument-to-apply-linux-modalias-.patch
+      + merged security patches 0081-0105, and 0128-0240
+      + various cherry picks: cherry-* and cherrypick-*.patch
+      + grub-install-backup-and-restore.patch
+      + uefi-firmware-setup.patch
+      + sleep-shift.patch
+      + vsnprintf-upper-case-hex.patch
+      + rhboot-f34-update-info-with-grub.cfg-netboot-selection-order.patch
+      + suse-search-for-specific-config-files-for-netboot.patch
+      + tftp-rollover-block-counter.patch
+      + ubuntu-efi-console-set-text-mode-as-needed.patch
+    - Merged in Debian:
+      + install-efi-ubuntu-flavours.patch
+      + ubuntu-dejavu-font-path.patch
+      + ubuntu-tpm-unknown-error-non-fatal.patch
+    - Not applicable:
+      + 0077-ubuntu-Update-the-linux-boot-protocol-version-check.patch: The
+        check has been removed.
+  * Fix zstd build on s390x
+  * Cherry-pick two upstream fixes to fix closing of SNP protocol in EFI
+    networking stack
+  * Build with -O1 on s390x to avoid build failure due to gcc optimization
+    failure causing it to wrongly assume variables as uninitialized.
+  * Revert integration of jfs and f2fs modules into signed images, we do not
+    support these file systems on /boot.
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Tue, 07 Dec 2021 13:40:32 +0100
+
 grub2 (2.06-2) unstable; urgency=medium
 
   * Update to minilzo-2.10, fixing build failures on armel, mips64el,
