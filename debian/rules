@@ -66,7 +66,7 @@ BUILD_PACKAGES := $(strip $(shell dh_listpackages))
 # REAL_PACKAGES build an actual grub variant (and therefore have both configure
 # and build stages). EXTRA_PACKAGES do not build grub but may depend on a
 # REAL_PACKAGE (and therefore only have a build stage)
-REAL_PACKAGES = grub-common grub-emu grub-pc grub-coreboot grub-efi-ia32 grub-efi-amd64 grub-efi-ia64 grub-efi-arm grub-efi-arm64 grub-ieee1275 grub-firmware-qemu grub-uboot grub-xen grub-yeeloong
+REAL_PACKAGES = grub-common grub-emu grub-pc grub-coreboot grub-efi-ia32 grub-efi-amd64 grub-efi-ia64 grub-efi-arm grub-efi-arm64 grub-efi-riscv64 grub-ieee1275 grub-firmware-qemu grub-uboot grub-xen grub-yeeloong
 EXTRA_PACKAGES = grub-rescue-pc grub-xen-host
 
 ifneq (,$(filter amd64,$(DEB_HOST_ARCH_CPU)))
@@ -85,6 +85,8 @@ else ifeq (arm,$(DEB_HOST_ARCH_CPU))
 COMMON_PLATFORM := uboot
 else ifeq (arm64,$(DEB_HOST_ARCH_CPU))
 COMMON_PLATFORM := efi-arm64
+else ifeq (riscv64,$(DEB_HOST_ARCH_CPU))
+COMMON_PLATFORM := efi-riscv64
 else
 COMMON_PLATFORM := none
 BUILD_PACKAGES += grub-none
@@ -129,8 +131,8 @@ debian/stamps/build-grub-efi-ia32 install/grub-efi-ia32: export SB_PLATFORM := i
 debian/stamps/build-grub-efi-ia32 install/grub-efi-ia32: export SB_EFI_NAME := ia32
 debian/stamps/build-grub-efi-amd64 install/grub-efi-amd64: export SB_PLATFORM := x86_64-efi
 debian/stamps/build-grub-efi-amd64 install/grub-efi-amd64: export SB_EFI_NAME := x64
-debian/stamps/build-grub-efi-arm64 install/grub-efi-arm64: export SB_PLATFORM := arm64-efi
-debian/stamps/build-grub-efi-arm64 install/grub-efi-arm64: export SB_EFI_NAME := aa64
+debian/stamps/build-grub-efi-riscv64 install/grub-efi-riscv64: export SB_PLATFORM := riscv64-efi
+debian/stamps/build-grub-efi-riscv64 install/grub-efi-riscv64: export SB_EFI_NAME := riscv64
 SB_PACKAGE :=
 ONLY_BUILD :=
 ifeq (yes,$(shell dpkg-vendor --derives-from Ubuntu && echo yes))
@@ -179,6 +181,16 @@ ifeq ($(SB_SUBMIT),yes)
 ONLY_BUILD := -pgrub-efi-$(DEB_HOST_ARCH) -pgrub-efi-$(DEB_HOST_ARCH)-bin -pgrub-efi-$(DEB_HOST_ARCH)-dbg
 else
 # on arm64, src:grub2 does not build efi-arm64 (-bin & -dbg)
+ONLY_BUILD := -Ngrub-efi-$(DEB_HOST_ARCH) -Ngrub-efi-$(DEB_HOST_ARCH)-bin -Ngrub-efi-$(DEB_HOST_ARCH)-dbg
+endif
+else ifeq ($(DEB_HOST_ARCH),riscv64)
+SB_PACKAGE := grub-efi-riscv64
+override_dh_builddeb: SB_PLATFORM := riscv64-efi
+ifeq ($(SB_SUBMIT),yes)
+# on amd64, src:grub2-unsigned builds efi-riscv64 (-bin & -dbg)
+ONLY_BUILD := -pgrub-efi-$(DEB_HOST_ARCH) -pgrub-efi-$(DEB_HOST_ARCH)-bin -pgrub-efi-$(DEB_HOST_ARCH)-dbg
+else
+# on riscv64, src:grub2 does not build efi-riscv64 (-bin & -dbg)
 ONLY_BUILD := -Ngrub-efi-$(DEB_HOST_ARCH) -Ngrub-efi-$(DEB_HOST_ARCH)-bin -Ngrub-efi-$(DEB_HOST_ARCH)-dbg
 endif
 else ifeq ($(DEB_HOST_ARCH),i386)
@@ -263,7 +275,7 @@ debian/stamps/configure-grub-efi-amd64:
 	mkdir -p debian/stamps $(subst debian/stamps/configure-,obj/,$@)
 	dh_auto_configure -- $(confflags) --with-platform=efi --target=amd64-pe --program-prefix=""
 	touch $@
-debian/stamps/configure-grub-efi-ia64 debian/stamps/configure-grub-efi-arm debian/stamps/configure-grub-efi-arm64:
+debian/stamps/configure-grub-efi-ia64 debian/stamps/configure-grub-efi-arm debian/stamps/configure-grub-efi-arm64 debian/stamps/configure-grub-efi-riscv64::
 	mkdir -p debian/stamps $(subst debian/stamps/configure-,obj/,$@)
 	dh_auto_configure -- $(confflags) --with-platform=efi
 	touch $@
@@ -288,7 +300,7 @@ debian/stamps/build-grub-none debian/stamps/build-grub-efi-ia64 debian/stamps/bu
 	dh_auto_build
 	touch $@
 
-debian/stamps/build-grub-efi-ia32 debian/stamps/build-grub-efi-amd64 debian/stamps/build-grub-efi-arm64: debian/stamps/build-%: debian/stamps/configure-% debian/stamps/build-grub-$(COMMON_PLATFORM)
+debian/stamps/build-grub-efi-ia32 debian/stamps/build-grub-efi-amd64 debian/stamps/build-grub-efi-arm64 debian/stamps/build-grub-efi-riscv64: debian/stamps/build-%: debian/stamps/configure-% debian/stamps/build-grub-$(COMMON_PLATFORM)
 	dh_auto_build
 ifneq (i386,$(DEB_HOST_ARCH_CPU))
 	grub_dir=`mktemp -d` ; \
@@ -426,7 +438,7 @@ install/grub-none:
 	# files.
 	mkdir -p debian/tmp-$(package)/usr/share/locale
 
-install/grub-pc install/grub-efi-ia32 install/grub-efi-amd64 install/grub-efi-ia64 install/grub-efi-arm install/grub-efi-arm64 install/grub-ieee1275 install/grub-coreboot install/grub-emu install/grub-uboot install/grub-xen install/grub-yeeloong:
+install/grub-pc install/grub-efi-ia32 install/grub-efi-amd64 install/grub-efi-ia64 install/grub-efi-arm install/grub-efi-arm64 install/grub-efi-riscv64 install/grub-ieee1275 install/grub-coreboot install/grub-emu install/grub-uboot install/grub-xen install/grub-yeeloong:
 	set -e ; \
 	if [ "$@" = "install/grub-xen" ] ; then \
 		dh_auto_install -Bobj/grub-xen-i386 --destdir=debian/tmp-$(package); \
@@ -571,7 +583,7 @@ endif
 
 NON_PLATFORM_PACKAGES = $(filter grub2 grub-linuxbios grub-efi grub-rescue-pc grub-firmware-qemu grub-xen-host,$(BUILD_PACKAGES))
 COMMON_PLATFORM_PACKAGES = $(filter grub-common grub2-common grub-theme-starfield grub-mount-udeb,$(BUILD_PACKAGES))
-PLATFORM_PACKAGES = $(filter grub-pc grub-efi-ia32 grub-efi-amd64 grub-efi-ia64 grub-efi-arm grub-efi-arm64 grub-ieee1275 grub-coreboot grub-uboot grub-xen grub-yeeloong,$(BUILD_PACKAGES))
+PLATFORM_PACKAGES = $(filter grub-pc grub-efi-ia32 grub-efi-amd64 grub-efi-ia64 grub-efi-arm grub-efi-arm64 grub-efi-riscv64 grub-ieee1275 grub-coreboot grub-uboot grub-xen grub-yeeloong,$(BUILD_PACKAGES))
 
 override_dh_install:
 ifneq (,$(NON_PLATFORM_PACKAGES))
@@ -613,6 +625,7 @@ override_dh_installdocs:
 	dh_installdocs $(patsubst %,-p%,$(filter grub-efi-%-signed-template,$(BUILD_PACKAGES)))
 	dh_installdocs -pgrub-efi-amd64 -pgrub-efi-amd64-bin -pgrub-efi-amd64-dbg --link-doc=grub-efi-amd64-bin
 	dh_installdocs -pgrub-efi-arm64 -pgrub-efi-arm64-bin -pgrub-efi-arm64-dbg --link-doc=grub-efi-arm64-bin
+	dh_installdocs -pgrub-efi-riscv64 -pgrub-efi-riscv64-bin -pgrub-efi-riscv64-dbg --link-doc=grub-efi-riscv64-bin
 	dh_installdocs --remaining-packages --link-doc=grub-common
 
 ifeq ($(FLICKER_FREE_BOOT),yes)
