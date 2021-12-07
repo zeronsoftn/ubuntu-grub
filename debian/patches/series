@@ -100,3 +100,5 @@ suse-add-support-for-UEFI-network-protocols.patch
 suse-AUDIT-0-http-boot-tracker-bug.patch
 rhboot-f34-efinet-also-use-the-firmware-acceleration-for-http.patch
 0241-Call-hwmatch-only-on-the-grub-pc-platform.patch
+cherrypick-efinet-correct-closing-snp-protocol.patch
+cherrypick-efi-grub_efi_close_protocol.patch
