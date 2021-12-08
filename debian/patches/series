@@ -102,3 +102,8 @@ rhboot-f34-efinet-also-use-the-firmware-acceleration-for-http.patch
 0241-Call-hwmatch-only-on-the-grub-pc-platform.patch
 cherrypick-efinet-correct-closing-snp-protocol.patch
 cherrypick-efi-grub_efi_close_protocol.patch
+no-devicetree-if-secure-boot.patch
+0077-ubuntu-Update-the-linux-boot-protocol-version-check.patch
+0096-linuxefi-fail-kernel-validation-without-shim-protoco.patch
+0099-chainloader-Avoid-a-double-free-when-validation-fail.patch
+0105-efilinux-Fix-integer-overflows-in-grub_cmd_initrd.patch
