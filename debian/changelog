@@ -1,3 +1,14 @@
+grub2 (2.06-2ubuntu3) jammy; urgency=medium
+
+  * Cherry-pick the missing hunk back that changes parameter loading
+    in grub-core/loader/i386/linux.c, this should fix booting on
+    BIOS systems.
+  * Fix the fallback for kernel addresses on amd64 EFI, if the kernel
+    could not be allocated at the preferred address, reset errno such
+    that if the 2nd allocation succeeds, we do not fail erroneously.
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Mon, 13 Dec 2021 13:44:14 +0100
+
 grub2 (2.06-2ubuntu2) jammy; urgency=medium
 
   * Restore still relevant patches lost in rebase.
