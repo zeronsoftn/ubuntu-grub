@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu26.14) jammy; urgency=medium
+grub2 (2.04-1ubuntu26.14) focal; urgency=medium
 
   * grub-check-signatures: Support gzip compressed kernels (LP: #1954683)
 
