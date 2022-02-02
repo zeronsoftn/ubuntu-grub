@@ -14,7 +14,7 @@ Signed-off-by: Dimitri John Ledkov <xnox@ubuntu.com>
 ---
  grub-core/loader/arm64/linux.c     | 13 +++++++++----
  grub-core/loader/efi/chainloader.c |  1 +
- grub-core/loader/efi/linux.c       |  1 +
+ grub-core/loader/efi/linux_sb.c    |  1 +
  grub-core/loader/i386/efi/linux.c  |  2 +-
  4 files changed, 12 insertions(+), 5 deletions(-)
 
@@ -62,10 +62,10 @@ index cf76f48..d64c851 100644
  
    grub_file_close (file);
    grub_device_close (dev);
-diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
+diff --git a/grub-core/loader/efi/linux_sb.c b/grub-core/loader/efi/linux_sb.c
 index 73a7196..a09479c 100644
---- a/grub-core/loader/efi/linux.c
-+++ b/grub-core/loader/efi/linux.c
+--- a/grub-core/loader/efi/linux_sb.c
++++ b/grub-core/loader/efi/linux_sb.c
 @@ -34,6 +34,7 @@ struct grub_efi_shim_lock
  };
  typedef struct grub_efi_shim_lock grub_efi_shim_lock_t;
