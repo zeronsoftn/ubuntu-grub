@@ -34,10 +34,10 @@ index a6204f6..9241b3e 100644
  };
  
 diff --git a/configure.ac b/configure.ac
-index 3c87596..091c95b 100644
+index 15a2a50..aafb733 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1791,16 +1791,16 @@ if test x"$enable_grub_mount" = xno ; then
+@@ -1799,16 +1799,16 @@ if test x"$enable_grub_mount" = xno ; then
  fi
  
  if test x"$grub_mount_excuse" = x ; then
