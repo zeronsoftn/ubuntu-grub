@@ -15,11 +15,11 @@ loaded into memory. The function
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
  grub-core/Makefile.core.def    |   4 +
- grub-core/loader/efi/linux.c   |  21 ++
+ grub-core/loader/efi/linux.c   |  24 +-
  grub-core/loader/efi/peimage.c | 765 +++++++++++++++++++++++++++++++++++++++++
  include/grub/efi/linux.h       |   3 +
  include/grub/efi/peimage.h     |  28 ++
- 5 files changed, 821 insertions(+)
+ 5 files changed, 823 insertions(+), 1 deletion(-)
  create mode 100644 grub-core/loader/efi/peimage.c
  create mode 100644 include/grub/efi/peimage.h
 
@@ -46,13 +46,14 @@ index 3b06462..2cfea95 100644
    common = loader/linux.c;
    common = lib/cmdline.c;
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
-index 56d6745..7c361ae 100644
+index 56d6745..576d8cb 100644
 --- a/grub-core/loader/efi/linux.c
 +++ b/grub-core/loader/efi/linux.c
-@@ -190,7 +190,28 @@ grub_arch_efi_linux_boot_image (grub_addr_t addr __attribute__((unused)),
+@@ -190,7 +190,29 @@ grub_arch_efi_linux_boot_image (grub_addr_t addr __attribute__((unused)),
  
    grub_dprintf ("linux", "linux command line: '%s'\n", args);
  
+-  retval = grub_efi_linux_boot (kernel_addr, handover_offset, kernel_addr);
 +/*
 + * FIXME:
 + *
@@ -71,10 +72,11 @@ index 56d6745..7c361ae 100644
 + * security audit of the code in grub_efi_run_image() is completed.
 + */
 +#ifndef __riscv
-   retval = grub_efi_linux_boot (kernel_addr, handover_offset, kernel_addr);
-+#else
-+  retval = grub_efi_run_image (kernel_addr, kernel_size, linux_args);
++  if (grub_efi_get_secureboot() == GRUB_EFI_SECUREBOOT_MODE_ENABLED)
++      retval = grub_efi_linux_boot (kernel_addr, handover_offset, kernel_addr);
++  else
 +#endif
++  retval = grub_efi_run_image (kernel_addr, kernel_size, linux_args);
  
    /* When successful, not reached */
    free_params();
