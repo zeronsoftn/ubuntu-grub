@@ -10,10 +10,10 @@ Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/grub-core/loader/efi/fdt.c b/grub-core/loader/efi/fdt.c
-index 6e4968a1a..fcd389253 100644
+index b846bf3..12164cd 100644
 --- a/grub-core/loader/efi/fdt.c
 +++ b/grub-core/loader/efi/fdt.c
-@@ -161,6 +161,7 @@ grub_cmd_devicetree (grub_command_t cmd __attribute__ ((unused)),
+@@ -128,6 +128,7 @@ grub_cmd_devicetree (grub_command_t cmd __attribute__ ((unused)),
    /* No arguments means "use firmware FDT".  */
    if (argc == 0)
      {
@@ -21,7 +21,7 @@ index 6e4968a1a..fcd389253 100644
        return GRUB_ERR_NONE;
      }
  
-@@ -192,6 +193,7 @@ out:
+@@ -167,6 +168,7 @@ out:
  
    if (blob)
      {

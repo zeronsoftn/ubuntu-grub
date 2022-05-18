@@ -16,7 +16,7 @@ Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
  1 file changed, 15 insertions(+), 3 deletions(-)
 
 diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
-index 24abc0c0b..6dd31966d 100644
+index 24abc0c..6dd3196 100644
 --- a/grub-core/loader/efi/linux.c
 +++ b/grub-core/loader/efi/linux.c
 @@ -67,8 +67,10 @@ struct grub_arm64_linux_pe_header

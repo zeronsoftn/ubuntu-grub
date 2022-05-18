@@ -30,7 +30,7 @@ Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
  2 files changed, 59 insertions(+)
 
 diff --git a/grub-core/loader/efi/fdt.c b/grub-core/loader/efi/fdt.c
-index b846bf35d..91691d913 100644
+index 12164cd..3bd5360 100644
 --- a/grub-core/loader/efi/fdt.c
 +++ b/grub-core/loader/efi/fdt.c
 @@ -30,6 +30,7 @@
@@ -92,7 +92,7 @@ index b846bf35d..91691d913 100644
    status = b->install_configuration_table (&fdt_guid, fdt ?: loaded_fdt);
    if (status != GRUB_EFI_SUCCESS)
 diff --git a/include/grub/efi/api.h b/include/grub/efi/api.h
-index c5dd4af1b..c222a2e3b 100644
+index c5dd4af..c222a2e 100644
 --- a/include/grub/efi/api.h
 +++ b/include/grub/efi/api.h
 @@ -344,6 +344,11 @@
