@@ -1,5 +1,6 @@
-grub2 (2.06-2ubuntu8) kinetic; urgency=medium
+grub2 (2.06-2ubuntu9) UNRELEASED; urgency=medium
 
+  [ Chris Coulson ]
   * SECURITY UPDATE: Crafted PNG grayscale images may lead to out-of-bounds
     write in heap.
     - 0139-video-readers-png-Drop-greyscale-support-to-fix-heap.patch:
@@ -85,7 +86,11 @@ grub2 (2.06-2ubuntu8) kinetic; urgency=medium
   * Bump SBAT generation:
     - update debian/sbat.ubuntu.csv.in
 
- -- Chris Coulson <chris.coulson@canonical.com>  Wed, 18 May 2022 18:11:18 +0100
+  [ Steve Langasek ]
+  * Bump versioned dependency on grub2-common to 2.02~beta2-36ubuntu3.32 for
+    necessary arm relocation support.  LP: #1926748.
+
+ -- Chris Coulson <chris.coulson@canonical.com>  Tue, 07 Jun 2022 17:36:27 +0100
 
 grub2 (2.06-2ubuntu7) jammy; urgency=medium
 

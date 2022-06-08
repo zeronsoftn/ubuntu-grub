@@ -504,7 +504,7 @@ Description: GRand Unified Bootloader, version 2 (ARM64 UEFI debug files)
 Package: grub-efi-arm64
 Architecture: any-arm64
 Pre-Depends: ${misc:Pre-Depends}
-Depends: ${shlibs:Depends}, ${misc:Depends}, grub2-common (>= 2.02~beta2-9), grub-efi-arm64-bin (= ${binary:Version}), ucf
+Depends: ${shlibs:Depends}, ${misc:Depends}, grub2-common (>= 2.02~beta2-36ubuntu3.32), grub-efi-arm64-bin (= ${binary:Version}), ucf
 Multi-Arch: foreign
 Description: GRand Unified Bootloader, version 2 (ARM64 UEFI version)
  GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
