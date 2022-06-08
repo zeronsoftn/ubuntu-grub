@@ -347,9 +347,9 @@ no_extra_removable_arg()
     fi
     db_get grub2/no_efi_extra_removable
     if [ "$RET" = true ]; then
-        NO_EXTRA_REMOVABLE="$no_removable"
+        echo "$no_removable"
     else
-        NO_EXTRA_REMOVABLE="$removable"
+        echo "$removable"
     fi
 }
 
