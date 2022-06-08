@@ -1,4 +1,4 @@
-grub2 (2.06-2ubuntu9) UNRELEASED; urgency=medium
+grub2 (2.06-2ubuntu9) kinetic; urgency=medium
 
   [ Chris Coulson ]
   * SECURITY UPDATE: Crafted PNG grayscale images may lead to out-of-bounds
