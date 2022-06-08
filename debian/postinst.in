@@ -345,8 +345,11 @@ no_extra_removable_arg()
 	    removable=""
 	    no_removable=""
     fi
+
+    # Ignore this setting in xenial and bionic, see https://launchpad.net/bugs/1930742
+    local codename="$(cat /etc/os-release | sed -n 's/VERSION_CODENAME=//p')"
     db_get grub2/no_efi_extra_removable
-    if [ "$RET" = true ]; then
+    if [ "$RET" = true ] && [ "$codename" != xenial ] && [ "$codename" != bionic ]; then
         echo "$no_removable"
     else
         echo "$removable"

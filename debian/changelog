@@ -89,6 +89,9 @@ grub2 (2.04-1ubuntu47.2) UNRELEASED; urgency=medium
   [ Steve Langasek ]
   * Bump versioned dependency on grub2-common to 2.02~beta2-36ubuntu3.32 for
     necessary arm relocation support.  LP: #1926748.
+  * debian/postinst.in: Unconditionally call grub-install with
+    --force-extra-removable on xenial and bionic, so that the \EFI\BOOT
+    removable path as used in cloud images receives the updates.  LP: #1930742.
 
  -- Chris Coulson <chris.coulson@canonical.com>  Tue, 07 Jun 2022 17:36:27 +0100
 
