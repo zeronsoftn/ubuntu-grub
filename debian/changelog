@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu47.2) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu47.2) impish; urgency=medium
 
   [ Chris Coulson ]
   * SECURITY UPDATE: Crafted PNG grayscale images may lead to out-of-bounds
