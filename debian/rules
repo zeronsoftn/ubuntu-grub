@@ -154,8 +154,10 @@ generate-grub2-unsigned:
 # Submit this build of grub for raw-uefi signing?
 ifeq ($(DEB_SOURCE),grub2)
 SB_SUBMIT := no
+COMPRESSION :=
 else
 SB_SUBMIT := yes
+COMPRESSION := -Zxz
 endif
 ifeq ($(DEB_HOST_ARCH),amd64)
 SB_PACKAGE := grub-efi-amd64
@@ -659,7 +661,7 @@ override_dh_gencontrol:
 TARNAME := grub2_$(deb_version)_$(DEB_HOST_ARCH).tar.gz
 
 override_dh_builddeb:
-	dh_builddeb $(ONLY_BUILD)
+	dh_builddeb $(ONLY_BUILD) -- $(COMPRESSION)
 ifneq (,$(SB_PACKAGE))
 	echo $(deb_version) > obj/monolithic/$(SB_PACKAGE)/version
 ifeq (yes,$(shell dpkg-vendor --derives-from Ubuntu && echo yes))
