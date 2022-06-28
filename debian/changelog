@@ -1,4 +1,4 @@
-grub2 (2.06-2ubuntu9) kinetic; urgency=medium
+grub2 (2.06-2ubuntu10) kinetic; urgency=medium
 
   [ Chris Coulson ]
   * SECURITY UPDATE: Crafted PNG grayscale images may lead to out-of-bounds
@@ -87,6 +87,9 @@ grub2 (2.06-2ubuntu9) kinetic; urgency=medium
     - update debian/sbat.ubuntu.csv.in
   * Make the grub2/no_efi_extra_removable setting work correctly
     - update debian/postinst.in
+  * Build grub2-unsigned packages with xz compression for compatibility
+    with xenial dpkg
+    - update debian/rules
 
   [ Steve Langasek ]
   * Bump versioned dependency on grub2-common to 2.02~beta2-36ubuntu3.32 for
