@@ -82,7 +82,7 @@ index 56d6745..576d8cb 100644
    free_params();
 diff --git a/grub-core/loader/efi/peimage.c b/grub-core/loader/efi/peimage.c
 new file mode 100644
-index 0000000..f9735ab
+index 0000000..fffdf65
 --- /dev/null
 +++ b/grub-core/loader/efi/peimage.c
 @@ -0,0 +1,765 @@
@@ -498,7 +498,7 @@ index 0000000..f9735ab
 +}
 +
 +/**
-+ * movw_get_imm() - get the immediate value of MOVT and MOVT instructions
++ * movw_get_imm() - get the immediate value of MOVT and MOVW instructions
 + *
 + * MOVT::
 + *
@@ -530,7 +530,7 @@ index 0000000..f9735ab
 +}
 +
 +/**
-+ * movw_set_imm() - set the immediate value of MOVT and MOVT instructions
++ * movw_set_imm() - set the immediate value of MOVT and MOVW instructions
 + *
 + * MOVT::
 + *
