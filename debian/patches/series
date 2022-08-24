@@ -159,3 +159,5 @@ ubuntu-disable-LOAD-FILE2-protocol-for-initrd-on-ARM.patch
 0159-fs-btrfs-Fix-several-fuzz-issues-with-invalid-dir-it.patch
 0160-fs-btrfs-Fix-more-ASAN-and-SEGV-issues-found-with-fu.patch
 0161-fs-btrfs-Fix-more-fuzz-issues-related-to-chunks.patch
+linux_xen-Properly-load-multiple-initrd-files.patch
+linux_xen-Properly-order-multiple-initrd-files.patch
