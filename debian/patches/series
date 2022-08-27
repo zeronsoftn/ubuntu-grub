@@ -161,3 +161,4 @@ ubuntu-disable-LOAD-FILE2-protocol-for-initrd-on-ARM.patch
 0161-fs-btrfs-Fix-more-fuzz-issues-related-to-chunks.patch
 linux_xen-Properly-load-multiple-initrd-files.patch
 linux_xen-Properly-order-multiple-initrd-files.patch
+linuxefi-Invalidate-i-cache-before-starting-the-kern.patch
