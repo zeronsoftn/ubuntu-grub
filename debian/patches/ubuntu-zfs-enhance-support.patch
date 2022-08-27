@@ -14,7 +14,8 @@ Subject: UBUNTU: Enhance ZFS grub support
 
 Author: Jean-Baptiste Lallement <jean-baptiste@ubuntu.com>
 Author: Didier Roche <didrocks@ubuntu.com>
-Last-Update: 2020-08-06
+Author: Adam R Bell <a_0x07@protonmail.ch>
+Last-Update: 2022-08-27
 Patch-Name: ubuntu-zfs-enhance-support.patch
 
 Signed-off-by: Didier Roche <didier.roche@canonical.com>
@@ -568,11 +569,15 @@ index 0000000..f321fe2
 +
 +    umount "${mntdir}" || true
 +    # We needed to look in / for snapshots on root dataset, umount the snapshot for etc before zfs lazily unmount it
-+    case "${etc_dir}" in /.zfs/snapshot/*/etc)
-+        snapshot_path="$(findmnt -n -o TARGET -T "${etc_dir}")"
-+        umount "${snapshot_path}" || true
-+        ;;
-+    esac
++    # This process only needs to run if the snapshot contains an .../etc path,
++    #  otherwise the build process may silently fail and produce no kernel lines in grub.cfg
++    if [ -e "${etc_dir}" ]; then
++        case "${etc_dir}" in /.zfs/snapshot/*/etc)
++            snapshot_path="$(findmnt -n -o TARGET -T "${etc_dir}")"
++            umount "${snapshot_path}" || true
++            ;;
++        esac
++    fi
 +}
 +
 +# Scan available boot options and returns in a formatted list
