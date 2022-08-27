@@ -1,0 +1,107 @@
+From: Chris Coulson <chris.coulson@canonical.com>
+Date: Thu, 17 Nov 2022 17:45:12 +0000
+Subject: [PATCH] linuxefi: Invalidate i-cache before starting the kernel
+
+We need to flush the memory range of the code we are about to execute
+from the instruction cache before we can safely execute it. Not doing
+so appears to be the source of rare synchronous exceptions a user
+is seeing on a Cortex-A72-based platform while executing the Linux EFI
+stub. Notably they seem to correlate with an instruction on a cache
+line boundary.
+
+Signed-off-by: dann frazier <dann.frazier@canonical.com>
+---
+ grub-core/kern/arm/coreboot/coreboot.S | 4 ++--
+ grub-core/loader/arm64/linux.c         | 4 ++--
+ grub-core/loader/efi/linux.c           | 8 ++++++--
+ grub-core/loader/i386/efi/linux.c      | 1 +
+ include/grub/efi/linux.h               | 4 ++--
+ 5 files changed, 13 insertions(+), 8 deletions(-)
+
+diff --git a/grub-core/kern/arm/coreboot/coreboot.S b/grub-core/kern/arm/coreboot/coreboot.S
+index 70998c0..3e61284 100644
+--- a/grub-core/kern/arm/coreboot/coreboot.S
++++ b/grub-core/kern/arm/coreboot/coreboot.S
+@@ -45,6 +45,6 @@ FUNCTION(grub_armv7_get_timer_frequency)
+ int
+ EXPORT_FUNC(grub_linuxefi_secure_validate) (void *data, grub_uint32_t size);
+ grub_err_t
+-EXPORT_FUNC(grub_efi_linux_boot) (void *kernel_address, grub_off_t offset,
+-				  void *kernel_param);
++EXPORT_FUNC(grub_efi_linux_boot) (void *kernel_address, grub_size_t kernel_size,
++				  grub_off_t offset, void *kernel_param);
+ 
+diff --git a/grub-core/loader/arm64/linux.c b/grub-core/loader/arm64/linux.c
+index 130e9c0..c6a2229 100644
+--- a/grub-core/loader/arm64/linux.c
++++ b/grub-core/loader/arm64/linux.c
+@@ -173,8 +173,8 @@ grub_arch_efi_linux_boot_image (grub_addr_t addr, grub_size_t size, char *args)
+   (void) size;
+ 
+ 
+-  retval = grub_efi_linux_boot ((char *)kernel_addr, handover_offset,
+-				kernel_addr);
++  retval = grub_efi_linux_boot ((char *)kernel_addr, kernel_size,
++				handover_offset, kernel_addr);
+ 
+   /* Never reached... */
+   free_params();
+diff --git a/grub-core/loader/efi/linux.c b/grub-core/loader/efi/linux.c
+index a09479c..b863160 100644
+--- a/grub-core/loader/efi/linux.c
++++ b/grub-core/loader/efi/linux.c
+@@ -16,6 +16,7 @@
+  *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
++#include <grub/cache.h>
+ #include <grub/err.h>
+ #include <grub/mm.h>
+ #include <grub/types.h>
+@@ -69,8 +70,8 @@ grub_linuxefi_secure_validate (void *data, grub_uint32_t size)
+ typedef void (*handover_func) (void *, grub_efi_system_table_t *, void *);
+ 
+ grub_err_t
+-grub_efi_linux_boot (void *kernel_addr, grub_off_t handover_offset,
+-		     void *kernel_params)
++grub_efi_linux_boot (void *kernel_addr, grub_size_t kernel_size,
++		     grub_off_t handover_offset, void *kernel_params)
+ {
+   grub_efi_loaded_image_t *loaded_image = NULL;
+   handover_func hf;
+@@ -95,6 +96,9 @@ grub_efi_linux_boot (void *kernel_addr, grub_off_t handover_offset,
+   grub_dprintf ("linux", "kernel_addr: %p handover_offset: %p params: %p\n",
+ 		kernel_addr, (void *)(grub_efi_uintn_t)handover_offset, kernel_params);
+ 
++  /* Invalidate the instruction cache */
++  grub_arch_sync_caches((void *)kernel_addr, kernel_size);
++
+   hf = (handover_func)((char *)kernel_addr + handover_offset + offset);
+   hf (grub_efi_image_handle, grub_efi_system_table, kernel_params);
+ 
+diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
+index 842396a..19297f1 100644
+--- a/grub-core/loader/i386/efi/linux.c
++++ b/grub-core/loader/i386/efi/linux.c
+@@ -56,6 +56,7 @@ grub_linuxefi_boot (void *data)
+   asm volatile ("cli");
+ 
+   return grub_efi_linux_boot ((char *)context->kernel_mem,
++			      context->kernel_size,
+ 			      context->handover_offset,
+ 			      context->params);
+ }
+diff --git a/include/grub/efi/linux.h b/include/grub/efi/linux.h
+index 0033d93..f8f9447 100644
+--- a/include/grub/efi/linux.h
++++ b/include/grub/efi/linux.h
+@@ -25,7 +25,7 @@
+ int
+ EXPORT_FUNC(grub_linuxefi_secure_validate) (void *data, grub_uint32_t size);
+ grub_err_t
+-EXPORT_FUNC(grub_efi_linux_boot) (void *kernel_address, grub_off_t offset,
+-				  void *kernel_param);
++EXPORT_FUNC(grub_efi_linux_boot) (void *kernel_address, grub_size_t kernel_size,
++				  grub_off_t offset, void *kernel_param);
+ 
+ #endif /* ! GRUB_EFI_LINUX_HEADER */

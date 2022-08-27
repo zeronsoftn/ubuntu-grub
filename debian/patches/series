@@ -284,3 +284,4 @@ font-Assign-null_font-to-glyphs-in-ascii_font_glyph.patch
 normal-charset-Fix-an-integer-overflow-in-grub_unicode_ag.patch
 font-Forbid-loading-of-font-files-when-secure-boot-is-ena.patch
 font-Try-opening-font-files-from-the-bundled-memdisk.patch
+linuxefi-Invalidate-i-cache-before-starting-the-kern.patch
