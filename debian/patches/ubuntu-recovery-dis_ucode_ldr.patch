@@ -33,7 +33,7 @@ index 41a2876..4988009 100644
  prepare_root_cache=
  boot_device_id=
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 8c2e7e5..cc4f6bd 100755
+index 1006d44..ae517c1 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -41,6 +41,16 @@ imported_pools=""
@@ -69,7 +69,7 @@ index 8c2e7e5..cc4f6bd 100755
      initrd_list=""
      kernel_list=""
      candidate_kernel_list="$(find "${boot_dir}" -maxdepth 1 -type f -regex '.*/\(vmlinuz\|vmlinux\|kernel\)-.*')"
-@@ -924,6 +925,11 @@ generate_grub_menu() {
+@@ -928,6 +929,11 @@ generate_grub_menu() {
          GRUB_CMDLINE_LINUX_RECOVERY="${GRUB_CMDLINE_LINUX_RECOVERY} nomodeset"
      fi
  

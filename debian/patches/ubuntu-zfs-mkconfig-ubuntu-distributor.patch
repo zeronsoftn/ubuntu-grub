@@ -15,10 +15,10 @@ Patch-Name: mkconfig-ubuntu-distributor.patch
  1 file changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 302df63..2149864 100755
+index ff0142f..36441b7 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
-@@ -807,7 +807,14 @@ generate_grub_menu() {
+@@ -811,7 +811,14 @@ generate_grub_menu() {
      if [ "${GRUB_DISTRIBUTOR}" = "" ] ; then
          OS=GNU/Linux
      else
