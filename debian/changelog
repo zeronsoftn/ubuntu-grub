@@ -1,3 +1,21 @@
+grub2 (2.06-2ubuntu11) kinetic; urgency=medium
+
+  [ Mauricio Faria de Oliveira ]
+  * linux_xen: Properly handle multiple initrd files (LP: #1987567)
+    - d/p/linux_xen-Properly-load-multiple-initrd-files.patch
+    - d/p/linux_xen-Properly-order-multiple-initrd-files.patch
+  * Fix for ZFS snapshots without etc directory.
+    Thanks to Adam R Bell <a_0x07@protonmail.ch> (LP: #1965983)
+
+  [ Heinrich Schuchardt ]
+  * efi/peimage: fix typos in code comments
+
+  [ dann frazier ]
+  * linuxefi: Invalidate i-cache before starting the kernel (LP: #1987924)
+    - d/p/linuxefi-Invalidate-i-cache-before-starting-the-kern.patch
+
+ -- dann frazier <dannf@ubuntu.com>  Wed, 14 Sep 2022 12:35:29 -0600
+
 grub2 (2.06-2ubuntu10) kinetic; urgency=medium
 
   [ Chris Coulson ]
