@@ -11,7 +11,7 @@ Patch-Name: mkconfig-signed-kernel.patch
  1 file changed, 21 insertions(+)
 
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 36441b7..7d9ce96 100755
+index 6cd6210..3403205 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -339,6 +339,16 @@ try_default_layout_bpool() {

@@ -18,7 +18,7 @@ Last-Update: 2013-12-25
  1 file changed, 13 insertions(+), 2 deletions(-)
 
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 6a9e910..ff0142f 100755
+index a02abb3..4bef9e3 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -19,6 +19,7 @@ set -e

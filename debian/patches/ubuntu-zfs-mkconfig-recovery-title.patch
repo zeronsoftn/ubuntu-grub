@@ -14,7 +14,7 @@ Patch-Name: mkconfig-recovery-title.patch
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index c652e54..21094bc 100755
+index 2be6025..cfcfdda 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -978,7 +978,7 @@ generate_grub_menu() {

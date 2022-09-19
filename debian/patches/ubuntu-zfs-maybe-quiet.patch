@@ -37,7 +37,7 @@ Patch-Name: maybe-quiet.patch
  1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 7d9ce96..fda8266 100755
+index 3403205..8306c3d 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -20,6 +20,7 @@ set -e

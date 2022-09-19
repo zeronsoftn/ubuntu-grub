@@ -22,8 +22,8 @@ Signed-off-by: Didier Roche <didier.roche@canonical.com>
 ---
  Makefile.util.def           |   7 +
  util/grub.d/10_linux.in     |   4 +
- util/grub.d/10_linux_zfs.in | 981 ++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 992 insertions(+)
+ util/grub.d/10_linux_zfs.in | 985 ++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 996 insertions(+)
  create mode 100755 util/grub.d/10_linux_zfs.in
 
 diff --git a/Makefile.util.def b/Makefile.util.def
@@ -61,10 +61,10 @@ index 4e09797..9a23c3a 100644
  	LINUX_ROOT_DEVICE="ZFS=${rpool}${bootfs%/}"
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
 new file mode 100755
-index 0000000..314c711
+index 0000000..ce6ff52
 --- /dev/null
 +++ b/util/grub.d/10_linux_zfs.in
-@@ -0,0 +1,981 @@
+@@ -0,0 +1,985 @@
 +#! /bin/sh
 +set -e
 +
@@ -1046,3 +1046,7 @@ index 0000000..314c711
 +        grub_menu="$(generate_grub_menu "${menu_metadata}")"
 +        if [ -n "${grub_menu}" ]; then
 +            # We want the trailing newline as a marker will be added
++            echo "${grub_menu}"
++        fi
++    ;;
++esac

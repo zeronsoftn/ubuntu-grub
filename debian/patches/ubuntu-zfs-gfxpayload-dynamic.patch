@@ -16,7 +16,7 @@ Patch-Name: gfxpayload-dynamic.patch
  1 file changed, 43 insertions(+), 3 deletions(-)
 
 diff --git a/util/grub.d/10_linux_zfs.in b/util/grub.d/10_linux_zfs.in
-index 3720e99..782235e 100755
+index 30c3148..758b134 100755
 --- a/util/grub.d/10_linux_zfs.in
 +++ b/util/grub.d/10_linux_zfs.in
 @@ -22,6 +22,7 @@ datarootdir="@datarootdir@"
