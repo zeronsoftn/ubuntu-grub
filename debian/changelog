@@ -1,3 +1,9 @@
+grub2 (2.06-2ubuntu12) kinetic; urgency=medium
+
+  * ubuntu-zfs-enhance-support.patch: Fix missing lines (LP: #1990143)
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Mon, 19 Sep 2022 16:00:47 +0200
+
 grub2 (2.06-2ubuntu11) kinetic; urgency=medium
 
   [ Mauricio Faria de Oliveira ]
