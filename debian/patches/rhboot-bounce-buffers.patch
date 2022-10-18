@@ -1,0 +1,117 @@
+From: Peter Jones <pjones@redhat.com>
+Date: Fri, 12 Jul 2019 09:53:32 +0200
+Subject: x86-efi: Use bounce buffers for reading to addresses > 4GB
+
+Lots of machines apparently can't DMA correctly above 4GB during UEFI,
+so use bounce buffers for the initramfs read.
+
+Signed-off-by: Peter Jones <pjones@redhat.com>
+
+Gpb-Pq: Name rhboot-x86-efi-use-bounce-buffers.patch
+
+x86-efi: Reduce maximum bounce buffer size to 16 MiB
+
+The EFI linux loader allocates a bounce buffer to copy the initrd since in
+some machines doing DMA on addresses above 4GB is not possible during EFI.
+
+But the verifiers framework also allocates a buffer to copy the initrd in
+its grub_file_open() handler. It does this since the data to verify has to
+be passed as a single chunk to modules that use the verifiers framework.
+
+If the initrd image size is big there may not be enough memory in the heap
+to allocate two buffers of that size. This causes an allocation failure in
+the verifiers framework and leads to the initrd not being read.
+
+To prevent these allocation failures, let's reduce the maximum size of the
+bounce buffer used in the EFI loader. Since the data read can be copied to
+the actual initrd address in multilple chunks.
+
+Resolves: rhbz#1838633
+
+Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+---
+ grub-core/loader/i386/efi/linux.c | 50 ++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 44 insertions(+), 6 deletions(-)
+
+diff --git a/grub-core/loader/i386/efi/linux.c b/grub-core/loader/i386/efi/linux.c
+index 8b1aa7d..5448dcd 100644
+--- a/grub-core/loader/i386/efi/linux.c
++++ b/grub-core/loader/i386/efi/linux.c
+@@ -46,6 +46,11 @@ struct grub_linuxefi_context {
+   void *initrd_mem;
+ };
+ 
++#define MIN(a, b) \
++  ({ typeof (a) _a = (a); \
++     typeof (b) _b = (b); \
++     _a < _b ? _a : _b; })
++
+ #define BYTES_TO_PAGES(bytes)   (((bytes) + 0xfff) >> 12)
+ 
+ static grub_err_t
+@@ -88,6 +93,44 @@ grub_linuxefi_unload (void *data)
+   return GRUB_ERR_NONE;
+ }
+ 
++#define BOUNCE_BUFFER_MAX 0x1000000ull
++
++static grub_ssize_t
++read(grub_file_t file, grub_uint8_t *bufp, grub_size_t len)
++{
++  grub_ssize_t bufpos = 0;
++  static grub_size_t bbufsz = 0;
++  static char *bbuf = NULL;
++
++  if (bbufsz == 0)
++    bbufsz = MIN(BOUNCE_BUFFER_MAX, len);
++
++  while (!bbuf && bbufsz)
++    {
++      bbuf = grub_malloc(bbufsz);
++      if (!bbuf)
++	bbufsz >>= 1;
++    }
++  if (!bbuf)
++    grub_error (GRUB_ERR_OUT_OF_MEMORY, N_("cannot allocate bounce buffer"));
++
++  while (bufpos < (long long)len)
++    {
++      grub_ssize_t sz;
++
++      sz = grub_file_read (file, bbuf, MIN(bbufsz, len - bufpos));
++      if (sz < 0)
++	return sz;
++      if (sz == 0)
++	break;
++
++      grub_memcpy(bufp + bufpos, bbuf, sz);
++      bufpos += sz;
++    }
++
++  return bufpos;
++}
++
+ static grub_err_t
+ grub_cmd_initrd (grub_command_t cmd, int argc, char *argv[])
+ {
+@@ -149,7 +192,7 @@ grub_cmd_initrd (grub_command_t cmd, int argc, char *argv[])
+   for (i = 0; i < nfiles; i++)
+     {
+       grub_ssize_t cursize = grub_file_size (files[i]);
+-      if (grub_file_read (files[i], ptr, cursize) != cursize)
++      if (read (files[i], ptr, cursize) != cursize)
+         {
+           if (!grub_errno)
+             grub_error (GRUB_ERR_FILE_READ_ERROR, N_("premature end of file %s"),
+@@ -180,11 +223,6 @@ grub_cmd_initrd (grub_command_t cmd, int argc, char *argv[])
+   return grub_errno;
+ }
+ 
+-#define MIN(a, b) \
+-  ({ typeof (a) _a = (a); \
+-     typeof (b) _b = (b); \
+-     _a < _b ? _a : _b; })
+-
+ static grub_err_t
+ grub_cmd_linux (grub_command_t cmd __attribute__ ((unused)),
+ 		int argc, char *argv[])
