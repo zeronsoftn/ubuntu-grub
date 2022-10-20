@@ -1,3 +1,11 @@
+grub2 (2.06-2ubuntu13) kinetic; urgency=medium
+
+  * Try to pick better locations for kernel and initrd (LP: #1989446)
+  * x86-efi: Use bounce buffers for reading to addresses > 4GB (enhances
+    firmware compatibility of previous change)
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 20 Oct 2022 21:18:25 +0200
+
 grub2 (2.06-2ubuntu12) kinetic; urgency=medium
 
   * ubuntu-zfs-enhance-support.patch: Fix missing lines (LP: #1990143)
