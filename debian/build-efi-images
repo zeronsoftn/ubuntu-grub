@@ -52,7 +52,8 @@ workdir="$(mktemp -d build-efi-images.XXXXXX)"
 echo 'normal (memdisk)/grub.cfg' >"$workdir/grub-bootstrap.cfg"
 
 # Skeleton configuration file which finds the real boot disk.
-cat >"$workdir/grub.cfg" <<EOF
+mkdir "$workdir/memdisk-cd"
+cat >"$workdir/memdisk-cd/grub.cfg" <<EOF
 if [ -z "\$prefix" -o ! -e "\$prefix" ]; then
 	if ! search --file --set=root /.disk/info; then
 		search --file --set=root /.disk/mini-info
@@ -68,7 +69,8 @@ else
 fi
 EOF
 
-cat >"$workdir/grub-netboot.cfg" <<EOF
+mkdir "$workdir/memdisk-netboot"
+cat >"$workdir/memdisk-netboot/grub.cfg" <<EOF
 if [ -e \$prefix/$platform/grub.cfg ]; then
 	source \$prefix/$platform/grub.cfg
 elif [ -e \$prefix/grub.cfg-$deb_arch ]; then
@@ -78,11 +80,16 @@ else
 fi
 EOF
 
-mkfs.msdos -C "$workdir/memdisk.fat" 64
-mcopy -i "$workdir/memdisk.fat" "$workdir/grub.cfg" ::grub.cfg
+mkdir -p "$workdir/memdisk/fonts"
 
-mkfs.msdos -C "$workdir/memdisk-netboot.fat" 64
-mcopy -i "$workdir/memdisk-netboot.fat" "$workdir/grub-netboot.cfg" ::grub.cfg
+for name in "memdisk" "memdisk-cd" "memdisk-netboot"; do
+        mkdir -p "$workdir/$name/fonts"
+        cp "$grub_core/../unicode.pf2" "$workdir/$name/fonts"
+done
+
+mksquashfs "$workdir/memdisk-cd" "$workdir/memdisk-cd.squashfs" -comp xz
+mksquashfs "$workdir/memdisk-netboot" "$workdir/memdisk-netboot.squashfs" -comp xz
+mksquashfs "$workdir/memdisk" "$workdir/memdisk.squashfs" -comp xz
 
 CD_MODULES="
 	all_video
@@ -196,7 +203,7 @@ NET_MODULES="$CD_MODULES
 echo "Including modules $CD_MODULES in $outdir/gcd$efi_name.efi"
 "$grub_mkimage" -O "$platform" -o "$outdir/gcd$efi_name.efi" \
 	-d "$grub_core" \
-	-c "$workdir/grub-bootstrap.cfg" -m "$workdir/memdisk.fat" \
+	-c "$workdir/grub-bootstrap.cfg" -m "$workdir/memdisk-cd.squashfs" \
 	-p /boot/grub \
 	--sbat "$sbat_csv" \
 	$CD_MODULES
@@ -204,15 +211,15 @@ echo "Including modules $CD_MODULES in $outdir/gcd$efi_name.efi"
 # Normal disk boot image
 echo "Including modules $GRUB_MODULES in $outdir/grub$efi_name.efi"
 "$grub_mkimage" -O "$platform" -o "$outdir/grub$efi_name.efi" \
-	-d "$grub_core" -p "/EFI/$efi_vendor" \
-	--sbat "$sbat_csv" \
+	-d "$grub_core" -m "$workdir/memdisk.squashfs" \
+        -p "/EFI/$efi_vendor" --sbat "$sbat_csv" \
 	$GRUB_MODULES
 
 # Normal network boot image
 echo "Including modules $NET_MODULES in $outdir/grubnet$efi_name.efi"
 "$grub_mkimage" -O "$platform" -o "$outdir/grubnet$efi_name.efi" \
 	-d "$grub_core" -c "$workdir/grub-bootstrap.cfg" \
-	-m "$workdir/memdisk-netboot.fat" \
+	-m "$workdir/memdisk-netboot.squashfs" \
 	-p /grub \
 	--sbat "$sbat_csv" \
 	$NET_MODULES
