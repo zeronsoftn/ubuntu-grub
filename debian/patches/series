@@ -99,7 +99,6 @@ ubuntu-recovery-dis_ucode_ldr.patch
 ubuntu-linuxefi-arm64.patch
 ubuntu-linuxefi-arm64-set-base-addr.patch
 ubuntu-add-initrd-less-boot-messages.patch
-ubuntu-fix-reproducible-squashfs-test.patch
 rhboot-f34-make-exit-take-a-return-code.patch
 rhboot-f34-dont-use-int-for-efi-status.patch
 rhboot-f34-make-pmtimer-tsc-calibration-fast.patch
@@ -181,3 +180,4 @@ font-Try-opening-fonts-from-the-bundled-memdisk.patch
 commands-efi-tpm-Refine-the-status-of-log-event.patch
 commands-efi-tpm-Use-grub_strcpy-instead-of-grub_memcpy.patch
 efi-tpm-Add-EFI_CC_MEASUREMENT_PROTOCOL-support.patch
+tests-Explicitly-unset-SOURCE_DATE_EPOCH-before-running-f.patch

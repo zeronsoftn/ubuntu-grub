@@ -27,6 +27,9 @@ grub2 (2.06-2ubuntu14) UNRELEASED; urgency=medium
     - add debian/patches/commands-efi-tpm-Refine-the-status-of-log-event.patch
     - add debian/patches/commands-efi-tpm-Use-grub_strcpy-instead-of-grub_memcpy.patch
     - add debian/patches/efi-tpm-Add-EFI_CC_MEASUREMENT_PROTOCOL-support.patch
+  * Fix the squashfs tests during the build
+    - remove debian/patches/ubuntu-fix-reproducible-squashfs-test.patch
+    - add debian/patches/tests-Explicitly-unset-SOURCE_DATE_EPOCH-before-running-f.patch
 
  -- Chris Coulson <chris.coulson@canonical.com>  Wed, 16 Nov 2022 14:40:42 +0000
 
