@@ -1,3 +1,31 @@
+grub2 (2.04-1ubuntu47.5) UNRELEASED; urgency=medium
+
+  * SECURITY UPDATE: Fix out of bounds writes due specially crafted fonts.
+    - add debian/patches/font-Fix-several-integer-overflows-in-grub_font_construct.patch
+    - add debian/patches/font-Fix-an-integer-underflow-in-blit_comb.patch
+    - CVE-2022-2601, CVE-2022-3775
+    - LP: #1996950
+  * Fix various issues as a result of fuzzing, static analysis and code
+    review:
+    - add debian/patches/font-Reject-glyphs-exceeds-font-max_glyph_width-or-font-m.patch
+    - add debian/patches/font-Fix-size-overflow-in-grub_font_get_glyph_internal.patch
+    - add debian/patchces/font-Remove-grub_font_dup_glyph.patch
+    - add debian/patches/font-Fix-integer-overflow-in-ensure_comb_space.patch
+    - add debian/patches/font-Fix-integer-overflow-in-BMP-index.patch
+    - add debian/patches/font-Fix-integer-underflow-in-binary-search-of-char-index.patch
+    - add debian/patches/fbutil-Fix-integer-overflow.patch
+    - add debian/patches/font-Harden-grub_font_blit_glyph-and-grub_font_blit_glyph.patch
+    - add debian/patches/font-Assign-null_font-to-glyphs-in-ascii_font_glyph.patch
+    - add debian/patches/normal-charset-Fix-an-integer-overflow-in-grub_unicode_ag.patch
+  * Forbid loading of external fonts when secure boot is enabled:
+    - add debian/patches/font-Forbid-loading-of-font-files-when-secure-boot-is-ena.patch
+  * Bundle unicode.pf2 in a squashfs memdisk attached to the signed EFI binary
+    - update debian/control
+    - update debian/build-efi-image
+    - add debian/patches/font-Try-opening-fonts-from-the-bundled-memdisk.patch
+
+ -- Chris Coulson <chris.coulson@canonical.com>  Thu, 17 Nov 2022 13:27:15 +0000
+
 grub2 (2.04-1ubuntu47.4) impish; urgency=medium
 
   [ Chris Coulson ]

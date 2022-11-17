@@ -1,0 +1,44 @@
+From: Chris Coulson <chris.coulson@canonical.com>
+Date: Thu, 17 Nov 2022 13:10:27 +0000
+Subject: font: Forbid loading of font files when secure boot is enabled
+
+This is an implementation of "kern/efi/sb: Enforce verification of
+font files" for 2.04, which does not use the shim lock verifier for
+secure boot verification.
+---
+ grub-core/font/font.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/grub-core/font/font.c b/grub-core/font/font.c
+index e6616e6..1654c3a 100644
+--- a/grub-core/font/font.c
++++ b/grub-core/font/font.c
+@@ -31,6 +31,11 @@
+ #include <grub/fontformat.h>
+ #include <grub/env.h>
+ #include <grub/safemath.h>
++#ifdef GRUB_MACHINE_EFI
++#include <grub/device.h>
++#include <grub/disk.h>
++#include <grub/efi/sb.h>
++#endif
+ 
+ GRUB_MOD_LICENSE ("GPLv3+");
+ 
+@@ -450,6 +455,16 @@ grub_font_load (const char *filename)
+   if (!file)
+     goto fail;
+ 
++#ifdef GRUB_MACHINE_EFI
++  if (grub_efi_secure_boot ()
++      && (!file->device->disk || file->device->disk->dev->id != GRUB_DISK_DEVICE_MEMDISK_ID))
++    {
++      grub_error (GRUB_ERR_ACCESS_DENIED,
++		  "Secure Boot forbids loading font from %s", file->name);
++      goto fail;
++    }
++#endif
++
+ #if FONT_DEBUG >= 3
+   grub_dprintf ("font", "file opened\n");
+ #endif

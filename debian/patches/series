@@ -270,3 +270,17 @@ cherry-fix-crash-on-http.patch
 0268-fs-btrfs-Fix-several-fuzz-issues-with-invalid-dir-it.patch
 0269-fs-btrfs-Fix-more-ASAN-and-SEGV-issues-found-with-fu.patch
 0270-fs-btrfs-Fix-more-fuzz-issues-related-to-chunks.patch
+font-Reject-glyphs-exceeds-font-max_glyph_width-or-font-m.patch
+font-Fix-size-overflow-in-grub_font_get_glyph_internal.patch
+font-Fix-several-integer-overflows-in-grub_font_construct.patch
+font-Remove-grub_font_dup_glyph.patch
+font-Fix-integer-overflow-in-ensure_comb_space.patch
+font-Fix-integer-overflow-in-BMP-index.patch
+font-Fix-integer-underflow-in-binary-search-of-char-index.patch
+fbutil-Fix-integer-overflow.patch
+font-Fix-an-integer-underflow-in-blit_comb.patch
+font-Harden-grub_font_blit_glyph-and-grub_font_blit_glyph.patch
+font-Assign-null_font-to-glyphs-in-ascii_font_glyph.patch
+normal-charset-Fix-an-integer-overflow-in-grub_unicode_ag.patch
+font-Forbid-loading-of-font-files-when-secure-boot-is-ena.patch
+font-Try-opening-font-files-from-the-bundled-memdisk.patch
