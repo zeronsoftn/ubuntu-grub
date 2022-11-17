@@ -24,6 +24,9 @@ grub2 (2.04-1ubuntu47.5) UNRELEASED; urgency=medium
     - update debian/control
     - update debian/build-efi-image
     - add debian/patches/font-Try-opening-fonts-from-the-bundled-memdisk.patch
+  * Fix the squashfs tests during the build
+    - remove debian/patches/ubuntu-fix-reproducible-squashfs-test.patch
+    - add debian/patches/tests-Explicitly-unset-SOURCE_DATE_EPOCH-before-running-f.patch
 
   [ dann frazier ]
   * linuxefi: Invalidate i-cache before starting the kernel (LP: #1987924)
