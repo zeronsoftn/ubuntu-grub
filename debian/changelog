@@ -30,6 +30,8 @@ grub2 (2.06-2ubuntu14) UNRELEASED; urgency=medium
   * Fix the squashfs tests during the build
     - remove debian/patches/ubuntu-fix-reproducible-squashfs-test.patch
     - add debian/patches/tests-Explicitly-unset-SOURCE_DATE_EPOCH-before-running-f.patch
+  * Bump SBAT generation:
+    - update debian/sbat.ubuntu.csv.in
 
  -- Chris Coulson <chris.coulson@canonical.com>  Wed, 16 Nov 2022 14:40:42 +0000
 
