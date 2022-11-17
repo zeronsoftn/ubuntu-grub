@@ -27,6 +27,8 @@ grub2 (2.04-1ubuntu47.5) UNRELEASED; urgency=medium
   * Fix the squashfs tests during the build
     - remove debian/patches/ubuntu-fix-reproducible-squashfs-test.patch
     - add debian/patches/tests-Explicitly-unset-SOURCE_DATE_EPOCH-before-running-f.patch
+  * Bump SBAT generation:
+    - update debian/sbat.ubuntu.csv.in
 
   [ dann frazier ]
   * linuxefi: Invalidate i-cache before starting the kernel (LP: #1987924)
