@@ -178,3 +178,6 @@ font-Harden-grub_font_blit_glyph-and-grub_font_blit_glyph.patch
 font-Assign-null_font-to-glyphs-in-ascii_font_glyph.patch
 normal-charset-Fix-an-integer-overflow-in-grub_unicode_ag.patch
 font-Try-opening-fonts-from-the-bundled-memdisk.patch
+commands-efi-tpm-Refine-the-status-of-log-event.patch
+commands-efi-tpm-Use-grub_strcpy-instead-of-grub_memcpy.patch
+efi-tpm-Add-EFI_CC_MEASUREMENT_PROTOCOL-support.patch

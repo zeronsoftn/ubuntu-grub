@@ -1,0 +1,41 @@
+From: Lu Ken <ken.lu@intel.com>
+Date: Wed, 13 Jul 2022 10:06:10 +0800
+Subject: commands/efi/tpm: Refine the status of log event
+
+1. Use macro GRUB_ERR_NONE instead of hard code 0.
+2. Keep lowercase of the first char for the status string of log event.
+
+Signed-off-by: Lu Ken <ken.lu@intel.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ grub-core/commands/efi/tpm.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/grub-core/commands/efi/tpm.c b/grub-core/commands/efi/tpm.c
+index e73bd55..08ce919 100644
+--- a/grub-core/commands/efi/tpm.c
++++ b/grub-core/commands/efi/tpm.c
+@@ -135,18 +135,18 @@ grub_efi_log_event_status (grub_efi_status_t status)
+   switch (status)
+     {
+     case GRUB_EFI_SUCCESS:
+-      return 0;
++      return GRUB_ERR_NONE;
+     case GRUB_EFI_DEVICE_ERROR:
+-      return grub_error (GRUB_ERR_IO, N_("Command failed"));
++      return grub_error (GRUB_ERR_IO, N_("command failed"));
+     case GRUB_EFI_INVALID_PARAMETER:
+-      return grub_error (GRUB_ERR_BAD_ARGUMENT, N_("Invalid parameter"));
++      return grub_error (GRUB_ERR_BAD_ARGUMENT, N_("invalid parameter"));
+     case GRUB_EFI_BUFFER_TOO_SMALL:
+-      return grub_error (GRUB_ERR_BAD_ARGUMENT, N_("Output buffer too small"));
++      return grub_error (GRUB_ERR_BAD_ARGUMENT, N_("output buffer too small"));
+     case GRUB_EFI_NOT_FOUND:
+       return grub_error (GRUB_ERR_UNKNOWN_DEVICE, N_("TPM unavailable"));
+     default:
+       grub_dprintf ("tpm", "Unknown TPM error: %" PRIdGRUB_SSIZE, status);
+-      return 0;
++      return GRUB_ERR_NONE;
+     }
+ }
+ 
