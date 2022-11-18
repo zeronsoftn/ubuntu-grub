@@ -1,4 +1,4 @@
-grub2 (2.06-2ubuntu14) UNRELEASED; urgency=medium
+grub2 (2.06-2ubuntu14) kinetic; urgency=medium
 
   * SECURITY UPDATE: Fix out of bounds writes due specially crafted fonts.
     - add debian/patches/font-Fix-several-integer-overflows-in-grub_font_construct.patch
