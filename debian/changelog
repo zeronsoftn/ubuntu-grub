@@ -29,6 +29,10 @@ grub2 (2.04-1ubuntu47.5) UNRELEASED; urgency=medium
     - add debian/patches/tests-Explicitly-unset-SOURCE_DATE_EPOCH-before-running-f.patch
   * Bump SBAT generation:
     - update debian/sbat.ubuntu.csv.in
+  * Make grub-efi-{amd64,arm64} depend on grub2-common 2.02~beta2-36ubuntu3.33
+    in xenial and 2.02-2ubuntu8.25 in bionic to fix LP: #1995751 (thanks
+    Julian Klode for the base-files hack to make a single binary be able to
+    depend on 2 different versions of the same package)
 
   [ dann frazier ]
   * linuxefi: Invalidate i-cache before starting the kernel (LP: #1987924)

@@ -346,7 +346,7 @@ Description: GRand Unified Bootloader, version 2 (EFI-AMD64 debug files)
 Package: grub-efi-amd64
 Architecture: i386 kopensolaris-i386 any-amd64
 Pre-Depends: ${misc:Pre-Depends}
-Depends: ${shlibs:Depends}, ${misc:Depends}, grub2-common (>= 2.02~beta2-9), grub-efi-amd64-bin (= ${binary:Version}), ucf
+Depends: ${shlibs:Depends}, ${misc:Depends}, grub2-common (>= 2.02~beta2-36ubuntu3.33), grub2-common (>= 2.02-2ubuntu8.25) | base-files (<< 10.1), grub-efi-amd64-bin (= ${binary:Version}), ucf
 Replaces: grub, grub-legacy, grub2 (<< ${source:Version}), grub-common (<= 1.97~beta2-1), grub-pc, grub-efi-ia32, grub-coreboot, grub-ieee1275
 Conflicts: grub, grub-legacy, grub-efi-ia32, grub-pc, grub-coreboot, grub-ieee1275, grub-xen, elilo
 Multi-Arch: foreign
@@ -505,7 +505,7 @@ Description: GRand Unified Bootloader, version 2 (ARM64 UEFI debug files)
 Package: grub-efi-arm64
 Architecture: any-arm64
 Pre-Depends: ${misc:Pre-Depends}
-Depends: ${shlibs:Depends}, ${misc:Depends}, grub2-common (>= 2.02~beta2-36ubuntu3.32), grub-efi-arm64-bin (= ${binary:Version}), ucf
+Depends: ${shlibs:Depends}, ${misc:Depends}, grub2-common (>= 2.02~beta2-36ubuntu3.33), grub2-common (>= 2.02-2ubuntu8.25) | base-files (<< 10.1), grub-efi-arm64-bin (= ${binary:Version}), ucf
 Multi-Arch: foreign
 Description: GRand Unified Bootloader, version 2 (ARM64 UEFI version)
  GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
