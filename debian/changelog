@@ -1,4 +1,4 @@
-grub2 (2.04-1ubuntu47.5) UNRELEASED; urgency=medium
+grub2 (2.04-1ubuntu47.5) focal; urgency=medium
 
   [ Chris Coulson ]
   * SECURITY UPDATE: Fix out of bounds writes due specially crafted fonts.
